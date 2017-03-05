@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/Icons">
+        <file>darkbishop.png</file>
+        <file>darkking.png</file>
+        <file>darkknight.png</file>
+        <file>darkpawn.png</file>
+        <file>darkqueen.png</file>
+        <file>darkrook.png</file>
+        <file>lightbishop.png</file>
+        <file>lightking.png</file>
+        <file>lightknight.png</file>
+        <file>lightpawn.png</file>
+        <file>lightqueen.png</file>
+        <file>lightrook.png</file>
+    </qresource>
+</RCC>
