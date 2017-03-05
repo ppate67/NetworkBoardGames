@@ -1,1 +1,14 @@
 Class Overview for Monopoly
+
+class Player{
+private:
+	string name;
+	int userid;
+	int bank;
+	int jailFree;
+	int position;
+
+public:
+	Player(string name, int userid, int bank, int jailFree, int position)
+
+};
