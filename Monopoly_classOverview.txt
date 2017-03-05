@@ -15,15 +15,14 @@ public:
 
 class gameBoard{
 Private:
-	int price;
-	int tax;
-	int mortgage;
-	string owner; 
-	int position;
-	int houses;
-	int hotels;
-	int category;
-	bool Mortgage;
+	int price; //Price for that property
+	int tax; //Amount it costs if landed on
+	int mortgage; //Amount of money you get if mortgaged
+	string owner; //Owner of property, originally set to null
+	int position; //Position on the board
+	int houses; //Amount of house (5 houses = 1 hotel)
+	int category; //What color cattegory it is instructions
+	bool Mortgage; //Is it mortgaged? 
 public: 
 	gameBoard(int price, int tax, int mortgage, string owner, int position, int houses, int hotels, int category, bool Mortgage)
 
@@ -39,4 +38,3 @@ public:
 	Card(int type, string text, int amount)
 
 };
-
