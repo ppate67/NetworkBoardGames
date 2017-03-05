@@ -38,3 +38,13 @@ public:
 	Card(int type, string text, int amount)
 
 };
+
+Void propertyPay {
+		//Player lands on property owned by another player 
+		//Player pays property owner
+}
+void drawCard {
+		//draw either a chance or community chest card
+		//add amount of card (negative or positive) to player
+		//add 1 to  “get out of jail free card” variable if it is that card (jailFree attribute)
+}
