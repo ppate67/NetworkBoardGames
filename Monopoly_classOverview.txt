@@ -12,3 +12,31 @@ public:
 	Player(string name, int userid, int bank, int jailFree, int position)
 
 };
+
+class gameBoard{
+Private:
+	int price;
+	int tax;
+	int mortgage;
+	string owner; 
+	int position;
+	int houses;
+	int hotels;
+	int category;
+	bool Mortgage;
+public: 
+	gameBoard(int price, int tax, int mortgage, string owner, int position, int houses, int hotels, int category, bool Mortgage)
+
+
+};
+
+Class Card{
+private:
+	int type; // chance or community chest
+	string text; // the instructions onthe card
+	int amount; // amount of money to add or subtract from the player according to the card
+public:
+	Card(int type, string text, int amount)
+
+};
+
