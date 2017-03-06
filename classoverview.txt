@@ -5,6 +5,34 @@ Checkers game:
 
 Chess Board:
 
+Go:
+
+class Go{
+public:
+BoardState board;
+int userColor;
+Go(int color, BoardState board);
+int checkLiberties(int corx, int cory);//recursive function to find number of liberties in a chain of stones
+bool korule(BoardState board); //checks if move will return to previous board state- which is illegal in go
+bool suicide(BoardState board);//checks if placed stone has any liberties or not with the condition of whether or not it is depriving the enemy group of its final liberty
+bool checkPositionValidity(int corx, int cory, int color);//checks if a move for a certain color is legal
+bool placeStone(int corx, int cory);//checks if move is legal and then calls Go’s graphics class to place the users color in the desired location
+void captureStones(); //removes any recently captured stones from the board. Calls graphics class to update board based on new board state
+void addStonePoints(int numcapstones, int playercolor); // adds points to capture total for the player
+void sendGameMsg(BoardState board); encapsulates board state into game message and then calls network’s client class to send the message
+};
+class BoardState{
+//-1 means empty, 0 white, 1 black
+int board[13][13];
+BoardState(int board[13][13]);
+void updateState(int xcor, int ycor, int newVal);//changes board state based on position and whether to make the cell vacant, white, or black
+ 
+};
+class goboard{
+goboard();
+void display(QWidget *baseWidge, Go *tile[13][13]);
+};
+
 
 
 Networking Classes (Andrew Polnik)
