@@ -1,1 +1,165 @@
+Graphics Classes
+Board:
+
+Checkers game:
+
+Chess Board:
+
+Go:
+
+class Go{
+public:
+BoardState board;
+int userColor;
+Go(int color, BoardState board);
+int checkLiberties(int corx, int cory);//recursive function to find number of liberties in a chain of stones
+bool korule(BoardState board); //checks if move will return to previous board state- which is illegal in go
+bool suicide(BoardState board);//checks if placed stone has any liberties or not with the condition of whether or not it is depriving the enemy group of its final liberty
+bool checkPositionValidity(int corx, int cory, int color);//checks if a move for a certain color is legal
+bool placeStone(int corx, int cory);//checks if move is legal and then calls Go’s graphics class to place the users color in the desired location
+void captureStones(); //removes any recently captured stones from the board. Calls graphics class to update board based on new board state
+void addStonePoints(int numcapstones, int playercolor); // adds points to capture total for the player
+void sendGameMsg(BoardState board); encapsulates board state into game message and then calls network’s client class to send the message
+};
+class BoardState{
+//-1 means empty, 0 white, 1 black
+int board[13][13];
+BoardState(int board[13][13]);
+void updateState(int xcor, int ycor, int newVal);//changes board state based on position and whether to make the cell vacant, white, or black
+ 
+};
+class goboard{
+goboard();
+void display(QWidget *baseWidge, Go *tile[13][13]);
+};
+class goGraphics{
+void mousePressEvent(QMouseEvent *event);
+	void displayElement(char elem);
+	void displayBoard();
+	void setTileColor(int color){tileColor=color;}
+	void setPieceColor(int color){pieceColor=color;}
+	void setPiece(bool p){piece=p;}
+	void setRow(int i){row=i;}
+	void setColumn(int j){col=j;}
+	void setTileNum(int k){tileNum=k;}
+	void setpieceName(char n){pieceName=n;}
+	int getTileColor(){return tileColor;}
+	int getPieceColor(){return pieceColor;}
+	int getRow(){return row;}
+	int getColumn(){return col;}
+	int gettileNum(){return tileNum;}
+	bool getPiece(){return piece;}
+ 
+};
+
+
+
+
+Networking Classes (Andrew Polnik)
+class GameMsg(){//This encapsulates game data with id’s and types so that data can be sent //abstractly without the need for team members to know about networking details
+//a game message will contain enough data to completely describe the board state at any time
+//each type will allow the receiver program to know how to parse the data and extract any and all board state information
+	public:
+   	GameMsg(int type, string data, int userid,int length);
+   	int type;
+int length;
+   	string data;
+            void composeData(); //composing data variable based on the current board state and the given message type
+  	void destroy();//deletes message as to conserve memory
+  	 int userid;
+};
+
+class Database
+//custom database class used to store and categorize any and all game messages so that a game can be reviewed by an AI if they wish to. For example, the AI API could extract a series of datalines from the Database and return the progression of board states of a game such that the AI can learn from them.
+{
+public:
+   Database();
+   void inputData(dataLine dl);
+   dataLine fetchData(int key);
+   void deleteData(int key);
+   string searchQuery();
+};
+
+class dataLine //dataLine stores relevant identifying information so it can be easily found in queries //but it stores  game data in the form of a GameMsg since the GameMsg is to fully describe the //board state at any point in time
+{
+public:
+   dataLine(int key, string username, int gameID, int gameType, int moveNumber, GameMsg msg);
+   int key;
+   string username;
+   int gameID;
+   int gameType;
+   int moveNumber;
+   GameMsg msg;
+};
+
+//server handles new connections with incomingConnection. 
+//incoming connection will create a new “player” and from then on all information
+//will be transferred via that created TCP socket link
+//The Database is created and managed on the server.
+
+class Server : public QTcpServer
+{
+   Q_OBJECT
+public:
+   explicit Server(QObject *parent = 0);
+   player* plist[MAXNUMPLAYER];
+   void getuserlist();
+
+protected:
+   Database db;
+   void incomingConnection(qintptr handle);
+   void createDatabase();
+   void updateDatabase();
+   void startGameConnection(); //handshake between two players to let them know that they     //would like to play with one another
+signals:
+public slots:
+private:
+};
+
+//stores vital socket information and methods for receiving TCP communications
+class player : public QObject
+{
+   Q_OBJECT
+public:
+   explicit player(QObject *parent =0);
+   void SetSocket(int id);//Sets up socket connection between server and new client player
+   int filled=0;//allows Server to keep record if this player object is an actively used socket   //connection
+   QTcpSocket *socket;
+signals:
+public slots:
+   void connected();//overloaded “connected” used for signals and slots implementation
+   void disconnected();//overloaded “connected” used for signals and slots implementation
+   void readyRead();//fires when there is new data available to read from a socket connection
+    //readyRead will call the “task” method
+   void task(GameMsg* msg);//relays msg to receiving player and stores msg in database in a new dataline object
+private:
+
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Client Side Classes
+Class NetworkClient {
+
+publlic:
+
+QTcpSocket* socket;
+void Connect();//connections client to the server
+void getGameList();//gets list of games that are currently waiting for player to join
+void startGame(); //starts game and adds the game’s ID to the GameList stored on the server so                              
+//that other players can see it and join if they so desire
+void joinGame(); //allows player to initiate handshake with other player by means of the server //which in turn officially initiates the game (i.e. the server will know who to forward game //messages to)
+void endGame(); //ends current game connection and returns user to the main UI window
+void sendChatMsg(int userid, ChatMsg msg);//sends chat message to other player. Chat //messages will be smaller than game messages typically and will not be stored in the database
+};
+
+class ChatMsg //object to contain sender/receiver id, and chat message payload.
+{
+public:
+   ChatMsg();
+   string senderName;
+   string receiverName;
+   int senderID;
+   int receiverID;
+   string msgData;
+  
+};
 
