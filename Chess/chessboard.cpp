@@ -30,6 +30,7 @@ void chessboard::display(QWidget *baseWidget,Chess *tile[8][8])
             tile[i][j] = new Chess(baseWidget);
             tile[i][j]->setTileColor((i+j)%2);
             tile[i][j]->setPiece(false);
+            tile[i][j]->setPieceColor(3); //no piece is on tile
             tile[i][j]->setRow(i);
             tile[i][j]->setColumn(j);
             tile[i][j]->setTileNum(k++);

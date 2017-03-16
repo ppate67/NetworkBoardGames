@@ -1,4 +1,5 @@
 #include "chess.h"
+#include "pieces.h"
 
 Chess *temp;
 
@@ -7,23 +8,39 @@ void Chess::mousePressEvent(QMouseEvent *event)
 {
     if(selected==0)
     {
-        this->getPieceName();
-        this->setStyleSheet("QLabel {background-color:rgb(176, 255, 20);}");
-        selected=1;
-        temp=this;
+        if (getPiece() == false){
+            selected = 0;
+        }
+        else {
+            this->getPieceName();
+            this->setStyleSheet("QLabel {background-color:rgb(176, 255, 20);}");
+            selected=1;
+            temp=this;
+        }
     }
     else
     {
-        selected=0;
-        //this->setTileColor(temp->getTileColor());
-        this->setPieceColor(temp->getPieceColor());
-        this->setPiece(true);
-        this->setpieceName(temp->getPieceName());
-        temp->displayBoard();
-        this->displayElement(this->getPieceName());
-        temp->piece=false;
-        temp->displayElement(' ');
-        temp->displayBoard();
+        // give selected color, name, row, and column to piece object
+        Piece p(temp->getPieceColor(), temp->getPieceName(), temp->getRow(), temp->getColumn());
+        // clicked back on itself so allow a new choice
+        if (this->getTileNum() == temp->getTileNum()){
+            selected = 0;
+            temp->displayBoard();
+        }
+        // check piece with ending location to see if move is valid;
+        else if (p.checkValid(this->getRow(), this->getColumn(), this->getPieceColor(), this->getPiece()) == true){
+            selected=0;
+            //this->setTileColor(temp->getTileColor());
+            this->setPieceColor(temp->getPieceColor());
+            this->setPiece(true);
+            this->setpieceName(temp->getPieceName());
+            temp->displayBoard();
+            this->displayElement(this->getPieceName());
+            temp->piece=false;
+            temp->pieceColor=3; // no piece there
+            temp->displayElement(' ');
+            temp->displayBoard();
+        }
     }
 }
 
@@ -74,7 +91,6 @@ void Chess::displayElement(char elem)
 
 void Chess::displayBoard()
 {
-
     if(this->tileColor==1)
     {
         this->setStyleSheet("QLabel {background-color:rgb(255, 193, 122);}:hover{background-color: rgb(62, 139, 178);}");
