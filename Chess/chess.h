@@ -1,6 +1,7 @@
 #ifndef CHESS_H
 #define CHESS_H
 #include <QLabel>
+
 class Chess:public QLabel
 {
 private:
@@ -24,7 +25,7 @@ public:
     int getPieceColor(){return pieceColor;}
     int getRow(){return row;}
     int getColumn(){return col;}
-    int gettileNum(){return tileNum;}
+    int getTileNum(){return tileNum;}
     bool getPiece(){return piece;}
     int getPieceName(){return pieceName;}
 };

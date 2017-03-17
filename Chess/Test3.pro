@@ -26,11 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp \
     chessboard.cpp \
-    chess.cpp
+    chess.cpp \
+    pieces.cpp
 
 HEADERS  += mainwindow.h \
     chessboard.h \
-    chess.h
+    chess.h \
+    pieces.h
 
 FORMS    += mainwindow.ui
 

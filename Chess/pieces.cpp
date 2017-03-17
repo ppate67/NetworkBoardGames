@@ -1,38 +1,38 @@
 #include "pieces.h"
 
-bool Piece::checkPawn(int endRow, int endCol, bool occupied){
+bool Piece::checkPawn(int startRow, int startCol, int endRow, int endCol, bool occupied){
     switch(color){
-        case 0:{ //white pieces increasing numbers in rows
+        case 0:{ //black pieces increasing numbers in rows
             if (occupied == false){ // can't move forward into opposing piece
-                if (endRow == row + 1 && endCol == col)
+                if (endRow == startRow + 1 && endCol == startCol)
                     return true;
-                if (row == 1){ // can move forward two spaces off start
-                    if (endRow == row + 2 && endCol == col)
+                if (startRow == 1){ // can move forward two spaces off start
+                    if (endRow == startRow + 2 && endCol == startCol)
                         return true;
                 }
             }
             else { // can only capture diagonally
-                if (endRow == row + 1 && endCol == col - 1)
-                    return true;
-                if (endRow == row + 1 && endCol == col + 1)
-                    return true;
+                if (endRow == startRow + 1){
+                    if (endCol == startCol - 1 || endCol == startCol + 1)
+                        return true;
+                }
             }
             break;
         }
-        case 1:{ //black pieces decreasing numbers in rows
+        case 1:{ //white pieces decreasing numbers in rows
             if (occupied == false){
-                if (endRow == row - 1 && endCol == col)
+                if (endRow == startRow - 1 && endCol == startCol)
                     return true;
-                if (row == 6){
-                    if (endRow == row - 2 && endCol == col)
+                if (startRow == 6){
+                    if (endRow == startRow - 2 && endCol == startCol)
                         return true;
                 }
             }
             else {
-                if (endRow == row - 1 && endCol == col - 1)
-                    return true;
-                if (endRow == row - 1 && endCol == col + 1)
-                    return true;
+                if (endRow == startRow - 1){
+                    if (endCol == startCol - 1 || endCol == startCol + 1)
+                        return true;
+                }
             }
             break;
         }
@@ -40,57 +40,81 @@ bool Piece::checkPawn(int endRow, int endCol, bool occupied){
     return false;
 }
 
-bool Piece::checkRook(int endRow, int endCol){
+bool Piece::checkRook(int startRow, int startCol, int endRow, int endCol){
+    if (chessboard::checkPath(startRow, startCol, endRow, endCol, 'l') == true){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool Piece::checkKnight(int startRow, int startCol, int endRow, int endCol){
     return false;
 }
 
-bool Piece::checkKnight(int endRow, int endCol){
-    return false;
-}
-
-bool Piece::checkKing(int endRow, int endCol){
-    if (endRow == row){
-        if (endCol == col - 1 || endCol == col + 1)
+bool Piece::checkKing(int startRow, int startCol, int endRow, int endCol){
+    if (endRow == startRow){
+        if ((endCol == startCol - 1) || (endCol == startCol + 1)){
             return true; // checks move 1 to left or right
+        }
     }
-    if (endCol == col){
-        if (endRow == row - 1 || endRow == row + 1)
+    else if (endCol == startCol){
+        if ((endRow == startRow - 1) || (endRow == startRow + 1)){
             return true; // checks move 1 up or back
+        }
     }
-    if ((endRow == row + 1 && endCol == col - 1) || (endRow == row - 1 && endCol == col + 1)){
-        return true; // checks top left corner and bottom right corner
+    else if (endRow == startRow + 1){
+        if ((endCol == startCol - 1) || (endCol == startCol + 1)){
+            return true; // check top right and left corners
+        }
     }
-    if ((endRow == row - 1 && endCol == col + 1) || (endRow == row + 1 && endCol == col - 1)){
-        return true; // checks top right corner and bottom left corner
+    else if (endRow == startRow - 1){
+        if ((endCol == startCol - 1) || (endCol == startCol + 1)){
+            return true; // check bottom right and left corners
+        }
     }
     return false;
 }
 
-bool Piece::checkQueen(int endRow, int endCol){
-    return true;
+bool Piece::checkQueen(int startRow, int startCol, int endRow, int endCol){
+    if (chessboard::checkPath(startRow, startCol, endRow, endCol, 'l') == true){
+        return true;
+    }
+    if (chessboard::checkPath(startRow, startCol, endRow, endCol, 'd') == true){
+        return true;
+    }
+    return false;
 }
 
-bool Piece::checkBishop(int endRow, int endCol){
-    return false;
+bool Piece::checkBishop(int startRow, int startCol, int endRow, int endCol){
+    if (chessboard::checkPath(startRow, startCol, endRow, endCol, 'd') == true){
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 bool Piece::checkValid(int endRow, int endCol, int endPieceColor, bool occupied){
-    if(color == endPieceColor){ // can not take own color piece
-        return false;
+    if (occupied == true){
+        if(color == endPieceColor){ // can not take own color piece
+            return false;
+        }
     }
     bool allow = false;
     switch(name){
-        case 'P': allow = checkPawn(endRow, endCol, occupied);
+        case 'P': allow = checkPawn(row, col, endRow, endCol, occupied);
             break;
-        case 'R': allow = checkRook(endRow, endCol);
+        case 'R': allow = checkRook(row, col, endRow, endCol);
             break;
-        case 'H': allow = checkKnight(endRow, endCol);
+        case 'H': allow = checkKnight(row, col, endRow, endCol);
             break;
-        case 'K': allow = checkKing(endRow, endCol);
+        case 'K': allow = checkKing(row, col, endRow, endCol);
             break;
-        case 'Q': allow = checkQueen(endRow, endCol);
+        case 'Q': allow = checkQueen(row, col, endRow, endCol);
             break;
-        case 'B': allow = checkBishop(endRow, endCol);
+        case 'B': allow = checkBishop(row, col, endRow, endCol);
             break;
    }
    return allow;

@@ -15,8 +15,8 @@ int main(int argc, char *argv[])
     int width = screenGeometry.width();
     myWidget->setGeometry(0,0,width,height);
     chessboard c;
-    Chess *tile[8][8]={{NULL}};
-    c.display(myWidget,tile);
+    c.setup(myWidget);
     myWidget->showFullScreen();
-    return a.exec();
+    a.exec();
+    return 0;
 }

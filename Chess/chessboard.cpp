@@ -2,12 +2,10 @@
 #include "chess.h"
 #include <QLabel>
 #include <QtGui>
-chessboard::chessboard()
-{
 
-}
+Chess* chessboard::tile[8][8] = {NULL};
 
-void chessboard::display(QWidget *baseWidget,Chess *tile[8][8])
+chessboard::setup(QWidget *baseWidget)
 {
     QLabel *outLabel = new QLabel(baseWidget);
     QScreen *screen = QGuiApplication::primaryScreen();
@@ -30,7 +28,6 @@ void chessboard::display(QWidget *baseWidget,Chess *tile[8][8])
             tile[i][j] = new Chess(baseWidget);
             tile[i][j]->setTileColor((i+j)%2);
             tile[i][j]->setPiece(false);
-            tile[i][j]->setPieceColor(3); //no piece is on tile
             tile[i][j]->setRow(i);
             tile[i][j]->setColumn(j);
             tile[i][j]->setTileNum(k++);
@@ -84,4 +81,80 @@ void chessboard::display(QWidget *baseWidget,Chess *tile[8][8])
         tile[7][5]->displayElement('B');
         tile[7][6]->displayElement('H');
         tile[7][7]->displayElement('R');
+}
+
+bool chessboard::checkPath(int startRow, int startCol, int endRow, int endCol, char direction){
+    switch(direction){
+        case 'l':{ // straight line path
+            if (startRow == endRow){
+                if (startCol < endCol){ // moving right
+                    for (int i = startCol + 1; i < endCol; i++){
+                        if (tile[startRow][i]->getPiece() == true)
+                            return false;
+                    }
+                }
+                else { // moving left
+                    for (int i = endCol + 1; i < startCol; i++){
+                        if (tile[startRow][i]->getPiece() == true)
+                            return false;
+                    }
+                }
+            }
+            else if (startCol == endCol){
+                if (startRow < endRow){ // moving forward
+                    for (int i = startRow + 1; i < endRow; i++){
+                        if (tile[i][startCol]->getPiece() == true)
+                            return false;
+                    }
+                }
+                else { // moving backward
+                    for (int i = endRow + 1; i < startRow; i++){
+                        if (tile[i][startCol]->getPiece() == true)
+                            return false;
+                    }
+                }
+            }
+            else {
+                return false; // not moving in a straight line
+            }
+            return true; // the path is clear
+        }
+        case 'd':{ // diagonal path
+            if (startRow == endRow || startCol == endCol){
+                return false; // not a diagonal move
+            }
+            else if (abs(startRow - endRow) != abs(startCol - endCol)){
+                return false; // is not an allowed diagonal move
+            }
+            if (startRow < endRow){ // moving down the board
+                if (startCol < endCol){ // moving to the right
+                    for (int i = 1; i < (endCol - startCol); i++){
+                        if (tile[startRow+i][startCol+i]->getPiece() == true)
+                            return false;
+                    }
+                }
+                else { // moving to the left
+                    for (int i = 1; i < (startCol - endCol); i++){
+                        if (tile[startRow+i][startCol-i]->getPiece() == true)
+                            return false;
+                    }
+                }
+            }
+            else if (endRow < startRow){ // moving up the board
+                if (startCol < endCol){ // moving to the right
+                    for (int i = 1; i < (endCol - startCol); i++){
+                        if (tile[startRow-i][startCol+i]->getPiece() == true)
+                            return false;
+                    }
+                }
+                else { // moving to the left
+                    for (int i = 1; i < (startCol - endCol); i++){
+                        if (tile[startRow-i][startCol-i]->getPiece() == true)
+                            return false;
+                    }
+                }
+            }
+            return true; // the path is clear
+        }
+    }
 }

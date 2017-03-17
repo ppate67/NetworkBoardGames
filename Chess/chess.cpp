@@ -29,6 +29,9 @@ void Chess::mousePressEvent(QMouseEvent *event)
         }
         // check piece with ending location to see if move is valid;
         else if (p.checkValid(this->getRow(), this->getColumn(), this->getPieceColor(), this->getPiece()) == true){
+            if(this->getPieceName() == 'K'){
+                exit(1); // a king was captured so the game is over
+            }
             selected=0;
             //this->setTileColor(temp->getTileColor());
             this->setPieceColor(temp->getPieceColor());
@@ -36,8 +39,7 @@ void Chess::mousePressEvent(QMouseEvent *event)
             this->setpieceName(temp->getPieceName());
             temp->displayBoard();
             this->displayElement(this->getPieceName());
-            temp->piece=false;
-            temp->pieceColor=3; // no piece there
+            temp->setPiece(false);
             temp->displayElement(' ');
             temp->displayBoard();
         }
