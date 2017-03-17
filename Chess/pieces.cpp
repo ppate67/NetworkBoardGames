@@ -40,7 +40,7 @@ bool Piece::checkPawn(int startRow, int startCol, int endRow, int endCol, bool o
     return false;
 }
 
-bool Piece::checkRook(int startRow, int startCol, int endRow, int endCol){
+bool Piece::checkRook(int startRow, int startCol, int endRow, int endCol){ // can move in straight lines without jumping over pieces
     if (chessboard::checkPath(startRow, startCol, endRow, endCol, 'l') == true){
         return true;
     }
@@ -49,7 +49,23 @@ bool Piece::checkRook(int startRow, int startCol, int endRow, int endCol){
     }
 }
 
-bool Piece::checkKnight(int startRow, int startCol, int endRow, int endCol){
+bool Piece::checkKnight(int startRow, int startCol, int endRow, int endCol){ // allowed to jump over pieces
+    if (endRow == startRow + 2){ // move two up and one to left or right
+        if (endCol == startCol - 1 || endCol == startCol + 1)
+            return true;
+    }
+    else if (endRow == startRow - 2){ // move two back and one to left or right
+        if (endCol == startCol - 1 || endCol == startCol + 1)
+            return true;
+    }
+    else if (endCol == startCol + 2){ // move two right and one up or back
+        if (endRow == startRow - 1 || endRow == startRow + 1)
+            return true;
+    }
+    else if (endCol == startCol - 2){ // move two left and one up or back
+        if (endRow == startRow - 1 || endRow == startRow + 1)
+            return true;
+    }
     return false;
 }
 
@@ -77,7 +93,7 @@ bool Piece::checkKing(int startRow, int startCol, int endRow, int endCol){
     return false;
 }
 
-bool Piece::checkQueen(int startRow, int startCol, int endRow, int endCol){
+bool Piece::checkQueen(int startRow, int startCol, int endRow, int endCol){ // can move in straight or diagonal lines without jumping over pieces
     if (chessboard::checkPath(startRow, startCol, endRow, endCol, 'l') == true){
         return true;
     }
@@ -87,7 +103,7 @@ bool Piece::checkQueen(int startRow, int startCol, int endRow, int endCol){
     return false;
 }
 
-bool Piece::checkBishop(int startRow, int startCol, int endRow, int endCol){
+bool Piece::checkBishop(int startRow, int startCol, int endRow, int endCol){ // can move in diagonal lines without jumping over pieces
     if (chessboard::checkPath(startRow, startCol, endRow, endCol, 'd') == true){
         return true;
     }
