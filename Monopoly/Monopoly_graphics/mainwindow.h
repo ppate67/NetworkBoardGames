@@ -13,9 +13,6 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    //------------core functions------------
-    void propertpay();
-    void drawcard(int)
     ~MainWindow();
 
 private:

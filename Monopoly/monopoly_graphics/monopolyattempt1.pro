@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2017-03-05T20:38:02
+# Project created by QtCreator 2017-03-18T16:02:30
 #
 #-------------------------------------------------
 
@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Monopoly_graphics
+TARGET = monopolyattempt1
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -29,3 +29,6 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    resources.qrc
