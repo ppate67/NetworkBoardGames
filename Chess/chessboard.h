@@ -10,7 +10,7 @@ private:
     static Chess *tile[8][8];
 public:
     chessboard(){}
-    setup(QWidget *baseWidget);
+    void setup(QWidget *baseWidget);
     static bool checkPath(int startRow, int startCol, int endRow, int endCol, char direction);
 };
 

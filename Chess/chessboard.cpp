@@ -2,16 +2,21 @@
 #include "chess.h"
 #include <QLabel>
 #include <QtGui>
-
+#include <QPushButton>
 Chess* chessboard::tile[8][8] = {NULL};
 
-chessboard::setup(QWidget *baseWidget)
+void chessboard::setup(QWidget *baseWidget)
 {
     QLabel *outLabel = new QLabel(baseWidget);
     QScreen *screen = QGuiApplication::primaryScreen();
     QRect  screenGeometry = screen->geometry();
     int height = screenGeometry.height();
     int width = screenGeometry.width();
+    QPushButton *button = new QPushButton("&Quit", baseWidget);
+    button->setText("Quit");
+    button->move(width/2-400,height/2);
+    button->show();
+    QObject::connect(button,SIGNAL(clicked()),baseWidget,SLOT(close()));
     outLabel->setGeometry((width/2)-(60*4)-20,(height/2)-(60*4)-20,60*8+40,60*8+40);
 
     outLabel->setStyleSheet("QLabel { background-color :rgb(178, 123, 60); color : black; }");
@@ -157,4 +162,9 @@ bool chessboard::checkPath(int startRow, int startCol, int endRow, int endCol, c
             return true; // the path is clear
         }
     }
+}
+
+void chessboard::quitclicked()
+{
+    QCoreApplication::quit();
 }
