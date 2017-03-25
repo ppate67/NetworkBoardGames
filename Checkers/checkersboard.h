@@ -1,18 +1,16 @@
-#ifndef CHECKERSBOARD_H
-#define CHECKERSBOARD_H
+#ifndef board.h
+#define board.h
+//This is the basic outline of a chess or a checker board
 
-#include <QWidget>
-#include <checkers.h>
-#include <stdlib.h> // used in checkPath function
-
-class checkersboard:public Checkers
-{
-private:
-    static Checkers *tile[8][8];
-public:
-    checkersboard(){}
-    void setup(QWidget *baseWidget);
-    //static bool checkPath(int startRow, int startCol, int endRow, int endCol, char direction); //Don't think I need this for checkers b/c i never use it
+Class board{
+Private:
+	Piece board[8][8];
+Public:
+	board();
+	~board();
+	Void displayBoard();
+	Bool checkMove();
+	Bool checkWin();
+	
 };
-
-#endif // CHECKERSBOARD_H
+#endif
