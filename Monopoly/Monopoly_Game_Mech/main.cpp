@@ -1,3 +1,7 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
 class Player{
 private:
 	string name; //The name of the property
@@ -12,7 +16,7 @@ public:
 };
 
 class gameBoard{
-Private:
+private:
 	int price; //Price for that property
 	int tax; //Amount it costs if landed on
 	int mortgage; //Amount of money you get if mortgaged
@@ -30,14 +34,14 @@ public:
 Class Card{
 private:
 	int type; // chance or community chest
-	string text; // the instructions onthe card
+	string text; // the instructions on the card
 	int amount; // amount of money to add or subtract from the player according to the card
 public:
 	Card(int type, string text, int amount)
 
 };
 
-Void propertyPay {
+void propertyPay {
 		//Player lands on property owned by another player 
 		//Player pays property owner
 }
@@ -49,16 +53,16 @@ void drawCard {
 int dieroll(int& roll1, int& roll2) {
 	srand(time(NULL));
 	roll1 = rand()%6+1;
-roll2 = rand()%6+1;
+	roll2 = rand()%6+1;
 }
 
-Void propertyBuy {
+void propertyBuy {
 		//ask if player would like to purchase, if yes continue if no call property auction
 		//change status of property to owned
 		//subtract money from player bank
 }
 
-Void propertyAuction {
+void propertyAuction {
 		//allow mortgages or trades??
 		//input an amount from each player
 		//highest amount gets the property
@@ -66,7 +70,7 @@ Void propertyAuction {
 		//Low Priority
 }
 
-Void propertyTrade {
+void propertyTrade {
 		//ask if player would like to trade, if yes continue
 		//select a player, bring up a list of their properties and their bank
 		//select property numbers and enter an amount of money from 0-some upper        bound
@@ -77,7 +81,7 @@ Void propertyTrade {
 		//Low Priority
 }
 
-Void propertyManage {
+void propertyManage {
 		//if a monopoly is held
 		//ask if they would like to purchase houses and how many
 		//if maximum houses ask if they would like to purchase hotels
@@ -85,7 +89,7 @@ Void propertyManage {
 		//subtract money from the bank of the purchasing player
 }
 
-Void propertyMortgage {
+void propertyMortgage {
 		//Need Money? Mortgage for a certain price
 		//Change flag for property to mortgaged (bool Mortgage = true)
 		//Set amount to unmortgage
