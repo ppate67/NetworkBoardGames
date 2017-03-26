@@ -10,7 +10,7 @@ void Chess::mousePressEvent(QMouseEvent *event)
 {
     if(selected==0)
     {
-        if (getPiece() == false || this->getPieceColor()!=Chess::playercolor){
+        if ((getPiece() == false || this->getPieceColor()!=Chess::playercolor) || chessturn==0){
             selected = 0;
         }
         else {
@@ -45,6 +45,7 @@ void Chess::mousePressEvent(QMouseEvent *event)
             temp->displayElement(' ');
             temp->displayBoard();
         }
+        sendGameMsg();
     }
 }
 

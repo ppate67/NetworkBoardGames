@@ -183,6 +183,7 @@ void MainWindow::on_pushButton_2_clicked()
     myWidget->setGeometry(0,0,width,height);
 
     chessboard c;
+
     c.setup(myWidget);
 
     myWidget->show();

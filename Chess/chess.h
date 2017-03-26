@@ -15,9 +15,7 @@ private:
 
 public:
     Chess(QWidget* pParent=0, Qt::WindowFlags f=0) : QLabel(pParent, f) {}
-    ~Chess(){
-        delete this;
-    }
+
     void mousePressEvent(QMouseEvent *event);
     void displayElement(char elem);
     void displayBoard();
