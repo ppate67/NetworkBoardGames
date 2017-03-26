@@ -1,5 +1,6 @@
 #include "client.h"
-#include "go.h"
+#include "Go/go.h"
+#include "Chess/chess.h"
 #include "fstream"
 #include "QMessageBox"
 QTcpSocket* Client::s=NULL;
@@ -26,7 +27,7 @@ void Client :: readyRead(){
     QByteArray message = socket->readAll();
     int id= int(message[0]);
     int type = int(message[1]);
-    if(type==0){//this is now defunct
+    if(type==0){
     int datamessage[169];
 
     for(int i=2; i<message.length();i++){
@@ -36,6 +37,18 @@ void Client :: readyRead(){
         Go::receiveUpdates(datamessage[i-2],i-2);
     }
         Go::updateEntireBoard();
+
+    }
+    if(type==1){
+        int datamessage[64];
+
+        for(int i=2; i<message.length();i++){
+            datamessage[i-2] = int(message[i]);
+            std::cout <<datamessage[i-2];
+
+            Chess::receiveUpdates(datamessage[i-2],i-2);
+        }
+
 
     }
     if(type==8){

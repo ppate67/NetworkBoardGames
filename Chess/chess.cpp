@@ -2,13 +2,15 @@
 #include "pieces.h"
 
 Chess *temp;
-
+Chess* Chess::chesshead=NULL;
+int Chess::chessturn=1;
+int Chess::playercolor=0;
 int Chess::selected=0;
 void Chess::mousePressEvent(QMouseEvent *event)
 {
     if(selected==0)
     {
-        if (getPiece() == false){
+        if (getPiece() == false || this->getPieceColor()!=Chess::playercolor){
             selected = 0;
         }
         else {
@@ -28,7 +30,7 @@ void Chess::mousePressEvent(QMouseEvent *event)
             temp->displayBoard();
         }
         // check piece with ending location to see if move is valid;
-        else if (p.checkValid(this->getRow(), this->getColumn(), this->getPieceColor(), this->getPiece()) == true){
+        else if (p.checkValid(this->getRow(), this->getColumn(), this->getPieceColor(), this->getPiece()) == true ){
             if(this->getPieceName() == 'K'){
                 exit(1); // a king was captured so the game is over
             }
@@ -101,4 +103,90 @@ void Chess::displayBoard()
     {
         this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);}:hover{background-color: rgb(62, 139, 178);}");
     }
+}
+
+
+
+void Chess::sendGameMsg(){
+    QByteArray BufferPing;
+    int des=0;
+    int vecsize=GameManager::games.size();
+    for(int i =0; i<vecsize; i++){
+        int playsize=GameManager::games[i].size();
+        for(int ii=0; ii<playsize;ii++){
+            if(GameManager::games[i][ii][2]==GameManager::clientID)
+                des=i;
+        }
+    }
+    BufferPing.append(char(des));
+    BufferPing.append(char(0));
+    Chess*tiles[8][8];
+    Chess*pnt=findHead(this);
+    fillArray(tiles,findHead(this));
+
+    for(int j=0; j<8;j++){
+        for(int i=0;i<8;i++){
+            char piecename = tiles[i][j]->getPieceName();
+            //if black piece we send it as uppercase letter
+            //if white piece we send it as lowercase letter
+            //this is so we can distinquish between the two color sets without
+            //needing more than 64 bytes
+            if(tiles[i][j]->getPieceColor()==1)
+                piecename=char(int(piecename)+32);
+            BufferPing.append(piecename);
+
+        }
+    }
+
+    Client::s->write(BufferPing);
+    Client::s->flush();
+    Chess::chessturn=0;
+}
+Chess* Chess::findHead(Chess* pnt){
+    while(1){
+        if(pnt->prevtile==NULL)
+            return pnt;
+        pnt=pnt->prevtile;
+    }
+}
+void Chess::fillArray(Chess* tiles[8][8],Chess* pnt){
+    tiles[0][0]=pnt;
+    for(int ii=0;ii<8;ii++){
+        for(int i=0;i<8;i++){
+            tiles[i][ii]=pnt;
+            pnt=pnt->nexttile;
+        }
+
+    }
+
+}
+void Chess::receiveUpdates(char piece1, int iteration){
+    Chess*temp=Chess::chesshead;
+    for(int i=0;i<iteration;i++){
+        temp=temp->nexttile;
+    }
+    if(int(piece1)==32){
+        temp->setPiece(false);
+
+    }
+    else{
+        temp->setPiece(true);
+        if(int(piece1)>90){
+            piece1-=32;
+            temp->setPieceColor(1);
+        }
+        else{
+            temp->setPieceColor(0);
+        }
+    }
+    temp->setpieceName(piece1);
+
+    if(temp->getPieceColor()!=2)
+        temp->setPiece(true);
+    else
+        temp->setPiece(false);
+
+    temp->displayElement(' ');
+    temp->displayBoard();
+    Chess::chessturn=1;
 }

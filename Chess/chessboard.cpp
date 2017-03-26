@@ -1,5 +1,5 @@
-#include "chessboard.h"
-#include "chess.h"
+#include "Chess/chessboard.h"
+#include "Chess/chess.h"
 #include <QLabel>
 #include <QtGui>
 #include <QPushButton>
@@ -86,6 +86,23 @@ void chessboard::setup(QWidget *baseWidget)
         tile[7][5]->displayElement('B');
         tile[7][6]->displayElement('H');
         tile[7][7]->displayElement('R');
+        //this will set up the pointers within each Chess object
+        //having pointers in each object makes it easier to navigate between objects
+//        for(int ii=0;ii<8;ii++){
+//        for(int i=0;i<7;i++){
+//            tile[i][ii]->nexttile=tile[i+1][ii];
+//            tile[i+1][ii]->prevtile=tile[i][ii];
+//        }
+//        if(ii!=8){
+//            tile[8][ii]->nexttile=tile[0][ii+1];
+//            tile[0][ii+1]->prevtile=tile[8][ii];
+//        }
+//        else{
+//            tile[8][8]->nexttile=nullptr;
+
+//        }
+//        }
+//        Chess::chesshead=tile[0][0];
 }
 
 bool chessboard::checkPath(int startRow, int startCol, int endRow, int endCol, char direction){

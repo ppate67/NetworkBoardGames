@@ -1,7 +1,7 @@
 #ifndef GO_H
 #define GO_H
 #include "QLabel"
-#include "client.h"
+#include "Networking/Client/client.h"
 class Go:public QLabel
 {
 private:

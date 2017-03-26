@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "Go/mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QtGui>
 #include <QApplication>
@@ -67,11 +67,11 @@ void MainWindow::populateList(int size){
         string rowtitle="Player: ";
         string rowtitlepart2=" Spectators: ";
         string game="";
-        if(ptemp->gameType==1)//go
+        if(ptemp->gameType==0)//go
             game="Go: ";
-        else if(ptemp->gameType==2)//chess
+        else if(ptemp->gameType==1)//chess
             game="Chess: ";
-        else if(ptemp->gameType==3)//checkers
+        else if(ptemp->gameType==2)//checkers
             game="Checkers: ";
         else//monopoly
             game="Monopoly: ";
@@ -111,10 +111,16 @@ void MainWindow::on_pushButton_clicked()
         myWidget->show();
         myWidget->setAttribute( Qt::WA_DeleteOnClose );
         connect(myWidget, SIGNAL(destroyed()), this, SLOT(deleteBoard()));
-        int requestID[5]={2,gameidtojoin,1,1,0};
+        int gametype=0;
+        for(int i=0; i<GameManager::games.size();i++)
+            if(i==gameidtojoin)
+                gametype=GameManager::games[i][0][0];
+        int requestID[5]={2,gameidtojoin,1,1,gametype};
         int playerid=GameManager::clientID;
         Client::makeRequest(requestID,playerid);
         Go::color=1;
+        Chess::playercolor=1;
+        Chess::chessturn=0;
         Go::turn=0;
 }
 
@@ -141,7 +147,8 @@ void MainWindow::on_pushButton_3_clicked()
     //counter++;
 
     //create go game
-    int requestID[5]={2,counter,1,1,1};
+    int gametype=0;
+    int requestID[5]={2,counter,1,1,gametype};
     int playerid=GameManager::clientID;
     Client::makeRequest(requestID,playerid);
     QWidget *myWidget = new QWidget();
@@ -163,6 +170,22 @@ void MainWindow::on_pushButton_3_clicked()
 void MainWindow::on_pushButton_2_clicked()
 {
     //create chess game
+    int counter=GameManager::games.size();
+    int gametype=1;
+    int requestID[5]={2,counter,1,1,gametype};
+    int playerid=GameManager::clientID;
+    Client::makeRequest(requestID,playerid);
+    QWidget *myWidget = new QWidget();
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QRect  screenGeometry = screen->geometry();
+    int height = screenGeometry.height();
+    int width = screenGeometry.width();
+    myWidget->setGeometry(0,0,width,height);
+
+    chessboard c;
+    c.setup(myWidget);
+
+    myWidget->show();
 
 }
 

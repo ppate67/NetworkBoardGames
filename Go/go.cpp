@@ -73,13 +73,13 @@ void Go::displayElement(char elem)
 
     if(this->userColor==1 && this->piece==true)
     {
-        this->setPixmap(QPixmap(":/Icons/Icons/blackstone.png"));
+        this->setPixmap(QPixmap(":/Icons2/blackstone.png"));
         this->setScaledContents(true);
     }
 
     else if(this->piece==true)
     {
-        this->setPixmap(QPixmap(":/Icons/Icons/whitestone.png"));
+        this->setPixmap(QPixmap(":/Icons2/whitestone.png"));
         this->setScaledContents(true);
     }
     else
@@ -89,34 +89,34 @@ void Go::displayBoard(int type)
 {
     switch(type){
         case 0:
-            this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);image:url(:/Icons/Icons/circlecross.png);}:hover{background-color: rgb(62, 139, 178);}");
+            this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);image:url(:/Icons2/circlecross.png);}:hover{background-color: rgb(62, 139, 178);}");
             break;
         case 1:
-            this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);image:url(:/Icons/Icons/CROSS.png);}:hover{background-color: rgb(62, 139, 178);}");
+            this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);image:url(:/Icons2/CROSS.png);}:hover{background-color: rgb(62, 139, 178);}");
             break;
         case 2:
-            this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);image:url(:/Icons/Icons/bottomside.png);}:hover{background-color: rgb(62, 139, 178);}");
+            this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);image:url(:/Icons2/bottomside.png);}:hover{background-color: rgb(62, 139, 178);}");
             break;
         case 3:
-            this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);image:url(:/Icons/Icons/topside.png);}:hover{background-color: rgb(62, 139, 178);}");
+            this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);image:url(:/Icons2/topside.png);}:hover{background-color: rgb(62, 139, 178);}");
             break;
         case 4:
-            this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);image:url(:/Icons/Icons/leftside.png);}:hover{background-color: rgb(62, 139, 178);}");
+            this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);image:url(:/Icons2/leftside.png);}:hover{background-color: rgb(62, 139, 178);}");
             break;
         case 5:
-            this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);image:url(:/Icons/Icons/rightside.png);}:hover{background-color: rgb(62, 139, 178);}");
+            this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);image:url(:/Icons2/rightside.png);}:hover{background-color: rgb(62, 139, 178);}");
             break;
         case 6:
-            this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);image:url(:/Icons/Icons/bottomleft.png);}:hover{background-color: rgb(62, 139, 178);}");
+            this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);image:url(:/Icons2/bottomleft.png);}:hover{background-color: rgb(62, 139, 178);}");
             break;
         case 7:
-            this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);image:url(:/Icons/Icons/topleft.png);}:hover{background-color: rgb(62, 139, 178);}");
+            this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);image:url(:/Icons2/topleft.png);}:hover{background-color: rgb(62, 139, 178);}");
             break;
         case 8:
-            this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);image:url(:/Icons/Icons/bottomright.png);}:hover{background-color: rgb(62, 139, 178);}");
+            this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);image:url(:/Icons2/bottomright.png);}:hover{background-color: rgb(62, 139, 178);}");
             break;
         case 9:
-            this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);image:url(:/Icons/Icons/topright.png);}:hover{background-color: rgb(62, 139, 178);}");
+            this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);image:url(:/Icons2/topright.png);}:hover{background-color: rgb(62, 139, 178);}");
             break;
 
         }
