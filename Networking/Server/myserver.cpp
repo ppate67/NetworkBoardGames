@@ -41,6 +41,9 @@ void MyServer::incomingConnection(qintptr handle)
 
     }
 }
+void addPlayerName(string name){
+  playerList.push_back (string name);
+}
 int getNumGoGames(){
     return 0;
 }
