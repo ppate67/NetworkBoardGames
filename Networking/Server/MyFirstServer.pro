@@ -23,7 +23,8 @@ SOURCES += main.cpp \
     database.cpp \
     dataline.cpp \
     chatmsg.cpp \
-    gamemanager.cpp
+    gamemanager.cpp \
+    chatmainwindow.cpp
 
 HEADERS += \
     myserver.h \
@@ -32,4 +33,8 @@ HEADERS += \
     database.h \
     dataline.h \
     chatmsg.h \
-    gamemanager.h
+    gamemanager.h \
+    chatmainwindow.h
+
+FORMS += \
+    chatmainwindow.ui
