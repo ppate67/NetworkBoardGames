@@ -4,9 +4,12 @@
 #include "vector"
 #include <QObject>
 #include <QDebug>
+#include <QStringList>
+#include <QTcpSocket>
 #include <QtNetwork/QTcpServer>
-#include <QtNetwork/QTcpSocket>
 #include <player.h>
+#include <QMap>
+#include <QSet>
 //#include <iostream>
 
 //using namespace std;
@@ -25,6 +28,9 @@ public:
     int getNumCheckGames();
     int getCheckGamePeer(int game);
     int getNumMonoGames();
+    void readyRead();
+    void disconnected();
+    void sendUserList();
 
     vector<int> getMonoGamePeer(int game);
 protected:
@@ -36,7 +42,8 @@ public slots:
 
 private:
     int numGo,numChess,numCheck,numMono;
-
+    QSet<QTcpSocket*> clients;
+    QMap<QTcpSocket*,QString> users;
 };
 
 #endif // MYSERVER_H
