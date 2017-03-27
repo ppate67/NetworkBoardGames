@@ -112,8 +112,7 @@ void MainWindow::on_pushButton_clicked()
         int playerid=GameManager::clientID;
         Client::makeRequest(requestID,playerid);
         Go::color=1;
-        Chess::playercolor=1;
-        Chess::chessturn=0;
+
         Go::turn=0;
         if(gametype==0){
             GoBoard c;
@@ -135,6 +134,8 @@ void MainWindow::on_pushButton_clicked()
             c.setup(myWidget);
 
             myWidget->show();
+            Chess::playercolor=1;
+            Chess::chessturn=0;
         }
 }
 

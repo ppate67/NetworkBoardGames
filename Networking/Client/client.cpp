@@ -24,9 +24,13 @@ void Client::Connect(){
 
 }
 void Client :: readyRead(){
+
     QByteArray message = socket->readAll();
     int id= int(message[0]);
     int type = int(message[1]);
+
+
+
     if(type==0){
     int datamessage[169];
 
@@ -42,10 +46,10 @@ void Client :: readyRead(){
     if(type==1){
         int datamessage[64];
 
+
         for(int i=2; i<message.length();i++){
             datamessage[i-2] = int(message[i]);
             std::cout <<datamessage[i-2];
-
             Chess::receiveUpdates(datamessage[i-2],i-2);
         }
 
@@ -131,14 +135,14 @@ void Client::sendGameMsg(GameMsg m){
 
 }
 
-void Client::SetPlayerName(int requestID[6],int playerid){ //requestID 6 for settingplayername 
-    bool ok;
-    QString name = QInputDialog::getText(this, tr("QInputDialog::getText()"),
-                                         tr("User name:"), QLineEdit::Normal,
-                                         QDir::home().dirName(), &ok);
-    if (ok && !text.isEmpty())
-        textLabel->setText(text);
+//void Client::SetPlayerName(int requestID[6],int playerid){ //requestID 6 for settingplayername
+//    bool ok;
+//    QString name = QInputDialog::getText(this, tr("QInputDialog::getText()"),
+//                                         tr("User name:"), QLineEdit::Normal,
+//                                         QDir::home().dirName(), &ok);
+//    if (ok && !text.isEmpty())
+//        textLabel->setText(text);
 
-    //add playername to vector of playernames at end of function
-    addPlayerName(name);
-}
+//    //add playername to vector of playernames at end of function
+//    addPlayerName(name);
+//}

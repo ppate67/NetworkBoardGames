@@ -6,11 +6,12 @@ Chess* Chess::chesshead=NULL;
 int Chess::chessturn=1;
 int Chess::playercolor=0;
 int Chess::selected=0;
+#include "QMessageBox"
 void Chess::mousePressEvent(QMouseEvent *event)
 {
     if(selected==0)
     {
-        if ((getPiece() == false || this->getPieceColor()!=Chess::playercolor) || chessturn==0){
+        if ((getPiece() == false || this->getPieceColor()!=Chess::playercolor)|| chessturn==0){
             selected = 0;
         }
         else {
@@ -43,9 +44,28 @@ void Chess::mousePressEvent(QMouseEvent *event)
             this->displayElement(this->getPieceName());
             temp->setPiece(false);
             temp->displayElement(' ');
+            temp->setpieceName(' ');
             temp->displayBoard();
+            sendGameMsg();
         }
-        sendGameMsg();
+        else{
+            string output="";
+            Chess* temp=chesshead;
+            while(temp!=nullptr){
+                if(temp->getPieceColor()==1 && temp->getPieceName()!=' ')
+                    output+=char(int(temp->getPieceName())+32);
+                else if(temp->getPieceName()==' ')
+                    output+='-';
+                else
+                output+=temp->getPieceName();
+                temp=temp->nexttile;
+            }
+            QMessageBox::information(
+                    new QMessageBox(),
+                    tr("Debug Window"),
+                   QString::fromStdString(output));//debuging purposes delete
+        }
+
     }
 }
 
@@ -120,7 +140,7 @@ void Chess::sendGameMsg(){
         }
     }
     BufferPing.append(char(des));
-    BufferPing.append(char(0));
+    BufferPing.append(char(1));//type =1 for chess games
     Chess*tiles[8][8];
     Chess*pnt=findHead(this);
     fillArray(tiles,findHead(this));
@@ -132,7 +152,7 @@ void Chess::sendGameMsg(){
             //if white piece we send it as lowercase letter
             //this is so we can distinquish between the two color sets without
             //needing more than 64 bytes
-            if(tiles[i][j]->getPieceColor()==1)
+            if(tiles[i][j]->getPieceColor()==1 && tiles[i][j]->getPieceName()!=' ')
                 piecename=char(int(piecename)+32);
             BufferPing.append(piecename);
 
@@ -168,7 +188,7 @@ void Chess::receiveUpdates(char piece1, int iteration){
     }
     if(int(piece1)==32){
         temp->setPiece(false);
-
+        temp->clear();
     }
     else{
         temp->setPiece(true);
@@ -182,12 +202,9 @@ void Chess::receiveUpdates(char piece1, int iteration){
     }
     temp->setpieceName(piece1);
 
-    if(temp->getPieceColor()!=2)
-        temp->setPiece(true);
-    else
-        temp->setPiece(false);
 
-    temp->displayElement(' ');
+
+    temp->displayElement(temp->getPieceName());
     temp->displayBoard();
     Chess::chessturn=1;
 }
