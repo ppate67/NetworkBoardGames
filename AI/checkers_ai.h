@@ -38,6 +38,7 @@ private:
     bool isSafe,makeKing,riskKing;
     int val_change,kill,killKing;
     //Placeholder for move values
+    static vector<possible_move*> moveList;
 public:
     possible_move();               //need class from checkers mechanics to test move validity
 
