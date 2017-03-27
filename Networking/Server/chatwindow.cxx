@@ -1,7 +1,7 @@
 #include "chatwindow.h"
 #include <QRegExp>
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
+chatwindow::chatwindow(QWidget *parent) : Qchatwindow(parent)
 {
     setupUi(this);
     stackedWidget->setCurrentWidget(loginPage);
@@ -10,12 +10,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     connect(socket, SIGNAL(connected()), this, SLOT(connected()));
 }
 
-void MainWindow::on_loginButton_clicked()
+void chatwindow::on_loginButton_clicked()
 {
     socket->connectToHost(serverLineEdit->text(), 4200);
 }
 
-void MainWindow::on_sayButton_clicked()
+void chatwindow::on_sayButton_clicked()
 {
     QString message = sayLineEdit->text().trimmed();
 
@@ -28,7 +28,7 @@ void MainWindow::on_sayButton_clicked()
     sayLineEdit->setFocus();
 }
 
-void MainWindow::readyRead()
+void chatwindow::readyRead()
 {
     while(socket->canReadLine())
     {
@@ -55,7 +55,7 @@ void MainWindow::readyRead()
     }
 }
 
-void MainWindow::connected()
+void chatwindow::connected()
 {
     stackedWidget->setCurrentWidget(chatPage);
     socket->write(QString("/me:" + userLineEdit->text() + "\n").toUtf8());

@@ -1,15 +1,15 @@
-#include <QMainWindow>
+#include <Qchatwindow>
 #include <QTcpSocket>
 
 #include "ui_chatwindow.h"
 
-class MainWindow : public QMainWindow, public Ui::MainWindow
+class chatwindow : public Qchatwindow, public Ui::chatwindow
 {
     Q_OBJECT
 
     public:
 
-        MainWindow(QWidget *parent=0);
+        chatwindow(QWidget *parent=0);
 
     private slots:
 
