@@ -6,7 +6,7 @@ Chess* Chess::chesshead=NULL;
 int Chess::chessturn=1;
 int Chess::playercolor=0;
 int Chess::selected=0;
-#include "QMessageBox"
+
 void Chess::mousePressEvent(QMouseEvent *event)
 {
     if(selected==0)
@@ -48,23 +48,7 @@ void Chess::mousePressEvent(QMouseEvent *event)
             temp->displayBoard();
             sendGameMsg();
         }
-        else{
-            string output="";
-            Chess* temp=chesshead;
-            while(temp!=nullptr){
-                if(temp->getPieceColor()==1 && temp->getPieceName()!=' ')
-                    output+=char(int(temp->getPieceName())+32);
-                else if(temp->getPieceName()==' ')
-                    output+='-';
-                else
-                output+=temp->getPieceName();
-                temp=temp->nexttile;
-            }
-            QMessageBox::information(
-                    new QMessageBox(),
-                    tr("Debug Window"),
-                   QString::fromStdString(output));//debuging purposes delete
-        }
+
 
     }
 }
