@@ -29,6 +29,15 @@ socket->setSocketDescriptor(id);
 
 cout << " Client connected at " << id <<endl;
 }
+
+/*void player SetName(){
+  string name;
+  cout << "Please enter your player name." << endl;
+  //make popup window for this, cin name and set playerName = name
+  //add playername to vector of playernames at end of function
+  addPlayerName(name);
+
+}*/
 void player :: connected(){}
 void player :: disconnected(){}
 void player :: readyRead(){
@@ -166,6 +175,9 @@ void player::handleRequest2(int requestID[5],int playerID){
 
             MyServer::plist[ids].socket->waitForBytesWritten(3000);
             }
+    }
+    else if(requestID[0]==6){ //ID 6 for playername
+      
     }
 
 }

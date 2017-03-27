@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/Icons2">
+        <file>blackstone.png</file>
+        <file>bottomleft.png</file>
+        <file>bottomright.png</file>
+        <file>bottomside.png</file>
+        <file>circlecross.png</file>
+        <file>CROSS.png</file>
+        <file>leftside.png</file>
+        <file>rightside.png</file>
+        <file>sqr.png</file>
+        <file>topleft.png</file>
+        <file>topright.png</file>
+        <file>topside.png</file>
+        <file>whitestone.png</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/Icons">
+        <file>Black-Circle.png</file>
+        <file>darkking.png</file>
+        <file>lightking.png</file>
+        <file>Red-circle.png</file>
+    </qresource>
+</RCC>

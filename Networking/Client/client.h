@@ -4,7 +4,7 @@
 #include <QtNetwork/QTcpServer>
 #include <QtNetwork/QTcpSocket>
 #include <iostream>
-#include "gamemsg.h"
+#include "Networking/Client/gamemsg.h"
 #include "gamemanager.h"
 #include "vector"
 using namespace std;
