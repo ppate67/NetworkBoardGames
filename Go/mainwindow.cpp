@@ -34,11 +34,11 @@ void MainWindow::populateList2(int size){
         string rowtitle="Player: ";
         string rowtitlepart2=" Spectators: ";
         string game="";
-        if(GameManager::games[i][0][0]==1)//go
+        if(GameManager::games[i][0][0]==0)//go
             game="Go: ";
-        else if(GameManager::games[i][0][0]==2)//chess
+        else if(GameManager::games[i][0][0]==1)//chess
             game="Chess: ";
-        else if(GameManager::games[i][0][0]==3)//checkers
+        else if(GameManager::games[i][0][0]==2)//checkers
             game="Checkers: ";
         else//monopoly
             game="Monopoly: ";
@@ -103,15 +103,8 @@ void MainWindow::on_pushButton_clicked()
         int height = screenGeometry.height()/2;
         int width = screenGeometry.width()/2;
         myWidget->setGeometry(width/2,height/2,width,height);
-    GoBoard c;
-    cc=&c;
-        Go *tile[13][13]={{NULL}};
 
-        c.display(myWidget,tile);
-        myWidget->show();
-        myWidget->setAttribute( Qt::WA_DeleteOnClose );
-        connect(myWidget, SIGNAL(destroyed()), this, SLOT(deleteBoard()));
-        int gametype=0;
+        int gametype=1;
         for(int i=0; i<GameManager::games.size();i++)
             if(i==gameidtojoin)
                 gametype=GameManager::games[i][0][0];
@@ -119,9 +112,31 @@ void MainWindow::on_pushButton_clicked()
         int playerid=GameManager::clientID;
         Client::makeRequest(requestID,playerid);
         Go::color=1;
-        Chess::playercolor=1;
-        Chess::chessturn=0;
+
         Go::turn=0;
+        if(gametype==0){
+            GoBoard c;
+            cc=&c;
+                Go *tile[13][13]={{NULL}};
+
+                c.display(myWidget,tile);
+                myWidget->show();
+                myWidget->setAttribute( Qt::WA_DeleteOnClose );
+                connect(myWidget, SIGNAL(destroyed()), this, SLOT(deleteBoard()));
+
+
+        }
+        else if(gametype==1){
+
+
+            chessboard c;
+
+            c.setup(myWidget);
+
+            myWidget->show();
+            Chess::playercolor=1;
+            Chess::chessturn=0;
+        }
 }
 
 

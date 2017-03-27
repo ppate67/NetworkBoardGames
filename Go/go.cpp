@@ -8,16 +8,15 @@ void Go::mousePressEvent(QMouseEvent *event)
 {
     if(turn==0 || !checkPositionValidity(this->getColumn(),this->getRow(),this->getPieceColor()))
     {
+		//checks if position is valid to place stone on
 
-        //this->setStyleSheet("QLabel {background-color:rgb(176, 255, 20);}");
-
-        //temp=this;
     }
     else
     {
-        //turn=0;
-        //this->setTileColor(temp->getTileColor());
-
+		//if position is valid then a stone is placed with a color equal to the player's color.
+		//a player can only place a stone with their color.
+		//board is then updated and a message is sent to server so that the other player can 
+		//update their board
         this->setPieceColor(color);
         this->setPiece(true);
         updateEntireBoard();
@@ -27,7 +26,7 @@ void Go::mousePressEvent(QMouseEvent *event)
     }
 }
 int Go::getUserColor(){
-
+	//this method would allow for a user to find out what their color is. 
     int vecsize=GameManager::games.size();
     for(int i=0; i<vecsize; i++){
         int playsize= GameManager::games[i].size();
@@ -45,7 +44,7 @@ int Go::getUserColor(){
 }
 void Go::updateEntireBoard(){
     //purpose is to updata tiles that have been affected by a change in liberties
-    //currently crashes the program sometimes?
+    
     Go* temp=Go::head;
     vector<Go*> tempcontainer;
     while(temp!=nullptr){
@@ -70,7 +69,8 @@ void Go::updateEntireBoard(){
 }
 void Go::displayElement(char elem)
 {
-
+	//displays picture of stone based on the color assigned to the tile
+	//userColor is a misnomer it should be called tilecolor - this change will be made shortly
     if(this->userColor==1 && this->piece==true)
     {
         this->setPixmap(QPixmap(":/Icons2/blackstone.png"));
@@ -87,6 +87,8 @@ void Go::displayElement(char elem)
     }
 void Go::displayBoard(int type)
 {
+	//this sets up the coloring of the board.
+	//also displays the crosses and line segments needed to make the board look the way it does
     switch(type){
         case 0:
             this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);image:url(:/Icons2/circlecross.png);}:hover{background-color: rgb(62, 139, 178);}");
@@ -187,34 +189,12 @@ int Go::checkLiberties(Go* position, Go* prevposition, vector<Go*>* positions){
     }
 
 
-
-
-
-    //need to get rid of doubley counted liberties
-    //we can define a isConnected method to check if two arbitry stones are connected
-    //we can subtract one from the liberties counter if
-    //they are connected, share a liberty, and the current stone being "investigated"
-    // is on the left or below the liberty (so we only decrement once)
-//    Go* twoabove=above;
-//    if(above!=nullptr){
-//        for(int i=0; i<13; i++)
-//        {
-//            twoabove=twoabove->prevtile;
-//            if(twoabove==nullptr)
-//                break;
-//        }
-//    }
-//    if(right->nexttile!=nullptr)
-//    if(isConnected(position,position,right->nexttile) && right->getPieceColor()==2){
-//        liberties--;
-//    }
-//    if(twoabove!=nullptr)
-//    if(isConnected(position,position,twoabove) && above->getPieceColor()==2){
-//        liberties--;
-//    }
     return liberties;
 }
 //bool korule(GoBoard board){}
+
+//isConnected no longer needed as it has been made obselete by just using a vector in the checkLiberties method
+//It very likely will become useful for calculating final scores of the game however.
 bool Go::isConnected(Go* curposition,Go* prevpos, Go* otherposition){
     //first call curposition = temp and otherposition = the position we are checking if curposition is connected to
     //so we want to recursively go from curposition to otherposition
@@ -280,6 +260,8 @@ bool Go::placeStone(int corx, int cory){return true;}
 void Go::captureStones(){}
 void Go::addStonePoints(int numcapstones, int playercolor){}
 void Go::sendGameMsg(){
+	//sends message to server containing information needed to describe the entire state of the Go game
+	//for Go this simply entails sending the color value of each tile
     QByteArray BufferPing;
     int des=0;
     int vecsize=GameManager::games.size();
@@ -308,6 +290,8 @@ void Go::sendGameMsg(){
     Go::turn=0;
 }
 Go* Go::findHead(Go* pnt){
+	//finds head of Go data structures
+	//used when contructing game message
     while(1){
         if(pnt->prevtile==NULL)
             return pnt;
@@ -315,6 +299,7 @@ Go* Go::findHead(Go* pnt){
     }
 }
 void Go::fillArray(Go* tiles[13][13],Go* pnt){
+	//fills array of go objects so that they can be easily iterated through
     tiles[0][0]=pnt;
     for(int ii=0;ii<13;ii++){
         for(int i=0;i<13;i++){
@@ -326,6 +311,9 @@ void Go::fillArray(Go* tiles[13][13],Go* pnt){
 
 }
 void Go::receiveUpdates(int color, int iteration){
+	//this static method is iteratively called by the client class
+	//it takes the color value from inside a tcp message and uses it to update the go board
+	//iteration is used as an index of which tile on the board to update.
     Go*temp=Go::head;
     for(int i=0;i<iteration;i++){
         temp=temp->nexttile;

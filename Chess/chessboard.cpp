@@ -39,6 +39,7 @@ void chessboard::setup(QWidget *baseWidget)
             tile[i][j]->setTileNum(k++);
             tile[i][j]->displayBoard();
             tile[i][j]->setGeometry(x,y,64,64);
+            tile[i][j]->displayElement(' ');//sets all pieces to empty but later on we place the pieces
             x+=60;
         }
         y+=60;

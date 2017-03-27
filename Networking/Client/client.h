@@ -21,6 +21,7 @@ class Client : public QObject
         static void makeRequest(int requestID[5],int playerid);
         void handleReply(vector<int>data,int size);
         void handleReply2(vector<char> data, int size);
+        void SetPlayerName();
 public slots:
     void readyRead();
 private:

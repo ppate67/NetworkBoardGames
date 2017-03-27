@@ -16,6 +16,7 @@ class player : public QObject
     Q_OBJECT
 public:
     explicit player(QObject *parent =0);
+    string playerName;
     void SetSocket(int id);
     int filled=0;
     QTcpSocket *slist[MAXNUMPLAYER];
