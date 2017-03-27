@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1294</width>
+    <height>680</height>
+   </rect>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::StrongFocus</enum>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="windowOpacity">
+   <double>0.000000000000000</double>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="styleSheet">
+    <string notr="true">background-image:url(:/board.png);
+background-position: all;</string>
+   </property>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>190</y>
+      <width>200</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::StrongFocus</enum>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 24pt &quot;MV Boli&quot;;
+border-style:solid;</string>
+    </property>
+    <property name="text">
+     <string>checker</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>260</y>
+      <width>200</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 24pt &quot;MV Boli&quot;;
+border-style:solid;</string>
+    </property>
+    <property name="text">
+     <string>chess</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>330</y>
+      <width>200</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 24pt &quot;MV Boli&quot;;
+border-style:solid;</string>
+    </property>
+    <property name="text">
+     <string>go</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_5">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>400</y>
+      <width>200</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 24pt &quot;MV Boli&quot;;
+border-style:solid;</string>
+    </property>
+    <property name="text">
+     <string>monopoly</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_6">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>470</y>
+      <width>200</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 24pt &quot;MV Boli&quot;;
+border-style:solid;</string>
+    </property>
+    <property name="text">
+     <string>quit</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>415</x>
+      <y>0</y>
+      <width>461</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::DefaultContextMenu</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+font: 26pt &quot;MV Boli&quot;;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="lineWidth">
+     <number>0</number>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MV Boli'; font-size:26pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Networked Board Game&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1294</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <widget class="QMenu" name="menuStart">
+     <property name="title">
+      <string>Start</string>
+     </property>
+     <widget class="QMenu" name="menuChecker">
+      <property name="title">
+       <string>Checker</string>
+      </property>
+      <addaction name="actionconnect_network"/>
+      <addaction name="actionplay_with_AI"/>
+     </widget>
+     <widget class="QMenu" name="menuChess">
+      <property name="title">
+       <string>Chess</string>
+      </property>
+      <addaction name="actionconnect_network_2"/>
+      <addaction name="actionplay_with_AI_2"/>
+     </widget>
+     <widget class="QMenu" name="menuGo">
+      <property name="title">
+       <string>Go</string>
+      </property>
+      <addaction name="actionconnect_network_3"/>
+      <addaction name="actionplay_with_AI_3"/>
+     </widget>
+     <widget class="QMenu" name="menuMonopoly">
+      <property name="title">
+       <string>Monopoly</string>
+      </property>
+      <addaction name="actionconnect_network_4"/>
+      <addaction name="actionplay_with_AI_4"/>
+     </widget>
+     <addaction name="menuChecker"/>
+     <addaction name="menuChess"/>
+     <addaction name="menuGo"/>
+     <addaction name="menuMonopoly"/>
+    </widget>
+    <addaction name="menuStart"/>
+    <addaction name="actionquit"/>
+   </widget>
+   <addaction name="menuFile"/>
+  </widget>
+  <action name="actionquit">
+   <property name="text">
+    <string>quit</string>
+   </property>
+  </action>
+  <action name="actionconnect_network">
+   <property name="text">
+    <string>connect network</string>
+   </property>
+  </action>
+  <action name="actionplay_with_AI">
+   <property name="text">
+    <string>play with AI</string>
+   </property>
+  </action>
+  <action name="actionconnect_network_2">
+   <property name="text">
+    <string>connect network</string>
+   </property>
+  </action>
+  <action name="actionplay_with_AI_2">
+   <property name="text">
+    <string>play with AI</string>
+   </property>
+  </action>
+  <action name="actionconnect_network_3">
+   <property name="text">
+    <string>connect network</string>
+   </property>
+  </action>
+  <action name="actionplay_with_AI_3">
+   <property name="text">
+    <string>play with AI</string>
+   </property>
+  </action>
+  <action name="actionconnect_network_4">
+   <property name="text">
+    <string>connect network</string>
+   </property>
+  </action>
+  <action name="actionplay_with_AI_4">
+   <property name="text">
+    <string>play with AI</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
