@@ -15,40 +15,61 @@ public:
 
 };
 
+<<<<<<< HEAD
+class gameProperty{
+Private:
+=======
 class gameBoard{
 private:
+>>>>>>> origin/master
 	int price; //Price for that property
 	int tax; //Amount it costs if landed on
 	int mortgage; //Amount of money you get if mortgaged
-	string owner; //Owner of property, originally set to null
+	int owner; //Owner of property, originally set to null
 	int position; //Position on the board
 	int houses; //Amount of house (5 houses = 1 hotel)
 	int category; //What color cattegory it is instructions
-	bool Mortgage; //Is it mortgaged? 
-public: 
+	bool Mortgage; //Is it mortgaged?
+public:
 	gameBoard(int price, int tax, int mortgage, string owner, int position, int houses, int hotels, int category, bool Mortgage)
 
 
 };
 
-Class Card{
+class gameRailRoad{
+Private:
+	int price; //Price for that property
+	int cost; //Amount it costs if landed on
+	int mortgage; //Amount of money you get if mortgaged
+	int owner; //Owner of property, originally set to null
+	int position; //Position on the board
+	int category; //What color cattegory it is instructions
+	bool Mortgage; //Is it mortgaged?
+public:
+	gameBoard(int price, int tax, int mortgage, string owner, int position, int houses, int hotels, int category, bool Mortgage)
+
+
+};
+
+class Card{
 private:
 	int type; // chance or community chest
 	string text; // the instructions on the card
 	int amount; // amount of money to add or subtract from the player according to the card
+	int position;
 public:
 	Card(int type, string text, int amount)
 
 };
 
 void propertyPay {
-		//Player lands on property owned by another player 
+		//Player lands on property owned by another player
 		//Player pays property owner
 }
 void drawCard {
 		//draw either a chance or community chest card
 		//add amount of card (negative or positive) to player
-		//add 1 to  ìget out of jail free cardî variable if it is that card (jailFree attribute)
+		//add 1 to  ‚Äúget out of jail free card‚Äù variable if it is that card (jailFree attribute)
 }
 int dieroll(int& roll1, int& roll2) {
 	srand(time(NULL));
