@@ -159,6 +159,9 @@ gameRailRoad Electric_Company(150, (4 * dieroll), 75, 0, 28, 0);
 //Community Chest == Card(int type, string text, int amount)
 
 Card a(1,"Advance to Go (Collect $200)", 200);
+Card b(1, "Bank error in your favor – collect $75 ", 75);
+Card c(1, "Doctor's fees – Pay $50 ", -50)
+Card d(1, "Get out of jail free – this card may be kept until needed, or sold", 0)
 
 
 
