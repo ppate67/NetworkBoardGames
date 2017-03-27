@@ -15,38 +15,32 @@ public:
 
 };
 
-<<<<<<< HEAD
+
 class gameProperty{
-Private:
-=======
-class gameBoard{
 private:
->>>>>>> origin/master
 	int price; //Price for that property
-	int tax; //Amount it costs if landed on
+	int rent; //Amount it costs if landed on
 	int mortgage; //Amount of money you get if mortgaged
 	int owner; //Owner of property, originally set to null
 	int position; //Position on the board
 	int houses; //Amount of house (5 houses = 1 hotel)
+  int build;
 	int category; //What color cattegory it is instructions
 	bool Mortgage; //Is it mortgaged?
 public:
-	gameBoard(int price, int tax, int mortgage, string owner, int position, int houses, int hotels, int category, bool Mortgage)
-
-
+	gameProperty(int price, int rent, int mortgage, int owner, int position, int houses, int build, int category, bool Mortgage)
 };
 
 class gameRailRoad{
 Private:
 	int price; //Price for that property
-	int cost; //Amount it costs if landed on
+	int rent; //Amount it costs if landed on
 	int mortgage; //Amount of money you get if mortgaged
 	int owner; //Owner of property, originally set to null
 	int position; //Position on the board
-	int category; //What color cattegory it is instructions
 	bool Mortgage; //Is it mortgaged?
 public:
-	gameBoard(int price, int tax, int mortgage, string owner, int position, int houses, int hotels, int category, bool Mortgage)
+	gameRailRoad(int price, int rent, int mortgage, int owner, int position, bool Mortgage)
 
 
 };
@@ -114,4 +108,51 @@ void propertyMortgage {
 		//Need Money? Mortgage for a certain price
 		//Change flag for property to mortgaged (bool Mortgage = true)
 		//Set amount to unmortgage
+}
+
+
+//Here is where all the properties are initiated
+//gameProperty(int price, int rent, int mortgage, int owner, int position, int houses, int build, int category, bool Mortgage)
+//Brown = category 1
+gameProperty MediterraneanAvenue(60, 2, 30, 0, 1, 0, 50, 1, 0);
+gameProperty BalticAvenue(60, 4, 30, 0, 3, 0, 50, 1, 0);
+//LightBlue = category 2
+gameProperty OrientalAvenue(100, 6, 50, 0, 6, 0, 50, 2, 0);
+gameProperty VermontAvenue(100, 6, 50, 0, 8, 0, 50, 2, 0);
+gameProperty MediterraneanAvenue(120, 8, 60, 0, 9, 0, 50, 2, 0);
+//Pink = category 3
+gameProperty StCharlesPlace(140, 10, 70, 0, 11, 0, 100, 3, 0);
+gameProperty StatesAvenue(140, 10, 70, 0, 13, 0, 100, 3, 0);
+gameProperty VirginiaAvenue(160, 12, 80, 0, 14, 0, 100, 3, 0);
+//Orange = category 4
+gameProperty StJamesPlace(180, 14, 90, 0, 16, 0, 100, 4, 0);
+gameProperty TennesseeAvenue(180, 14, 90, 0, 18, 0, 100, 4, 0);
+gameProperty NewYorkAvenue(200, 16, 100, 0, 19, 0, 100, 4, 0);
+//Red = category 5
+gameProperty KentuckyAvenue(220, 18, 110, 0, 21, 0, 150, 5, 0);
+gameProperty IndianaAvenue(220, 18, 110, 0, 23, 0, 150, 5, 0);
+gameProperty IllinoisAvenue(240, 20, 120, 0, 24, 0, 150, 5, 0);
+//Yellow = category 6
+gameProperty AtlanticAvenue(260, 22, 130, 0, 26, 0, 150, 6, 0);
+gameProperty VentnorAvenue(260, 22, 130, 0, 27, 0, 150, 6, 0);
+gameProperty MarvinGardens(280, 24, 140, 0, 29, 0, 150, 6, 0);
+//Green = category 7
+gameProperty PacificAvenue(300, 26, 150, 0, 31, 0, 200, 7, 0);
+gameProperty NorthCarolinaAvenue(300, 26, 150, 0, 32, 0, 200, 7, 0);
+gameProperty PennsylvaniaAvenue(320, 28, 160, 0, 34, 0, 200, 7, 0);
+//DarkBlue = category 8
+gameProperty ParkPlace(350, 35, 175, 0, 37, 0, 200, 8, 0);
+gameProperty Boardwalk(400, 50, 200, 0, 39, 0, 200, 8, 0);
+
+
+//gameRailRoad(int price, int rent, int mortgage, int owner, int position, bool Mortgage)
+gameRailRoad Reading_Railroad(200, 25, 100, 0, 5, 0);
+gameRailRoad Pennsylvania_Railroad(200, 25, 100, 0, 15, 0);
+gameRailRoad BandO_Railroad(200, 25, 100, 0, 25, 0);
+gameRailRoad ShortLine_Railroad(200, 25, 100, 0, 35, 0);
+
+
+
+int main() {
+
 }
