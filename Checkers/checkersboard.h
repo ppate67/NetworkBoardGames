@@ -1,6 +1,7 @@
-#ifndef board.h
-#define board.h
-//This is the basic outline of a chess or a checker board
+#ifndef _CHECKERSBOARD_H_
+#define _CHECKERSBOARD_H_
+//This is the basic outline of a checkers board.
+//IS THIS FILE STILL NECESSARY?
 
 Class board{
 Private:
@@ -8,9 +9,9 @@ Private:
 Public:
 	board();
 	~board();
-	Void displayBoard();
-	Bool checkMove();
-	Bool checkWin();
+	void displayBoard();
+	bool checkMove();
+	bool checkWin();
 	
 };
 #endif

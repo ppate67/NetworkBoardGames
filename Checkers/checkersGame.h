@@ -8,13 +8,16 @@
 
 #include "checkersboard.h"
 #include "checkerDisk.h"
+#include <cmath>
 
 class CheckersGame{
 private:
     checkersboard* board;
     bool winner;
 public:
-    CheckersGame() : winner(false) {}
+    CheckersGame() : winner(false) {
+        board = checkersboard(); //Initialize a checkers board (4x4 array) to default piece locations
+    }
     
     bool checkMove(checkerDisk c, int destX, int destY){
         //Checks if the intended move is a valid move.
@@ -24,20 +27,64 @@ public:
         if(c.c == 'b' || c.c == 'r'){
             //Not a king
             if(c.c == 'b'){
-                
+                if(abs(destY-c.currY) == 1 && abs(destX-c.currX) == 1){
+                    //check if the user is making a valid move (in the correct direction)
+                    if (destY < c.currY)
+                        return true;
+                }
+                else if (abs(destY-c.currY) == 2 && abs(destX-c.currX) == 2){
+                    //Check if the user is making a valid jump over an opponent piece
+                    int lowX = min(c.currX, destX);
+                    int lowY = min(c.currY, destY);
+                    if((board[lowY+1][lowX+1]->c == 'r') && destY < c.currY)
+                        return true;
+                }
+                return false;
             }
             else{
-                
+                if(abs(destY-c.currY) == 1 && abs(destX-c.currX) == 1){
+                    //check if the user is making a valid move (in the correct direction)
+                    if (destY > c.currY)
+                        return true;
+                }
+                else if (abs(destY-c.currY) == 2 && abs(destX-c.currX) == 2){
+                    //Check if the user is making a valid jump over an opponent piece
+                    int lowX = min(c.currX, destX);
+                    int lowY = min(c.currY, destY);
+                    if(board[lowY+1][lowX+1]->c == 'b' && destY > c.currY)
+                        return true;
+                }
             }
         }
         else{
             //King
-            if (board[currY][currX] != nullptr)
-                return false;
-            else if (destX)
-                return false;
+            if (c.c == 'B'){
+                if (board[destY][destX] != nullptr)
+                    return false;
+                if (abs(destY-c.currY) > 2 && abs(destX-c.currX) > 2)
+                    return false;
+                else if (abs(destY-c.currY) == 2 && abs(destX-c.currX) == 2){
+                    int lowX = min(c.currX, destX);
+                    int lowY = min(c.currY, destY);
+                    if(board[lowY+1][lowX+1]->c == 'r' || board[lowY+1][lowX+1]->c == 'R')
+                        return true;
+                }
+                return true;
+            }
+            else{
+                if (board[destY][destX] != nullptr)
+                    return false;
+                if (abs(destY-c.currY) > 2 && abs(destX-c.currX) > 2)
+                    return false;
+                else if (abs(destY-c.currY) == 2 && abs(destX-c.currX) == 2){
+                    int lowX = min(c.currX, destX);
+                    int lowY = min(c.currY, destY);
+                    if(board[lowY+1][lowX+1]->c == 'r' || board[lowY+1][lowX+1]->c == 'R')
+                        return true;
+                }
+                return true;
+            }
         }
-        
     }
     bool checkKing(checkerDisk c){
         //Checks if the last move resulted in a checkerDisk being promoted to a king.
