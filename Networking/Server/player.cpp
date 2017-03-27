@@ -11,6 +11,8 @@ player::player(QObject *parent) : QObject(parent)
     }
 }
 void player::SetSocket(int id){
+	//launched when connection is orriginally established
+	//static "slist" array is populated with the pointer to the socket object associated with this player 
 socket = new QTcpSocket(this);
 for(int i =0; i<MAXNUMPLAYER; i++){
     if((slist[i]==NULL)){
@@ -21,6 +23,8 @@ for(int i =0; i<MAXNUMPLAYER; i++){
 
 }
 cout <<"test";
+//signal and slot mechanisms that allow asynchronous behavior such as the ability for the server to handle 
+//when a tcp message arrives on a socket connection
 connect(socket, SIGNAL(connected()),this,SLOT(connected()));
 connect(socket,SIGNAL(disconnected()),this,SLOT(disconnected()));
 connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
@@ -41,7 +45,11 @@ cout << " Client connected at " << id <<endl;
 void player :: connected(){}
 void player :: disconnected(){}
 void player :: readyRead(){
-
+	//this method is called by the slot signal mechanism whenever a new TCP
+	//message arrives to the server
+	//The server then handles the TCP byte array by decomposing it into its header components
+	// and its data payload components. Code branches off from there based on the header's type field.
+	
     QByteArray playerinput = socket->readAll();
 
     int length = playerinput.length();
@@ -63,7 +71,7 @@ void player :: readyRead(){
     GameManager *temp = GameManager::head;
     int vecsize=GameManager::games.size();
     for(int i =0; i<vecsize;i++){
-
+		//the following is a set of server messages used for debugging purposes.
         int playsize= GameManager::games[i].size();
         for(int ii=0; ii<playsize;ii++){
             cout << "GameID " << i << endl;
@@ -74,9 +82,9 @@ void player :: readyRead(){
     }
     for(int i=0; i<MAXNUMPLAYER; i++)
         if(&MyServer::plist[i]==this)
-            ids=i;
+            ids=i;//finding the socket id of the client 
     if(type==8)
-        handleRequest2(handledata,ids);
+        handleRequest2(handledata,ids);//if the type is 8 then the server is dealing with a client request
     else
         task(&msg);
 }
@@ -86,6 +94,9 @@ void player::handleRequest2(int requestID[5],int playerID){
         //do later
     }
     else if(requestID[0]==2){
+		//handles request to add a player to a game based on gameid
+		//if the gameid is larger than any currently in the vector then 
+		//a new game is added
         if(requestID[3]==1){//on gameID
             int gameid=requestID[1];
             int gametype=requestID[4];
@@ -108,6 +119,7 @@ void player::handleRequest2(int requestID[5],int playerID){
         }
     }
     else if(requestID[0]==3){
+		//sends back a list of deliminited games (described by the player id, player type, and gametype)
         QByteArray output;
 
         int gType=requestID[1];
@@ -124,9 +136,9 @@ void player::handleRequest2(int requestID[5],int playerID){
 
             int playsize= GameManager::games[i].size();
             for(int ii=0; ii<playsize;ii++){
-                output.append(GameManager::games[i][ii][2]);
-                output.append(GameManager::games[i][ii][1]);
-                output.append(GameManager::games[i][ii][0]);
+                output.append(GameManager::games[i][ii][2]);//player id
+                output.append(GameManager::games[i][ii][1]);//player type
+                output.append(GameManager::games[i][ii][0]);//gametype
             }
              output.append(char('i'));
         }
@@ -137,6 +149,7 @@ void player::handleRequest2(int requestID[5],int playerID){
         cout << "Sent gameID list " << counter <<endl;
     }
     else if(requestID[0]==4){
+		//sends a list of players (described by their player id and player type) for a specific gameid
         QByteArray output;
         output.append(char(playerID));
         output.append(char(8));
@@ -159,6 +172,8 @@ void player::handleRequest2(int requestID[5],int playerID){
         MyServer::plist[playerID].socket->waitForBytesWritten(3000);
     }
     else if(requestID[0]==5){
+		//this is the response to the player requesting for its clientid
+		//player wants to know their clientid so that they can know how to refer to themselves.
         int ids=0;//id sender
         QByteArray output;
         for(int i=0; i<MAXNUMPLAYER; i++)
@@ -177,115 +192,15 @@ void player::handleRequest2(int requestID[5],int playerID){
             }
     }
     else if(requestID[0]==6){ //ID 6 for playername
-      
+      //response to player request for a list of player usernames
+	  
     }
 
 }
 void player::handleRequest(int requestID[5],int playerID){//fires if type of gamemsg was 8
-    if(requestID[0]==1){
-        //remove player
-        GameManager *temp;
-        int gameid=GameManager::findGame1(playerID)->gameID;
-        GameManager* gameptr=GameManager::findGame3(gameid);
-        temp->removePlayer(GameManager::findGame1(playerID),gameptr);
-        //requestID[1]->gameID
-    }
-    else if(requestID[0]==2){
-        //add player requestID[1]->gameID or gametype
-        //requestID[2]->player vs spectator
-        //requestID[3]->base it on gameID vs gametype
-
-            GameManager *newplayer=new GameManager();
-            newplayer->playerid=playerID;
-            GameManager* game;
-            int counter=0;
-            int gameID=0;
-            if(requestID[3]==1){//on gameID
-                game = GameManager::findGame3(requestID[1]);
-                gameID=requestID[1];
-            }
-            else{//on gametype
-                game = GameManager::findGame2(requestID[1]);
-            }
-            GameManager* temp = GameManager::head;
-            while(temp!=nullptr)
-                if(temp->gameID>counter)
-                    counter=temp->gameID;
-
-            counter++;
-            int gameType=1;
-            if(game==nullptr){
-                game=new GameManager();
-                counter--;
-                gameID=counter;
-
-            }
-            newplayer->addPlayer(game,newplayer);
-            newplayer->gameType=gameType;//needs to be changed
-            newplayer->gameID=gameID;
-            if(requestID[2]==1){//player
-                newplayer->player=true;
-            }
-            else{//spectator
-                newplayer->player=false;
-            }
-
-        }
-    else if(requestID[0]==3){//client requests gameids based on gametype
-        //sends gameids,
-        //requestID[1]->gametype go->1 chess->2 checkers->3 mono->4
-        int ids=0;//id sender
-        QByteArray output;
-
-        int gType=requestID[1];
-        output.append(char(playerID));
-        output.append(char(8));
-        output.append(char(3));
-        output.append(char(gType));
-        int counter=0;
-        GameManager* temp=GameManager::head;
-        while(temp!=NULL){
-            if(temp->gameID==gType){
-                output.append(char(temp->gameID));
-                counter++;
-            }
-            temp=temp->nextGame;
-        }
-        MyServer::plist[playerID].socket->write(output);
-        MyServer::plist[playerID].socket->flush();
-
-        MyServer::plist[playerID].socket->waitForBytesWritten(3000);
-        cout << "Sent gameID list " << counter <<endl;
-
-    }
-    else if(requestID[0]==4){//client requests game info based on gameid
-        //sends  playerids alt'd with player type (player vs spectator)
-        int ids=0;//id sender
-        QByteArray output;
-        output.append(char(playerID));
-        output.append(char(8));
-        output.append(char(4));//makes sure recipient handles as desired
-        int gameid=requestID[1];
-        output.append(char(gameid));
-        GameManager* temp;
-        int counter=0;
-        temp=GameManager::findGame3(gameid);
-        while(temp!=NULL){
-            if(temp->playerid!=playerID){
-                output.append(char(playerID));
-                counter++;
-                if(temp->player==true)
-                    output.append(char(1));
-                else
-                    output.append(char(0));
-            }
-            temp=temp->nextPlayer;
-        }
-        MyServer::plist[playerID].socket->write(output);
-        MyServer::plist[playerID].socket->flush();
-        cout<<"Sending player lists"<<counter<<endl;
-        MyServer::plist[playerID].socket->waitForBytesWritten(3000);
-    }
+    //removed and handleRequest2 is used instead
+	//this used to do what handleRequest2 currently does but by using the pointer based data structure
+	//instead of multidemsional vectors
     }
 
 
@@ -319,6 +234,9 @@ void player::task(GameMsg* msg){
     }
 }
 void player::broadcastGames(){
+	//this method has not been implements yet but it
+	//will be used to send a list of games to every player connected to the server
+	//by doing this the client can maintain a constant up-to-date record of the games being played across the server
     for(int i=0; i<MAXNUMPLAYER; i++){
         int broadmsg[5]={3,1,1,1,1};
         if(MyServer::plist[i].filled!=0)
