@@ -1,6 +1,6 @@
 #include "go.h"
 
-Go *temp;
+//Go *temp;
 Go* Go::head=NULL;
 int Go::turn=1;
 int Go::color=0;

@@ -10,3 +10,7 @@ SOURCES += Main.cpp \
     Window.cpp
 
 RC_FILE = Board.rc
+
+DISTFILES += \
+    favicon.ico \
+    Board.rc

@@ -10,8 +10,7 @@ CONFIG += app_bundle
 
 TEMPLATE = app
 
-SOURCES += main.cpp \
-    Go/main.cpp \
+SOURCES += Networking/main.cpp \
     Chess/chess.cpp \
     Chess/chessboard.cpp \
     Chess/pieces.cpp \
@@ -47,7 +46,7 @@ RESOURCES += \
     Go/resources2.qrc
 
 FORMS += \
-    mainwindow.ui
+    Networking/mainwindow.ui
 
 DISTFILES += \
     Checkers/IMG_0114.JPG \
