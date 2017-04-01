@@ -52,7 +52,7 @@ void Checkers::mousePressEvent(QMouseEvent *event)
 void Checkers::displayElement(char elem)
 {
     this->pieceName=elem;
-
+    this->setScaledContents(true);
     if(this->pieceColor==1 && this->piece==true)
     {
         switch(elem)
