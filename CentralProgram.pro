@@ -19,7 +19,10 @@ SOURCES += Networking/main.cpp \
     Go/mainwindow.cpp \
     Networking/Client/client.cpp \
     Networking/Client/gamemanager.cpp \
-    Networking/Client/gamemsg.cpp
+    Networking/Client/gamemsg.cpp \
+    Checkers1/checkers.cpp \
+    Checkers1/checkersboard.cpp \
+    Checkers1/pieces2.cpp
 
 
 # The following define makes your compiler emit warnings if you use
@@ -36,14 +39,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SUBDIRS += \
     Checkers/board1.pro \
     Chess/Test3.pro \
-    Networking/Client/TestHost.pro
+    Networking/Client/TestHost.pro \
+    Checkers1/board1.pro
 
 RESOURCES += \
     Checkers/checkers_pieces.qrc \
     Checkers/images.qrc \
     Checkers/kings.qrc \
     Chess/resources.qrc \
-    Go/resources2.qrc
+    Go/resources2.qrc \
+    Checkers1/checkers_pieces.qrc \
+    Checkers1/images.qrc \
+    Checkers1/kings.qrc
 
 FORMS += \
     Networking/mainwindow.ui
@@ -82,7 +89,12 @@ DISTFILES += \
     Go/topside.png \
     Go/whitestone.png \
     Go/README \
-    Networking/Client/README.txt
+    Networking/Client/README.txt \
+    Checkers1/board1.pro.user \
+    Checkers1/Black-Circle.png \
+    Checkers1/darkking.png \
+    Checkers1/lightking.png \
+    Checkers1/Red-circle.png
 
 HEADERS += Chess/chess.h \
     Chess/chessboard.h \
@@ -92,4 +104,7 @@ HEADERS += Chess/chess.h \
     Go/mainwindow.h \
     Networking/Client/client.h \
     Networking/Client/gamemanager.h \
-    Networking/Client/gamemsg.h
+    Networking/Client/gamemsg.h \
+    Checkers1/checkers.h \
+    Checkers1/checkersboard.h \
+    Checkers1/pieces2.h

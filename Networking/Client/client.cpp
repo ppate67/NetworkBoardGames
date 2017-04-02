@@ -1,6 +1,7 @@
 #include "client.h"
 #include "Go/go.h"
 #include "Chess/chess.h"
+#include "Checkers1/checkers.h"
 #include "fstream"
 #include "QMessageBox"
 QTcpSocket* Client::s=NULL;
@@ -31,7 +32,7 @@ void Client :: readyRead(){
 
 
 
-    if(type==0){
+    if(type==0){//go message
     int datamessage[169];
 
     for(int i=2; i<message.length();i++){
@@ -43,7 +44,7 @@ void Client :: readyRead(){
         Go::updateEntireBoard();
 
     }
-    if(type==1){
+    if(type==1){//chess message
         int datamessage[64];
 
 
@@ -53,6 +54,17 @@ void Client :: readyRead(){
             Chess::receiveUpdates(datamessage[i-2],i-2);
         }
 
+
+    }
+    if(type==2){//checkers message
+        int datamessage[64];
+        for(int i=2; i<message.length(); i++){
+            datamessage[i-2]=int(message[i]);//this is not optimal we could just use message[i] everywhere
+            //make this change asap
+            std:cout <<datamessage[i-2];
+            Checkers::receiveUpdates(datamessage[i-2],i-2);
+
+        }
 
     }
     if(type==8){

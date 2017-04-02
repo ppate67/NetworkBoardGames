@@ -2,6 +2,7 @@
 #define CHECKERS_H
 
 #include <QLabel>
+#include "Networking/Client/client.h"
 
 class Checkers:public QLabel {
 private:
@@ -23,7 +24,8 @@ public:
     int getTileNum() {return tileNum;}
     bool getPiece() {return piece;}
     int getPieceName() {return pieceName;}
-
+    void capturePiece();
+    void checkCapture();
     void setTileColor(int color){tileColor=color;}
     void setPieceColor(int color){pieceColor=color;}
     void setPiece(bool p){piece=p;}
@@ -31,6 +33,18 @@ public:
     void setColumn(int j){col=j;}
     void setTileNum(int k){tileNum=k;}
     void setpieceName(char n){pieceName=n;}
+
+    //networking functionalities
+    static int checkersturn;
+    static int playercolor;
+    Checkers* nexttile;
+    static Checkers* checkershead;
+    Checkers* prevtile;
+    void fillArray(Checkers* tiles[8][8],Checkers* pnt);
+    Checkers* findHead(Checkers* pnt);
+    void sendGameMsg();
+    static void receiveUpdates(char piece1, int iteration);
+
 };
 
 #endif // CHECKERS_H

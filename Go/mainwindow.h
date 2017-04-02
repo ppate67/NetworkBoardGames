@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "QListWidgetItem"
 #include "goboard.h"
+#include "Checkers1/checkersboard.h"
 #include "Chess/chessboard.h"
 namespace Ui {
 class MainWindow;

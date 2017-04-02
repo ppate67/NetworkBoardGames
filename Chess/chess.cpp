@@ -1,5 +1,5 @@
 #include "chess.h"
-#include "pieces.h"
+#include "Chess/pieces.h"
 
 Chess *temp;
 Chess* Chess::chesshead=NULL;

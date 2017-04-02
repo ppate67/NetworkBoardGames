@@ -1,22 +1,23 @@
-#include "pieces.h"
+#include "Checkers1/pieces2.h"
 
-bool Piece::checkValid(int endRow, int endCol, int endPieceColor, bool occupied){
+bool CheckerPiece::checkValid2(int endRow, int endCol, int endPieceColor, bool occupied){
     if (occupied == true){
-        if(color == endPieceColor){ // can not take own color piece
-            return false;
-        }
+
+            return false; //cannot move to any occupied position in checkers.
+
     }
     bool allow = false;
     switch(name){
-        case 'P': allow = checkPiece(row, col, endRow, endCol); // This is a normal checkers piece
+        case 'P': allow = checkPiece2(row, col, endRow, endCol); // This is a normal checkers piece
             break;
-        case 'K': allow = checkKinged(row, col, endRow, endCol); // This is for a kinged checkers piece
+        case 'K': allow = checkKinged2(row, col, endRow, endCol); // This is for a kinged checkers piece
             break;
    }
+
    return allow;
 }
 
-bool Piece::checkPiece(int startRow, int startCol, int endRow, int endCol){
+bool CheckerPiece::checkPiece2(int startRow, int startCol, int endRow, int endCol){
     switch(color){
         case 0:{ //black pieces increasing numbers in rows
             if (endRow == startRow + 1){
@@ -30,12 +31,13 @@ bool Piece::checkPiece(int startRow, int startCol, int endRow, int endCol){
                 if (endCol == startCol - 1 || endCol == startCol + 1)
                     return true;
             }
+
         }
     }
     return false;
 }
 
-bool Piece::checkKinged(int startRow, int startCol, int endRow, int endCol){
+bool CheckerPiece::checkKinged2(int startRow, int startCol, int endRow, int endCol){
     if (endRow == startRow - 1 || endRow == startRow + 1 ){ // A kinged piece can move diagnoly in any direction
         if (endCol == startCol - 1 || endCol == startCol + 1)
             return true;

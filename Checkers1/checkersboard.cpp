@@ -1,5 +1,4 @@
 #include "checkersboard.h"
-#include "checkers.h"
 #include <QLabel>
 #include <QtGui>
 #include <QPushButton>
@@ -39,6 +38,7 @@ void checkersboard::setup(QWidget *baseWidget)
             tile[i][j]->setTileNum(k++);
             tile[i][j]->displayBoard();
             tile[i][j]->setGeometry(x,y,64,64);
+            tile[i][j]->displayElement(' ');//sets all pieces to empty but later on we place the pieces
             x+=60;
         }
         y+=60;
@@ -73,5 +73,23 @@ void checkersboard::setup(QWidget *baseWidget)
         tile[6][j]->setPieceColor(1);
         tile[6][j]->displayElement('P');
     }
+    //this will set up the pointers within each Chess object
+    //having pointers in each object makes it easier to navigate between objects
+    tile[0][0]->prevtile=nullptr;
+    for(int ii=0;ii<8;ii++){
+    for(int i=0;i<7;i++){
+        tile[i][ii]->nexttile=tile[i+1][ii];
+        tile[i+1][ii]->prevtile=tile[i][ii];
+    }
+    if(ii!=7){
+        tile[7][ii]->nexttile=tile[0][ii+1];
+        tile[0][ii+1]->prevtile=tile[7][ii];
+    }
+    else{
+        tile[7][7]->nexttile=nullptr;
+
+    }
+    }
+    Checkers::checkershead=tile[0][0];
 }
 

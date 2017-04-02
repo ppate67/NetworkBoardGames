@@ -2,7 +2,7 @@
 #define CHECKERSBOARD_H
 
 #include <QWidget>
-#include <checkers.h>
+#include "checkers.h"
 #include <stdlib.h> // used in checkPath function
 
 class checkersboard:public Checkers

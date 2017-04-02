@@ -1,5 +1,6 @@
 #include "Go/mainwindow.h"
 #include "ui_mainwindow.h"
+
 #include <QtGui>
 #include <QApplication>
 #include "iostream"
@@ -137,6 +138,14 @@ void MainWindow::on_pushButton_clicked()
             Chess::playercolor=1;
             Chess::chessturn=0;
         }
+        else if(gametype==2){
+            checkersboard c;
+            c.setup(myWidget);
+            myWidget->show();
+            Checkers::playercolor=1;
+            Checkers::checkersturn=0;
+
+        }
 }
 
 
@@ -208,6 +217,24 @@ void MainWindow::on_pushButton_2_clicked()
 void MainWindow::on_pushButton_5_clicked()
 {
     //create checkers game
+    int counter=GameManager::games.size();
+    int gametype=2;
+    int requestID[5]={2,counter,1,1,gametype};
+    int playerid=GameManager::clientID;
+    Client::makeRequest(requestID,playerid);
+    QWidget *myWidget = new QWidget();
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QRect  screenGeometry = screen->geometry();
+    int height = screenGeometry.height();
+    int width = screenGeometry.width();
+    myWidget->setGeometry(0,0,width,height);
+
+    checkersboard c;
+
+    c.setup(myWidget);
+
+    myWidget->show();
+
 }
 
 void MainWindow::on_pushButton_4_clicked()
