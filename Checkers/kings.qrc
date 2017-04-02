@@ -1,6 +1,1 @@
-<RCC>
-    <qresource prefix="/kings">
-        <file>darkking.png</file>
-        <file>lightking.png</file>
-    </qresource>
-</RCC>
+<RCC/>

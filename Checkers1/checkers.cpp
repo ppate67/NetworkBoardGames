@@ -44,6 +44,10 @@ void Checkers::mousePressEvent(QMouseEvent *event)
             this->setPieceColor(temp2->getPieceColor());
             this->setPiece(true);
             this->setpieceName(temp2->getPieceName());
+            if(this->getRow()==0 && this->getPieceColor()==1)
+                this->setpieceName('K');
+            else if(this->getRow()==7 && this->getPieceColor()==0)
+                this->setpieceName('K');
             temp2->displayBoard();
             this->displayElement(this->getPieceName());
             temp2->setPiece(false);
@@ -65,9 +69,9 @@ void Checkers::displayElement(char elem)
     {
         switch(elem)
         {
-        case 'K': this->setPixmap(QPixmap(":/Icons/lightking.png"));
+        case 'K': this->setPixmap(QPixmap(":/IconsCheckers/lightking.png"));
             break;
-        case 'P': this->setPixmap(QPixmap(":/Icons/Red-circle.png"));
+        case 'P': this->setPixmap(QPixmap(":/IconsCheckers/redpiece.png"));
             break;
 
         }
@@ -77,9 +81,9 @@ void Checkers::displayElement(char elem)
     {
         switch(elem)
         {
-        case 'P': this->setPixmap(QPixmap(":/checkers/Black-Circle.png"));
+        case 'P': this->setPixmap(QPixmap(":/IconsCheckers/blackpiece.png"));
             break;
-        case 'K': this->setPixmap(QPixmap(":/Icons/darkking.png"));
+        case 'K': this->setPixmap(QPixmap(":/IconsCheckers/darkking.png"));
             break;
         }
     }
@@ -106,9 +110,13 @@ void Checkers::capturePiece(Checkers* capturee, Checkers* captor){
     //we will have a timer or button that allows the player to make multistage move. For now a simple pop-up message asking
     // if they want to make an additional move will suffice. The graphics team can make it look nicer
     selected=0;
-    this->setPieceColor(captor->getPieceColor());
+    this->setPieceColor(Checkers::playercolor);
     this->setPiece(true);
     this->setpieceName(captor->getPieceName());
+    if(this->getRow()==0 && this->getPieceColor()==1)
+        this->setpieceName('K');//promotion via capture for red
+    else if(this->getRow()==7 && this->getPieceColor()==0)
+        this->setpieceName('K');//promotion via capture for black
     captor->displayBoard();
     this->displayElement(this->getPieceName());
     captor->setPiece(false);

@@ -43,9 +43,6 @@ SUBDIRS += \
     Checkers1/board1.pro
 
 RESOURCES += \
-    Checkers/checkers_pieces.qrc \
-    Checkers/images.qrc \
-    Checkers/kings.qrc \
     Chess/resources.qrc \
     Go/resources2.qrc \
     Checkers1/checkers_pieces.qrc \
