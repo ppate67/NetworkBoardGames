@@ -107,7 +107,7 @@ void MyServer::readyRead()
 }
 
 void addPlayerName(string name){
-  playerList.push_back (string name);
+  //playerList.push_back (string name);
 }
 int getNumGoGames(){
     return 0;

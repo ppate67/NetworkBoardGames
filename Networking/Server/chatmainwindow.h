@@ -1,22 +1,22 @@
-#ifndef CHATMAINWINDOW_H
-#define CHATMAINWINDOW_H
+//#ifndef CHATMAINWINDOW_H
+//#define CHATMAINWINDOW_H
 
-#include <QMainWindow>
+////#include <QMainWindow>
 
-namespace Ui {
-class ChatMainWindow;
-}
+//namespace Ui {
+//class ChatMainWindow;
+//}
 
-class ChatMainWindow : public QMainWindow
-{
-    Q_OBJECT
+//class ChatMainWindow : public QMainWindow
+//{
+//    Q_OBJECT
 
-public:
-    explicit ChatMainWindow(QWidget *parent = 0);
-    ~ChatMainWindow();
+//public:
+//    explicit ChatMainWindow(QWidget *parent = 0);
+//    ~ChatMainWindow();
 
-private:
-    Ui::ChatMainWindow *ui;
-};
+//private:
+//    Ui::ChatMainWindow *ui;
+//};
 
-#endif // CHATMAINWINDOW_H
+//#endif // CHATMAINWINDOW_H

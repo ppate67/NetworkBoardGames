@@ -1,12 +1,14 @@
 #include "database.h"
 #include <QSqlDatabase>
+#include "QSqlQuery"
+#include "QtSql"
 using namespace std;
 //Use http://doc.qt.io/qt-5/qsqldatabase.html for more database commands 
 //from QSQLDatabase
 
 //https://katecpp.wordpress.com/2015/08/28/sqlite-with-qt/
 
-QT += sql
+
 
 class DbManager
 {
@@ -14,6 +16,7 @@ private:
     QSqlDatabase m_db;
 public:
     DbManager(const QString& path);
+    bool addPerson(const QString& name);
 };
 
 DbManager::DbManager(const QString& path)
@@ -23,11 +26,11 @@ DbManager::DbManager(const QString& path)
  
    if (!m_db.open())
    {
-      qDebug() << "Error: connection with database fail";
+      //qDebug() << "Error: connection with database fail";
    }
    else
    {
-      qDebug() << "Database: connection ok";
+      //qDebug() << "Database: connection ok";
    }
 }
 
@@ -44,8 +47,8 @@ bool DbManager::addPerson(const QString& name) //Refers to new Player
    }
    else
    {
-        qDebug() << "addPerson error:  "
-                 << query.lastError();
+        //qDebug() << "addPerson error:  "
+                 //<< query.lastError();
    }
  
    return success;
@@ -53,14 +56,14 @@ bool DbManager::addPerson(const QString& name) //Refers to new Player
 
 //http://www.informit.com/articles/article.aspx?p=1405550
 
-int main(int argc, char *argv[])
-{
-    QApplication app(argc, argv);
-    if (!createConnection())
-        return 1;
-    ...
-    return app.exec();
-}
+//int main(int argc, char *argv[])
+//{
+//    QApplication app(argc, argv);
+//    if (!createConnection())
+//        return 1;
+//    ...
+//    return app.exec();
+//}
 
 //katecpp.wordpress.com/2015/08/28/sqlite-with-qt/
 /* Keep in case revert back to this in future
