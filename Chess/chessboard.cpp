@@ -191,3 +191,90 @@ void chessboard::quitclicked()
 {
     QCoreApplication::quit();
 }
+
+void chessboard::drawpath(Chess *t)
+{
+    int rw=t->getRow(),co=t->getColumn();
+    if(t->getPiece())//if there is any piece
+    {
+        if(t->getPieceName()=='P'&&t->getPieceColor())//if it's white pawn
+        {
+            if(rw!=0)
+            {
+                if(rw==6)//if it's at initial position
+                {
+                    if(tile[rw-1][co]->getPiece()==false)
+                    {
+                        tile[rw-1][co]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                            if(tile[rw-2][co]->getPiece()==false)
+                                tile[rw-2][co]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                    }
+                }
+                else
+                {
+                    if(tile[rw-1][co]->getPiece()==false)
+                        tile[rw-1][co]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                }
+                if(rw-1>=0&&co-1>=0)
+                {
+                    if(tile[rw-1][co-1]->getPiece()&&tile[rw-1][co-1]->getPieceColor()==0)
+                        tile[rw-1][co-1]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                }
+                if(rw-1>=0&&co+1<=7)
+                {
+                    if(tile[rw-1][co+1]->getPiece()&&tile[rw-1][co+1]->getPieceColor()==0)
+                        tile[rw-1][co+1]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                }
+            }
+        }
+        else if(t->getPieceName()=='P'&&t->getPieceColor()==false)//if it's black pawn
+        {
+            if(rw!=7)
+            {
+                if(rw==1)//if it's at initial position
+                {
+                    if(tile[rw+1][co]->getPiece()==false)
+                    {
+                        tile[rw+1][co]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                        if(tile[rw+2][co]->getPiece()==false)
+                            tile[rw+2][co]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                    }
+                }
+                else
+                {
+                    if(tile[rw+1][co]->getPiece()==false)
+                        tile[rw+1][co]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                }
+                if(rw+1<=7&&co+1<=7)
+                {
+                    if(tile[rw+1][co+1]->getPiece()&&tile[rw+1][co+1]->getPieceColor()==1)
+                        tile[rw+1][co+1]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                }
+                if(rw+1<=7&&co-1>=0)
+                {
+                    if(tile[rw+1][co-1]->getPiece()&&tile[rw+1][co-1]->getPieceColor()==1)
+                        tile[rw+1][co-1]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                }
+            }
+        }
+    }
+}
+
+void chessboard::erasepath()
+{
+    for(int i=0;i<8;i++)
+    {
+        for(int j=0;j<8;j++)
+        {
+            if(tile[i][j]->getTileColor()==1)
+            {
+                tile[i][j]->setStyleSheet("QLabel {background-color:rgb(255, 193, 122);}:hover{background-color: rgb(62, 139, 178);}");
+            }
+            else
+            {
+                tile[i][j]->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);}:hover{background-color: rgb(62, 139, 178);}");
+            }
+        }
+    }
+}
+

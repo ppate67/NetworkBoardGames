@@ -13,6 +13,8 @@ public:
     void setup(QWidget *baseWidget);
     static bool checkPath(int startRow, int startCol, int endRow, int endCol, char direction);
     void quitclicked();
+    static void drawpath(Chess *t);
+    static void erasepath();
 };
 
 #endif // CHESSBOARD_H

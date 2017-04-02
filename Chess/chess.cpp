@@ -18,6 +18,7 @@ void Chess::mousePressEvent(QMouseEvent *event)
             this->getPieceName();
             this->setStyleSheet("QLabel {background-color:rgb(176, 255, 20);}");
             selected=1;
+            chessboard::drawpath(this);
             temp=this;
         }
     }
@@ -28,6 +29,7 @@ void Chess::mousePressEvent(QMouseEvent *event)
         // clicked back on itself so allow a new choice
         if (this->getTileNum() == temp->getTileNum()){
             selected = 0;
+            chessboard::erasepath();
             temp->displayBoard();
         }
         // check piece with ending location to see if move is valid;
@@ -36,6 +38,7 @@ void Chess::mousePressEvent(QMouseEvent *event)
                 exit(1); // a king was captured so the game is over
             }
             selected=0;
+            chessboard::erasepath();
             //this->setTileColor(temp->getTileColor());
             this->setPieceColor(temp->getPieceColor());
             this->setPiece(true);
