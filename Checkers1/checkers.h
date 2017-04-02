@@ -24,7 +24,7 @@ public:
     int getTileNum() {return tileNum;}
     bool getPiece() {return piece;}
     int getPieceName() {return pieceName;}
-    void capturePiece();
+    void capturePiece(Checkers* capturee, Checkers* captor);
     void checkCapture();
     void setTileColor(int color){tileColor=color;}
     void setPieceColor(int color){pieceColor=color;}
@@ -34,6 +34,7 @@ public:
     void setTileNum(int k){tileNum=k;}
     void setpieceName(char n){pieceName=n;}
 
+    void captureAuxiloryFunc(int usercolor, int enemycolor);
     //networking functionalities
     static int checkersturn;
     static int playercolor;

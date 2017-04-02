@@ -1,5 +1,8 @@
 #include "Checkers1/pieces2.h"
+#include "iostream"
+#include <sstream>
 
+#include "QMessageBox"
 Checkers *temp2;
 int Checkers::selected=0;
 Checkers* Checkers::checkershead=NULL;
@@ -48,6 +51,9 @@ void Checkers::mousePressEvent(QMouseEvent *event)
             temp2->displayBoard();
             sendGameMsg();
         }
+        else{
+            checkCapture();//this checks for capture. if valid capture it executes capture, prints board, sends game message over socket
+        }
     }
 }
 
@@ -93,9 +99,139 @@ void Checkers::displayBoard()
         this->setStyleSheet("QLabel {background-color:rgb(147, 91, 26);}:hover{background-color: rgb(62, 139, 178);}");
     }
 }
-void Checkers::capturePiece(){}
-void Checkers::checkCapture(){}
+void Checkers::capturePiece(Checkers* capturee, Checkers* captor){
+    //captures piece (i.e. removes it from the board)
+    //we then check if the player is able to capture an additional piece
+    //this depends on piece type and piece color
+    //we will have a timer or button that allows the player to make multistage move. For now a simple pop-up message asking
+    // if they want to make an additional move will suffice. The graphics team can make it look nicer
+    selected=0;
+    this->setPieceColor(captor->getPieceColor());
+    this->setPiece(true);
+    this->setpieceName(captor->getPieceName());
+    captor->displayBoard();
+    this->displayElement(this->getPieceName());
+    captor->setPiece(false);
+    captor->displayElement(' ');
+    captor->displayBoard();
+    capturee->setPiece(false);
+    capturee->displayElement(' ');
+    capturee->displayBoard();
+    //need to add multistage move
+    sendGameMsg();
+}
+void Checkers::checkCapture(){
 
+    //this function is called to check if a move is valid in a capture scenario
+    //this functionality isn't covered by any methods in the CheckerPiece class
+    //and it would be easier to do it here since the entire checkers data strut is here to work with
+    //we will call capturePiece if we find it is a valid capture
+
+    int usercolor= temp2->getPieceColor();
+    int enemycolor=0;
+    if(enemycolor==usercolor)enemycolor++;
+    if(temp2->getPieceName()=='K'){
+        if(this->row > temp2->row){
+            captureAuxiloryFunc(1,enemycolor);
+        }
+        if(this->row<temp2->row){
+            captureAuxiloryFunc(0,enemycolor);//this is hacky but it is a valid approach --better
+        }
+    }
+    else{
+        if(usercolor==0){//black pieces increasing numbers in rows
+                captureAuxiloryFunc(0,1);
+        }
+        else if(usercolor==1){//red pieces decreasing numbers in rows
+            captureAuxiloryFunc(1,0);
+        }
+    }
+
+}
+void Checkers::captureAuxiloryFunc(int usercolor, int enemycolor){
+    if(usercolor==1){
+
+        if(this->row < temp2->row){
+            Checkers* bwalk=this;//backward list walk
+            Checkers* fwalk=temp2;//forward list walk
+            Checkers* topleft=temp2;
+            Checkers* topright=temp2;
+            Checkers* blselecteddes=this;//this will become the bottom left of the selected destination. If it equals topright then it's maybe a valid capture
+            Checkers* brselecteddes=this;//this will become the bottom right of the selected destination. If it equals topleft then it's maybe a valid capture
+            for(int i = 0; i<9; i++){
+                fwalk=fwalk->nexttile;
+                bwalk=bwalk->prevtile;
+                if(i==6){
+                    topright=bwalk;
+                    blselecteddes=fwalk;
+                }
+                else if(i==8){
+                    topleft=bwalk;
+                    brselecteddes=fwalk;
+                }
+
+
+            }
+            if(topright==blselecteddes){
+
+                if(topright->getPieceColor()==enemycolor){
+
+                    capturePiece(topright,temp2);
+                }
+            }
+            if(topleft==brselecteddes){
+
+                if(topleft->getPieceColor()==enemycolor){
+
+                    capturePiece(topleft,temp2);
+                }
+            }
+        }
+    }
+    else if(usercolor==0){
+
+        if(this->row > temp2->row){
+
+            Checkers* bwalk=temp2;//backward list walk
+            Checkers* fwalk=this;//forward list walk
+            Checkers* tlselecteddes=this;//this will become the top left of the selected destination. If it equals bottomright then it's a valid capture (maybe)
+            Checkers* trselecteddes=this;//this will become the top right of the selected destination. If it equals bottomleft then it's a valid capture (maybe)
+            Checkers* bottomright=temp2;
+            Checkers* bottomleft=temp2;
+
+
+            for(int i =0; i<9; i++){
+                fwalk=fwalk->nexttile;
+                bwalk=bwalk->prevtile;
+                if(i==6){
+                    trselecteddes=bwalk;
+                    bottomleft=fwalk;
+                }
+                else if(i==8){
+                    tlselecteddes=bwalk;
+                    bottomright=fwalk;
+                }
+
+
+            }
+
+            if(tlselecteddes==bottomright){
+                if(bottomright->getPieceColor()==enemycolor){
+                    capturePiece(bottomright,temp2);
+                }
+            }
+            if(trselecteddes==bottomleft){
+                if(bottomleft->getPieceColor()==enemycolor){
+                    capturePiece(bottomleft,temp2);
+                }
+            }
+        }
+    }
+    else{
+
+    }
+
+}
 void Checkers::sendGameMsg(){
     QByteArray BufferPing;
     int des=0;
