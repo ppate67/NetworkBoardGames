@@ -24,6 +24,7 @@ bool CheckerPiece::checkPiece2(int startRow, int startCol, int endRow, int endCo
                 if (endCol == startCol - 1 || endCol == startCol + 1)
                     return true;
             }
+            break;
         }
 
         case 1:{ //white pieces decreasing numbers in rows
@@ -31,6 +32,7 @@ bool CheckerPiece::checkPiece2(int startRow, int startCol, int endRow, int endCo
                 if (endCol == startCol - 1 || endCol == startCol + 1)
                     return true;
             }
+            break;
 
         }
     }
