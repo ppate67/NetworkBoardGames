@@ -6,5 +6,7 @@
         <file>Red-circle.png</file>
         <file>blackpiece.png</file>
         <file>redpiece.png</file>
+        <file>blackking.png</file>
+        <file>redking.png</file>
     </qresource>
 </RCC>

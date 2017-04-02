@@ -69,7 +69,7 @@ void Checkers::displayElement(char elem)
     {
         switch(elem)
         {
-        case 'K': this->setPixmap(QPixmap(":/IconsCheckers/lightking.png"));
+        case 'K': this->setPixmap(QPixmap(":/IconsCheckers/redking.png"));
             break;
         case 'P': this->setPixmap(QPixmap(":/IconsCheckers/redpiece.png"));
             break;
@@ -83,7 +83,7 @@ void Checkers::displayElement(char elem)
         {
         case 'P': this->setPixmap(QPixmap(":/IconsCheckers/blackpiece.png"));
             break;
-        case 'K': this->setPixmap(QPixmap(":/IconsCheckers/darkking.png"));
+        case 'K': this->setPixmap(QPixmap(":/IconsCheckers/blackking.png"));
             break;
         }
     }
