@@ -131,4 +131,7 @@ p, li { white-space: pre-wrap; }
  </widget>
  <resources/>
  <connections/>
+ <slots>
+  <slot>slot1()</slot>
+ </slots>
 </ui>
