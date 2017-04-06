@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>board.png</file>
+        <file>checker.png</file>
+        <file>chess.png</file>
+        <file>go.png</file>
+        <file>monopoly.png</file>
+        <file>checker icon.png</file>
+        <file>chess icon.png</file>
+        <file>go icon.png</file>
+        <file>mainmenu icon.png</file>
+        <file>monopoly icon.png</file>
+        <file>quit icon.png</file>
+    </qresource>
+</RCC>
