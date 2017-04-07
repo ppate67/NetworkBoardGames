@@ -29,8 +29,26 @@ void Client :: readyRead(){
     QByteArray message = socket->readAll();
     int id= int(message[0]);
     int type = int(message[1]);
+    int clientid = GameManager::clientID;
+    int vecsize=GameManager::games.size();
+    ofstream outputfile;
+    string path = "client";
+    path+=char(clientid+48);
+    path+="gamelist.txt";
+    outputfile.open(path);
 
+    for(int i =0; i<vecsize;i++){
+        //the following is a set of server messages used for debugging purposes.
+        int playsize= GameManager::games[i].size();
+        for(int ii=0; ii<playsize;ii++){
 
+            outputfile <<  "GameID " << i << endl;
+            outputfile << "Gametype: " << GameManager::games[i][ii][0]<<endl;
+            outputfile << "Playertype: " << GameManager::games[i][ii][1]<<endl;
+            outputfile << "PlayerID: " << GameManager::games[i][ii][2]<<endl;
+        }
+    }
+    outputfile.close();
 
     if(type==0){//go message
     int datamessage[169];
@@ -73,7 +91,7 @@ void Client :: readyRead(){
         for(int i =0;i<(len);i++){
             data.push_back(char(message[i+2]));
         }
-        handleReply2(data,data.size());
+        handleReply2(data,len);
 
     }
 }
@@ -82,11 +100,10 @@ void Client::handleReply2(vector<char> data, int size){
     //games avail per game type
     //and info about each of thus games such as who is spectating
     //and who is actually playing.
-    string debugout="ff";
-    debugout+=size;
+    string debugout="";
     for(int i=0; i<size; i++)
         debugout+=char(int(data[i])+48);
-    debugout+="f";
+
 //    QMessageBox::information(
 //        new QMessageBox(),
 //        tr("Debug Window"),
@@ -99,15 +116,24 @@ void Client::handleReply2(vector<char> data, int size){
             if(data[i]=='i'){
                 counter++;
                 checkifdelimited=0;
+                i++;
             }
-            else if(checkifdelimited==0){
-                vector<int>player={int(data[i+2]),int(data[i+1]),int(data[i])};
-                GameManager::games.push_back({player});
-                checkifdelimited=1;
+            if(checkifdelimited==0 && i+2<size){
+                if(0*int(data[i+2])/4!=0)
+                    ;//don't add to vector if it isn't a gametype between 0 and 3. Some error occurred
+                else{
+                    vector<int>player={int(data[i+2]),int(data[i+1]),int(data[i])};
+                    GameManager::games.push_back({player});
+                    checkifdelimited=1;
+                }
             }
             else if(i+2<size){
-                vector<int> player = {int(data[i+2]),int(data[i+1]),int(data[i])};
-                GameManager::games[counter].push_back(player);
+                if(0*int(data[i+2])/4!=0)
+                    ;//don't add to vector if it isn't a gametype between 0 and 3. Some error occurred
+                else{
+                    vector<int> player = {int(data[i+2]),int(data[i+1]),int(data[i])};
+                    GameManager::games[counter].push_back(player);
+                }
             }
         }
 
@@ -130,13 +156,20 @@ void Client::makeRequest(int requestID[5],int playerid){
     QByteArray output;
     output.append(char(playerid));
     output.append(char(8));
+    string debugout="";
     for(int i =0; i<5; i++){
         output.append((char(requestID[i])));
-
+        debugout+=char(requestID[i]+48);
     }
+//        QMessageBox::information(
+//            new QMessageBox(),
+//            tr("Debug Window"),
+//            QString::fromStdString(debugout));//debuging purposes delete
     Client::s->write(output);
     Client::s->flush();
     Client::s->waitForBytesWritten(1000);
+
+
 }
 void Client::pingpong(){
     //method to pingpong data between two clients

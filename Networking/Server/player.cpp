@@ -1,6 +1,7 @@
 #include "player.h"
 #include "myserver.h"
 #include "iostream"
+#include "fstream"
 using namespace std;
 player::player(QObject *parent) : QObject(parent)
 {
@@ -70,6 +71,9 @@ void player :: readyRead(){
     int ids=0;//id sender
     GameManager *temp = GameManager::head;
     int vecsize=GameManager::games.size();
+    ofstream outputfile;
+    outputfile.open("servergamelist.txt");
+
     for(int i =0; i<vecsize;i++){
 		//the following is a set of server messages used for debugging purposes.
         int playsize= GameManager::games[i].size();
@@ -78,13 +82,22 @@ void player :: readyRead(){
             cout << "Gametype: " << GameManager::games[i][ii][0]<<endl;
             cout << "Playertype: " << GameManager::games[i][ii][1]<<endl;
             cout << "PlayerID: " << GameManager::games[i][ii][2]<<endl;
+            outputfile <<  "GameID " << i << endl;
+            outputfile << "Gametype: " << GameManager::games[i][ii][0]<<endl;
+            outputfile << "Playertype: " << GameManager::games[i][ii][1]<<endl;
+            outputfile << "PlayerID: " << GameManager::games[i][ii][2]<<endl;
         }
     }
+    outputfile.close();
     for(int i=0; i<MAXNUMPLAYER; i++)
         if(&MyServer::plist[i]==this)
             ids=i;//finding the socket id of the client 
-    if(type==8)
+    if(type==8){
         handleRequest2(handledata,ids);//if the type is 8 then the server is dealing with a client request
+
+        //broadcastGames();
+
+    }
     else
         task(&msg);
 }
@@ -108,25 +121,31 @@ void player::handleRequest2(int requestID[5],int playerID){
                     GameManager::games[i].push_back(newplayer);
                 }
             }
-            if(gameid>=vecsize || vecsize==0){
-                std::vector<int> newplayer={gametype,playertype,playerID};
-                GameManager::games.push_back({newplayer});
-            }
+
+
+
+
         }
         else{//on gametype
-            //do later
-            cout << "OOPS Err must of occurred";
+            int vecsize=GameManager::games.size();
+            int gametype=requestID[4];
+            int playertype = requestID[2];
+            std::vector<int> newplayer={gametype,playertype,playerID};
+            GameManager::games.push_back({newplayer});
         }
+        broadcastGames();
     }
     else if(requestID[0]==3){
 		//sends back a list of deliminited games (described by the player id, player type, and gametype)
         QByteArray output;
-
+        ofstream outputfile;//debugging
+        outputfile.open("messages.txt");//debugging purposes
         int gType=requestID[1];
         output.append(char(playerID));
         output.append(char(8));
         output.append(char(3));
         output.append(char(gType));
+        outputfile<< 3 << gType;
         int counter=0;
         int vecsize=GameManager::games.size();
 
@@ -139,14 +158,17 @@ void player::handleRequest2(int requestID[5],int playerID){
                 output.append(GameManager::games[i][ii][2]);//player id
                 output.append(GameManager::games[i][ii][1]);//player type
                 output.append(GameManager::games[i][ii][0]);//gametype
+                outputfile<<GameManager::games[i][ii][2]<<GameManager::games[i][ii][1]<<GameManager::games[i][ii][0];
             }
              output.append(char('i'));
+             outputfile<<'i';
+
         }
         MyServer::plist[playerID].socket->write(output);
         MyServer::plist[playerID].socket->flush();
 
         MyServer::plist[playerID].socket->waitForBytesWritten(3000);
-        cout << "Sent gameID list " << counter <<endl;
+        cout << "Sent gameID list " << playerID <<endl;
     }
     else if(requestID[0]==4){
 		//sends a list of players (described by their player id and player type) for a specific gameid
@@ -190,6 +212,7 @@ void player::handleRequest2(int requestID[5],int playerID){
 
             MyServer::plist[ids].socket->waitForBytesWritten(3000);
             }
+
     }
     else if(requestID[0]==6){ //ID 6 for playername
       //response to player request for a list of player usernames
@@ -214,7 +237,7 @@ void player::task(GameMsg* msg){
     int id = msg->gameid;//id of game
     output.append(char(id));
     output.append(char(msg->type));
-    if(id>GameManager::games.size()){cout<<id<<"DOGS";return;}
+    if(id>GameManager::games.size()){cout<<id<<"Error";return;}
     output.append(QString::fromStdString(data));
     //we want to send a msg to everyone with the game id that does not have the sender's player id
     int playsize=GameManager::games[id].size();
@@ -227,7 +250,7 @@ void player::task(GameMsg* msg){
                 MyServer::plist[pid].socket->flush();
 
                 MyServer::plist[pid].socket->waitForBytesWritten(3000);
-                cout<<"CATS";
+                cout<<"Success";
             }
         }
 

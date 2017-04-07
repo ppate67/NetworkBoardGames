@@ -268,7 +268,7 @@ void Go::sendGameMsg(){
     for(int i =0; i<vecsize; i++){
         int playsize=GameManager::games[i].size();
         for(int ii=0; ii<playsize;ii++){
-            if(GameManager::games[i][ii][2]==GameManager::clientID)
+            if(GameManager::games[i][ii][2]==GameManager::clientID && GameManager::games[i][ii][0]==0)
                 des=i;
         }
     }

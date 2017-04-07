@@ -1,0 +1,32 @@
+bool CheckMate(TBoard b,TSide side){     
+    int x,y,x2,y2;      
+    TBoard b2;       
+    if (!BeCheck(b,side)){
+        return false;      
+    }       
+    for (x=0;x<BOARDSIZE;++x){
+        for (y=0;y<BOARDSIZE;++y){
+            if (b[x][y].side==side) {
+                for (x2=0;x2<BOARDSIZE;++x2){
+                    for (y2=0;y2<BOARDSIZE;++y2){
+                        if ((x!=x2 || y!=y2) && b[x2][y2].side!=side){
+                            if (CanMove(b,x,y,x2,y2,1)==true){
+                                CopyBoard(b2,b);
+                                ChessMove(b2,x,y,x2,y2);
+                                if (!BeCheck(b2,side)==true)
+                                    return false;
+                                    }
+                                if (b[x][y].pt==PAWN && CanMove(b,x,y,x2,y2,2)==true){
+                                    CopyBoard(b2,b);
+                                    ChessMove(b2,x,y,x2,y2);
+                                    if (!BeCheck(b2,side)){
+                                        return false;}
+                                }
+                        }
+                    }
+                }
+        }
+    }
+}
+return true;
+}

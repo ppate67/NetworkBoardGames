@@ -41,14 +41,22 @@ void MainWindow::populateList2(int size){
             game="Chess: ";
         else if(GameManager::games[i][0][0]==2)//checkers
             game="Checkers: ";
-        else//monopoly
+        else if(GameManager::games[i][0][0]==3)//monopoly
             game="Monopoly: ";
+        else{
+            string debug="";
+            debug+="Failure: ";debug+=GameManager::games[i][0][0];
+            QMessageBox::information(
+                    new QMessageBox(),
+                   tr("Debug Window"),
+                    QString::fromStdString(debug));//debuging purposes delete
+        }
         int playsize = GameManager::games[i].size();
         for(int ii=0;ii<playsize; ii++){
             if(GameManager::games[i][ii][1]==1)
-                rowtitle += " "+GameManager::games[i][ii][2];
+                rowtitle += " "+char(GameManager::games[i][ii][2]+48);
             else
-                rowtitlepart2+=" "+GameManager::games[i][ii][2];
+                rowtitlepart2+=" "+char(GameManager::games[i][ii][2]+48);
         }
         string title = game + rowtitle + rowtitlepart2;
         const char* title1= title.c_str();
@@ -60,38 +68,38 @@ void MainWindow::populateList2(int size){
     }
 }
 void MainWindow::populateList(int size){
-    GameManager* temp = GameManager::head;
+//    GameManager* temp = GameManager::head;
 
-    ui->listWidget->clear();
-    while(temp!=nullptr){
-        GameManager* ptemp=temp;
-        string rowtitle="Player: ";
-        string rowtitlepart2=" Spectators: ";
-        string game="";
-        if(ptemp->gameType==0)//go
-            game="Go: ";
-        else if(ptemp->gameType==1)//chess
-            game="Chess: ";
-        else if(ptemp->gameType==2)//checkers
-            game="Checkers: ";
-        else//monopoly
-            game="Monopoly: ";
+//    ui->listWidget->clear();
+//    while(temp!=nullptr){
+//        GameManager* ptemp=temp;
+//        string rowtitle="Player: ";
+//        string rowtitlepart2=" Spectators: ";
+//        string game="";
+//        if(ptemp->gameType==0)//go
+//            game="Go: ";
+//        else if(ptemp->gameType==1)//chess
+//            game="Chess: ";
+//        else if(ptemp->gameType==2)//checkers
+//            game="Checkers: ";
+//        else//monopoly
+//            game="Monopoly: ";
 
-        while(ptemp!=nullptr){
-            if(ptemp->player==true)
-                rowtitle += " "+ptemp->playerid;
-            else
-                rowtitlepart2+=" "+ptemp->playerid;
-            ptemp=ptemp->nextPlayer;
-        }
-        string title = game + rowtitle + rowtitlepart2;
-        const char* title1= title.c_str();
-        QListWidgetItem *radbutton=new QListWidgetItem(ui->listWidget);
-        radbutton->setData(Qt::UserRole,temp->gameID);
+//        while(ptemp!=nullptr){
+//            if(ptemp->player==true)
+//                rowtitle += " "+ptemp->playerid;
+//            else
+//                rowtitlepart2+=" "+ptemp->playerid;
+//            ptemp=ptemp->nextPlayer;
+//        }
+//        string title = game + rowtitle + rowtitlepart2;
+//        const char* title1= title.c_str();
+//        QListWidgetItem *radbutton=new QListWidgetItem(ui->listWidget);
+//        radbutton->setData(Qt::UserRole,temp->gameID);
 
-        ui->listWidget->setItemWidget(radbutton, new QRadioButton(tr((title1))));
-        temp=temp->nextGame;
-     }
+//        ui->listWidget->setItemWidget(radbutton, new QRadioButton(tr((title1))));
+//        temp=temp->nextGame;
+//     }
 
 }
 void MainWindow::on_pushButton_clicked()
@@ -172,7 +180,7 @@ void MainWindow::on_pushButton_3_clicked()
 
     //create go game
     int gametype=0;
-    int requestID[5]={2,counter,1,1,gametype};
+    int requestID[5]={2,counter,1,0,gametype};//based on gametype
     int playerid=GameManager::clientID;
     Client::makeRequest(requestID,playerid);
     QWidget *myWidget = new QWidget();
@@ -196,7 +204,7 @@ void MainWindow::on_pushButton_2_clicked()
     //create chess game
     int counter=GameManager::games.size();
     int gametype=1;
-    int requestID[5]={2,counter,1,1,gametype};
+    int requestID[5]={2,counter,1,0,gametype};
     int playerid=GameManager::clientID;
     Client::makeRequest(requestID,playerid);
     QWidget *myWidget = new QWidget();
@@ -219,7 +227,7 @@ void MainWindow::on_pushButton_5_clicked()
     //create checkers game
     int counter=GameManager::games.size();
     int gametype=2;
-    int requestID[5]={2,counter,1,1,gametype};
+    int requestID[5]={2,counter,1,0,gametype};
     int playerid=GameManager::clientID;
     Client::makeRequest(requestID,playerid);
     QWidget *myWidget = new QWidget();

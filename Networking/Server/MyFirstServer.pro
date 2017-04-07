@@ -6,7 +6,7 @@
 
 QT       += core
 QT       += network
-
+QT += sql
 QT       -= gui
 
 TARGET = MyFirstServer

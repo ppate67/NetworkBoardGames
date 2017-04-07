@@ -34,5 +34,5 @@ click back to main menu
 */
 void checker::on_pushButton_2_clicked()
 {
-
+    connect(this, SIGNAL (clicked()), this, SLOT (mainwindow::slot1()));
 }

@@ -112,7 +112,8 @@ background:qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.
     <enum>Qt::DefaultContextMenu</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 40pt &quot;MV Boli&quot;;;
+    <string notr="true">font: 40pt &quot;MV Boli&quot;;
+border-style:solid;
 color:rgb(255, 255, 127);</string>
    </property>
    <property name="frameShape">
@@ -132,4 +133,7 @@ p, li { white-space: pre-wrap; }
  </widget>
  <resources/>
  <connections/>
+ <slots>
+  <slot>slot1()</slot>
+ </slots>
 </ui>
