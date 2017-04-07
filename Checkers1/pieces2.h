@@ -16,4 +16,4 @@ public:
 
 };
 
-#endif // PIECES_H
+#endif // CPIECES_H

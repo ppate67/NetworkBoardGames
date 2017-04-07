@@ -39,6 +39,8 @@ void Checkers::mousePressEvent(QMouseEvent *event)
             }*/
 
             //Need to put code to check if last piece was captured
+            
+            
             selected=0;
             //this->setTileColor(temp2->getTileColor());
             this->setPieceColor(temp2->getPieceColor());
@@ -56,7 +58,10 @@ void Checkers::mousePressEvent(QMouseEvent *event)
             sendGameMsg();
         }
         else{
-            checkCapture();//this checks for capture. if valid capture it executes capture, prints board, sends game message over socket
+            //if(p.checkCapture() == true){
+                
+            //}
+            //this checks for capture. if valid capture it executes capture, prints board, sends game message over socket
         }
     }
 }
