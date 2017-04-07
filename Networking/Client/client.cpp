@@ -104,10 +104,10 @@ void Client::handleReply2(vector<char> data, int size){
     for(int i=0; i<size; i++)
         debugout+=char(int(data[i])+48);
 
-    QMessageBox::information(
-        new QMessageBox(),
-        tr("Debug Window"),
-        QString::fromStdString(debugout));//debuging purposes delete
+//    QMessageBox::information(
+//        new QMessageBox(),
+//        tr("Debug Window"),
+//        QString::fromStdString(debugout));//debuging purposes delete
     if(int(data[0])==3){
         int counter=0;
         int checkifdelimited=0;
@@ -161,10 +161,10 @@ void Client::makeRequest(int requestID[5],int playerid){
         output.append((char(requestID[i])));
         debugout+=char(requestID[i]+48);
     }
-        QMessageBox::information(
-            new QMessageBox(),
-            tr("Debug Window"),
-            QString::fromStdString(debugout));//debuging purposes delete
+//        QMessageBox::information(
+//            new QMessageBox(),
+//            tr("Debug Window"),
+//            QString::fromStdString(debugout));//debuging purposes delete
     Client::s->write(output);
     Client::s->flush();
     Client::s->waitForBytesWritten(1000);
