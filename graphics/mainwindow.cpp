@@ -53,3 +53,8 @@ void MainWindow::on_pushButton_6_clicked()
 {
     connect(this, SIGNAL (clicked()), this, SLOT (quit()));
 }
+
+void MainWindow::on_pushButton_2_pressed()
+{
+
+}

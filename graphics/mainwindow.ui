@@ -288,38 +288,10 @@ background-image:url(:/go icon.png)</string>
      <property name="title">
       <string>Start</string>
      </property>
-     <widget class="QMenu" name="menuChecker">
-      <property name="title">
-       <string>Checker</string>
-      </property>
-      <addaction name="actionconnect_network"/>
-      <addaction name="actionplay_with_AI"/>
-     </widget>
-     <widget class="QMenu" name="menuChess">
-      <property name="title">
-       <string>Chess</string>
-      </property>
-      <addaction name="actionconnect_network_2"/>
-      <addaction name="actionplay_with_AI_2"/>
-     </widget>
-     <widget class="QMenu" name="menuGo">
-      <property name="title">
-       <string>Go</string>
-      </property>
-      <addaction name="actionconnect_network_3"/>
-      <addaction name="actionplay_with_AI_3"/>
-     </widget>
-     <widget class="QMenu" name="menuMonopoly">
-      <property name="title">
-       <string>Monopoly</string>
-      </property>
-      <addaction name="actionconnect_network_4"/>
-      <addaction name="actionplay_with_AI_4"/>
-     </widget>
-     <addaction name="menuChecker"/>
-     <addaction name="menuChess"/>
-     <addaction name="menuGo"/>
-     <addaction name="menuMonopoly"/>
+     <addaction name="actionChecker"/>
+     <addaction name="actionChess"/>
+     <addaction name="actionGo"/>
+     <addaction name="actionMonopoly"/>
     </widget>
     <addaction name="menuStart"/>
     <addaction name="actionquit"/>
@@ -371,10 +343,111 @@ background-image:url(:/go icon.png)</string>
     <string>play with AI</string>
    </property>
   </action>
+  <action name="actionChecker">
+   <property name="text">
+    <string>Checker</string>
+   </property>
+  </action>
+  <action name="actionChess">
+   <property name="text">
+    <string>Chess</string>
+   </property>
+  </action>
+  <action name="actionGo">
+   <property name="text">
+    <string>Go</string>
+   </property>
+  </action>
+  <action name="actionMonopoly">
+   <property name="text">
+    <string>Monopoly</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actionChecker</sender>
+   <signal>triggered()</signal>
+   <receiver>pushButton_2</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>301</x>
+     <y>51</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>809</x>
+     <y>232</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionquit</sender>
+   <signal>triggered()</signal>
+   <receiver>pushButton_6</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>809</x>
+     <y>512</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionMonopoly</sender>
+   <signal>triggered()</signal>
+   <receiver>pushButton_5</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>301</x>
+     <y>117</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>809</x>
+     <y>442</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionGo</sender>
+   <signal>triggered()</signal>
+   <receiver>pushButton_4</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>301</x>
+     <y>95</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>809</x>
+     <y>372</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionChess</sender>
+   <signal>triggered()</signal>
+   <receiver>pushButton_3</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>301</x>
+     <y>73</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>809</x>
+     <y>302</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <slots>
   <slot>slot1()</slot>
  </slots>
