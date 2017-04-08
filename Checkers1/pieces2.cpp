@@ -2,7 +2,6 @@
 
 bool CheckerPiece::checkValid2(int endRow, int endCol, int endPieceColor, bool occupied){
     if (occupied == true){
-
             return false; //cannot move to any occupied position in checkers.
 
     }
@@ -13,7 +12,6 @@ bool CheckerPiece::checkValid2(int endRow, int endCol, int endPieceColor, bool o
         case 'K': allow = checkKinged2(row, col, endRow, endCol); // This is for a kinged checkers piece
             break;
    }
-
    return allow;
 }
 
@@ -47,4 +45,25 @@ bool CheckerPiece::checkKinged2(int startRow, int startCol, int endRow, int endC
     return false;
 }
 
-
+bool CheckerPiece::checkCapture(int endRow, int endCol, bool midOccupied, bool endOccupied){
+    if(endOccupied)
+        return false;
+    if(name == 'P'){ //Piece is making a jump
+        if((endCol == col - 2 || endCol == col + 2) && midOccupied){
+            if(color == 0){ //Black Piece
+                if(endRow == row + 2)
+                    return true;
+            }
+            else{ //Red piece
+                if(endRow == row - 2)
+                    return true;
+            }
+        }
+    }
+    else{ //King is making a jump
+        if((endCol == col - 2 || endCol == col + 2) && midOccupied){
+            if(endRow == row + 2 || endRow == row - 2)
+                return true;
+        }
+    }
+}

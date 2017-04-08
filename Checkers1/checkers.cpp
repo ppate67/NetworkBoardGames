@@ -1,4 +1,5 @@
 #include "Checkers1/pieces2.h"
+#include "Checkers1/checkersboard.h"
 #include "iostream"
 #include <sstream>
 
@@ -33,13 +34,6 @@ void Checkers::mousePressEvent(QMouseEvent *event)
         }
         // check piece with ending location to see if move is valid;
         else if (p.checkValid2(this->getRow(), this->getColumn(), this->getPieceColor(), this->getPiece()) == true){
-
-            /*if(this->getPieceName() == 'K'){
-                exit(1); // a king was captured so the game is over
-            }*/
-
-            //Need to put code to check if last piece was captured
-            
             
             selected=0;
             //this->setTileColor(temp2->getTileColor());
@@ -58,10 +52,13 @@ void Checkers::mousePressEvent(QMouseEvent *event)
             sendGameMsg();
         }
         else{
-            //if(p.checkCapture() == true){
+            bool middleOccupied = checkersboard::tile[this->getRow()+temp2->getRow()/2][this->getColumn()+temp2->getColumn()/2]->getPiece();
+            if(p.checkCapture(this->getRow(), this->getColumn(), middleOccupied, (this->getColumn()+temp2->getColumn())/2), this->getPiece()){
+                //this checks for capture. if valid capture it executes capture, prints board, sends game message over socket
                 
-            //}
-            //this checks for capture. if valid capture it executes capture, prints board, sends game message over socket
+                
+            }
+            
         }
     }
 }

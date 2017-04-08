@@ -93,3 +93,9 @@ void checkersboard::setup(QWidget *baseWidget)
     Checkers::checkershead=tile[0][0];
 }
 
+bool checkersboard::isOccupied(int row, int col){
+    if(tile[row][col]->getPiece())
+        return true;
+    return false;
+}
+

@@ -4,6 +4,7 @@
 #include <QLabel>
 #include "Networking/Client/client.h"
 
+
 class Checkers:public QLabel {
 private:
     static int selected;
