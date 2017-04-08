@@ -257,6 +257,152 @@ void chessboard::drawpath(Chess *t)
                 }
             }
         }
+        else if(t->getPieceName()=='R')
+        {
+            //left
+            for(int i=co-1;i>=0;i--)
+            {
+                if(tile[rw][i]->getPiece()==false)
+                    tile[rw][i]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                else
+                {
+                    if(tile[rw][i]->getPieceColor()!=t->getPieceColor())
+                        tile[rw][i]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                    break;
+                }
+            }
+            //right
+            for(int i=co+1;i<=7;i++)
+            {
+                if(tile[rw][i]->getPiece()==false)
+                    tile[rw][i]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                else
+                {
+                    if(tile[rw][i]->getPieceColor()!=t->getPieceColor())
+                        tile[rw][i]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                    break;
+                }
+            }
+            //forward
+            for(int i=rw+1;i<=7;i++)
+            {
+                if(tile[i][co]->getPiece()==false)
+                    tile[i][co]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                else
+                {
+                    if(tile[i][co]->getPieceColor()!=t->getPieceColor())
+                        tile[i][co]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                    break;
+                }
+            }
+            //backward
+            for(int i=rw-1;i>=0;i--)
+            {
+                if(tile[i][co]->getPiece()==false)
+                    tile[i][co]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                else
+                {
+                    if(tile[i][co]->getPieceColor()!=t->getPieceColor())
+                        tile[i][co]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                    break;
+                }
+            }
+        }
+        else if(t->getPieceName()=='H')
+        {
+            //all positions where a knight can move. Check if out of bounds and if move is valid
+            if(co-1>=0&&rw-2>=0)
+            {
+                if(tile[rw-2][co-1]->getPiece()==false||tile[rw-2][co-1]->getPieceColor()!=t->getPieceColor())
+                    tile[rw-2][co-1]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+            }
+            if(co+1<=7&&rw-2>=0)
+            {
+                if(tile[rw-2][co+1]->getPiece()==false||tile[rw-2][co+1]->getPieceColor()!=t->getPieceColor())
+                    tile[rw-2][co+1]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+            }
+            if(co-1>=0&&rw+2<=7)
+            {
+                if(tile[rw+2][co-1]->getPiece()==false||tile[rw+2][co-1]->getPieceColor()!=t->getPieceColor())
+                    tile[rw+2][co-1]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+            }
+            if(co+1<=70&&rw+2<=7)
+            {
+                if(tile[rw+2][co+1]->getPiece()==false||tile[rw+2][co+1]->getPieceColor()!=t->getPieceColor())
+                    tile[rw+2][co+1]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+            }
+            if(co-2>=0&&rw-1>=0)
+            {
+                if(tile[rw-1][co-2]->getPiece()==false||tile[rw-1][co-2]->getPieceColor()!=t->getPieceColor())
+                    tile[rw-1][co-2]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+            }
+            if(co+2<=7&&rw-1>=0)
+            {
+                if(tile[rw-1][co+2]->getPiece()==false||tile[rw-1][co+2]->getPieceColor()!=t->getPieceColor())
+                    tile[rw-1][co+2]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+            }
+            if(co-2>=0&&rw+1<=7)
+            {
+                if(tile[rw+1][co-2]->getPiece()==false||tile[rw+1][co-2]->getPieceColor()!=t->getPieceColor())
+                    tile[rw+1][co-2]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+            }
+            if(co+2<=70&&rw+1<=7)
+            {
+                if(tile[rw+1][co+2]->getPiece()==false||tile[rw+1][co+2]->getPieceColor()!=t->getPieceColor())
+                    tile[rw+1][co+2]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+            }
+        }
+        else if(t->getPieceName()=='B')
+        {
+            //left-top
+            for(int i=rw-1,j=co-1;i>=0&&j>=0;i--,j--)
+            {
+                if(tile[i][j]->getPiece()==false)
+                    tile[i][j]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                else
+                {
+                    if(tile[i][j]->getPieceColor()!=t->getPieceColor())
+                        tile[i][j]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                    break;
+                }
+            }
+            //left-bottom
+            for(int i=rw+1,j=co-1;i<=7&&j>=0;i++,j--)
+            {
+                if(tile[i][j]->getPiece()==false)
+                    tile[i][j]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                else
+                {
+                    if(tile[i][j]->getPieceColor()!=t->getPieceColor())
+                        tile[i][j]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                    break;
+                }
+            }
+            //right-top
+            for(int i=rw-1,j=co+1;i>=0&&j<=7;i--,j++)
+            {
+                if(tile[i][j]->getPiece()==false)
+                    tile[i][j]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                else
+                {
+                    if(tile[i][j]->getPieceColor()!=t->getPieceColor())
+                        tile[i][j]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                    break;
+                }
+            }
+            //right-bottom
+            for(int i=rw+1,j=co+1;i<=7&&j<=7;i++,j++)
+            {
+                if(tile[i][j]->getPiece()==false)
+                    tile[i][j]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                else
+                {
+                    if(tile[i][j]->getPieceColor()!=t->getPieceColor())
+                        tile[i][j]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
+                    break;
+                }
+            }
+        }
     }
 }
 
