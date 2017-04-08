@@ -1,9 +1,10 @@
-#include "go.h"
-
+#include "goboard.h"
 //Go *temp;
 Go* Go::head=NULL;
 int Go::turn=1;
 int Go::color=0;
+int Go::opponentScore=0;
+int Go::playerScore=0;
 void Go::mousePressEvent(QMouseEvent *event)
 {
     if(turn==0 || !checkPositionValidity(this->getColumn(),this->getRow(),this->getPieceColor()))
@@ -56,8 +57,14 @@ void Go::updateEntireBoard(){
         positions.clear();
     }
     for(int i=0; i<tempcontainer.size(); i++){
+        if(tempcontainer[i]->getPieceColor()!=Go::color && tempcontainer[i]->getPieceColor()!=2)
+            Go::playerScore++;
+        else if(tempcontainer[i]->getPieceColor()!=2)
+            Go::opponentScore++;
         tempcontainer[i]->setPieceColor(2);
         tempcontainer[i]->setPiece(false);
+
+
     }
     temp=Go::head;
     while(temp!=nullptr){
@@ -65,6 +72,7 @@ void Go::updateEntireBoard(){
         temp->displayBoard(temp->type);
         temp=temp->nexttile;
     }
+    GoBoard::updateScores();
 
 }
 void Go::displayElement(char elem)
