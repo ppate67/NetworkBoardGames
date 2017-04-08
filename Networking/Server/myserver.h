@@ -11,10 +11,12 @@
 #include <QMap>
 #include <QSet>
 #include <stdio.h>
-//#include <unistd.h>
+#include <unistd.h>
 #include <stdlib.h>
-//#include <netinet/in.h>
+//winsock2.h should replace netinet.h for windows socket functionality
+#include <winsock2.h>
 #include <sys/types.h>
+//winsock2 should also work for sys/socket.h
 //#include <sys/socket.h>
 
 //#include <iostream>
