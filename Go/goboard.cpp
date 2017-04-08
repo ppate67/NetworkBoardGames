@@ -1,10 +1,12 @@
 #include "goboard.h"
-
+#include "QPushButton.h"
 #include <QtGui>
 GoBoard::GoBoard()
 {
-
+      Go::opponentScore=0;
+      Go::playerScore=0;
 }
+QLabel *score;
 void GoBoard::display(QWidget *baseWidget,Go *tile[13][13])
 {
     QLabel *outLabel = new QLabel(baseWidget);
@@ -12,6 +14,16 @@ void GoBoard::display(QWidget *baseWidget,Go *tile[13][13])
     QRect  screenGeometry = screen->geometry();
     int height = screenGeometry.height();
     int width = screenGeometry.width();
+    score  = new QLabel(baseWidget);
+    score->move(width/2-60*15,height/2-40*13);
+    QString scoreText = "Score (You): "; scoreText+=QString::number(Go::playerScore) + "\nScore (Opponent): " + QString::number(Go::opponentScore);
+    score->setText(scoreText);
+    score->show();
+    QPushButton *button = new QPushButton("&Forfeit", baseWidget);
+    button->setText("Forfeit");
+    button->move(width/2-60*15,height/2-40*10);
+    button->show();
+    QObject::connect(button,SIGNAL(clicked()),baseWidget,SLOT(close()));
     outLabel->setGeometry((width/2)-(60*12)-20,(height/2)-(40*13)-20,40*13+40,40*13+40);
 
     outLabel->setStyleSheet("QLabel { background-color :rgb(178, 123, 60); color : black; }");
@@ -78,4 +90,19 @@ void GoBoard::display(QWidget *baseWidget,Go *tile[13][13])
                 }
                 }
                 Go::head=tile[0][0];
+}
+void GoBoard::forfeitclicked(){
+    //remove player from game on server
+    removeplayer();
+    QCoreApplication::quit();
+
+}
+void GoBoard::removeplayer(){
+
+}
+void GoBoard::updateScores(){
+    QString scoreText = "Score (You): "; scoreText+=QString::number(Go::playerScore) + "\nScore (Opponent): " + QString::number(Go::opponentScore);
+    score->setText(scoreText);
+    score->show();
+
 }

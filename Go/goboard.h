@@ -9,7 +9,9 @@ public:
 
     void display(QWidget *baseWidget,Go *tile[13][13]);
 
-
+    void forfeitclicked();
+    void removeplayer();
+    static void updateScores();
 };
 
 #endif // GOBOARD_H

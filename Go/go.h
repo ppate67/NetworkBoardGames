@@ -12,6 +12,8 @@ private:
 public:
     Go* nexttile;
     static Go* head;
+    static int opponentScore;
+    static int playerScore;
     Go* prevtile;
     int type;
     static int turn;
