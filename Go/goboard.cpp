@@ -24,7 +24,7 @@ void GoBoard::display(QWidget *baseWidget,Go *tile[13][13])
     button->setText("Forfeit");
     button->move(width/2-60*15,height/2-40*10);
     button->show();
-    //QObject::connect(button,SIGNAL(clicked()),baseWidget,SLOT(forfeitclose()));
+    QObject::connect(button,SIGNAL(clicked()),baseWidget,SLOT(close()));
     outLabel->setGeometry((width/2)-(60*12)-20,(height/2)-(40*13)-20,40*13+40,40*13+40);
 
     outLabel->setStyleSheet("QLabel { background-color :rgb(178, 123, 60); color : black; }");

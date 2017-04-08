@@ -132,7 +132,7 @@ void MainWindow::on_pushButton_clicked()
                 myWidget->show();
 
                 myWidget->setAttribute( Qt::WA_DeleteOnClose );
-                connect(myWidget, SIGNAL(destroyed()), this, SLOT(deleteBoard()));
+                connect(myWidget, SIGNAL(destroyed()), this, SLOT(leaveGo()));
 
 
         }
@@ -144,6 +144,9 @@ void MainWindow::on_pushButton_clicked()
             c.setup(myWidget);
 
             myWidget->show();
+            myWidget->setAttribute( Qt::WA_DeleteOnClose );
+            connect(myWidget, SIGNAL(destroyed()), this, SLOT(leaveChess()));
+
             Chess::playercolor=1;
             Chess::chessturn=0;
         }
@@ -151,6 +154,9 @@ void MainWindow::on_pushButton_clicked()
             checkersboard c;
             c.setup(myWidget);
             myWidget->show();
+            myWidget->setAttribute( Qt::WA_DeleteOnClose );
+            connect(myWidget, SIGNAL(destroyed()), this, SLOT(leaveCheckers()));
+
             Checkers::playercolor=1;
             Checkers::checkersturn=0;
 
@@ -160,13 +166,45 @@ void MainWindow::on_pushButton_clicked()
 
 }
 
-void MainWindow::deleteBoard(){
+void MainWindow::leaveGo(){
     int gameid=0;
     int playindex=0;
     for(int i=0; i<GameManager::games.size(); i++){
         int playsize= GameManager::games[i].size();
         for(int ii=0; ii<playsize; ii++)
-            if(GameManager::games[i][ii][2]==GameManager::clientID && GameManager::games[i][ii][1]==1){
+            if(GameManager::games[i][ii][2]==GameManager::clientID && GameManager::games[i][ii][0]==0){
+                gameid=i;
+                playindex=ii;
+            }
+    }
+    int requestID[5]={1,gameid,playindex,0,0};//msg type (delete), gameID, 0, 0,0
+    int playerid=GameManager::clientID;
+    Client::makeRequest(requestID,playerid);
+    //delete cc;
+}
+void MainWindow::leaveChess(){
+    int gameid=0;
+    int playindex=0;
+    for(int i=0; i<GameManager::games.size(); i++){
+        int playsize= GameManager::games[i].size();
+        for(int ii=0; ii<playsize; ii++)
+            if(GameManager::games[i][ii][2]==GameManager::clientID && GameManager::games[i][ii][0]==1){
+                gameid=i;
+                playindex=ii;
+            }
+    }
+    int requestID[5]={1,gameid,playindex,0,0};//msg type (delete), gameID, 0, 0,0
+    int playerid=GameManager::clientID;
+    Client::makeRequest(requestID,playerid);
+    //delete cc;
+}
+void MainWindow::leaveCheckers(){
+    int gameid=0;
+    int playindex=0;
+    for(int i=0; i<GameManager::games.size(); i++){
+        int playsize= GameManager::games[i].size();
+        for(int ii=0; ii<playsize; ii++)
+            if(GameManager::games[i][ii][2]==GameManager::clientID && GameManager::games[i][ii][0]==2){
                 gameid=i;
                 playindex=ii;
             }
@@ -204,7 +242,7 @@ void MainWindow::on_pushButton_3_clicked()
         c.display(myWidget,tile);
         myWidget->show();
         myWidget->setAttribute( Qt::WA_DeleteOnClose );
-        connect(myWidget, SIGNAL(destroyed()), this, SLOT(deleteBoard()));
+        connect(myWidget, SIGNAL(destroyed()), this, SLOT(leaveGo()));
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -227,6 +265,8 @@ void MainWindow::on_pushButton_2_clicked()
     c.setup(myWidget);
 
     myWidget->show();
+    myWidget->setAttribute( Qt::WA_DeleteOnClose );
+    connect(myWidget, SIGNAL(destroyed()), this, SLOT(leaveChess()));
 
 }
 
@@ -250,6 +290,8 @@ void MainWindow::on_pushButton_5_clicked()
     c.setup(myWidget);
 
     myWidget->show();
+    myWidget->setAttribute( Qt::WA_DeleteOnClose );
+    connect(myWidget, SIGNAL(destroyed()), this, SLOT(leaveCheckers()));
 
 }
 

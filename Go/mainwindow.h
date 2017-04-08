@@ -20,7 +20,9 @@ public:
     void removeplayer();
 private slots:
     void on_pushButton_clicked();
-    void deleteBoard();
+    void leaveGo();
+    void leaveChess();
+    void leaveCheckers();
     void populateList(int size);
     void populateList2(int size);
     void on_pushButton_3_clicked();
