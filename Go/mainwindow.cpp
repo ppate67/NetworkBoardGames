@@ -130,6 +130,7 @@ void MainWindow::on_pushButton_clicked()
 
                 c.display(myWidget,tile);
                 myWidget->show();
+
                 myWidget->setAttribute( Qt::WA_DeleteOnClose );
                 connect(myWidget, SIGNAL(destroyed()), this, SLOT(deleteBoard()));
 
@@ -158,14 +159,21 @@ void MainWindow::on_pushButton_clicked()
 
 
 }
-void MainWindow::deleteBoard(){
-    for(int i=0; i<13; i++){
-        for(int j=0;j<13;j++){
-            //delete tile[i][j];
-            Go::turn=1;
-        }
 
+void MainWindow::deleteBoard(){
+    int gameid=0;
+    int playindex=0;
+    for(int i=0; i<GameManager::games.size(); i++){
+        int playsize= GameManager::games[i].size();
+        for(int ii=0; ii<playsize; ii++)
+            if(GameManager::games[i][ii][2]==GameManager::clientID && GameManager::games[i][ii][1]==1){
+                gameid=i;
+                playindex=ii;
+            }
     }
+    int requestID[5]={1,gameid,playindex,0,0};//msg type (delete), gameID, 0, 0,0
+    int playerid=GameManager::clientID;
+    Client::makeRequest(requestID,playerid);
     //delete cc;
 }
 
@@ -267,3 +275,4 @@ void MainWindow::on_listWidget_itemActivated(QListWidgetItem *item)
 {
     gameidtojoin=item->data(Qt::UserRole).toInt();
 }
+

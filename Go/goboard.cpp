@@ -1,6 +1,7 @@
 #include "goboard.h"
 #include "QPushButton.h"
 #include <QtGui>
+#include "QMessageBox"
 GoBoard::GoBoard()
 {
       Go::opponentScore=0;
@@ -23,7 +24,7 @@ void GoBoard::display(QWidget *baseWidget,Go *tile[13][13])
     button->setText("Forfeit");
     button->move(width/2-60*15,height/2-40*10);
     button->show();
-    QObject::connect(button,SIGNAL(clicked()),baseWidget,SLOT(close()));
+    //QObject::connect(button,SIGNAL(clicked()),baseWidget,SLOT(forfeitclose()));
     outLabel->setGeometry((width/2)-(60*12)-20,(height/2)-(40*13)-20,40*13+40,40*13+40);
 
     outLabel->setStyleSheet("QLabel { background-color :rgb(178, 123, 60); color : black; }");
@@ -91,14 +92,26 @@ void GoBoard::display(QWidget *baseWidget,Go *tile[13][13])
                 }
                 Go::head=tile[0][0];
 }
-void GoBoard::forfeitclicked(){
+void GoBoard::forfeitclose(){
     //remove player from game on server
-    removeplayer();
-    QCoreApplication::quit();
+    this->removeplayer();
 
+    QCoreApplication::quit();
 }
 void GoBoard::removeplayer(){
-
+    int gameid=0;
+    int playindex=0;
+    for(int i=0; i<GameManager::games.size(); i++){
+        int playsize= GameManager::games[i].size();
+        for(int ii=0; ii<playsize; ii++)
+            if(GameManager::games[i][ii][2]==GameManager::clientID && GameManager::games[i][ii][1]==1){
+                gameid=i;
+                playindex=ii;
+            }
+    }
+    int requestID[5]={1,gameid,playindex,0,0};//msg type (delete), gameID, 0, 0,0
+    int playerid=GameManager::clientID;
+    Client::makeRequest(requestID,playerid);
 }
 void GoBoard::updateScores(){
     int pterr=0; int antiterr=0;

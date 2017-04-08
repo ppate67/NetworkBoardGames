@@ -3,15 +3,18 @@
 #include "QWidget"
 #include "go.h"
 
-class GoBoard {
+class GoBoard
+{
+
 public:
     GoBoard();
 
     void display(QWidget *baseWidget,Go *tile[13][13]);
-
-    void forfeitclicked();
+    void forfeitclose();
     void removeplayer();
     static void updateScores();
+
+
 };
 
 #endif // GOBOARD_H

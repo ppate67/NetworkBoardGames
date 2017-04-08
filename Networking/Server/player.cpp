@@ -104,7 +104,18 @@ void player :: readyRead(){
 void player::handleRequest2(int requestID[5],int playerID){
 
     if(requestID[0]==1){
-        //do later
+        cout << "Deleting Player: " << char(playerID+48)<<endl;
+        int gameid=requestID[1];
+        int playindex=requestID[2];
+        if(gameid>=GameManager::games.size())
+            return;//do not delete player as the game does not exist
+        if(playindex>=GameManager::games[gameid].size())
+            return;
+        if(GameManager::games[gameid][playindex][2]==playerID)
+            GameManager::games[gameid].erase(GameManager::games[gameid].begin()+playindex);
+        if(GameManager::games[gameid].size()==0)
+            GameManager::games.erase(GameManager::games.begin()+gameid);
+        broadcastGames();
     }
     else if(requestID[0]==2){
 		//handles request to add a player to a game based on gameid
