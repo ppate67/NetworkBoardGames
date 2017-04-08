@@ -5,6 +5,8 @@ int Go::turn=1;
 int Go::color=0;
 int Go::opponentScore=0;
 int Go::playerScore=0;
+int Go::wterr=0;
+int Go::blterr=0;
 void Go::mousePressEvent(QMouseEvent *event)
 {
     if(turn==0 || !checkPositionValidity(this->getColumn(),this->getRow(),this->getPieceColor()))
@@ -48,14 +50,30 @@ void Go::updateEntireBoard(){
     
     Go* temp=Go::head;
     vector<Go*> tempcontainer;
+    blterr=0;wterr=0;
     while(temp!=nullptr){
         vector<Go*> positions;
         if(temp->checkLiberties(temp,temp,&positions)<=0){
             tempcontainer.push_back(temp);
         }
-        temp=temp->nexttile;
+
         positions.clear();
+        if(temp->getPieceColor()==2){
+
+              if(temp->calculateTerritory(temp,temp,&positions,1)>0)
+                      blterr++;
+
+        }
+        positions.clear();
+        if(temp->getPieceColor()==2){
+               if(temp->calculateTerritory(temp,temp,&positions,0)>0)
+                    wterr++;
+
+        }
+        positions.clear();
+        temp=temp->nexttile;
     }
+
     for(int i=0; i<tempcontainer.size(); i++){
         if(tempcontainer[i]->getPieceColor()!=Go::color && tempcontainer[i]->getPieceColor()!=2)
             Go::playerScore++;
@@ -337,3 +355,113 @@ void Go::receiveUpdates(int color, int iteration){
     Go::turn=1;
 }
 
+int Go::calculateTerritory(Go* position, Go* prevposition, vector<Go*>* positions, int tercolor){
+    int anticolor =0; if (tercolor==0)anticolor++;
+    for(int i=0; i<positions->size(); i++)
+        if(positions->at(i)==position)
+            return -1;
+    if(position->getPieceColor()==2)
+        positions->push_back(position);
+    if(position->getPieceColor()==anticolor)
+        return 0;
+    //if(position==originalpos && position !=prevposition)
+      //  return 0;
+    int terrs=1;
+
+    Go* above = nullptr;
+    Go* below = nullptr;
+    Go* right = nullptr;
+    Go* left = nullptr;
+    Go* temp =position;
+    Go* temp2 = position;
+    for(int i =0; i<13; i++){
+        if(temp!=nullptr)
+            temp=temp->prevtile;
+        if(temp2!=nullptr)
+            temp2 = temp2->nexttile;
+        if(i==0 && temp!=nullptr && temp->getRow()<12){
+            left = temp;
+        }
+        if(i==12 && temp!=nullptr)
+            above = temp;
+        if(i==0 && temp2!=nullptr && temp2->getRow()>0)
+            right = temp2;
+        if(i==12 && temp2!=nullptr)
+            below = temp2;
+    }
+    if(below!=nullptr){
+        if(below->getPieceColor()==anticolor)
+            return 0;
+        if(below->getPieceColor()==2 && below!=prevposition)
+            {
+                if(calculateTerritory(below,position,positions,tercolor)!=0){
+                    if(calculateTerritory(below,position,positions,tercolor)==-1)
+                        terrs++;
+                    terrs+=calculateTerritory(below,position,positions,tercolor);
+                }
+                else
+                    return 0;
+
+        }
+        if(below->getPieceColor()==tercolor)
+            terrs++;
+    }
+    if(above!=nullptr){
+        if(above->getPieceColor()==anticolor)
+            return 0;
+        if(above->getPieceColor()==2 && above!=prevposition)
+           {
+            if(calculateTerritory(above,position,positions,tercolor)!=0){
+                if(calculateTerritory(above,position,positions,tercolor)==-1)
+                    terrs++;
+                terrs+=calculateTerritory(above,position,positions,tercolor);
+            }
+            else
+                return 0;
+
+
+            }
+        if(above->getPieceColor()==tercolor)
+            terrs++;
+    }
+    if(right!=nullptr){
+        if(right->getPieceColor()==anticolor)
+            return 0;
+        if(right->getPieceColor()==2 && right!=prevposition)
+             {
+            if(calculateTerritory(right,position,positions,tercolor)!=0){
+                if(calculateTerritory(right,position,positions,tercolor)==-1)
+                    terrs++;
+                terrs+=calculateTerritory(right,position,positions,tercolor);
+            }
+            else
+                return 0;
+
+            }
+        if(right->getPieceColor()==tercolor)
+            terrs++;
+    }
+    if(left!=nullptr){
+        if(left->getPieceColor()==anticolor)
+            return 0;
+        if(left->getPieceColor()==2 && left!=prevposition)
+        {
+            if(calculateTerritory(left,position,positions,tercolor)!=0){
+                if(calculateTerritory(left,position,positions,tercolor)==-1)
+                    terrs++;
+                terrs+=calculateTerritory(left,position,positions,tercolor);
+            }
+            else
+                return 0;
+
+
+        }
+        if(left->getPieceColor()==tercolor)
+            terrs++;
+    }
+
+
+    return terrs;
+
+
+}

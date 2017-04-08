@@ -180,14 +180,14 @@ void Client::sendGameMsg(GameMsg m){
 
 }
 
-void Client::SetPlayerName(int requestID[6],int playerid){ //requestID 6 for settingplayername
-    bool ok;
-    QString name = QInputDialog::getText(this, tr("QInputDialog::getText()"),
-                                         tr("User name:"), QLineEdit::Normal,
-                                         QDir::home().dirName(), &ok);
-    if (ok && !text.isEmpty())
-        textLabel->setText(text);
+//void Client::SetPlayerName(int requestID[6],int playerid){ //requestID 6 for settingplayername
+//    bool ok;
+//    QString name = QInputDialog::getText(this, tr("QInputDialog::getText()"),
+//                                         tr("User name:"), QLineEdit::Normal,
+//                                         QDir::home().dirName(), &ok);
+//    if (ok && !text.isEmpty())
+//        textLabel->setText(text);
 
-    //add playername to vector of playernames at end of function
-    addPlayerName(name);
-}
+//    //add playername to vector of playernames at end of function
+//    addPlayerName(name);
+//}

@@ -101,7 +101,16 @@ void GoBoard::removeplayer(){
 
 }
 void GoBoard::updateScores(){
-    QString scoreText = "Score (You): "; scoreText+=QString::number(Go::playerScore) + "\nScore (Opponent): " + QString::number(Go::opponentScore);
+    int pterr=0; int antiterr=0;
+    if(Go::color==0){//white
+        pterr=Go::wterr;
+        antiterr=Go::blterr;
+    }
+    else{
+        pterr=Go::blterr;
+        antiterr=Go::wterr;
+    }
+    QString scoreText = "Score (You): "; scoreText+=QString::number(Go::playerScore+pterr) + "\nScore (Opponent): " + QString::number(Go::opponentScore+antiterr);
     score->setText(scoreText);
     score->show();
 

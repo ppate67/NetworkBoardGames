@@ -14,6 +14,8 @@ public:
     static Go* head;
     static int opponentScore;
     static int playerScore;
+    static int wterr;
+    static int blterr;
     Go* prevtile;
     int type;
     static int turn;
@@ -49,6 +51,7 @@ public:
     void addStonePoints(int numcapstones, int playercolor);
     void sendGameMsg();
     static void receiveUpdates(int color, int iteration);
+    int calculateTerritory(Go* position, Go* prevposition, vector<Go*>* positions, int tercolor);
 };
 
 
