@@ -277,7 +277,7 @@ void ChessOptions::mousePressEvent(QMouseEvent *event){
 
     }
     else if(this->piecetype==3){
-        this->pawn->setpieceName('K');
+        this->pawn->setpieceName('H');
         this->pawn->displayElement(this->pawn->getPieceName());
 
     }

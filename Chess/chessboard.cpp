@@ -326,7 +326,7 @@ void chessboard::drawpath(Chess *t)
                 if(tile[rw+2][co-1]->getPiece()==false||tile[rw+2][co-1]->getPieceColor()!=t->getPieceColor())
                     tile[rw+2][co-1]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
             }
-            if(co+1<=70&&rw+2<=7)
+            if(co+1<=7&&rw+2<=7)
             {
                 if(tile[rw+2][co+1]->getPiece()==false||tile[rw+2][co+1]->getPieceColor()!=t->getPieceColor())
                     tile[rw+2][co+1]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
@@ -346,7 +346,7 @@ void chessboard::drawpath(Chess *t)
                 if(tile[rw+1][co-2]->getPiece()==false||tile[rw+1][co-2]->getPieceColor()!=t->getPieceColor())
                     tile[rw+1][co-2]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
             }
-            if(co+2<=70&&rw+1<=7)
+            if(co+2<=7&&rw+1<=7)
             {
                 if(tile[rw+1][co+2]->getPiece()==false||tile[rw+1][co+2]->getPieceColor()!=t->getPieceColor())
                     tile[rw+1][co+2]->setStyleSheet("QLabel {background-color:orange;border:1px solid;}");
