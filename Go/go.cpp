@@ -279,7 +279,10 @@ bool Go::isConnected(Go* curposition,Go* prevpos, Go* otherposition){
 //bool suicide(GoBoard board){}
 bool Go::checkPositionValidity(int corx, int cory, int color){
     //needs to be done
-    return true;
+    if(this->piece==true)
+        return false;
+    else
+        return true;
 
 }
 bool Go::placeStone(int corx, int cory){return true;}

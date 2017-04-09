@@ -1,6 +1,7 @@
 #include "chess.h"
+#include <QtGui>
+#include "QMessageBox"
 #include "Chess/pieces.h"
-
 Chess *temp;
 Chess* Chess::chesshead=NULL;
 int Chess::chessturn=1;
@@ -9,6 +10,7 @@ int Chess::selected=0;
 
 void Chess::mousePressEvent(QMouseEvent *event)
 {
+
     if(selected==0)
     {
         if ((getPiece() == false || this->getPieceColor()!=Chess::playercolor)|| chessturn==0){
@@ -49,7 +51,16 @@ void Chess::mousePressEvent(QMouseEvent *event)
             temp->displayElement(' ');
             temp->setpieceName(' ');
             temp->displayBoard();
-            sendGameMsg();
+            if(this->getPieceName()=='P' && this->getPieceColor()==0 && this->getRow()==7){
+                pawnPromotion(this);
+
+            }
+            else if(this->getPieceName()=='P' && this->getPieceColor()==1 && this->getRow()==0){
+                pawnPromotion(this);
+
+            }
+            else
+                sendGameMsg();
         }
 
 
@@ -195,3 +206,82 @@ void Chess::receiveUpdates(char piece1, int iteration){
     temp->displayBoard();
     Chess::chessturn=1;
 }
+void Chess::pawnPromotion(Chess *pawn){//makes window for players to choose what to promote to
+    QDialog *promotion = new QDialog;
+    QScreen *screen = QGuiApplication::primaryScreen();
+    QRect  screenGeometry = screen->geometry();
+    int height = screenGeometry.height();
+    int width = screenGeometry.width();
+    promotion->setGeometry(width/2-300,height/2-175,600,350);
+    promotion->setWindowFlags(Qt::WindowStaysOnTopHint);
+    promotion->setAttribute(Qt::WA_TranslucentBackground, true);
+
+    promotion->setWindowFlags(Qt::Popup | Qt::FramelessWindowHint);
+    promotion->setStyleSheet("background:transparent;");
+    ChessOptions *queen = new ChessOptions(promotion);
+    ChessOptions *bishop = new ChessOptions(promotion);
+    ChessOptions *rook = new ChessOptions(promotion);
+    ChessOptions *knight = new ChessOptions(promotion);
+    queen->setGeometry(20,100,120,120);
+    bishop->setGeometry(170,100,120,120);
+    rook->setGeometry(320,100,120,120);
+    knight->setGeometry(470,100,120,120);
+    queen->setScaledContents(true);
+    bishop->setScaledContents(true);
+    rook->setScaledContents(true);
+    knight->setScaledContents(true);
+    queen->setStyleSheet("QLabel {background-color:rgb(255, 255, 255);}:hover{background-color: rgb(62, 139, 178);}");
+    bishop->setStyleSheet("QLabel {background-color:rgb(255, 255, 255);}:hover{background-color: rgb(62, 139, 178);}");
+    rook->setStyleSheet("QLabel {background-color:rgb(255, 255, 255);}:hover{background-color: rgb(62, 139, 178);}");
+    knight->setStyleSheet("QLabel {background-color:rgb(255, 255, 255);}:hover{background-color: rgb(62, 139, 178);}");
+    queen->piecetype=0; bishop->piecetype=1; rook->piecetype=2; knight->piecetype=3;
+    if(playercolor==1){
+        queen->setPixmap(QPixmap(":/Icons/lightqueen.png"));
+        bishop->setPixmap(QPixmap(":/Icons/lightbishop.png"));
+        rook->setPixmap(QPixmap(":/Icons/lightrook.png"));
+        knight->setPixmap(QPixmap(":/Icons/lightknight.png"));
+
+    }
+    else{
+        queen->setPixmap(QPixmap(":/Icons/darkqueen.png"));
+        bishop->setPixmap(QPixmap(":/Icons/darkbishop.png"));
+        rook->setPixmap(QPixmap(":/Icons/darkrook.png"));
+        knight->setPixmap(QPixmap(":/Icons/darkknight.png"));
+
+    }
+    promotion->show();
+    queen->pawn=pawn;
+    bishop->pawn=pawn;
+    rook->pawn=pawn;
+    knight->pawn=pawn;
+    queen->window=promotion;
+    bishop->window=promotion;
+    rook->window=promotion;
+    knight->window=promotion;
+
+}
+void ChessOptions::mousePressEvent(QMouseEvent *event){
+    if(this->piecetype==0){
+        this->pawn->setpieceName('Q');
+        this->pawn->displayElement(this->pawn->getPieceName());
+
+    }
+    else if(this->piecetype==1){
+        this->pawn->setpieceName('B');
+        this->pawn->displayElement(this->pawn->getPieceName());
+
+    }
+    else if(this->piecetype==2){
+        this->pawn->setpieceName('R');
+        this->pawn->displayElement(this->pawn->getPieceName());
+
+    }
+    else if(this->piecetype==3){
+        this->pawn->setpieceName('K');
+        this->pawn->displayElement(this->pawn->getPieceName());
+
+    }
+    this->pawn->sendGameMsg();
+    this->window->close();
+}
+
