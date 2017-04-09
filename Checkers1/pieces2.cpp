@@ -66,4 +66,5 @@ bool CheckerPiece::checkCapture(int endRow, int endCol, bool midOccupied, bool e
                 return true;
         }
     }
+    return false;
 }

@@ -11,6 +11,7 @@ private:
     int tileColor, pieceColor, row, col, tileNum;
     bool piece;
     char pieceName;
+    static bool multicap;
 public:
     Checkers(QWidget* pParent=0, Qt::WindowFlags f=0) : QLabel(pParent, f) {}
 
@@ -34,7 +35,7 @@ public:
     void setColumn(int j){col=j;}
     void setTileNum(int k){tileNum=k;}
     void setpieceName(char n){pieceName=n;}
-
+    bool multiCapture();
     void captureAuxiloryFunc(int usercolor, int enemycolor);
     //networking functionalities
     static int checkersturn;

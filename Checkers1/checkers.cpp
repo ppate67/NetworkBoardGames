@@ -9,6 +9,7 @@ int Checkers::selected=0;
 Checkers* Checkers::checkershead=NULL;
 int Checkers::checkersturn=1;
 int Checkers::playercolor=0;
+bool Checkers::multicap=false;
 void Checkers::mousePressEvent(QMouseEvent *event)
 {
     if(selected==0)
@@ -31,9 +32,13 @@ void Checkers::mousePressEvent(QMouseEvent *event)
         if (this->getTileNum() == temp2->getTileNum()){
             selected = 0;
             temp2->displayBoard();
+            if(multicap==true){
+                multicap=false;
+                sendGameMsg();
+            }
         }
         // check piece with ending location to see if move is valid;
-        else if (p.checkValid2(this->getRow(), this->getColumn(), this->getPieceColor(), this->getPiece()) == true){
+        else if (p.checkValid2(this->getRow(), this->getColumn(), this->getPieceColor(), this->getPiece()) == true && !multicap){
             
             selected=0;
             //this->setTileColor(temp2->getTileColor());
@@ -51,18 +56,108 @@ void Checkers::mousePressEvent(QMouseEvent *event)
             temp2->displayBoard();
             sendGameMsg();
         }
-        else{
-            bool middleOccupied = checkersboard::tile[this->getRow()+temp2->getRow()/2][this->getColumn()+temp2->getColumn()/2]->getPiece();
-            if(p.checkCapture(this->getRow(), this->getColumn(), middleOccupied, (this->getColumn()+temp2->getColumn())/2), this->getPiece()){
+        else if (abs(this->getRow()-temp2->getRow())==2 && abs(this->getColumn()-temp2->getColumn())==2){
+            bool middleOccupied = checkersboard::tile[(this->getRow()+temp2->getRow())/2][(this->getColumn()+temp2->getColumn())/2]->getPiece();
+
+            Checkers* middlepiece = checkersboard::tile[(this->getRow()+temp2->getRow())/2][(this->getColumn()+temp2->getColumn())/2];
+            if(p.checkCapture(this->getRow(), this->getColumn(), middleOccupied, this->getPiece()) ){//&& ((middlepiece->row+1)==this->row || (middlepiece->row+1)==temp2->row)&&((middlepiece->col+1)==this->col || (middlepiece->col+1)==temp2->col)){
                 //this checks for capture. if valid capture it executes capture, prints board, sends game message over socket
-                
-                
+                selected=0;
+                this->setPieceColor(temp2->getPieceColor());
+                this->setPiece(true);
+                this->setpieceName(temp2->getPieceName());
+                if(this->getRow()==0 && this->getPieceColor()==1)
+                    this->setpieceName('K');
+                else if(this->getRow()==7 && this->getPieceColor()==0)
+                    this->setpieceName('K');
+                temp2->displayBoard();
+                this->displayElement(this->getPieceName());
+                temp2->setPiece(false);
+                temp2->displayElement(' ');
+                temp2->displayBoard();
+                middlepiece->setPiece(false);
+                middlepiece->setpieceName(' ');
+                middlepiece->displayElement(' ');
+                middlepiece->displayBoard();
+                if(!multiCapture()){
+                    multicap=false;
+                    this->displayBoard();
+                    sendGameMsg();
+                }
             }
             
         }
     }
 }
+bool Checkers::multiCapture(){
+    Checkers* topright=nullptr; Checkers* bottomright=nullptr; Checkers* topleft=nullptr;Checkers* bottomleft=nullptr;
+    if(this->row>=2 && this->col<=5){
+        topright=checkersboard::tile[this->row-2][this->col+2];
 
+        CheckerPiece p(this->getPieceColor(), this->getPieceName(), this->getRow(), this->getColumn());
+        bool middleOccupied = checkersboard::tile[(this->getRow()+topright->getRow())/2][(this->getColumn()+topright->getColumn())/2]->getPiece();
+
+        Checkers* middlepiece = checkersboard::tile[(this->getRow()+topright->getRow())/2][(this->getColumn()+topright->getColumn())/2];
+        if(p.checkCapture(topright->row,topright->col,middleOccupied,topright->getPiece())){
+            multicap=true;
+            selected=1;
+            temp2=this;
+            this->getPieceName();
+            this->setStyleSheet("QLabel {background-color:rgb(176, 255, 20);}");
+            return true;
+        }
+
+    }
+    if(this->row<=5 && this->col<=5){
+       bottomright=checkersboard::tile[this->row+2][this->col+2];
+       CheckerPiece p(this->getPieceColor(), this->getPieceName(), this->getRow(), this->getColumn());
+       bool middleOccupied = checkersboard::tile[(this->getRow()+bottomright->getRow())/2][(this->getColumn()+bottomright->getColumn())/2]->getPiece();
+
+       Checkers* middlepiece = checkersboard::tile[(this->getRow()+bottomright->getRow())/2][(this->getColumn()+bottomright->getColumn())/2];
+       if(p.checkCapture(bottomright->row,bottomright->col,middleOccupied,bottomright->getPiece())){
+           multicap=true;
+           selected=1;
+           temp2=this;
+           this->getPieceName();
+           this->setStyleSheet("QLabel {background-color:rgb(176, 255, 20);}");
+           return true;
+       }
+
+    }
+    if(this->row>=2 && this->col>=2){
+        topleft=checkersboard::tile[this->row-2][this->col-2];
+        CheckerPiece p(this->getPieceColor(), this->getPieceName(), this->getRow(), this->getColumn());
+        bool middleOccupied = checkersboard::tile[(this->getRow()+topleft->getRow())/2][(this->getColumn()+topleft->getColumn())/2]->getPiece();
+
+        Checkers* middlepiece = checkersboard::tile[(this->getRow()+topleft->getRow())/2][(this->getColumn()+topleft->getColumn())/2];
+        if(p.checkCapture(topleft->row,topleft->col,middleOccupied,topleft->getPiece())){
+            multicap=true;
+            selected=1;
+            temp2=this;
+            this->getPieceName();
+            this->setStyleSheet("QLabel {background-color:rgb(176, 255, 20);}");
+            return true;
+        }
+
+    }
+    if(this->row<=5 && this->col>=2){
+        bottomleft=checkersboard::tile[this->row+2][this->col-2];
+        CheckerPiece p(this->getPieceColor(), this->getPieceName(), this->getRow(), this->getColumn());
+        bool middleOccupied = checkersboard::tile[(this->getRow()+bottomleft->getRow())/2][(this->getColumn()+bottomleft->getColumn())/2]->getPiece();
+
+        Checkers* middlepiece = checkersboard::tile[(this->getRow()+bottomleft->getRow())/2][(this->getColumn()+bottomleft->getColumn())/2];
+        if(p.checkCapture(bottomleft->row,bottomleft->col,middleOccupied,bottomleft->getPiece())){
+            multicap=true;
+            selected=1;
+            temp2=this;
+            this->getPieceName();
+            this->setStyleSheet("QLabel {background-color:rgb(176, 255, 20);}");
+            return true;
+        }
+
+    }
+    return false;
+}
 void Checkers::displayElement(char elem)
 {
     this->pieceName=elem;

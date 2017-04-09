@@ -25,6 +25,7 @@ SOURCES += main.cpp \
     #chatmsg.cpp \
     gamemanager.cpp \
    # chatmainwindow.cpp
+    getopt.c
 
 HEADERS += \
     myserver.h \
@@ -35,6 +36,7 @@ HEADERS += \
     #chatmsg.h \
     gamemanager.h \
     #chatmainwindow.h
+    getopt.h
 
 FORMS += \
     #chatmainwindow.ui
