@@ -37,6 +37,7 @@ public:
     void setpieceName(char n){pieceName=n;}
     bool multiCapture();
     void captureAuxiloryFunc(int usercolor, int enemycolor);
+    bool checkForWin(int lastMoveColor);
     //networking functionalities
     static int checkersturn;
     static int playercolor;

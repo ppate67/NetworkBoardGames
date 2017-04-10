@@ -84,6 +84,11 @@ void Checkers::mousePressEvent(QMouseEvent *event)
                     this->displayBoard();
                     sendGameMsg();
                 }
+                if(checkForWin(this->getPieceColor())){
+                    //End game, notify players of winner.
+                    //For now I'm testing with a console print.
+                    cout << "Game over." << endl;
+                }
             }
             
         }
@@ -158,6 +163,17 @@ bool Checkers::multiCapture(){
     }
     return false;
 }
+
+bool Checkers::checkForWin(int lastMoveColor){
+    //Go through each element on the board. If there are no opponent color pieces remaining, return true.
+    //Not efficient, but without keeping a static count of how many of each color are left, this is the easiest.
+    for(int i = 0; i < 8; i++)
+        for(int j = 0; j < 8; j++)
+            if(checkersboard::tile[i][j]->getPiece() == true && checkersboard::tile[i][j]->getPieceColor() != lastMoveColor)
+                return false;
+    return true;
+}
+
 void Checkers::displayElement(char elem)
 {
     this->pieceName=elem;
