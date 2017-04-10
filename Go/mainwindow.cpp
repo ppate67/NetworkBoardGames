@@ -180,6 +180,7 @@ void MainWindow::leaveGo(){
     int requestID[5]={1,gameid,playindex,0,0};//msg type (delete), gameID, 0, 0,0
     int playerid=GameManager::clientID;
     Client::makeRequest(requestID,playerid);
+    endingScreen(false);
     //delete cc;
 }
 void MainWindow::leaveChess(){
@@ -318,3 +319,23 @@ void MainWindow::on_listWidget_itemActivated(QListWidgetItem *item)
     gameidtojoin=item->data(Qt::UserRole).toInt();
 }
 
+void MainWindow::endingScreen(bool victory){//this screen will popup when ever the game has ended and will inform the user if they won or lost
+//        QWidget *myWidget = new QWidget();
+//        QScreen *screen = QGuiApplication::primaryScreen();
+//        QRect  screenGeometry = screen->geometry();
+//        int height = screenGeometry.height();
+//        int width = screenGeometry.width();
+//        myWidget->setGeometry(0,0,width,height);
+//        myWidget->show();
+//        QMovie *gif = new QMovie(":/Icons2/defeat.gif");
+//        QLabel *Background = new QLabel(myWidget);
+//        Background->setGeometry(0,0,480,480);
+
+
+//        Bacskground->setAttribute(Qt::WA_NoSystemBackground);
+//        Background->setMovie(gif);
+//        Background->setScaledContents(true);
+//        gif->start();
+//        myWidget->setAttribute( Qt::WA_DeleteOnClose );
+
+}

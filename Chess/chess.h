@@ -2,7 +2,7 @@
 #define CHESS_H
 #include <QLabel>
 #include "Networking/Client/client.h"
-
+#include "QDialog"
 class Chess:public QLabel
 {
 private:
@@ -34,7 +34,7 @@ public:
     bool getPiece(){return piece;}
     char getPieceName(){return pieceName;}
 
-
+    void pawnPromotion(Chess* pawn);
 
     //networking methods. This is essentially the same stuff used by the go class
     //but a bit different since chess is a different game with different requirements
@@ -47,6 +47,19 @@ public:
     Chess* findHead(Chess* pnt);
     void sendGameMsg();
     static void receiveUpdates(char piece1, int iteration);
-};
 
+public slots:
+    void queenpromotion();
+};
+class ChessOptions:public QLabel
+{
+    public:
+    ChessOptions(QWidget* pParent=0, Qt::WindowFlags f=0) : QLabel(pParent, f) {}
+    int piecetype;
+    Chess *pawn;
+    QDialog * window;
+    void mousePressEvent(QMouseEvent *event);
+
+
+};
 #endif // CHESS_H
