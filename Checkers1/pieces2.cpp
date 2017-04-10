@@ -45,8 +45,8 @@ bool CheckerPiece::checkKinged2(int startRow, int startCol, int endRow, int endC
     return false;
 }
 
-bool CheckerPiece::checkCapture(int endRow, int endCol, bool midOccupied, bool endOccupied){
-    if(endOccupied)
+bool CheckerPiece::checkCapture(int endRow, int endCol, bool midOccupied, bool endOccupied, int midColor){
+    if(endOccupied || midColor == color)
         return false;
     if(name == 'P'){ //Piece is making a jump
         if((endCol == col - 2 || endCol == col + 2) && midOccupied){

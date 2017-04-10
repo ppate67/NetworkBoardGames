@@ -14,7 +14,7 @@ void Checkers::mousePressEvent(QMouseEvent *event)
 {
     if(selected==0)
     {
-        if (getPiece() == false|| this->getPieceColor()!=Checkers::playercolor|| checkersturn==0){
+        if (getPiece() == false/*|| this->getPieceColor()!=Checkers::playercolor|| checkersturn==0*/){
             selected = 0;
         }
         else {
@@ -60,7 +60,7 @@ void Checkers::mousePressEvent(QMouseEvent *event)
             bool middleOccupied = checkersboard::tile[(this->getRow()+temp2->getRow())/2][(this->getColumn()+temp2->getColumn())/2]->getPiece();
 
             Checkers* middlepiece = checkersboard::tile[(this->getRow()+temp2->getRow())/2][(this->getColumn()+temp2->getColumn())/2];
-            if(p.checkCapture(this->getRow(), this->getColumn(), middleOccupied, this->getPiece()) ){//&& ((middlepiece->row+1)==this->row || (middlepiece->row+1)==temp2->row)&&((middlepiece->col+1)==this->col || (middlepiece->col+1)==temp2->col)){
+            if(p.checkCapture(this->getRow(), this->getColumn(), middleOccupied, this->getPiece(), middlepiece->getPieceColor())){//&& ((middlepiece->row+1)==this->row || (middlepiece->row+1)==temp2->row)&&((middlepiece->col+1)==this->col || (middlepiece->col+1)==temp2->col)){
                 //this checks for capture. if valid capture it executes capture, prints board, sends game message over socket
                 selected=0;
                 this->setPieceColor(temp2->getPieceColor());
@@ -98,7 +98,7 @@ bool Checkers::multiCapture(){
         bool middleOccupied = checkersboard::tile[(this->getRow()+topright->getRow())/2][(this->getColumn()+topright->getColumn())/2]->getPiece();
 
         Checkers* middlepiece = checkersboard::tile[(this->getRow()+topright->getRow())/2][(this->getColumn()+topright->getColumn())/2];
-        if(p.checkCapture(topright->row,topright->col,middleOccupied,topright->getPiece())){
+        if(p.checkCapture(topright->row,topright->col,middleOccupied,topright->getPiece(), middlepiece->getPieceColor())){
             multicap=true;
             selected=1;
             temp2=this;
@@ -114,7 +114,7 @@ bool Checkers::multiCapture(){
        bool middleOccupied = checkersboard::tile[(this->getRow()+bottomright->getRow())/2][(this->getColumn()+bottomright->getColumn())/2]->getPiece();
 
        Checkers* middlepiece = checkersboard::tile[(this->getRow()+bottomright->getRow())/2][(this->getColumn()+bottomright->getColumn())/2];
-       if(p.checkCapture(bottomright->row,bottomright->col,middleOccupied,bottomright->getPiece())){
+       if(p.checkCapture(bottomright->row,bottomright->col,middleOccupied,bottomright->getPiece(), middlepiece->getPieceColor())){
            multicap=true;
            selected=1;
            temp2=this;
@@ -130,7 +130,7 @@ bool Checkers::multiCapture(){
         bool middleOccupied = checkersboard::tile[(this->getRow()+topleft->getRow())/2][(this->getColumn()+topleft->getColumn())/2]->getPiece();
 
         Checkers* middlepiece = checkersboard::tile[(this->getRow()+topleft->getRow())/2][(this->getColumn()+topleft->getColumn())/2];
-        if(p.checkCapture(topleft->row,topleft->col,middleOccupied,topleft->getPiece())){
+        if(p.checkCapture(topleft->row,topleft->col,middleOccupied,topleft->getPiece(), middlepiece->getPieceColor())){
             multicap=true;
             selected=1;
             temp2=this;
@@ -146,7 +146,7 @@ bool Checkers::multiCapture(){
         bool middleOccupied = checkersboard::tile[(this->getRow()+bottomleft->getRow())/2][(this->getColumn()+bottomleft->getColumn())/2]->getPiece();
 
         Checkers* middlepiece = checkersboard::tile[(this->getRow()+bottomleft->getRow())/2][(this->getColumn()+bottomleft->getColumn())/2];
-        if(p.checkCapture(bottomleft->row,bottomleft->col,middleOccupied,bottomleft->getPiece())){
+        if(p.checkCapture(bottomleft->row,bottomleft->col,middleOccupied,bottomleft->getPiece(), middlepiece->getPieceColor())){
             multicap=true;
             selected=1;
             temp2=this;
