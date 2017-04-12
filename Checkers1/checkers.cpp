@@ -14,7 +14,7 @@ void Checkers::mousePressEvent(QMouseEvent *event)
 {
     if(selected==0)
     {
-        if (getPiece() == false/*|| this->getPieceColor()!=Checkers::playercolor|| checkersturn==0*/){
+        if (getPiece() == false|| this->getPieceColor()!=Checkers::playercolor|| checkersturn==0){
             selected = 0;
         }
         else {

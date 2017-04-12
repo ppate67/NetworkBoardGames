@@ -1,6 +1,6 @@
 #include "Go/mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include "QGraphicsScene"
 #include <QtGui>
 #include <QApplication>
 #include "iostream"
@@ -320,22 +320,26 @@ void MainWindow::on_listWidget_itemActivated(QListWidgetItem *item)
 }
 
 void MainWindow::endingScreen(bool victory){//this screen will popup when ever the game has ended and will inform the user if they won or lost
-//        QWidget *myWidget = new QWidget();
-//        QScreen *screen = QGuiApplication::primaryScreen();
-//        QRect  screenGeometry = screen->geometry();
-//        int height = screenGeometry.height();
-//        int width = screenGeometry.width();
-//        myWidget->setGeometry(0,0,width,height);
-//        myWidget->show();
-//        QMovie *gif = new QMovie(":/Icons2/defeat.gif");
-//        QLabel *Background = new QLabel(myWidget);
-//        Background->setGeometry(0,0,480,480);
+        QWidget *myWidget = new QWidget();
+        QScreen *screen = QGuiApplication::primaryScreen();
+        QRect  screenGeometry = screen->geometry();
+        int height = screenGeometry.height();
+        int width = screenGeometry.width();
+        myWidget->setGeometry(width/4,height/4,480,480);
+        myWidget->show();
+         QMovie *gif;
+        if(victory)
+            gif = new QMovie(":/Icons2/victory.gif");
+        else
+            gif = new QMovie(":/Icons2/defeat.gif");
+        QLabel *Background = new QLabel(myWidget);
+        Background->setGeometry(0,0,480,480);
 
-
-//        Bacskground->setAttribute(Qt::WA_NoSystemBackground);
-//        Background->setMovie(gif);
-//        Background->setScaledContents(true);
-//        gif->start();
-//        myWidget->setAttribute( Qt::WA_DeleteOnClose );
+        QGraphicsScene scene;
+        Background->setMovie(gif);
+        Background->setScaledContents(true);
+        gif->start();
+        myWidget->setAttribute( Qt::WA_DeleteOnClose );
+        Background->show();
 
 }

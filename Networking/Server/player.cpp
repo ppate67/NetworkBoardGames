@@ -61,7 +61,7 @@ void player :: readyRead(){
     string outputdata="";
     for(int i=2;i<length;i++){
         data += char(int(playerinput[i]));
-        outputdata+=int(playerinput[i]);
+        outputdata+=int(playerinput[i]+48);
         if(length==7){
             handledata[i-2]=int(playerinput[i]);
         }
