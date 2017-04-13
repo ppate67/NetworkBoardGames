@@ -13,6 +13,14 @@ void chessboard::setup(QWidget *baseWidget)
     QRect  screenGeometry = screen->geometry();
     int height = screenGeometry.height();
     int width = screenGeometry.width();
+    //display player tags
+    QLabel *player1=new QLabel(baseWidget);
+    QLabel *player2=new QLabel(baseWidget);
+    player1->setGeometry(width/2+300,height/2-260,400,100);
+    player2->setGeometry(width/2+300,height/2+100,400,100);
+    player1->setPixmap(QPixmap(":/Icons/Player1Logo.png"));
+    player2->setPixmap(QPixmap(":/Icons/Player2Logo.png"));
+    //quit button
     QPushButton *button = new QPushButton("&Quit", baseWidget);
     button->setText("Quit");
     button->move(width/2-400,height/2);
