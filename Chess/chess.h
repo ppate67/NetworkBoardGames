@@ -14,7 +14,13 @@ private:
 
 
 public:
-    Chess(QWidget* pParent=0, Qt::WindowFlags f=0) : QLabel(pParent, f) {}
+    Chess(QWidget* pParent=0, Qt::WindowFlags f=0) : QLabel(pParent, f) {
+//        Chess::chesshead=NULL;
+//        Chess::chessturn=1;
+//        Chess::playercolor=0;
+//        Chess::selected=0;
+
+    }
 
     void mousePressEvent(QMouseEvent *event);
     void displayElement(char elem);

@@ -117,6 +117,7 @@
      <string>Networked Board Games</string>
     </property>
     <addaction name="actionChat"/>
+    <addaction name="action"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -138,6 +139,11 @@
   <action name="actionChat">
    <property name="text">
     <string>Chat</string>
+   </property>
+  </action>
+  <action name="action">
+   <property name="text">
+    <string>Change Serrver</string>
    </property>
   </action>
  </widget>

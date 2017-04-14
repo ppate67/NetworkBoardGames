@@ -44,7 +44,9 @@ cout << " Client connected at " << id <<endl;
 
 }*/
 void player :: connected(){}
-void player :: disconnected(){}
+void player :: disconnected(){
+
+}
 void player :: readyRead(){
 	//this method is called by the slot signal mechanism whenever a new TCP
 	//message arrives to the server

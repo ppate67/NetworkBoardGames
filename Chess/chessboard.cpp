@@ -189,6 +189,7 @@ bool chessboard::checkPath(int startRow, int startCol, int endRow, int endCol, c
 
 void chessboard::quitclicked()
 {
+
     QCoreApplication::quit();
 }
 

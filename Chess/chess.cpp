@@ -2,6 +2,7 @@
 #include <QtGui>
 #include "QMessageBox"
 #include "Chess/pieces.h"
+
 Chess *temp;
 Chess* Chess::chesshead=NULL;
 int Chess::chessturn=1;
@@ -37,6 +38,18 @@ void Chess::mousePressEvent(QMouseEvent *event)
         // check piece with ending location to see if move is valid;
         else if (p.checkValid(this->getRow(), this->getColumn(), this->getPieceColor(), this->getPiece()) == true ){
             if(this->getPieceName() == 'K'){
+                chessboard::erasepath();
+                //this->setTileColor(temp->getTileColor());
+                this->setPieceColor(temp->getPieceColor());
+                this->setPiece(true);
+                this->setpieceName(temp->getPieceName());
+                temp->displayBoard();
+                this->displayElement(this->getPieceName());
+                temp->setPiece(false);
+                temp->displayElement(' ');
+                temp->setpieceName(' ');
+                temp->displayBoard();
+                sendGameMsg();
                 exit(1); // a king was captured so the game is over
             }
             selected=0;

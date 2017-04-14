@@ -9,7 +9,10 @@ class chessboard:public Chess
 private:
     static Chess *tile[8][8];
 public:
-    chessboard(){}
+    chessboard(){
+
+
+    }
     void setup(QWidget *baseWidget);
     static bool checkPath(int startRow, int startCol, int endRow, int endCol, char direction);
     void quitclicked();

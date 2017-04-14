@@ -26,7 +26,7 @@ private slots:
     void populateList(int size);
     void populateList2(int size);
     void on_pushButton_3_clicked();
-
+    void changeServer();
     void on_pushButton_2_clicked();
 
     void on_pushButton_5_clicked();

@@ -20,11 +20,19 @@ using namespace std;
 class Client : public QObject
 {
     Q_OBJECT
+private:
+    Client(QObject *parent =0);
     public:
-        Client(QObject *parent =0);
+        static void makeClient(){
+            if(client == nullptr){
+                client = new Client();
+            }
+        }
         QTcpSocket *socket;
         static QTcpSocket *s;
+        static Client* client;
         void Connect();
+        void Connect(std::string address, int port);
         void pingpong();
         static void sendGameMsg(GameMsg m);
         static void makeRequest(int requestID[5],int playerid);

@@ -5,6 +5,7 @@
 #include "fstream"
 #include "QMessageBox"
 QTcpSocket* Client::s=NULL;
+Client* Client::client=nullptr;
 Client::Client(QObject *parent):QObject(parent)
 {
 
@@ -24,6 +25,20 @@ void Client::Connect(){
 
 
 }
+void Client::Connect(std::string address, int port){
+    socket = new QTcpSocket(this);
+    socket->connectToHost(QHostAddress(QString::fromStdString(address)),port);
+    if(socket->waitForConnected(3000)){
+
+        connect(socket, SIGNAL(readyRead()), this, SLOT(readyRead()));
+        cout << "Client Connected" << endl;
+
+    }
+    else cout<<"Not Connected"<<endl;
+    Client::s=socket;
+
+}
+
 void Client :: readyRead(){
 
     QByteArray message = socket->readAll();

@@ -6,7 +6,9 @@
 #include "iostream"
 #include "QRadioButton"
 #include "QHBoxLayout"
+#include "QGraphicsOpacityEffect"
 #include "QMessageBox"
+#include "QInputDialog"
 int gameidtojoin=-1;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -19,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     Client::makeRequest(requestID,playerid);
     GameManager::games.clear();
     populateList(5);
-
+    connect(ui->action,SIGNAL(triggered()),this,SLOT(changeServer()));
 }
 
 MainWindow::~MainWindow()
@@ -120,14 +122,14 @@ void MainWindow::on_pushButton_clicked()
         int requestID[5]={2,gameidtojoin,1,1,gametype};
         int playerid=GameManager::clientID;
         Client::makeRequest(requestID,playerid);
-        Go::color=1;
 
-        Go::turn=0;
         if(gametype==0){
             GoBoard c;
             cc=&c;
                 Go *tile[13][13]={{NULL}};
+                Go::color=1;
 
+                Go::turn=0;
                 c.display(myWidget,tile);
                 myWidget->show();
 
@@ -197,6 +199,8 @@ void MainWindow::leaveChess(){
     int requestID[5]={1,gameid,playindex,0,0};//msg type (delete), gameID, 0, 0,0
     int playerid=GameManager::clientID;
     Client::makeRequest(requestID,playerid);
+    endingScreen(false);
+
     //delete cc;
 }
 void MainWindow::leaveCheckers(){
@@ -213,6 +217,8 @@ void MainWindow::leaveCheckers(){
     int requestID[5]={1,gameid,playindex,0,0};//msg type (delete), gameID, 0, 0,0
     int playerid=GameManager::clientID;
     Client::makeRequest(requestID,playerid);
+    endingScreen(false);
+
     //delete cc;
 }
 
@@ -338,8 +344,29 @@ void MainWindow::endingScreen(bool victory){//this screen will popup when ever t
         QGraphicsScene scene;
         Background->setMovie(gif);
         Background->setScaledContents(true);
+        QGraphicsOpacityEffect *effect = new QGraphicsOpacityEffect(myWidget);
+        Background->setGraphicsEffect(effect);
         gif->start();
         myWidget->setAttribute( Qt::WA_DeleteOnClose );
         Background->show();
+
+}
+void MainWindow::changeServer(){
+
+    std::string address ="";
+    address = QInputDialog::getText(this,"Server Address","Input the server address here as text.").toStdString();
+
+    int port = 1234;
+    string temp = QInputDialog::getText(this,"Server Address","Input the server port here as a number.").toStdString();
+    if(std::stoi(temp)<=65535 && std::stoi(temp)>=0)
+        port =std::stoi(temp);
+    Client::client->s->close();
+    Client::client->socket->close();
+    Client::client->Connect(address,port);
+
+    int requestID[5]={5,0,0,0,0};
+    int playerid=GameManager::clientID;//doesn't matter because the purpose of this request is to find the client's player id from the server
+    Client::makeRequest(requestID,playerid);
+    GameManager::games.clear();
 
 }
