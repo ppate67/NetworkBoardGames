@@ -355,7 +355,16 @@ void Go::receiveUpdates(int color, int iteration){
 
     temp->displayElement(' ');
     temp->displayBoard(temp->type);
-    Go::turn=1;
+
+    int vecsize=GameManager::games.size();
+    for(int i =0; i<vecsize; i++){
+        int playsize=GameManager::games[i].size();
+        for(int ii=0; ii<playsize;ii++){
+            if(GameManager::games[i][ii][2]==GameManager::clientID && GameManager::games[i][ii][1]==1)
+                Go::turn=1;
+        }
+    }
+
 }
 
 int Go::calculateTerritory(Go* position, Go* prevposition, vector<Go*>* positions, int tercolor){

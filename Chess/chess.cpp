@@ -217,7 +217,16 @@ void Chess::receiveUpdates(char piece1, int iteration){
 
     temp->displayElement(temp->getPieceName());
     temp->displayBoard();
-    Chess::chessturn=1;
+
+    int vecsize=GameManager::games.size();
+    for(int i =0; i<vecsize; i++){
+        int playsize=GameManager::games[i].size();
+        for(int ii=0; ii<playsize;ii++){
+            if(GameManager::games[i][ii][2]==GameManager::clientID && GameManager::games[i][ii][1]==1)
+                Chess::chessturn=1;
+        }
+    }
+
 }
 void Chess::pawnPromotion(Chess *pawn){//makes window for players to choose what to promote to
     QDialog *promotion = new QDialog;

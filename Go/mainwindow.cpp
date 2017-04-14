@@ -116,10 +116,14 @@ void MainWindow::on_pushButton_clicked()
         myWidget->setGeometry(width/2,height/2,width,height);
 
         int gametype=1;
+        int mode =1;//whether spectator or player. Default to player.
         for(int i=0; i<GameManager::games.size();i++)
-            if(i==gameidtojoin)
+            if(i==gameidtojoin){
                 gametype=GameManager::games[i][0][0];
-        int requestID[5]={2,gameidtojoin,1,1,gametype};
+                if(GameManager::games[i].size()>=2)
+                    mode=0;
+            }
+        int requestID[5]={2,gameidtojoin,mode,1,gametype};
         int playerid=GameManager::clientID;
         Client::makeRequest(requestID,playerid);
 
@@ -182,7 +186,15 @@ void MainWindow::leaveGo(){
     int requestID[5]={1,gameid,playindex,0,0};//msg type (delete), gameID, 0, 0,0
     int playerid=GameManager::clientID;
     Client::makeRequest(requestID,playerid);
-    endingScreen(false);
+    int vecsize=GameManager::games.size();
+    for(int i =0; i<vecsize; i++){
+        int playsize=GameManager::games[i].size();
+        for(int ii=0; ii<playsize;ii++){
+            if(GameManager::games[i][ii][2]==GameManager::clientID && GameManager::games[i][ii][1]==1)
+                endingScreen(false);
+        }
+    }
+
     //delete cc;
 }
 void MainWindow::leaveChess(){
@@ -199,7 +211,16 @@ void MainWindow::leaveChess(){
     int requestID[5]={1,gameid,playindex,0,0};//msg type (delete), gameID, 0, 0,0
     int playerid=GameManager::clientID;
     Client::makeRequest(requestID,playerid);
-    endingScreen(false);
+
+    int vecsize=GameManager::games.size();
+    for(int i =0; i<vecsize; i++){
+        int playsize=GameManager::games[i].size();
+        for(int ii=0; ii<playsize;ii++){
+            if(GameManager::games[i][ii][2]==GameManager::clientID && GameManager::games[i][ii][1]==1)
+                 endingScreen(false);
+        }
+    }
+
 
     //delete cc;
 }
@@ -217,7 +238,16 @@ void MainWindow::leaveCheckers(){
     int requestID[5]={1,gameid,playindex,0,0};//msg type (delete), gameID, 0, 0,0
     int playerid=GameManager::clientID;
     Client::makeRequest(requestID,playerid);
-    endingScreen(false);
+
+    int vecsize=GameManager::games.size();
+    for(int i =0; i<vecsize; i++){
+        int playsize=GameManager::games[i].size();
+        for(int ii=0; ii<playsize;ii++){
+            if(GameManager::games[i][ii][2]==GameManager::clientID && GameManager::games[i][ii][1]==1)
+                endingScreen(false);
+        }
+    }
+
 
     //delete cc;
 }

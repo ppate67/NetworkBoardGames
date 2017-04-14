@@ -434,6 +434,15 @@ void Checkers::receiveUpdates(char piece1, int iteration){
 
     temp->displayElement(temp->getPieceName());
     temp->displayBoard();
-    Checkers::checkersturn=1;
+
+    int vecsize=GameManager::games.size();
+    for(int i =0; i<vecsize; i++){
+        int playsize=GameManager::games[i].size();
+        for(int ii=0; ii<playsize;ii++){
+            if(GameManager::games[i][ii][2]==GameManager::clientID && GameManager::games[i][ii][1]==1)
+                Checkers::checkersturn=1;
+        }
+    }
+
 }
 
