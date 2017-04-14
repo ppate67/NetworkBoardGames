@@ -8,7 +8,7 @@ Chess* Chess::chesshead=NULL;
 int Chess::chessturn=1;
 int Chess::playercolor=0;
 int Chess::selected=0;
-
+int Chess::offline=0;
 void Chess::mousePressEvent(QMouseEvent *event)
 {
 
@@ -49,8 +49,9 @@ void Chess::mousePressEvent(QMouseEvent *event)
                 temp->displayElement(' ');
                 temp->setpieceName(' ');
                 temp->displayBoard();
-                sendGameMsg();
-                exit(1); // a king was captured so the game is over
+                if(offline==0)
+                    sendGameMsg();
+                //exit(1); // a king was captured so the game is over<--no good because it exits out of the console as well which is undesired
             }
             selected=0;
             chessboard::erasepath();
@@ -73,7 +74,8 @@ void Chess::mousePressEvent(QMouseEvent *event)
 
             }
             else
-                sendGameMsg();
+                if(offline==0)
+                    sendGameMsg();
         }
 
 

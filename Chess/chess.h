@@ -14,6 +14,7 @@ private:
 
 
 public:
+    static int offline;
     Chess(QWidget* pParent=0, Qt::WindowFlags f=0) : QLabel(pParent, f) {
 //        Chess::chesshead=NULL;
 //        Chess::chessturn=1;

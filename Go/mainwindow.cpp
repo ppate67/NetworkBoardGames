@@ -10,7 +10,7 @@
 #include "QMessageBox"
 #include "QInputDialog"
 int gameidtojoin=-1;
-
+int MainWindow::offline=0;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -265,7 +265,8 @@ void MainWindow::on_pushButton_3_clicked()
     int gametype=0;
     int requestID[5]={2,counter,1,0,gametype};//based on gametype
     int playerid=GameManager::clientID;
-    Client::makeRequest(requestID,playerid);
+    if(offline==0)
+        Client::makeRequest(requestID,playerid);
     QWidget *myWidget = new QWidget();
         QScreen *screen = QGuiApplication::primaryScreen();
         QRect  screenGeometry = screen->geometry();
@@ -280,6 +281,7 @@ void MainWindow::on_pushButton_3_clicked()
         myWidget->show();
         myWidget->setAttribute( Qt::WA_DeleteOnClose );
         connect(myWidget, SIGNAL(destroyed()), this, SLOT(leaveGo()));
+        Go::offline=offline;
 }
 
 void MainWindow::on_pushButton_2_clicked()
@@ -289,7 +291,8 @@ void MainWindow::on_pushButton_2_clicked()
     int gametype=1;
     int requestID[5]={2,counter,1,0,gametype};
     int playerid=GameManager::clientID;
-    Client::makeRequest(requestID,playerid);
+    if(offline==0)
+        Client::makeRequest(requestID,playerid);
     QWidget *myWidget = new QWidget();
     QScreen *screen = QGuiApplication::primaryScreen();
     QRect  screenGeometry = screen->geometry();
@@ -304,7 +307,7 @@ void MainWindow::on_pushButton_2_clicked()
     myWidget->show();
     myWidget->setAttribute( Qt::WA_DeleteOnClose );
     connect(myWidget, SIGNAL(destroyed()), this, SLOT(leaveChess()));
-
+    Chess::offline=offline;
 }
 
 void MainWindow::on_pushButton_5_clicked()
@@ -329,7 +332,7 @@ void MainWindow::on_pushButton_5_clicked()
     myWidget->show();
     myWidget->setAttribute( Qt::WA_DeleteOnClose );
     connect(myWidget, SIGNAL(destroyed()), this, SLOT(leaveCheckers()));
-
+    Checkers::offline=offline;
 }
 
 void MainWindow::on_pushButton_4_clicked()
@@ -399,4 +402,12 @@ void MainWindow::changeServer(){
     Client::makeRequest(requestID,playerid);
     GameManager::games.clear();
 
+}
+
+void MainWindow::on_checkBox_stateChanged(int arg1)
+{
+    if(offline==0)
+        offline=1;
+    else
+        offline=0;
 }

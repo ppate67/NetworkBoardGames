@@ -7,6 +7,7 @@
 
 class Checkers:public QLabel {
 private:
+
     static int selected;
     int tileColor, pieceColor, row, col, tileNum;
     bool piece;
@@ -14,7 +15,7 @@ private:
     static bool multicap;
 public:
     Checkers(QWidget* pParent=0, Qt::WindowFlags f=0) : QLabel(pParent, f) {}
-
+    static int offline;
     void mousePressEvent(QMouseEvent *event);
     void displayElement(char elem);
     void displayBoard();

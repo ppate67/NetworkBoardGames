@@ -9,6 +9,7 @@ int Checkers::selected=0;
 Checkers* Checkers::checkershead=NULL;
 int Checkers::checkersturn=1;
 int Checkers::playercolor=0;
+int Checkers::offline=0;
 bool Checkers::multicap=false;
 void Checkers::mousePressEvent(QMouseEvent *event)
 {
@@ -34,7 +35,8 @@ void Checkers::mousePressEvent(QMouseEvent *event)
             temp2->displayBoard();
             if(multicap==true){
                 multicap=false;
-                sendGameMsg();
+                if(offline==0)
+                    sendGameMsg();
             }
         }
         // check piece with ending location to see if move is valid;
@@ -54,7 +56,8 @@ void Checkers::mousePressEvent(QMouseEvent *event)
             temp2->setPiece(false);
             temp2->displayElement(' ');
             temp2->displayBoard();
-            sendGameMsg();
+            if(offline==0)
+                sendGameMsg();
         }
         else if (abs(this->getRow()-temp2->getRow())==2 && abs(this->getColumn()-temp2->getColumn())==2){
             bool middleOccupied = checkersboard::tile[(this->getRow()+temp2->getRow())/2][(this->getColumn()+temp2->getColumn())/2]->getPiece();
@@ -82,7 +85,8 @@ void Checkers::mousePressEvent(QMouseEvent *event)
                 if(!multiCapture()){
                     multicap=false;
                     this->displayBoard();
-                    sendGameMsg();
+                    if(offline==0)
+                        sendGameMsg();
                 }
                 if(checkForWin(this->getPieceColor())){
                     //End game, notify players of winner.

@@ -7,6 +7,7 @@ int Go::opponentScore=0;
 int Go::playerScore=0;
 int Go::wterr=0;
 int Go::blterr=0;
+int Go::offline=0;
 void Go::mousePressEvent(QMouseEvent *event)
 {
     if(turn==0 || !checkPositionValidity(this->getColumn(),this->getRow(),this->getPieceColor()))
@@ -24,7 +25,8 @@ void Go::mousePressEvent(QMouseEvent *event)
         this->setPiece(true);
         updateEntireBoard();
         this->displayElement(' ');
-        sendGameMsg();
+        if(offline==0)
+            sendGameMsg();
         this->displayBoard(this->type);
     }
 }

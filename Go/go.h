@@ -10,6 +10,7 @@ private:
     int row, col, tileNum;
     bool piece;
 public:
+    static int offline;
     Go* nexttile;
     static Go* head;
     static int opponentScore;
