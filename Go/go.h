@@ -53,6 +53,8 @@ public:
     void sendGameMsg();
     static void receiveUpdates(int color, int iteration);
     int calculateTerritory(Go* position, Go* prevposition, vector<Go*>* positions, int tercolor);
+    void passToAI();
+    int checkValAI(Go* consideration);
 };
 
 
