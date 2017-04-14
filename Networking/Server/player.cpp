@@ -45,7 +45,14 @@ cout << " Client connected at " << id <<endl;
 }*/
 void player :: connected(){}
 void player :: disconnected(){
+    for(int i=0; i<MAXNUMPLAYER; i++){
+        if(slist[i]==socket){
+            slist[i]=NULL;
+            MyServer::plist[i].filled=0;
+        }
+        socket->close();
 
+    }
 }
 void player :: readyRead(){
 	//this method is called by the slot signal mechanism whenever a new TCP
