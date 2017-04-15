@@ -19,8 +19,6 @@ public:
     bool checkQueen(int startRow, int startCol, int endRow, int endCol);
     bool checkBishop(int startRow, int startCol, int endRow, int endCol);
 
-    int getRow(){return row;}
-    int getCol(){return col;}
     void setRow(int x){row = x;}
     void setCol(int y){col = y;}
 
