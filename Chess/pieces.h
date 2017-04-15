@@ -18,6 +18,17 @@ public:
     bool checkKing(int startRow, int startCol, int endRow, int endCol);
     bool checkQueen(int startRow, int startCol, int endRow, int endCol);
     bool checkBishop(int startRow, int startCol, int endRow, int endCol);
+
+    int getRow(){return row;}
+    int getCol(){return col;}
+    void setRow(int x){row = x;}
+    void setCol(int y){col = y;}
+
+    // king rows and columns to help with finding check and checkmate
+    static int bkr;
+    static int bkc;
+    static int wkr;
+    static int wkc;
 };
 
 #endif

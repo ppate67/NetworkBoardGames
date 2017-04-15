@@ -1,5 +1,10 @@
 #include "pieces.h"
 
+int Piece::bkr = 0;
+int Piece::bkc = 4;
+int Piece::wkr = 7;
+int Piece::wkc = 4;
+
 bool Piece::checkPawn(int startRow, int startCol, int endRow, int endCol, bool occupied){
     switch(color){
         case 0:{ //black pieces increasing numbers in rows

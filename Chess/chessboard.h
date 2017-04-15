@@ -18,6 +18,7 @@ public:
     void quitclicked();
     static void drawpath(Chess *t);
     static void erasepath();
+    static bool checkMate();
 };
 
 #endif // CHESSBOARD_H
