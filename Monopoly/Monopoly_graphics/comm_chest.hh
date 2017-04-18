@@ -10,7 +10,7 @@ private:
 	int amount; // amount of money to add or subtract from the player according to the card
 	int position;
 public:
-	Card(int type, string text, int amount)
+	Card(int type, string text, int amount, int position) : type(type), text(text), amount(amount), position(position){}
 
 
 	Card a(1,"Advance to Go (Collect $200)", 200);
