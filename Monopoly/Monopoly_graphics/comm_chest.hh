@@ -31,3 +31,5 @@ public:
 	Card p(1,"You have won second prize in a beauty contest – Collect $10", 10);
 	Card q(1,"You inherit $100",100);
 };
+
+#endif
