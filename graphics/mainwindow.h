@@ -2,6 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "checker.h"
+#include "chess.h"
+#include "go.h"
+#include "monopoly.h"
 
 namespace Ui {
 class MainWindow;
@@ -15,6 +19,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+signals:
+    void goToWidget(int);
+
 private slots:
     void on_pushButton_2_clicked();
 
@@ -26,10 +33,16 @@ private slots:
 
     void on_pushButton_6_clicked();
 
-    void on_pushButton_2_pressed();
+    void runningWidget(int);
+
 
 private:
     Ui::MainWindow *ui;
+    checker *checkerWidget;
+    chess *chessWidget;
+    go *goWidget;
+    monopoly *monopolyWidget;
+
 };
 
 #endif // MAINWINDOW_H

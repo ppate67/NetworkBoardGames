@@ -6,6 +6,8 @@ monopoly::monopoly(QWidget *parent) :
     ui(new Ui::monopoly)
 {
     ui->setupUi(this);
+
+    connect(ui->pushButton_2, SIGNAL (clicked()), this, SLOT (on_pushButton_2_clicked()));
 }
 
 monopoly::~monopoly()
@@ -34,5 +36,5 @@ click back to main menu
 */
 void monopoly::on_pushButton_2_clicked()
 {
-    connect(this, SIGNAL (clicked()), this, SLOT (mainwindow::slot1()));
+
 }

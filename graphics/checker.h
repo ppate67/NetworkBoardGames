@@ -2,8 +2,11 @@
 #define CHECKER_H
 
 #include <QWidget>
+#include <QMainWindow>
+#include "mainwindow.h"
 
 namespace Ui {
+class mainwindow;
 class checker;
 }
 
@@ -14,6 +17,7 @@ class checker : public QWidget
 public:
     explicit checker(QWidget *parent = 0);
     ~checker();
+    QMainWindow *mainwindow;
 
 private slots:
     void on_pushButton_clicked();

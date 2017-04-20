@@ -6,6 +6,8 @@ chess::chess(QWidget *parent) :
     ui(new Ui::chess)
 {
     ui->setupUi(this);
+
+    connect(ui->pushButton_2, SIGNAL (clicked()), this, SLOT (on_pushButton_2_clicked()));
 }
 
 chess::~chess()
@@ -34,5 +36,5 @@ click back to main menu
 */
 void chess::on_pushButton_2_clicked()
 {
-    connect(this, SIGNAL (clicked()), this, SLOT (mainwindow::slot1()));
+
 }

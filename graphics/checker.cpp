@@ -6,6 +6,9 @@ checker::checker(QWidget *parent) :
     ui(new Ui::checker)
 {
     ui->setupUi(this);
+
+    connect(ui->pushButton_2, SIGNAL (clicked()), this, SLOT (on_pushButton_2_clicked()));
+
 }
 
 checker::~checker()
@@ -34,5 +37,6 @@ click back to main menu
 */
 void checker::on_pushButton_2_clicked()
 {
-    connect(this, SIGNAL (clicked()), this, SLOT (mainwindow::slot1()));
+    this->hide();
+    mainwindow->show();
 }
