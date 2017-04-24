@@ -3,6 +3,7 @@
 #include <QLabel>
 #include "Networking/Client/client.h"
 #include "QDialog"
+#include "QThread"
 class Chess:public QLabel
 {
 private:
@@ -40,7 +41,7 @@ public:
     int getTileNum(){return tileNum;}
     bool getPiece(){return piece;}
     char getPieceName(){return pieceName;}
-
+    void passToAI();
     void pawnPromotion(Chess* pawn);
 
     //networking methods. This is essentially the same stuff used by the go class
@@ -54,6 +55,14 @@ public:
     Chess* findHead(Chess* pnt);
     void sendGameMsg();
     static void receiveUpdates(char piece1, int iteration);
+
+    //AI code
+    void resetBoardState(const string& state);
+    string describeBoardState();
+    Chess* findPiece(int row, int col);
+    int findScore(int destination);
+    vector<int> evaluateMoves(const string& originalBoardState,vector<vector<int>> moves,vector<vector<int>> playermoves, vector<Chess*> pieces, vector<Chess*> playerpieces, int treelength, int ecolor, int alpha, int beta, int score);
+    vector<int>findPossMoves();
 
 public slots:
     void queenpromotion();

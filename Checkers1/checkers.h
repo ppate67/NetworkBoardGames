@@ -1,9 +1,9 @@
 #ifndef CHECKERS_H
 #define CHECKERS_H
-
+#include "vector"
 #include <QLabel>
 #include "Networking/Client/client.h"
-
+using namespace std;
 
 class Checkers:public QLabel {
 private:
@@ -49,6 +49,15 @@ public:
     Checkers* findHead(Checkers* pnt);
     void sendGameMsg();
     static void receiveUpdates(char piece1, int iteration);
+
+
+
+    void passToAI();
+    vector<int> evaluateMoves(const string& originalBoardState,vector<vector<int>> moves,vector<vector<int>> playermoves, vector<Checkers*> AIpieces,vector<Checkers*> playerpieces, int treelength, int ecolor, int alpha, int beta, int score);
+    string describeBoardState();
+    Checkers* findPiece(int row, int col);
+    int findScore(int destination);
+    void resetBoardState(const string& state);
 
 };
 

@@ -9,7 +9,11 @@ QT += widgets
 CONFIG += app_bundle
 
 TEMPLATE = app
-
+QMAKE_CXXFLAGS_RELEASE -= -O2
+QMAKE_CXXFLAGS_RELEASE += -O3
+# add the desired -O3 if not present
+QMAKE_CXXFLAGS_RELEASE *= -O3
+QMAKE_LFLAGS_RELEASE -= -O1
 SOURCES += Networking/main.cpp \
     Chess/chess.cpp \
     Chess/chessboard.cpp \

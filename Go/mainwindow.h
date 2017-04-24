@@ -18,7 +18,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void removeplayer();
-    static int MainWindow::offline;
+    static int offline;
 private slots:
     void on_pushButton_clicked();
     void leaveGo();
