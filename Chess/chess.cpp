@@ -66,12 +66,11 @@ void Chess::mousePressEvent(QMouseEvent *event)
                 temp->displayBoard();
                 if(offline==0)
                     sendGameMsg();
-<<<<<<< HEAD
+
                 else
                     passToAI();
                 //exit(1); // a king was captured so the game is over<--no good because it exits out of the console as well which is undesired
-=======
->>>>>>> 3bb0b83979e2555235b131b8ddca9899693e4366
+
             }
             selected=0;
             chessboard::erasepath();
@@ -346,7 +345,7 @@ void ChessOptions::mousePressEvent(QMouseEvent *event){
     this->pawn->sendGameMsg();
     this->window->close();
 }
-<<<<<<< HEAD
+
 void Chess::passToAI(){
     int AIcolor = 0; if(playercolor==0) AIcolor=1;
     //make a list of pieces that can make moves and use that list with the
@@ -722,5 +721,4 @@ vector<int> Chess::findPossMoves(){//this function was written in an attempt to 
     return result;
        }
 
-=======
->>>>>>> 3bb0b83979e2555235b131b8ddca9899693e4366
+
