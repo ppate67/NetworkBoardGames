@@ -10,11 +10,7 @@ int Chess::playercolor=0;
 int Chess::selected=0;
 int Chess::offline=0;
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 3bb0b83979e2555235b131b8ddca9899693e4366
 void Chess::mousePressEvent(QMouseEvent *event)
 {
     if(selected==0)
