@@ -2,6 +2,8 @@
 #define MONOPOLY_H
 
 #include <QWidget>
+#include <QMainWindow>
+
 
 namespace Ui {
 class monopoly;
@@ -14,6 +16,7 @@ class monopoly : public QWidget
 public:
     explicit monopoly(QWidget *parent = 0);
     ~monopoly();
+    QMainWindow *mainwindow;
 
 private slots:
     void on_pushButton_clicked();

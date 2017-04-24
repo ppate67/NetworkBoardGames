@@ -10,11 +10,13 @@ int Chess::playercolor=0;
 int Chess::selected=0;
 int Chess::offline=0;
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 3bb0b83979e2555235b131b8ddca9899693e4366
 void Chess::mousePressEvent(QMouseEvent *event)
 {
-
     if(selected==0)
     {
         if ((getPiece() == false || this->getPieceColor()!=Chess::playercolor)|| chessturn==0){
@@ -40,7 +42,17 @@ void Chess::mousePressEvent(QMouseEvent *event)
         }
         // check piece with ending location to see if move is valid;
         else if (p.checkValid(this->getRow(), this->getColumn(), this->getPieceColor(), this->getPiece()) == true ){
+            p.setRow(this->getRow());
+            p.setCol(this->getColumn());
             if(this->getPieceName() == 'K'){
+                if (this->getPieceColor() == 0){
+                    Piece::bkr = this->getRow();
+                    Piece::bkc = this->getColumn();
+                }
+                else {
+                    Piece::wkr = this->getRow();
+                    Piece::wkc = this->getColumn();
+                }
                 chessboard::erasepath();
                 //this->setTileColor(temp->getTileColor());
                 this->setPieceColor(temp->getPieceColor());
@@ -54,9 +66,12 @@ void Chess::mousePressEvent(QMouseEvent *event)
                 temp->displayBoard();
                 if(offline==0)
                     sendGameMsg();
+<<<<<<< HEAD
                 else
                     passToAI();
                 //exit(1); // a king was captured so the game is over<--no good because it exits out of the console as well which is undesired
+=======
+>>>>>>> 3bb0b83979e2555235b131b8ddca9899693e4366
             }
             selected=0;
             chessboard::erasepath();
@@ -70,6 +85,22 @@ void Chess::mousePressEvent(QMouseEvent *event)
             temp->displayElement(' ');
             temp->setpieceName(' ');
             temp->displayBoard();
+            if (temp->getPieceColor() == 0){ // black piece was just moved, check if it put white king in check
+                if(p.checkValid(Piece::wkr, Piece::wkc, 1, true) == true){
+                    if(chessboard::checkMate()==true)
+                        cout << "Game Over" << endl; // possibly add gif later
+                    else
+                        cout << "White piece in check" << endl; // just testing now, should add pop up later
+                }
+            }
+            else{ // white piece was jsut moved, check if it put black king in check
+                if(p.checkValid(Piece::bkr, Piece::bkc, 1, true) == true){
+                    if(chessboard::checkMate()==true)
+                        cout << "Game Over" << endl; // possibly add gif later
+                    else
+                        cout << "Black piece in check" << endl; // just testing now, should add pop up later
+                }
+            }
             if(this->getPieceName()=='P' && this->getPieceColor()==0 && this->getRow()==7){
                 pawnPromotion(this);
 
@@ -315,6 +346,7 @@ void ChessOptions::mousePressEvent(QMouseEvent *event){
     this->pawn->sendGameMsg();
     this->window->close();
 }
+<<<<<<< HEAD
 void Chess::passToAI(){
     int AIcolor = 0; if(playercolor==0) AIcolor=1;
     //make a list of pieces that can make moves and use that list with the
@@ -690,3 +722,5 @@ vector<int> Chess::findPossMoves(){//this function was written in an attempt to 
     return result;
        }
 
+=======
+>>>>>>> 3bb0b83979e2555235b131b8ddca9899693e4366

@@ -4,6 +4,7 @@
 #include <QtGui>
 #include <QPushButton>
 #include "QMessageBox"
+
 Chess* chessboard::tile[8][8] = {NULL};
 
 void chessboard::setup(QWidget *baseWidget)
@@ -115,7 +116,6 @@ void chessboard::setup(QWidget *baseWidget)
         }
         }
         Chess::chesshead=tile[0][0];
-
 
 }
 
@@ -623,3 +623,7 @@ void chessboard::erasepath()
     }
 }
 
+bool chessboard::checkMate(){
+    return false;
+    // will implement this later
+}

@@ -2,6 +2,8 @@
 #define GO_H
 
 #include <QWidget>
+#include <QMainWindow>
+
 
 namespace Ui {
 class go;
@@ -14,6 +16,7 @@ class go : public QWidget
 public:
     explicit go(QWidget *parent = 0);
     ~go();
+    QMainWindow *mainwindow;
 
 private slots:
     void on_pushButton_clicked();

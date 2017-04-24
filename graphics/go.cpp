@@ -6,6 +6,8 @@ go::go(QWidget *parent) :
     ui(new Ui::go)
 {
     ui->setupUi(this);
+
+    connect(ui->pushButton_2, SIGNAL (clicked()), this, SLOT (on_pushButton_2_clicked()));
 }
 
 go::~go()
@@ -34,5 +36,5 @@ click back to main menu
 */
 void go::on_pushButton_2_clicked()
 {
-    connect(this, SIGNAL (clicked()), this, SLOT (mainwindow::slot1()));
+
 }
