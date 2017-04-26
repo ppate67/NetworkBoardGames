@@ -14,7 +14,8 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h \
     player.h \
-    boardspace.h
+    boardspace.h \
+    cards.h
 
 FORMS    += mainwindow.ui
 
