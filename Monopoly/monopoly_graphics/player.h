@@ -43,6 +43,15 @@ public:
         a.bank = a.bank -amount;
     }
 
+    //Amount = (Price of Property / 2)
+    friend void playerMortgageProperty(Player& a, int amount){
+        a.bank = a.bank + amount;
+    }
+
+    //Amount = (Price of Property / 2)
+    friend void playerPayMortgageProperty(Player& a, int amount){
+        a.bank = a.bank - amount;
+    }
 
 
 

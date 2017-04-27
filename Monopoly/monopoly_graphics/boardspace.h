@@ -20,13 +20,6 @@ private:
 public:
     boardSpace(){} // everything default to zero
 
-    friend class Player;
-
-    friend void buildHouse(boardSpace& a){
-        a.houses = a.houses +1;
-        a.rent = a.rent + a.houses*100 ;
-    }
-
     friend int getRent(boardSpace& a){
         return a.rent;
     }
@@ -35,8 +28,21 @@ public:
         return a.price;
     }
 
-    friend int setOwner(boardSpace& a, int id){
+    friend void setOwner(boardSpace& a, int id){
         a.owned = id;
+    }
+
+    friend void buildHouse(boardSpace& a){
+        a.houses = a.houses +1;
+        a.rent = a.rent + a.houses*100 ;
+    }
+
+    friend void mortgageProperty(boardSpace& a){
+        a.mortgaged = true;
+    }
+
+    friend void unmortgageProperty(boardSpace& a){
+        a.mortgaged = false;
     }
 
     //use void functions such as these to allow us to create an array of board positions easier
