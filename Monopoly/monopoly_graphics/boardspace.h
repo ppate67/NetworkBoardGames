@@ -1,6 +1,6 @@
 #ifndef BOARDSPACE_H
 #define BOARDSPACE_H
-
+#include"player.h"
 #include<string>
 using namespace std;
 
@@ -19,6 +19,25 @@ private:
     int tax;
 public:
     boardSpace(){} // everything default to zero
+
+    friend class Player;
+
+    friend void buildHouse(boardSpace& a){
+        a.houses = a.houses +1;
+        a.rent = a.rent + a.houses*100 ;
+    }
+
+    friend int getRent(boardSpace& a){
+        return a.rent;
+    }
+
+    friend int getPrice(boardSpace a){
+        return a.price;
+    }
+
+    friend int setOwner(boardSpace& a, int id){
+        a.owned = id;
+    }
 
     //use void functions such as these to allow us to create an array of board positions easier
     //we will set us this array in main.cpp as part of initialization

@@ -13,7 +13,7 @@ private:
 public:
     Card(){}
 
-    //use void functions such as these to allow us to create an array of board positions easier
+    //use void functions such as these to allow us to create an array of chance and community chest cards easier
     //we will set us this array in main.cpp as part of initialization
     //we can then can pick randomly from the array to pick which card they get
 
@@ -24,10 +24,14 @@ public:
         amount = initAmount;
     }
 
+
+    //The card read would be Chance[randomCard()] or CommunityChance[randomCard] --- A random card would be read out of that set based on the position the player is in
     friend void readCard(Card a, string& words, int& payment){
         words = a.text;
         payment = a.amount;
     }
+
+
 };
 
 

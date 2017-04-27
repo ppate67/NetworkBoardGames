@@ -4,7 +4,10 @@
 #include <QApplication>
 #include "boardspace.h"
 #include "cards.h"
+#include "player.h"
+
 using namespace std;
+
 
 void dieroll(int& roll1, int& roll2, int& totalRoll) {
     srand(time(NULL));
@@ -13,9 +16,11 @@ void dieroll(int& roll1, int& roll2, int& totalRoll) {
     totalRoll = roll1 + roll2;
 }
 
-void randomCard(int& num){
+int randomCard(){
+    int num;
     srand(time(NULL));
     num = rand()%14;
+    return num;
 }
 
 
@@ -644,6 +649,13 @@ int main(int argc, char *argv[])
 
 
     //-------END OF CHANCE CARD INITIALIZATION-------
+
+    //-------START OF PLAYER INITIALIZATION-------
+    //Making game only 2 players to start out
+    Player player1("Player 1", 1, 500, 0, 0);
+    Player player2("Player 2", 1, 500, 0, 0);
+
+    //-------END OF PLAYER INITIALIZATION-------
 
     return a.exec();
 }
