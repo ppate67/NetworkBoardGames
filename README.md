@@ -6,7 +6,7 @@ The program is split into two sections: the server and the client.
 # Client:
 Consider the diagram below
 
-![alt text](http://imgur.com/a/xbs6N)
+![img](http://imgur.com/a/xbs6N)
 
 When the program launches, main.cpp is the first to execute. From there, it launches and initializes the TCP client connection to the server.
 The mainwindow is then launched. On mainwindow launch, the first thing done is to find the client's id "clientID" which is stored in the GameManager class. 
@@ -15,7 +15,7 @@ client's ID number. The client then sends "int request1[5]={3,1,0,0,0};" which r
 This received list then used to update the static vector "games" which is in the GameManager class and keeps an almanac of all the information being stored on the server.
 
 At this point, the player should see the mainwindow displayed on their screen. See below:
-![alt text](http://imgur.com/a/7KVyX)
+![img](http://imgur.com/a/7KVyX)
 
 If the user wishes to change the server they are connected to, they can click "Networked Board Games --> Change Server". 
 They will then be prompted through dialog windows to enter first the server address and then the port number. The default server location is localhost (127.0.0.1). 
@@ -30,7 +30,7 @@ A client that joins a game that already exists is always player 2 and, as such, 
 ## The following are descriptions for each game that can be played:
 
 ### Go:
-![alt text](http://imgur.com/a/AFl4w)
+![img](http://imgur.com/a/AFl4w)
 When a Go game is launched, the first an instance of goboard is created. Along with the goboard object, an 13 by 13 array of Go objects.
 Go objects, which inherent from QLabel, are associated with a single tile of the board. This means that the graphics for a single tile can be altered within the Go object associated with that tile. The goboard object mostly handles the graphics of the entire board.  
 In the game, a player can only make a move if the static Go int is set to 1 and if the move is valid. The game determines if the move is valid by calling Go::checkPositionValidity (which in turn checks if there is already a piece in the position).
@@ -43,9 +43,9 @@ If it is an online game, Go::sendGameMsg is used to send a game message over the
 When a player receives one of these game messages from the server, it uses Go::receiveUpdates to update each tile on the board with the opponent's move (and its consequences) and Go::updateEntireBoard to update the score of each player.
 
 ### Chess:
-![alt text](http://imgur.com/a/p6MQd)
+![img](http://imgur.com/a/p6MQd)
 ### Checkers:
-![alt text](http://imgur.com/a/aUzrA)
+![img](http://imgur.com/a/aUzrA)
 
 ##T he following are descriptions for each AI for each game:
 ### Go AI:
