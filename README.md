@@ -3,10 +3,10 @@ This project currently incorporates online and offline play for Checkers, Chess,
 
 The program is split into two sections: the server and the client. 
 
-Client:
+# Client:
 Consider the diagram below
 
-http://imgur.com/a/xbs6N
+![alt text](http://imgur.com/a/xbs6N)
 
 When the program launches, main.cpp is the first to execute. From there, it launches and initializes the TCP client connection to the server.
 The mainwindow is then launched. On mainwindow launch, the first thing done is to find the client's id "clientID" which is stored in the GameManager class. 
@@ -15,7 +15,7 @@ client's ID number. The client then sends "int request1[5]={3,1,0,0,0};" which r
 This received list then used to update the static vector "games" which is in the GameManager class and keeps an almanac of all the information being stored on the server.
 
 At this point, the player should see the mainwindow displayed on their screen. See below:
-http://imgur.com/a/7KVyX
+![alt text](http://imgur.com/a/7KVyX)
 
 If the user wishes to change the server they are connected to, they can click "Networked Board Games --> Change Server". 
 They will then be prompted through dialog windows to enter first the server address and then the port number. The default server location is localhost (127.0.0.1). 
@@ -27,22 +27,33 @@ If the client wishes to update the game list on the mainwindow they simply need 
 When the game is joined, the server launches a message to the server requesting to join the game. The server will then respond with an updated message to all players on the server containing info on all the games on the system.
 A client that joins a game that already exists is always player 2 and, as such, makes their turn second. Naturally, the "Launch Game" button also opens a window for the game to be played in.
 
-The following are descriptions for each game that can be played:
+## The following are descriptions for each game that can be played:
 
-GO:
-http://imgur.com/a/AFl4w
-Chess:
-http://imgur.com/a/p6MQd
-Checkers:
-http://imgur.com/a/aUzrA
+### Go:
+![alt text](http://imgur.com/a/AFl4w)
+When a Go game is launched, the first an instance of goboard is created. Along with the goboard object, an 13 by 13 array of Go objects.
+Go objects, which inherent from QLabel, are associated with a single tile of the board. This means that the graphics for a single tile can be altered within the Go object associated with that tile. The goboard object mostly handles the graphics of the entire board.  
+In the game, a player can only make a move if the static Go int is set to 1 and if the move is valid. The game determines if the move is valid by calling Go::checkPositionValidity (which in turn checks if there is already a piece in the position).
 
-The following are descriptions for each AI for each game:
-Go AI:
+Once the new piece is placed on the board, Go::updateEntireBoard() is called in which the liberties of each piece on the board are taken into consideration (this is acheived through the Go::checkLiberties method). If checkLiberties returns a value equal to or less than 0 then the piece being checked will be removed from the board. Go::updateEntireBoard() also updates the score of the game (which includes adding a point to a score if an opponent piece is removed). The score is also updated by factoring in the value of the territories the players hold (this is done with the Go::calculateTerritory method). 
 
-Chess AI:
+Once the entire board is updated, the game is either passed off to the opponent (be it the AI or an opponent connected to the server).
+If it is an online game, Go::sendGameMsg is used to send a game message over the server. This message is composed of a 171 byte long byte array categorizing which game the message corresponds to and the 169 tiles in the game.
 
-Checkers AI:
+When a player receives one of these game messages from the server, it uses Go::receiveUpdates to update each tile on the board with the opponent's move (and its consequences) and Go::updateEntireBoard to update the score of each player.
+
+### Chess:
+![alt text](http://imgur.com/a/p6MQd)
+### Checkers:
+![alt text](http://imgur.com/a/aUzrA)
+
+##T he following are descriptions for each AI for each game:
+### Go AI:
+
+### Chess AI:
+
+### Checkers AI:
 
 
-Server Description:
+# Server Description:
 
