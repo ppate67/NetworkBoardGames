@@ -738,18 +738,24 @@ void MainWindow::on_pushButton_2_clicked()
 
     string typeOfSpace = spaces[players[turnNumber]->getPosition()]->getSpaceType();
 
+
+    //Checks to See if the Spot is a Chance Location
     if(typeOfSpace == "Chance"){
-        int tempBank = players[turnNumber]->getBank();
-        int randFourteen = randomCard();
+        int tempBank = players[turnNumber]->getBank(); //Gets the Value of the Players Bank so they can get paid or pay their dues
+        int randFourteen = randomCard(); //Random Card Drawn
+
+        //This pays to deducts money from player
         players[turnNumber]->setBank(tempBank + Chance[randFourteen]->getAmount());
 
         //Displays Message Box With What Card You Drew
         QMessageBox::information(this, "Draw A Chance Card", "You Drew the Card: " + QString::fromStdString(Chance[randFourteen]->getText()));
     }
 
+
+    //Checks to See if the Spot is a Community Chest Location
     if(typeOfSpace == "Community Chest"){
-        int tempBank = players[turnNumber]->getBank();
-        int randFourteen = randomCard();
+        int tempBank = players[turnNumber]->getBank(); //Gets the Value of the Players Bank so they can get paid or pay their dues
+        int randFourteen = randomCard(); //Random Card Drawn
         players[turnNumber]->setBank(tempBank + CommunityChest[randFourteen]->getAmount());
 
         //Displays Message Box With What Card You Drew
