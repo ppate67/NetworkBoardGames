@@ -3,10 +3,8 @@
 
 #include <QWidget>
 #include <QMainWindow>
-#include "mainwindow.h"
 
 namespace Ui {
-class mainwindow;
 class checker;
 }
 
