@@ -98,6 +98,14 @@ public:
         }
     }
 
+    string getBoardname(boardSpace a){
+        return a.name;
+    }
+
+    string getName(){
+        return name;
+    }
+
 };
 
 

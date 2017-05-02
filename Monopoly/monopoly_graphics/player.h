@@ -25,6 +25,10 @@ public:
         return a.userid;
     }
 
+    friend int getBank(Player a){
+        return a.bank;
+    }
+
     friend int getJailFree(Player a){
         return a.jailFree;
     }
@@ -36,6 +40,9 @@ public:
 
     friend void movePlayer(Player& a, int distance){
         a.position = a.position + distance;
+        if(a.position > 39){
+            a.position = a.position - 40;
+        }
 
     }
 
@@ -53,6 +60,15 @@ public:
         a.bank = a.bank - amount;
     }
 
+    /*
+    Player& operator =(Player a){
+        a.name = name;
+        a.userid = userid;
+        a.bank = bank;
+        a.jailFree = jailFree;
+        a.position = position;
+    }
+    */
 
 
 };
