@@ -23,6 +23,9 @@ public:
     friend int getRent(boardSpace& a){
         return a.rent;
     }
+    string getSpaceType(){
+        return spaceType;
+    }
 
     friend int getPrice(boardSpace a){
         return a.price;
