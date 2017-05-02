@@ -18,9 +18,7 @@ void dieRoll(int& roll1, int& roll2, int& totalRoll) {
 }
 
 
-Player player1("Player 1", 1, 500, 0, 0);
-Player player2("Player 2", 1, 600, 0, 0);
-
+//Initializes the Player Classes
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -29,7 +27,24 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    turnNumber = 0;
+    numberOfTurns =1;
 
+    players = new Player*[2];
+    players[0] = new Player;
+    players[1] = new Player;
+
+    players[0]->setName("Player 1");
+    players[0]->setUserID(1);
+    players[0]->setBank(500);
+    players[0]->setJailFree(0);
+    players[0]->setPosition(0);
+
+    players[1]->setName("Player 2");
+    players[1]->setUserID(2);
+    players[1]->setBank(500);
+    players[1]->setJailFree(0);
+    players[1]->setPosition(0);
 
 
     // -------INITIALIZE BOARDSPACES-------
@@ -532,11 +547,11 @@ MainWindow::MainWindow(QWidget *parent) :
     QPixmap board(":/board.jpg");
     ui->label->setPixmap(board.scaled(551,551,Qt::KeepAspectRatio));
 
-    ui->Player1_Space->setText(QString::fromStdString(spaces[getPosition(player1)]->getName()));
-    ui->Player1_Bank_Amount->setText("$" + QString::number(getBank(player1)));
+    ui->Player1_Space->setText(QString::number(players[0]->getPosition()) + "- " + QString::fromStdString(spaces[players[0]->getPosition()]->getName()));
+    ui->Player1_Bank_Amount->setText("$" + QString::number(players[0]->getBank()));
 
-    ui->Player2_Space->setText(QString::fromStdString(spaces[getPosition(player2)]->getName()));
-    ui->Player2_Bank_Amount->setText("$" + QString::number(getBank(player2)));
+    ui->Player2_Space->setText(QString::number(players[1]->getPosition()) + "- " +QString::fromStdString(spaces[players[1]->getPosition()]->getName()));
+    ui->Player2_Bank_Amount->setText("$" + QString::number(players[1]->getBank()));
 
   //  Player player1("Player 1", 1, 500, 0, 0);
 
@@ -560,10 +575,37 @@ void MainWindow::on_pushButton_2_clicked()
     int totalRoll =0;
 
     dieRoll(roll1, roll2, totalRoll);
-    movePlayer(player1, totalRoll);
+    players[turnNumber]->movePlayer(totalRoll);
+
+    if(players[turnNumber]->getPosition()>40){
+        players[turnNumber]->setPosition(players[turnNumber]->getPosition()-40);
+        players[turnNumber]->setBank(players[turnNumber]->getBank()+200);
+    }
+
     ui->DiceRoll->setText("Your Roll: " + QString::number(totalRoll));
-    // ui->DiceRoll->setText(QString::number(getPosition(player1)));
-    string BoardspaceName = spaces[getPosition(player1)]->getName();
-    ui->Player1_Space->setText(QString::fromStdString(BoardspaceName));
+
+
+
+    int currentUserID = players[turnNumber]->getUserID();
+
+    //Switch Turns
+    if(currentUserID == 1){
+        ui->Player1_Space->setText(QString::number(players[0]->getPosition()) + "- " + QString::fromStdString(spaces[players[0]->getPosition()]->getName()));
+        ui->Player1_Bank_Amount->setText("$" + QString::number(players[0]->getBank()));
+        turnNumber = 1;
+        ui->TurnLabel->setText("Player 2's Turn");
+        numberOfTurns = numberOfTurns +1;
+        ui->TotalTurns->setText("Total Number of Turns: " + QString::number(numberOfTurns));
+    }
+
+    if(currentUserID == 2){
+        ui->Player2_Space->setText(QString::number(players[1]->getPosition()) + "- " +QString::fromStdString(spaces[players[1]->getPosition()]->getName()));
+        ui->Player2_Bank_Amount->setText("$" + QString::number(players[1]->getBank()));
+        turnNumber = 0;
+        ui->TurnLabel->setText("Player 1's Turn");
+        numberOfTurns = numberOfTurns +1;
+        ui->TotalTurns->setText("Total Number of Turns: " + QString::number(numberOfTurns));
+
+    }
 
 }

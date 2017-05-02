@@ -18,6 +18,10 @@ class MainWindow : public QMainWindow
 private:
     Ui::MainWindow *ui;
     boardSpace** spaces;
+    Player** players;
+    int turnNumber;
+    int numberOfTurns;
+
 
 
 public:
