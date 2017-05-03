@@ -50,7 +50,7 @@ When a Chess game is launched, the first an instance of chessboard is created. A
 ![Imgur](http://i.imgur.com/An8N6EL.png)
 When a Checkers game is launched, the first an instance of checkersboard is created. Along with the checkersboard object, an 8 by 8 array of Checkers objects. Checkers objects, which inherent from QLabel, are associated with a single tile of the board. This means that the graphics for a single tile can be altered within the Checkers object associated with that tile. The checkersboard object mostly handles the graphics of the entire board. In the game, a player can only make a move if the static Checkers int "checkersturn" is set to 1 and if the move is valid.  The game determines if the move is valid by utilizing the Piece class and the Piece::checkValid method.
 
-##T he following are descriptions for each AI for each game:
+## The following are descriptions for each AI for each game:
 ### Go AI:
 
 ### Chess AI:
@@ -59,4 +59,30 @@ When a Checkers game is launched, the first an instance of checkersboard is crea
 
 
 # Server Description:
+The server, and the client for that matter, has a data structure "games" which is a vector of vector of ints. Each vector in the top most vector represents a game while each item in the innermost vector is representative of a single player; it is structured as follows:
+games[gameid][0] = gametype;
+games[gameid][1] = player type; - Player type specifies whether it is a spectator or a player.
+games[gameid][2] = playerid;
+There are a number of codes and headers that clients send to the server in order to acheive certain goals such as to get lists of games being played on the server. The messages are as follows:
+Message Structure:
+The message structure is split up into individual byte segments as follows
+{sending id/gameid}{message type}{code/message}
+Types:
+8 - Type reserved for non-game data. This can refer to all of the informational requests/chat messages.
+0 - Go game data messages - Describes the board state of a particular Go game running on the server.
+1 - Chess game data messages - Describes the board state of a particular Chess game running on the server.
+2 - Checkers game data messages - Describes the board state of a particular Checkers game running on the server.
+Codes (All have type =8):
+5 0 0 0 0 - Requests server to send the client's userid to the client.
+3 1 0 0 0 - Makes request for the the server to send all the games on the server.
+1 gameid playerindex 0 0 - Requests server to delete a player from the "game" vector.
+2 gameid 1 0 gametype - Requests the server to add a game to the server by gameid. Byte 3 sets the server to add by gametype
+2 gameidtojoin mode 1 gametype - Requests server to add player to specified game based on the gameid. Mode designates the playertype.
+7 "new username" - Requests server to add username to the "playerList" vector. 
+6 1 1 1 1 - Requests server to broadcast all player usernames to every client on the server.
+8 "chat message" - Server requested to forward chat messages to people participating in the chat room.
+
+The server is broken up into two main functional classes. "MyServer" and "player". MyServer listens for port 1234 and sets up (and maintains) a socket connection to any clients that connect to the server. player which inherits from QObject is the embodiment the TCP socket connection. One player object is associated with each socket connection. The player listens along its associated socket and makes responses to any messages it receives along the socket. Below is a graphic describing the structure of the server.
+
+![Imgur](http://i.imgur.com/MotFu7d.png)
 
