@@ -181,7 +181,25 @@ bool Checkers::checkForWin(int lastMoveColor){
         for(int j = 0; j < 8; j++)
             if(checkersboard::tile[i][j]->getPiece() == true && checkersboard::tile[i][j]->getPieceColor() != lastMoveColor)
                 return false;
+    if(openMoves(lastMoveColor))
+        return false;
     return true;
+}
+
+bool Checkers::openMoves(int lastMoveColor){
+    //Go through each element of the board. If there are no pieces with available moves remaining
+    //(i.e. all opponent pieces are blocked) that player loses.
+    for(int i = 0; i < 8; i++)
+        for(int j = 0; j < 8; j++){
+            if(checkersboard::tile[i][j]->getPiece() == true && checkersboard::tile[i][j]->getPieceColor() != lastMoveColor){
+                CheckerPiece p(checkersboard::tile[i][j]->getPieceColor(), checkersboard::tile[i][j]->getPieceName(), i, j);
+                if(p.checkMoves(checkersboard::tile))
+                    return true;
+            }
+            else
+                continue;
+        }
+    return false;
 }
 
 void Checkers::displayElement(char elem)
@@ -248,6 +266,7 @@ void Checkers::capturePiece(Checkers* capturee, Checkers* captor){
     capturee->setPiece(false);
     capturee->displayElement(' ');
     capturee->displayBoard();
+    checkersboard::tile[captor->getRow()][captor->getColumn()] = NULL; //TESTING
     //need to add multistage move
     sendGameMsg();
 }

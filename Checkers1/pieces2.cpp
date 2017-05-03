@@ -68,3 +68,98 @@ bool CheckerPiece::checkCapture(int endRow, int endCol, bool midOccupied, bool e
     }
     return false;
 }
+
+//Check if there are any available moves for this piece. If none, return false.
+bool CheckerPiece::checkMoves(Checkers* tile[8][8]){
+    bool space1 = false, space2 = false, space3 = false, space4 = false;
+    switch(name){
+        case 'P':
+                if (color == 0){
+
+                    if(col<7)
+                        space1 = checkValid2(row+1, col+1, tile[row+1][col+1]->getPieceColor(), tile[row+1][col+1]->getPiece());
+                    if(col>0)
+                        space2 = checkValid2(row+1, col+1, tile[row+1][col-1]->getPieceColor(), tile[row+1][col-1]->getPiece());
+
+                    if(space1 || space2)
+                        return true;
+
+                    if(!space1){
+                        //If space1 is invalid, check if there is a valid jump.
+                        if(row < 6 && col < 6 && tile[row+1][col+1]->getPiece()){
+                            space1 = checkCapture(row+2, col+2, true, tile[row+2][col+2]->getPiece(), tile[row+1][col+1]->getPieceColor());
+                        }
+                    }
+                    if(!space2){
+                        //If space2 is invalid, check if there is a valid jump.
+                        if(row < 6 && col > 1 && tile[row+1][col-1]->getPiece()){
+                            space1 = checkCapture(row+2, col-2, true, tile[row+2][col-2]->getPiece(), tile[row+1][col-1]->getPieceColor());
+                        }
+                    }
+                }
+                else{
+
+                    if(col < 7)
+                        space1 = checkValid2(row-1, col+1, tile[row-1][col+1]->getPieceColor(), tile[row-1][col+1]->getPiece());
+                    if(col > 0)
+                        space2 = checkValid2(row-1, col-1, tile[row-1][col-1]->getPieceColor(), tile[row-1][col-1]->getPiece());
+
+                    if(space1 || space2)
+                        return true;
+
+                    if(!space1){
+                        //If space1 is invalid, check if there is a valid jump.
+                        if(row > 1 && col < 6 && tile[row-1][col+1]->getPiece()){
+                            space1 = checkCapture(row-2, col+2, true, tile[row-2][col+2]->getPiece(), tile[row-1][col+1]->getPieceColor());
+                        }
+                    }
+                    if(!space2){
+                        //If space2 is invalid, check if there is a valid jump.
+                        if(row > 1 && col > 1 && tile[row-1][col-1]->getPiece()){
+                            space1 = checkCapture(row-2, col-2, true, tile[row-2][col-2]->getPiece(), tile[row-1][col-1]->getPieceColor());
+                        }
+                    }
+                }
+            break;
+        case 'K':
+
+            if(row > 0 && col < 7)
+                space1 = checkValid2(row-1, col+1, tile[row-1][col+1]->getPieceColor(), tile[row-1][col+1]->getPiece());
+            if(row < 7 && col < 7)
+                space2 = checkValid2(row+1, col+1, tile[row+1][col+1]->getPieceColor(), tile[row+1][col+1]->getPiece());
+            if(row > 0 && col > 0)
+                space3 = checkValid2(row-1, col-1, tile[row-1][col-1]->getPieceColor(), tile[row-1][col-1]->getPiece());
+            if(row < 7 && col > 0)
+                space4 = checkValid2(row+1, col-1, tile[row+1][col-1]->getPieceColor(), tile[row+1][col-1]->getPiece());
+
+            if(space1 || space2 || space3 || space4)
+                return true;
+
+            if(!space1){
+                //If space1 is invalid, check if there is a valid jump.
+                if(row > 1 && col < 6 && tile[row-1][col+1]->getPiece()){
+                    space1 = checkCapture(row-2, col+2, true, tile[row-2][col+2]->getPiece(), tile[row-1][col+1]->getPieceColor());
+                }
+            }
+            if(!space2){
+                //If space2 is invalid, check if there is a valid jump.
+                if(row < 6 && col < 6 && tile[row+1][col+1]->getPiece()){
+                    space2 = checkCapture(row+2, col+2, true, tile[row+2][col+2]->getPiece(), tile[row+1][col+1]->getPieceColor());
+                }
+            }
+            if(!space3){
+                //If space2 is invalid, check if there is a valid jump.
+                if(row > 1 && col > 1 && tile[row-1][col-1]->getPiece()){
+                    space3 = checkCapture(row-2, col-2, true, tile[row-2][col-2]->getPiece(), tile[row-1][col-1]->getPieceColor());
+                }
+            }
+            if(!space4){
+                //If space2 is invalid, check if there is a valid jump.
+                if(row < 6 && col > 1 && tile[row+1][col-1]->getPiece()){
+                    space4 = checkCapture(row+2, col-2, true, tile[row+2][col-2]->getPiece(), tile[row+1][col-1]->getPieceColor());
+                }
+            }
+            break;
+    }
+    return(space1 || space2 || space3 || space4);
+}
