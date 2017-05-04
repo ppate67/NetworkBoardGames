@@ -266,7 +266,6 @@ void Checkers::capturePiece(Checkers* capturee, Checkers* captor){
     capturee->setPiece(false);
     capturee->displayElement(' ');
     capturee->displayBoard();
-    checkersboard::tile[captor->getRow()][captor->getColumn()] = NULL; //TESTING
     //need to add multistage move
     sendGameMsg();
 }
