@@ -17,3 +17,6 @@ public:
 };
 
 #endif // DATABASE_H
+
+//Change Database format to MYSQL
+//Reference: http://doc.qt.io/qt-5/sql-connecting.html
