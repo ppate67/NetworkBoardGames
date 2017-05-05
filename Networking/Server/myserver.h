@@ -27,8 +27,9 @@ class MyServer : public QTcpServer
     Q_OBJECT
 public:
     explicit MyServer(QObject *parent = 0);
-    vector<string> playerList; //List of playernames to be called from server
+    static vector<string> playerList; //List of playernames to be called from server
     static player plist[MAXNUMPLAYER];
+
     QTcpSocket* getuserlist(int userid);
     int getNumGoGames();
     int getGoGamePeer(int game);

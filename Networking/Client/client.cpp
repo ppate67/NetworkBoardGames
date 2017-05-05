@@ -4,6 +4,8 @@
 #include "Checkers1/checkers.h"
 #include "fstream"
 #include "QMessageBox"
+#include "Go/mainwindow.h"
+using namespace std;
 QTcpSocket* Client::s=NULL;
 Client* Client::client=nullptr;
 Client::Client(QObject *parent):QObject(parent)
@@ -71,7 +73,6 @@ void Client :: readyRead(){
     for(int i=2; i<message.length();i++){
         datamessage[i-2] = int(message[i]);
         std::cout <<datamessage[i-2];
-
         Go::receiveUpdates(datamessage[i-2],i-2);
     }
         Go::updateEntireBoard();
@@ -100,7 +101,7 @@ void Client :: readyRead(){
         }
 
     }
-    if(type==8){
+    if(type==8){//Informational messages needed by client to know what games are on the server and to get other background info
         int len=message.length()-2;
         vector <char> data;
         for(int i =0;i<(len);i++){
@@ -118,12 +119,27 @@ void Client::handleReply2(vector<char> data, int size){
     string debugout="";
     for(int i=0; i<size; i++)
         debugout+=char(int(data[i])+48);
+    if(int(data[0])==1){
+        int gametype=GameManager::games[int(data[1])][0][0];
+        MainWindow::victory=true;
+        if(gametype==0)
+        {
 
-//    QMessageBox::information(
-//        new QMessageBox(),
-//        tr("Debug Window"),
-//        QString::fromStdString(debugout));//debuging purposes delete
-    if(int(data[0])==3){
+            Go::head->parentWidget()->close();
+
+        }
+        else if(gametype==1)
+        {
+            Chess::chesshead->parentWidget()->close();
+
+        }
+        else if(gametype==2)
+        {
+            Checkers::checkershead->parentWidget()->close();
+
+        }
+    }
+    if(int(data[0])==3){//message contains information about games on server but not actual game data
         int counter=0;
         int checkifdelimited=0;
         GameManager::games.clear();
@@ -156,11 +172,36 @@ void Client::handleReply2(vector<char> data, int size){
     else if(int(data[0])==4){
 
     }
-    else if(int(data[0])==5){
+    else if(int(data[0])==5){//message informs user what their userid is
         GameManager::clientID=int(data[1]);
         int pid1=GameManager::clientID;
         int request1[5]={3,1,0,0,0};
         makeRequest(request1,pid1);
+    }
+    else if(int(data[0])==6){
+        GameManager::playerList.clear();
+        string name="";
+        for(int i=1; i<data.size(); i++){
+            if(data[i]=='/'){
+                GameManager::playerList.push_back(name);
+                name="";
+            }
+            else
+                name+=data[i];
+
+
+        }
+
+
+
+
+    }
+    else if(int(data[0])==9){
+        string message ="";
+        message+=GameManager::playerList[int(data[1])];
+        for(int i=2; i<size;i++)
+            message+=char(data[i]);
+        ChatWindow::receiveChatMessage(message);
     }
 }
 void Client::handleReply(vector<int> data,int size){
@@ -176,10 +217,7 @@ void Client::makeRequest(int requestID[5],int playerid){
         output.append((char(requestID[i])));
         debugout+=char(requestID[i]+48);
     }
-//        QMessageBox::information(
-//            new QMessageBox(),
-//            tr("Debug Window"),
-//            QString::fromStdString(debugout));//debuging purposes delete
+
     Client::s->write(output);
     Client::s->flush();
     Client::s->waitForBytesWritten(1000);

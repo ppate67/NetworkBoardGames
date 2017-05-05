@@ -6,12 +6,13 @@ using namespace std;
 
 
  player MyServer::plist[MAXNUMPLAYER];
+ vector<string> MyServer::playerList;
 MyServer::MyServer(QObject *parent) :
     QTcpServer(parent)
 {
 
 
-    if(!listen(QHostAddress::Any, 1234))
+    if(!listen(QHostAddress::Any, 1234))//server listens on machine's port 1234
     {
        cout << "Server could not start!";
     }
@@ -21,12 +22,14 @@ MyServer::MyServer(QObject *parent) :
         QHostInfo info;
         QNetworkInterface qinterface = QNetworkInterface::interfaceFromName(info.hostName());
         cout << qinterface.allAddresses()[3].toString().toStdString();
+        //displays one of the IP addresses of server for debugging purposes
     }
 }
 QTcpSocket* MyServer::getuserlist(int userid){
     return (plist[userid].socket);
 }
 void MyServer::incomingConnection(qintptr handle)
+//sets up socket connection and player object for new connection
 {
 
     for(int i=0; i<MAXNUMPLAYER; i++)

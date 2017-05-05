@@ -175,6 +175,15 @@ void Chess::displayBoard()
 
 
 void Chess::sendGameMsg(){
+    /*
+        This method is used to send the state of the game to the opponent.
+        It uses the GameManager class to find the destination 'game'
+        It next uses fillArray method to fill an array of Chess pointers so that
+        it is easy to make a output byte array categorizing it.
+        The Client class is then used to write the byte array over the socket.
+
+
+    */
     QByteArray BufferPing;
     int des=0;
     int vecsize=GameManager::games.size();
@@ -210,6 +219,13 @@ void Chess::sendGameMsg(){
     Chess::chessturn=0;
 }
 Chess* Chess::findHead(Chess* pnt){
+    /*
+        This method simply finds and returns the head of the Chess data structure.
+        It can be used to find the head when initially defining it
+        or if you change it.  The head happens to be the top left most tile.
+
+
+    */
     while(1){
         if(pnt->prevtile==NULL)
             return pnt;
@@ -217,6 +233,14 @@ Chess* Chess::findHead(Chess* pnt){
     }
 }
 void Chess::fillArray(Chess* tiles[8][8],Chess* pnt){
+    /*
+        This method fills and 8 by 8 2d array with chess pointers in a way
+        that is geometrically similar to the placing of the tiles on a
+        Chess/Checkers board. It need not return anything since we are changing the
+        array (via the fact that tiles is actually a pointer) being passed in.
+
+
+    */
     tiles[0][0]=pnt;
     for(int ii=0;ii<8;ii++){
         for(int i=0;i<8;i++){
@@ -228,6 +252,17 @@ void Chess::fillArray(Chess* tiles[8][8],Chess* pnt){
 
 }
 void Chess::receiveUpdates(char piece1, int iteration){
+    /*
+        This method uses iteration to denote where on the chess board
+        we are updating and piece1 to denote what to update it with.
+        The method is called iteratively 64 times in order to update the
+        entire board. Capital letters received through piece1 means that the
+        color of the piece is of value 0. Lower case are naturally of value 1 then.
+        This method also allows the player to take their turn again.
+
+
+
+    */
     Chess*temp=Chess::chesshead;
     for(int i=0;i<iteration;i++){
         temp=temp->nexttile;
@@ -263,7 +298,18 @@ void Chess::receiveUpdates(char piece1, int iteration){
     }
 
 }
-void Chess::pawnPromotion(Chess *pawn){//makes window for players to choose what to promote to
+void Chess::pawnPromotion(Chess *pawn){
+    //makes window for players to choose what to promote to
+    /*
+        We have to make a Dialog window in order to prompt the user to make their choice.
+        ChessOptions (which inherits QObject via inheriting QLabel) is used in aid of this endeavor so that we can have clickable actions that
+        utilize signal slot mechanisms.
+        Once the user makes their choice, the actions needed to execute their choice happen in the ChessOptions Class. Therefore, the dialog window
+        will not close until the user makes a pawn promotion choice.
+
+    */
+
+
     QDialog *promotion = new QDialog;
     QScreen *screen = QGuiApplication::primaryScreen();
     QRect  screenGeometry = screen->geometry();
@@ -318,6 +364,13 @@ void Chess::pawnPromotion(Chess *pawn){//makes window for players to choose what
 
 }
 void ChessOptions::mousePressEvent(QMouseEvent *event){
+    /*
+        This is where the pawnPromotion user choice is implemented.
+        This function is naturally called via a signal slot mechanism defined within QObject.
+        It places the piece choosen where the pawn was.
+
+
+    */
     if(this->piecetype==0){
         this->pawn->setpieceName('Q');
         this->pawn->displayElement(this->pawn->getPieceName());
@@ -343,6 +396,22 @@ void ChessOptions::mousePressEvent(QMouseEvent *event){
 }
 
 void Chess::passToAI(){
+    /*
+        This is a complicated start to a set of methods that do the AI work.
+        passToAI first makes four vectors desecribing the pieces on the board and the moves they can make (for each color).
+        It then passes those into evaluateMoves which essentially both evaluates moves based on a minimax algorithm (alpha beta pruning)
+        and on future moves. The move returned through this method is the move the AI chooses. At the end of this method we see the program implement
+        the move in the actual game such that the player can see it.
+
+        Note: This AI is not good. It is slow, inefficient, and unintelligent. This is mainly due to the fact that we inefficiently have defined evaluateMoves in a
+        way that requires unnecessary computation and copying. The only way to fix this would be to use complicated methods such as 'bitboards' or boards defined by a set of 64 bits (or a type long).
+
+        This would be too much to implement given the scope of the project.
+
+
+    */
+
+
     int AIcolor = 0; if(playercolor==0) AIcolor=1;
     //make a list of pieces that can make moves and use that list with the
     //possible moves functions for chess
@@ -635,6 +704,18 @@ vector<int> Chess::evaluateMoves(const string& originalBoardState,vector<vector<
 }
 
 int Chess::findScore(int destination){
+    /*
+
+        Evaluates move based on whether the destination is advancing it position or if it is capturing a piece.
+        This is a rudimentary scoring system for Chess since the actual desired position of a given particular piece is
+        a little more complicated. For instance, one prefers to have their Queen not in corners or edges because they have
+        less utility in those locations. This method does not capture these subtle details of the game. It works fine for this
+        project though.
+
+
+
+    */
+
     int cols = destination%8;
     int rows= destination/8;
     int srcRow = this->getRow();
@@ -676,6 +757,9 @@ int Chess::findScore(int destination){
     return abs(score);
 }
 Chess* Chess::findPiece(int row, int col){
+    /*
+        Returns Chess pointer given its row and column numbers.
+    */
     Chess* temp = chesshead;
     if(row<0 || row>7 || col<0 || col>7) return nullptr;
     for(int i=0; i<8; i++)
@@ -689,7 +773,11 @@ Chess* Chess::findPiece(int row, int col){
     return temp;
 }
 string Chess::describeBoardState(){
+    /*
+        Makes and returns a string of the same format of those sent over the server in such a way to describe the state of the board.
+        This is used by the AI so that is can return to the original board state after making changes while evaluating moves.
 
+    */
     Chess* temp =chesshead;
     string BoardState="";
     while(temp!=nullptr)
@@ -708,6 +796,7 @@ string Chess::describeBoardState(){
     return BoardState;
 }
 void Chess::resetBoardState(const string& state){
+    //Resets board state to that described by the state variable passed to this method.
     for(int i =0; i<64; i++)
         receiveUpdates(state[i],i);
 }

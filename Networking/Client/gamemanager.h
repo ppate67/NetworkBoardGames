@@ -1,7 +1,8 @@
 #ifndef GAMEMANAGER_H
 #define GAMEMANAGER_H
-
+#include "string"
 #include "vector"
+using namespace std;
 class GameManager
 {
 public:
@@ -15,6 +16,7 @@ public:
     static GameManager *head;
     static bool hasPlayerID;
     static std::vector<std::vector<std::vector<int>>> games;
+    static vector<string> playerList;//list of player names used for chat application
     static int clientID;
     GameManager *nextPlayer;
 //this class is an interconnected data structure sort of like a linked

@@ -26,6 +26,17 @@ public:
         prevtile=NULL;
 
     }
+    ~Go(){
+        head=nullptr;
+
+        turn=1;
+        color=0;
+        opponentScore=0;
+        playerScore=0;
+        wterr=0;
+        blterr=0;
+        offline=0;
+    }
     static void updateEntireBoard();
     void mousePressEvent(QMouseEvent *event);
     void displayElement(char elem);
