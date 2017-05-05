@@ -866,7 +866,7 @@ void MainWindow::on_pushButton_2_clicked()
     //Checks to See if the player is in jail and if they have a get out of jail free card
     if(typeOfSpace == "Jail"){
         if (players[turnNumber]->getJailFree() > 0)
-            players[turnNumber]->setJail(0);
+            players[turnNumber]->setJail(false);
     }
 
 
