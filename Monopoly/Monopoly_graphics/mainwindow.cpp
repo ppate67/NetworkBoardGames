@@ -772,6 +772,13 @@ MainWindow::MainWindow(QWidget *parent) :
     QPixmap board(":/board.jpg");
     ui->label->setPixmap(board.scaled(551,551,Qt::KeepAspectRatio));
 
+    //Display Piece 1
+    QPixmap piece1(":/player1piece.png");
+    ui->label_3->setPixmap(piece1.scaled(100,100, Qt::KeepAspectRatio));
+
+    //Display Piece 2
+    QPixmap piece2(":/player2piece.png");
+    ui->label_4->setPixmap(piece1.scaled(100,100, Qt::KeepAspectRatio));
 
     //Display ScoreBoard
     ui->Player1_Space->setText(QString::number(players[0]->getPosition()) + "- " + QString::fromStdString(spaces[players[0]->getPosition()]->getName()));
@@ -781,8 +788,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->Player2_Space->setText(QString::number(players[1]->getPosition()) + "- " +QString::fromStdString(spaces[players[1]->getPosition()]->getName()));
     ui->Player2_Bank_Amount->setText("$" + QString::number(players[1]->getBank()));
     ui->Player2_Jailfree_amount->setText(QString::number(players[1]->getJailFree()));
-
-
 
     //Quit Button
     connect(ui->pushButton, SIGNAL (clicked()), QApplication::instance(), SLOT(quit()));
@@ -839,6 +844,16 @@ void MainWindow::on_pushButton_2_clicked()
     ui->DiceRoll->setText("Your Roll: " + QString::number(totalRoll));
 
 
+
+
+    //move players piece on board
+    if (turnNumber == 0) //Adjust Player one's position
+        ui->label_3->move(spaces[players[0]->getPosition()]->getX() , spaces[players[0]->getPosition()]->getY());
+
+    if (turnNumber == 1) //Adjust Player Two's position
+        ui->label_4->move(spaces[players[1]->getPosition()]->getX(), spaces[players[1]->getPosition()]->getY());
+
+
     //Loops Player Back Around the Board and Pays them $200 as they pass go
     if(players[turnNumber]->getPosition()>40){
         players[turnNumber]->setPosition(players[turnNumber]->getPosition()-40);
@@ -846,9 +861,7 @@ void MainWindow::on_pushButton_2_clicked()
     }
 
 
-
     string typeOfSpace = spaces[players[turnNumber]->getPosition()]->getSpaceType();
-
 
     //Checks to See if the Spot is a Chance Location
     if(typeOfSpace == "Chance"){
@@ -911,8 +924,6 @@ void MainWindow::on_pushButton_2_clicked()
             players[turnNumber]->setPosition(10);
     }
 
-
-
     int currentUserID = players[turnNumber]->getUserID();
 
     //Switch Turns
@@ -950,7 +961,6 @@ void MainWindow::on_pushButton_2_clicked()
         ui->TurnLabel->setText("Player 1's Turn");
         numberOfTurns = numberOfTurns +1;
         ui->TotalTurns->setText("Total Number of Turns: " + QString::number(numberOfTurns));
-
     }
 
 
