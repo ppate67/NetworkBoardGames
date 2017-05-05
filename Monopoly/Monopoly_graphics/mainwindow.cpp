@@ -740,6 +740,10 @@ void MainWindow::on_pushButton_2_clicked()
 
 
     string typeOfSpace = spaces[players[turnNumber]->getPosition()]->getSpaceType();
+    int Ownership = spaces[players[turnNumber]->getPosition()]->getOwnership();
+    string Name = spaces[players[turnNumber]->getPosition()]->getName();
+    int PropertyCost = spaces[players[turnNumber]->getPosition()]->getPrice();
+    int Rent = spaces[players[turnNumber]->getPosition()]->getRent();
 
 
     //Checks to See if the Spot is a Chance Location
@@ -782,11 +786,34 @@ void MainWindow::on_pushButton_2_clicked()
              players[turnNumber]->setJail(1);
              players[turnNumber]->setPosition(10);
         }
-
-
         //Displays Message Box With What Card You Drew
         QMessageBox::information(this, "Draw A Community Chest Card", "You Drew the Card: " + QString::fromStdString(CommunityChest[randFourteen]->getText()));
     }
+        //Buying Property, paying rent, etc.
+        if (typeOfSpace == "Property" || "Utility" || "Railroad") {
+            if (Ownership == -1) {
+                QMessageBox::StandardButton reply;
+                reply = QMessageBox::question(this, "Buying Property", "Would you like to purchase "+QString::fromStdString(spaces[players[1]->getPosition()]->getName()), QMessageBox::Yes|QMessageBox::No);
+                if (reply == QMessageBox::Yes) {
+                    qDebug() << "You have purchased "+QString::fromStdString(spaces[players[1]->getPosition()]->getName());
+                    int tempBank = players[turnNumber]->getBank(); //Gets the Value of the Players Bank so they can get paid or pay their dues>
+                    //This pays to deducts money from player
+                    players[turnNumber]->setBank(tempBank - PropertyCost);
+                    spaces[players[turnNumber]->getPosition()]->setOwnership(players[turnNumber]->getUserID);
+                    QApplication::quit();
+                }
+                else {
+                    qDebug() << "You have declined to purchase "+QString::fromStdString(spaces[players[1]->getPosition()]->getName());
+                    QApplication::quit();
+                }
+            }
+            if (Ownership != turnNumber || -1) {
+                QMessageBox::information(this, "Pay Rent", "You landed on owned property.");
+                int tempBank = players[turnNumber]->getBank();
+                players[turnNumber]->setBank(tempBank - Rent);
+            }
+        }
+
 
     //Checks to See if the player is in jail and if they have a get out of jail free card
     if(typeOfSpace == "Jail"){
