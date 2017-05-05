@@ -51,14 +51,14 @@ MainWindow::MainWindow(QWidget *parent) :
     players[0]->setBank(500);
     players[0]->setJailFree(0);
     players[0]->setPosition(0);
-    players[0]->setJail(0);
+    players[0]->setJail(false);
 
     players[1]->setName("Player 2");
     players[1]->setUserID(2);
     players[1]->setBank(500);
     players[1]->setJailFree(0);
     players[1]->setPosition(0);
-    players[1]->setJail(0);
+    players[1]->setJail(false);
 
     // -------INITIALIZE BOARDSPACES-------
 
@@ -750,14 +750,12 @@ void MainWindow::on_pushButton_2_clicked()
         //This pays to deducts money from player
         players[turnNumber]->setBank(tempBank + Chance[randFourteen]->getAmount());
 
-        //Checks to see if a Get out of jail free card
+        //Checks to see if a Get out of jail free card or a go to jail card
         if (Chance[randFourteen]->getText() == "CHANCE: Get out of jail free – this card may be kept until needed, or sold"){
             players[turnNumber]->addJailFree();
         }
-
-        //Checks to see if a go to jail card
-        if (Chance[randFourteen]->getText() == "CHANCE: Go to Jail – Go directly to jail – Do not pass Go – Do not collect $200"){
-             players[turnNumber]->setJail(1);
+        else if (Chance[randFourteen]->getText() == "CHANCE: Go to Jail – Go directly to jail – Do not pass Go – Do not collect $200"){
+             players[turnNumber]->setJail(true);
              players[turnNumber]->setPosition(10);
         }
 
@@ -772,14 +770,12 @@ void MainWindow::on_pushButton_2_clicked()
         int randFourteen = randomCard(); //Random Card Drawn
         players[turnNumber]->setBank(tempBank + CommunityChest[randFourteen]->getAmount());
 
-        //Checks to see if a Get out of jail free card
+        //Checks to see if a Get out of jail free card or a go to jail card
         if (Chance[randFourteen]->getText() == "COMMUNITY CHEST: Get out of jail free – this card may be kept until needed, or sold"){
             players[turnNumber]->addJailFree();
         }
-
-        //Checks to see if a go to jail card
-        if (Chance[randFourteen]->getText() == "COMMUNITY CHEST: Go to Jail – Go directly to jail – Do not pass Go – Do not collect $200"){
-             players[turnNumber]->setJail(1);
+        else if (Chance[randFourteen]->getText() == "COMMUNITY CHEST: Go to Jail – Go directly to jail – Do not pass Go – Do not collect $200"){
+             players[turnNumber]->setJail(true);
              players[turnNumber]->setPosition(10);
         }
 
