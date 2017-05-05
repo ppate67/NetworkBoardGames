@@ -51,13 +51,14 @@ MainWindow::MainWindow(QWidget *parent) :
     players[0]->setBank(500);
     players[0]->setJailFree(0);
     players[0]->setPosition(0);
+    players[0]->setJail(0);
 
     players[1]->setName("Player 2");
     players[1]->setUserID(2);
     players[1]->setBank(500);
     players[1]->setJailFree(0);
     players[1]->setPosition(0);
-
+    players[1]->setJail(0);
 
     // -------INITIALIZE BOARDSPACES-------
 
@@ -775,9 +776,11 @@ MainWindow::MainWindow(QWidget *parent) :
     //Display ScoreBoard
     ui->Player1_Space->setText(QString::number(players[0]->getPosition()) + "- " + QString::fromStdString(spaces[players[0]->getPosition()]->getName()));
     ui->Player1_Bank_Amount->setText("$" + QString::number(players[0]->getBank()));
+    ui->Player1_Jailfree_amount->setText(QString::number(players[0]->getJailFree()));
 
     ui->Player2_Space->setText(QString::number(players[1]->getPosition()) + "- " +QString::fromStdString(spaces[players[1]->getPosition()]->getName()));
     ui->Player2_Bank_Amount->setText("$" + QString::number(players[1]->getBank()));
+    ui->Player2_Jailfree_amount->setText(QString::number(players[1]->getJailFree()));
 
 
 
@@ -826,6 +829,17 @@ void MainWindow::on_pushButton_2_clicked()
         //This pays to deducts money from player
         players[turnNumber]->setBank(tempBank + Chance[randFourteen]->getAmount());
 
+        //Checks to see if a Get out of jail free card
+        if (Chance[randFourteen]->getText() == "CHANCE: Get out of jail free – this card may be kept until needed, or sold"){
+            players[turnNumber]->addJailFree();
+        }
+
+        //Checks to see if a go to jail card
+        if (Chance[randFourteen]->getText() == "CHANCE: Go to Jail – Go directly to jail – Do not pass Go – Do not collect $200"){
+             players[turnNumber]->setJail(1);
+             players[turnNumber]->setPosition(10);
+        }
+
         //Displays Message Box With What Card You Drew
         QMessageBox::information(this, "Draw A Chance Card", "You Drew the Card: " + QString::fromStdString(Chance[randFourteen]->getText()));
     }
@@ -837,9 +851,28 @@ void MainWindow::on_pushButton_2_clicked()
         int randFourteen = randomCard(); //Random Card Drawn
         players[turnNumber]->setBank(tempBank + CommunityChest[randFourteen]->getAmount());
 
+        //Checks to see if a Get out of jail free card
+        if (Chance[randFourteen]->getText() == "COMMUNITY CHEST: Get out of jail free – this card may be kept until needed, or sold"){
+            players[turnNumber]->addJailFree();
+        }
+
+        //Checks to see if a go to jail card
+        if (Chance[randFourteen]->getText() == "COMMUNITY CHEST: Go to Jail – Go directly to jail – Do not pass Go – Do not collect $200"){
+             players[turnNumber]->setJail(1);
+             players[turnNumber]->setPosition(10);
+        }
+
+
         //Displays Message Box With What Card You Drew
         QMessageBox::information(this, "Draw A Community Chest Card", "You Drew the Card: " + QString::fromStdString(CommunityChest[randFourteen]->getText()));
     }
+
+    //Checks to See if the player is in jail and if they have a get out of jail free card
+    if(typeOfSpace == "Jail"){
+        if (players[turnNumber]->getJailFree() > 0)
+            players[turnNumber]->setJail(0);
+    }
+
 
 
     int currentUserID = players[turnNumber]->getUserID();
@@ -850,6 +883,8 @@ void MainWindow::on_pushButton_2_clicked()
         //Updates ScoreBoard
         ui->Player1_Space->setText(QString::number(players[0]->getPosition()) + "- " + QString::fromStdString(spaces[players[0]->getPosition()]->getName()));
         ui->Player1_Bank_Amount->setText("$" + QString::number(players[0]->getBank()));
+        ui->Player1_Jailfree_amount->setText(QString::number(players[0]->getJailFree()));
+        ui->Player1_inJail->setText(QString::number(players[0]->getJailStatus()));
         turnNumber = 1;
         ui->TurnLabel->setText("Player 2's Turn");
         numberOfTurns = numberOfTurns +1;
@@ -861,6 +896,7 @@ void MainWindow::on_pushButton_2_clicked()
         //Updates ScoreBoard
         ui->Player2_Space->setText(QString::number(players[1]->getPosition()) + "- " +QString::fromStdString(spaces[players[1]->getPosition()]->getName()));
         ui->Player2_Bank_Amount->setText("$" + QString::number(players[1]->getBank()));
+        ui->Player2_inJail->setText(QString::number(players[1]->getJailStatus()));
         turnNumber = 0;
         ui->TurnLabel->setText("Player 1's Turn");
         numberOfTurns = numberOfTurns +1;

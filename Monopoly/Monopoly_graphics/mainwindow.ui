@@ -187,7 +187,7 @@
     <property name="geometry">
      <rect>
       <x>1010</x>
-      <y>190</y>
+      <y>220</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -243,7 +243,7 @@
     <property name="geometry">
      <rect>
       <x>1120</x>
-      <y>220</y>
+      <y>250</y>
       <width>191</width>
       <height>21</height>
      </rect>
@@ -261,7 +261,7 @@
     <property name="geometry">
      <rect>
       <x>1010</x>
-      <y>220</y>
+      <y>250</y>
       <width>131</width>
       <height>21</height>
      </rect>
@@ -281,7 +281,7 @@
     <property name="geometry">
      <rect>
       <x>1120</x>
-      <y>240</y>
+      <y>270</y>
       <width>191</width>
       <height>21</height>
      </rect>
@@ -299,7 +299,7 @@
     <property name="geometry">
      <rect>
       <x>1010</x>
-      <y>240</y>
+      <y>270</y>
       <width>111</width>
       <height>21</height>
      </rect>
@@ -426,6 +426,192 @@
      <string>Total Number of Turns: 1</string>
     </property>
    </widget>
+   <widget class="QLabel" name="Player1_Jailfree_amount">
+    <property name="geometry">
+     <rect>
+      <x>1120</x>
+      <y>180</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Player2_Jailfree_amount">
+    <property name="geometry">
+     <rect>
+      <x>1130</x>
+      <y>290</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Player1_Bank_Text_2">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>180</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>JailFree Cards:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Player1_Bank_Text_3">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>290</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>JailFree Cards:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Player1_inJail">
+    <property name="geometry">
+     <rect>
+      <x>1120</x>
+      <y>200</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Player2_inJail">
+    <property name="geometry">
+     <rect>
+      <x>1120</x>
+      <y>310</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Player2_inJail_2">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>310</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>In Jail?</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Player2_inJail_3">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>200</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>In Jail?</string>
+    </property>
+   </widget>
+   <zorder>Player1_Position_Text</zorder>
+   <zorder>label</zorder>
+   <zorder>label_2</zorder>
+   <zorder>pushButton</zorder>
+   <zorder>pushButton_2</zorder>
+   <zorder>Player1_Space</zorder>
+   <zorder>Scoreboard_text</zorder>
+   <zorder>Player1_Text</zorder>
+   <zorder>DiceRoll</zorder>
+   <zorder>Player2_Text</zorder>
+   <zorder>Player1_Bank_Text</zorder>
+   <zorder>Player1_Bank_Amount</zorder>
+   <zorder>Player2_Space</zorder>
+   <zorder>Player2_Position_Text</zorder>
+   <zorder>Player2_Bank_Amount</zorder>
+   <zorder>Player2_Bank_Text</zorder>
+   <zorder>TurnLabel</zorder>
+   <zorder>TotalTurns</zorder>
+   <zorder>Player1_Jailfree_amount</zorder>
+   <zorder>Player2_Jailfree_amount</zorder>
+   <zorder>Player1_Bank_Text_2</zorder>
+   <zorder>Player1_Bank_Text_3</zorder>
+   <zorder>Player1_inJail</zorder>
+   <zorder>Player2_inJail</zorder>
+   <zorder>Player2_inJail_2</zorder>
+   <zorder>Player2_inJail_3</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
