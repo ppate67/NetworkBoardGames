@@ -801,10 +801,19 @@ void MainWindow::on_pushButton_2_clicked()
     int roll2 = 0;
     int totalRoll =0;
 
-
     //Rolls Dice and Moves The Player
     dieRoll(roll1, roll2, totalRoll);
+    //Checks if player is in jail and needs doubles on the roll
+    if (players[turnNumber]->getJailStatus() == true){
+        if (roll1 == roll2)
+            players[turnNumber]->movePlayer(totalRoll);
+        else {
+            players[turnNumber]->movePlayer(0);
+        }
+    }
+    else{
     players[turnNumber]->movePlayer(totalRoll);
+    }
 
     //Displays the TotalRoll value so the player can see what they rolled
     ui->DiceRoll->setText("Your Roll: " + QString::number(totalRoll));
