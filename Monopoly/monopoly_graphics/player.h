@@ -31,11 +31,8 @@ public:
     void setJailFree(int initJailFree){
         jailFree = initJailFree;
     }
-    int addJailFree(){
-       return jailFree += 1;
-    }
-    int subJailFree(){
-        return jailFree -= 1;
+    void addJailFree(){
+        jailFree += 1;
     }
 
     void setPosition(int initPosition){

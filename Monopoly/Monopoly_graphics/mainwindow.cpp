@@ -806,33 +806,13 @@ void MainWindow::on_pushButton_2_clicked()
     int roll2 = 0;
     int totalRoll =0;
 
-    //Asks the player if they want to use their get out of jail free card
-    if (players[turnNumber]->getJailStatus() == true && players[turnNumber]->getJailFree() > 0){
-        QMessageBox JailFreeCheck;
-        JailFreeCheck.setWindowTitle("Monopoly: You are in Jail");
-        JailFreeCheck.setText("Would you like to use your 'Get out of Jail Free' card?");
-        JailFreeCheck.setStandardButtons(QMessageBox::Yes);
-        JailFreeCheck.addButton(QMessageBox::No);
-        JailFreeCheck.setDefaultButton(QMessageBox::No);
-        if(JailFreeCheck.exec() == QMessageBox::Yes){
-            QMessageBox::information(this, tr("Monopoly"),tr("You have been Freed!") );
-            players[turnNumber]->subJailFree();
-            players[turnNumber]->setJail(false);
-        }else {
-            QMessageBox::information(this, tr("Monopoly"),tr("You have declined to use your 'Get out of Jail Free' card."));
-        }
-    }
     //Rolls Dice and Moves The Player
     dieRoll(roll1, roll2, totalRoll);
     //Checks if player is in jail and needs doubles on the roll
     if (players[turnNumber]->getJailStatus() == true){
-        if (roll1 == roll2){
-            QMessageBox::information(this, tr("Monopoly"),tr("You rolled a double!"));
-            players[turnNumber]->setJail(false);
+        if (roll1 == roll2)
             players[turnNumber]->movePlayer(totalRoll);
-        }
         else {
-            QMessageBox::information(this, tr("Monopoly"),tr("You failed to roll a double, you are stuck in jail."));
             players[turnNumber]->movePlayer(0);
         }
     }
@@ -876,17 +856,10 @@ void MainWindow::on_pushButton_2_clicked()
         players[turnNumber]->setBank(tempBank + Chance[randFourteen]->getAmount());
 
         //Checks to see if a Get out of jail free card or a go to jail card
-        /*if (Chance[randFourteen]->getText() == "CHANCE: Get out of jail free – this card may be kept until needed, or sold"){
+        if (Chance[randFourteen]->getText() == "CHANCE: Get out of jail free – this card may be kept until needed, or sold"){
             players[turnNumber]->addJailFree();
         }
         else if (Chance[randFourteen]->getText() == "CHANCE: Go to Jail – Go directly to jail – Do not pass Go – Do not collect $200"){
-             players[turnNumber]->setJail(true);
-             players[turnNumber]->setPosition(10);
-        }*/
-        if (randFourteen = 4){
-            players[turnNumber]->addJailFree();
-        }
-        else if (randFourteen = 5){
              players[turnNumber]->setJail(true);
              players[turnNumber]->setPosition(10);
         }
@@ -903,17 +876,10 @@ void MainWindow::on_pushButton_2_clicked()
         players[turnNumber]->setBank(tempBank + CommunityChest[randFourteen]->getAmount());
 
         //Checks to see if a Get out of jail free card or a go to jail card
-        /*if (Chance[randFourteen]->getText() == "COMMUNITY CHEST: Get out of jail free – this card may be kept until needed, or sold"){
+        if (Chance[randFourteen]->getText() == "COMMUNITY CHEST: Get out of jail free – this card may be kept until needed, or sold"){
             players[turnNumber]->addJailFree();
         }
         else if (Chance[randFourteen]->getText() == "COMMUNITY CHEST: Go to Jail – Go directly to jail – Do not pass Go – Do not collect $200"){
-             players[turnNumber]->setJail(true);
-             players[turnNumber]->setPosition(10);
-        }*/
-        if (randFourteen = 4){
-            players[turnNumber]->addJailFree();
-        }
-        else if (randFourteen = 5){
              players[turnNumber]->setJail(true);
              players[turnNumber]->setPosition(10);
         }
@@ -950,10 +916,10 @@ void MainWindow::on_pushButton_2_clicked()
         }
 
 
-    //Checks to See if the player is on the go directly to jail space
-    if(typeOfSpace == "GoJail"){
-            players[turnNumber]->setJail(true);
-            players[turnNumber]->setPosition(10);
+    //Checks to See if the player is in jail and if they have a get out of jail free card
+    if(typeOfSpace == "Jail"){
+        if (players[turnNumber]->getJailFree() > 0)
+            players[turnNumber]->setJail(false);
     }
 
     int currentUserID = players[turnNumber]->getUserID();
@@ -965,12 +931,7 @@ void MainWindow::on_pushButton_2_clicked()
         ui->Player1_Space->setText(QString::number(players[0]->getPosition()) + "- " + QString::fromStdString(spaces[players[0]->getPosition()]->getName()));
         ui->Player1_Bank_Amount->setText("$" + QString::number(players[0]->getBank()));
         ui->Player1_Jailfree_amount->setText(QString::number(players[0]->getJailFree()));
-        if (players[0]->getJailStatus() == true)
-            ui->Player1_inJail->setText("Yes");
-        else{
-            ui->Player1_inJail->setText("No");
-        }
-        //ui->Player1_inJail->setText(QString::number(players[0]->getJailStatus()));
+        ui->Player1_inJail->setText(QString::number(players[0]->getJailStatus()));
         turnNumber = 1;
         ui->TurnLabel->setText("Player 2's Turn");
         numberOfTurns = numberOfTurns +1;
@@ -982,25 +943,12 @@ void MainWindow::on_pushButton_2_clicked()
         //Updates ScoreBoard
         ui->Player2_Space->setText(QString::number(players[1]->getPosition()) + "- " +QString::fromStdString(spaces[players[1]->getPosition()]->getName()));
         ui->Player2_Bank_Amount->setText("$" + QString::number(players[1]->getBank()));
-        ui->Player2_Jailfree_amount->setText(QString::number(players[1]->getJailFree()));
-        if (players[1]->getJailStatus() == true)
-            ui->Player2_inJail->setText("Yes");
-        else{
-            ui->Player2_inJail->setText("No");
-        }
-        //ui->Player2_inJail->setText(QString::number(players[1]->getJailStatus()));
+        ui->Player2_inJail->setText(QString::number(players[1]->getJailStatus()));
         turnNumber = 0;
         ui->TurnLabel->setText("Player 1's Turn");
         numberOfTurns = numberOfTurns +1;
         ui->TotalTurns->setText("Total Number of Turns: " + QString::number(numberOfTurns));
     }
 
+}
 
-}
-void MainWindow::on_pushButton_3_clicked(){
-    players[turnNumber]->setJail(true);
-
-}
-void MainWindow::on_pushButton_4_clicked(){
-    players[turnNumber]->setPosition(30);
-}
