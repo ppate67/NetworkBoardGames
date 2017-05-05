@@ -867,6 +867,7 @@ void MainWindow::on_pushButton_2_clicked()
     string Name = spaces[players[turnNumber]->getPosition()]->getName();
     int PropertyCost = spaces[players[turnNumber]->getPosition()]->getPrice();
     int Rent = spaces[players[turnNumber]->getPosition()]->getRent();
+    int PlayerOwner = players[turnNumber]->getUserID();
 
     //Checks to See if the Spot is a Chance Location
     if(typeOfSpace == "Chance"){
@@ -884,10 +885,10 @@ void MainWindow::on_pushButton_2_clicked()
              players[turnNumber]->setJail(true);
              players[turnNumber]->setPosition(10);
         }*/
-        if (randFourteen = 4){
+        if(randFourteen == 4){
             players[turnNumber]->addJailFree();
         }
-        else if (randFourteen = 5){
+        else if(randFourteen == 5){
              players[turnNumber]->setJail(true);
              players[turnNumber]->setPosition(10);
         }
@@ -911,10 +912,10 @@ void MainWindow::on_pushButton_2_clicked()
              players[turnNumber]->setJail(true);
              players[turnNumber]->setPosition(10);
         }*/
-        if (randFourteen = 4){
+        if(randFourteen == 4){
             players[turnNumber]->addJailFree();
         }
-        else if (randFourteen = 5){
+        else if(randFourteen == 5){
              players[turnNumber]->setJail(true);
              players[turnNumber]->setPosition(10);
         }
@@ -933,7 +934,7 @@ void MainWindow::on_pushButton_2_clicked()
                 int tempBank = players[turnNumber]->getBank(); //Gets the Value of the Players Bank so they can get paid or pay their dues>
                 //This pays to deducts money from player
                 players[turnNumber]->setBank(tempBank - PropertyCost);
-                spaces[players[turnNumber]->getPosition()]->setOwnership(players[turnNumber]->getUserID);
+                spaces[players[turnNumber]->getPosition()]->setOwnership(PlayerOwner);
                 QApplication::quit();
             }
             else {
