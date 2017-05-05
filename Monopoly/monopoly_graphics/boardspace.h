@@ -100,13 +100,6 @@ public:
         yCoordinate = initY;
     }
 
-    int getX(){
-        return xCoordinate;
-    }
-    int getY(){
-        return yCoordinate;
-    }
-
     bool upgrade(){
         if(houses < 5){
             rent = rent * 2;

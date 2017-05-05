@@ -1,7 +1,5 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
     <file>board.jpg</file>
-    <file>player1piece.png</file>
-    <file>player2piece.png</file>
 </qresource>
 </RCC>

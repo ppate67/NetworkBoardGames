@@ -586,6 +586,32 @@
      <string>In Jail?</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>340</y>
+      <width>151</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Go to Jail</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>400</y>
+      <width>151</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>JailFree Card</string>
+    </property>
+   </widget>
    <zorder>Player1_Position_Text</zorder>
    <zorder>label</zorder>
    <zorder>label_2</zorder>
@@ -612,6 +638,8 @@
    <zorder>Player2_inJail</zorder>
    <zorder>Player2_inJail_2</zorder>
    <zorder>Player2_inJail_3</zorder>
+   <zorder>pushButton_3</zorder>
+   <zorder>pushButton_4</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

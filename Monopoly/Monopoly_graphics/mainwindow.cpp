@@ -772,13 +772,14 @@ MainWindow::MainWindow(QWidget *parent) :
     QPixmap board(":/board.jpg");
     ui->label->setPixmap(board.scaled(551,551,Qt::KeepAspectRatio));
 
-    //Display Piece 1
+    /*//Display Piece 1
     QPixmap piece1(":/player1piece.png");
     ui->label_3->setPixmap(piece1.scaled(100,100, Qt::KeepAspectRatio));
 
     //Display Piece 2
     QPixmap piece2(":/player2piece.png");
     ui->label_4->setPixmap(piece1.scaled(100,100, Qt::KeepAspectRatio));
+    */
 
     //Display ScoreBoard
     ui->Player1_Space->setText(QString::number(players[0]->getPosition()) + "- " + QString::fromStdString(spaces[players[0]->getPosition()]->getName()));
@@ -846,14 +847,14 @@ void MainWindow::on_pushButton_2_clicked()
 
 
 
-    //move players piece on board
+  /*  //move players piece on board
     if (turnNumber == 0) //Adjust Player one's position
         ui->label_3->move(spaces[players[0]->getPosition()]->getX() , spaces[players[0]->getPosition()]->getY());
 
     if (turnNumber == 1) //Adjust Player Two's position
         ui->label_4->move(spaces[players[1]->getPosition()]->getX(), spaces[players[1]->getPosition()]->getY());
 
-
+*/
     //Loops Player Back Around the Board and Pays them $200 as they pass go
     if(players[turnNumber]->getPosition()>40){
         players[turnNumber]->setPosition(players[turnNumber]->getPosition()-40);
@@ -970,5 +971,5 @@ void MainWindow::on_pushButton_3_clicked(){
 
 }
 void MainWindow::on_pushButton_4_clicked(){
-    players[turnNumber]->setPosition(30);
-}
+    players[turnNumber]->addJailFree();
+    }
