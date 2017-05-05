@@ -586,6 +586,32 @@
      <string>In Jail?</string>
     </property>
    </widget>
+<<<<<<< HEAD
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>814</x>
+      <y>250</y>
+      <width>121</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>go to jail</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>810</x>
+      <y>320</y>
+      <width>121</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Add Jailfree</string>
+=======
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
@@ -622,6 +648,7 @@
     </property>
     <property name="scaledContents">
      <bool>true</bool>
+>>>>>>> a48b763ef9ec925d491f93e84f2af10d3ff54209
     </property>
    </widget>
    <zorder>Player1_Position_Text</zorder>
@@ -650,8 +677,13 @@
    <zorder>Player2_inJail</zorder>
    <zorder>Player2_inJail_2</zorder>
    <zorder>Player2_inJail_3</zorder>
+<<<<<<< HEAD
+   <zorder>pushButton_3</zorder>
+   <zorder>pushButton_4</zorder>
+=======
    <zorder>label_3</zorder>
    <zorder>label_4</zorder>
+>>>>>>> a48b763ef9ec925d491f93e84f2af10d3ff54209
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
