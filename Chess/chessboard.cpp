@@ -8,6 +8,9 @@
 Chess* chessboard::tile[8][8] = {NULL};
 
 void chessboard::setup(QWidget *baseWidget)
+//this sets up the graphics for the chessboard. Also sets up the 64 tiles of chess board
+//Each chess object inherits from QLabel so it inherently has graphical qualities such as
+//a background image/color/geometry. This setup function initializes all these graphics features of the Chess QLabel
 {
     QLabel *outLabel = new QLabel(baseWidget);
     QScreen *screen = QGuiApplication::primaryScreen();
@@ -120,6 +123,7 @@ void chessboard::setup(QWidget *baseWidget)
 }
 
 bool chessboard::checkPath(int startRow, int startCol, int endRow, int endCol, char direction){
+    //this checks whetger a path along the chess board is valid by checking if there are pieces in between the origin and destination
     switch(direction){
         case 'l':{ // straight line path
             if (startRow == endRow){
@@ -203,6 +207,8 @@ void chessboard::quitclicked()
 
 void chessboard::drawpath(Chess *t)
 {
+    //Graphical method that is used to draw (highlight) tiles that are possible destinations
+    //of the selected Chess tile "t"
     int rw=t->getRow(),co=t->getColumn();
     if(t->getPiece())//if there is any piece
     {
@@ -607,6 +613,8 @@ void chessboard::drawpath(Chess *t)
 
 void chessboard::erasepath()
 {
+    //erases highlighted path of all tiles on board.
+    //called whenever we are no longer selecting a chess object.
     for(int i=0;i<8;i++)
     {
         for(int j=0;j<8;j++)

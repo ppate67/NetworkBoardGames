@@ -186,6 +186,11 @@ bool Checkers::checkForWin(int lastMoveColor){
 
 void Checkers::displayElement(char elem)
 {
+    /*
+        This method simply changes the picture displayed by the label with the specified Checkers piece name value denoted by char elem.
+
+
+    */
     this->pieceName=elem;
     this->setScaledContents(true);
     if(this->pieceColor==1 && this->piece==true)
@@ -217,6 +222,9 @@ void Checkers::displayElement(char elem)
 
 void Checkers::displayBoard()
 {
+    /*
+        This method sets the tile colors in the alternating checkered format.
+    */
     if(this->tileColor==1)
     {
         this->setStyleSheet("QLabel {background-color:rgb(255, 193, 122);}:hover{background-color: rgb(62, 139, 178);}");
@@ -377,6 +385,7 @@ void Checkers::sendGameMsg(){
                 des=i;
         }
     }
+    //build byte array denoted by BufferPing. send it over socket connection when built
     BufferPing.append(char(des));
     BufferPing.append(char(2));//type =2 for Checkers games
     Checkers*tiles[8][8];
@@ -402,6 +411,9 @@ void Checkers::sendGameMsg(){
     Checkers::checkersturn=0;
 }
 Checkers* Checkers::findHead(Checkers* pnt){
+    //finds head of checkers data structure (through use of pointers).
+    //Used whenever one needs to traverse the data structure from the top
+
     while(1){
         if(pnt->prevtile==NULL)
             return pnt;
@@ -409,6 +421,7 @@ Checkers* Checkers::findHead(Checkers* pnt){
     }
 }
 void Checkers::fillArray(Checkers* tiles[8][8],Checkers* pnt){
+    //Fills tiles with Checkers pointers in such a way as to geometrically mirror the checkers board in the array
     tiles[0][0]=pnt;
     for(int ii=0;ii<8;ii++){
         for(int i=0;i<8;i++){
@@ -420,6 +433,18 @@ void Checkers::fillArray(Checkers* tiles[8][8],Checkers* pnt){
 
 }
 void Checkers::receiveUpdates(char piece1, int iteration){
+
+    /*
+        This method uses iteration to denote where on the checkers board
+        we are updating and piece1 to denote what to update it with.
+        The method is called iteratively 64 times in order to update the
+        entire board. Capital letters received through piece1 means that the
+        color of the piece is of value 0. Lower case are naturally of value 1 then.
+        This method also allows the player to take their turn again.
+
+
+
+    */
     Checkers*temp=Checkers::checkershead;
     for(int i=0;i<iteration;i++){
         temp=temp->nexttile;
@@ -456,6 +481,22 @@ void Checkers::receiveUpdates(char piece1, int iteration){
 
 }
 void Checkers::passToAI(){
+    /*
+        This is a complicated start to a set of methods that do the AI work.
+        passToAI first makes four vectors desecribing the pieces on the board and the moves they can make (for each color).
+        It then passes those into evaluateMoves which essentially both evaluates moves based on a minimax algorithm (alpha beta pruning)
+        and on future moves. The move returned through this method is the move the AI chooses. At the end of this method we see the program implement
+        the move in the actual game such that the player can see it.
+
+        Note: This AI is not good. It is slow, inefficient, and unintelligent. This is mainly due to the fact that we inefficiently have defined evaluateMoves in a
+        way that requires unnecessary computation and copying. The only way to fix this would be to use complicated methods such as 'bitboards' or boards defined by a set of 64 bits (or a type long).
+
+        This would be too much to implement given the scope of the project.
+
+
+    */
+
+
     int AIcolor = 0; if(playercolor==0) AIcolor=1;
     //make a list of pieces that can make moves and use that list with the
     //possible moves functions for checkers
@@ -571,7 +612,7 @@ void Checkers::passToAI(){
     bestDes->displayElement(bestDes->getPieceName());
 }
 vector<int> Checkers::evaluateMoves(const string& originalBoardState,vector<vector<int>> moves,vector<vector<int>> playermoves, vector<Checkers*> AIpieces,vector<Checkers*> playerpieces, int treelength, int ecolor, int alpha, int beta, int score){//
-
+//returns index of best move and the score of that move. treelength is how far in the future we are evaluating to
     int AIcolor = 0;if(playercolor==0)AIcolor=1;
     int nextColor = 0; if(ecolor==0)nextColor=1;
     int bestPiece= 0;
@@ -766,6 +807,11 @@ void Checkers::resetBoardState(const string& state){
 }
 
 string Checkers::describeBoardState(){
+    /*
+        Makes and returns a string of the same format of those sent over the server in such a way to describe the state of the board.
+        This is used by the AI so that is can return to the original board state after making changes while evaluating moves.
+
+    */
     Checkers* temp =checkershead;
     string BoardState="";
     while(temp!=nullptr)
@@ -785,6 +831,9 @@ string Checkers::describeBoardState(){
 
 }
 Checkers* Checkers::findPiece(int row, int col){
+    /*
+        Returns Chess pointer given its row and column numbers.
+    */
     Checkers* temp = checkershead;
     if(row<0 || row>7 || col<0 || col>7) return nullptr;
     for(int i=0; i<8; i++)
@@ -799,6 +848,9 @@ Checkers* Checkers::findPiece(int row, int col){
 
 }
 int Checkers::findScore(int destination){
+     /*
+      * Evaluates move based on whether the destination is advancing it position or if it is capturing a piece. Also the scoring tries to urge pieces to become King if they can.
+      */
     int cols = destination%8;
     int rows= destination/8;
     int srcRow = this->getRow();

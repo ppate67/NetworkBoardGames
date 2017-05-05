@@ -11,6 +11,7 @@ int Go::playerScore=0;
 int Go::wterr=0;
 int Go::blterr=0;
 int Go::offline=0;
+
 void Go::mousePressEvent(QMouseEvent *event)
 {
     if(turn==0 || !checkPositionValidity(this->getColumn(),this->getRow(),this->getPieceColor()))
@@ -285,7 +286,7 @@ bool Go::isConnected(Go* curposition,Go* prevpos, Go* otherposition){
 }
 //bool suicide(GoBoard board){}
 bool Go::checkPositionValidity(int corx, int cory, int color){
-    //needs to be done
+    //checks if choosen tile already has a piece on it
     if(this->piece==true)
         return false;
     else
@@ -375,14 +376,18 @@ void Go::receiveUpdates(int color, int iteration){
 }
 
 int Go::calculateTerritory(Go* position, Go* prevposition, vector<Go*>* positions, int tercolor){
+    //recursively calculates the territory for a given color.
+    //works similarly to how liberties are checked
+
     int anticolor =0; if (tercolor==0)anticolor++;
     for(int i=0; i<positions->size(); i++)
         if(positions->at(i)==position)
-            return -1;
+            return -1;//makes sure to only visit/count a valid territory once
+
     if(position->getPieceColor()==2)
         positions->push_back(position);
     if(position->getPieceColor()==anticolor)
-        return 0;
+        return 0;//means that it is not a valid territory
     //if(position==originalpos && position !=prevposition)
       //  return 0;
     int terrs=1;
@@ -419,7 +424,7 @@ int Go::calculateTerritory(Go* position, Go* prevposition, vector<Go*>* position
                     terrs+=calculateTerritory(below,position,positions,tercolor);
                 }
                 else
-                    return 0;
+                    return 0;//any zeros are propagated throughout the recursive chain
 
         }
         if(below->getPieceColor()==tercolor)
@@ -436,7 +441,7 @@ int Go::calculateTerritory(Go* position, Go* prevposition, vector<Go*>* position
                 terrs+=calculateTerritory(above,position,positions,tercolor);
             }
             else
-                return 0;
+                return 0;//any zeros are propagated throughout the recursive chain
 
 
             }
@@ -454,7 +459,7 @@ int Go::calculateTerritory(Go* position, Go* prevposition, vector<Go*>* position
                 terrs+=calculateTerritory(right,position,positions,tercolor);
             }
             else
-                return 0;
+                return 0;//any zeros are propagated throughout the recursive chain
 
             }
         if(right->getPieceColor()==tercolor)
@@ -471,7 +476,7 @@ int Go::calculateTerritory(Go* position, Go* prevposition, vector<Go*>* position
                 terrs+=calculateTerritory(left,position,positions,tercolor);
             }
             else
-                return 0;
+                return 0;//any zeros are propagated throughout the recursive chain
 
 
         }
@@ -534,6 +539,12 @@ void Go::passToAI(){
     }
 }
 int Go::checkValAI(Go* consideration){
+    //This is the evaluation function for the AI. Since Go is complicated we only consider
+    //the present state of the game and not future states. The evaulation is a weight base
+    //system which awards taking territory away from the opponent, gaining territory, and capturing.
+    //AI performs well enough to know that its moves are not random and have a purpose but
+    //a real Go player might not any significant strategic merit to the moves it makes
+
     int tempwterr =wterr;
     int tempbterr = blterr;
     int AIcolor=0; if(color==0)AIcolor=1;
