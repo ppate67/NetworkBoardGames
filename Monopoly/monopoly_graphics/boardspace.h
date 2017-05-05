@@ -18,8 +18,10 @@ private:
     int houses;
     int rent;
     int tax;
+    int xCoordinate;
+    int yCoordinate;
 public:
-    boardSpace(){} // everything default to zero
+    boardSpace(){} // everything default to zero, set parameters outside of class with method calls
 
     int getRent(){
         return rent;
@@ -53,7 +55,6 @@ public:
     }
 
     //use void functions such as these to allow us to create an array of board positions easier
-    //we will set us this array in main.cpp as part of initialization
     void setName(string initName){
         name = initName;
     }
@@ -95,6 +96,21 @@ public:
         houses = initHouses;
     }
 
+    void setXcoordinate(int initX){
+        xCoordinate = initX;
+    }
+
+    void setYcoordinate(int initY){
+        yCoordinate = initY;
+    }
+
+    int getX(){
+        return xCoordinate;
+    }
+    int getY(){
+        return yCoordinate;
+    }
+
     bool upgrade(){
         if(houses < 5){
             rent = rent * 2;
@@ -104,6 +120,8 @@ public:
             return false;
         }
     }
+
+
 
     string getBoardname(boardSpace a){
         return a.name;
