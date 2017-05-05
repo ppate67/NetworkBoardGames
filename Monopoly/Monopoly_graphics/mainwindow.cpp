@@ -79,6 +79,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[0]->setRent(0);
     spaces[0]->setTax(0);
     spaces[0]->setActionText("Pass GO, Get $200");
+    spaces[0]->setXcoordinate(730);
+    spaces[0]->setYcoordinate(630);
 
     //Space 1
     spaces[1]->setName("Old Kent Road");
@@ -91,6 +93,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[1]->setRent(2);
     spaces[1]->setTax(0);
     spaces[1]->setActionText("$60");
+    spaces[1]->setXcoordinate(640);
+    spaces[1]->setYcoordinate(640);
 
     //Space 2
     spaces[2]->setName("Community Chest");
@@ -103,6 +107,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[2]->setRent(0);
     spaces[2]->setTax(0);
     spaces[2]->setActionText("Draw a Card");
+    spaces[2]->setXcoordinate(580);
+    spaces[2]->setYcoordinate(640);
 
     //Space 3
     spaces[3]->setName("White Chapel Road");
@@ -115,6 +121,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[3]->setRent(4);
     spaces[3]->setTax(0);
     spaces[3]->setActionText("$60");
+    spaces[3]->setXcoordinate(510);
+    spaces[3]->setYcoordinate(640);
 
 
     //Space 4
@@ -128,6 +136,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[4]->setRent(4);
     spaces[4]->setTax(200);
     spaces[4]->setActionText("Pay $200");
+    spaces[4]->setXcoordinate(450);
+    spaces[4]->setYcoordinate(640);
 
     //Space 5
     spaces[5]->setName("Kings Cross Station");
@@ -140,6 +150,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[5]->setRent(25);
     spaces[5]->setTax(0);
     spaces[5]->setActionText("$200");
+    spaces[5]->setXcoordinate(390);
+    spaces[5]->setYcoordinate(640);
 
     //Space 6
     spaces[6]->setName("The Angel, Islington");
@@ -152,6 +164,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[6]->setRent(6);
     spaces[6]->setTax(0);
     spaces[6]->setActionText("$100");
+    spaces[6]->setXcoordinate(330);
+    spaces[6]->setYcoordinate(640);
 
     //Space 7
     spaces[7]->setName("Chance");
@@ -164,6 +178,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[7]->setRent(0);
     spaces[7]->setTax(0);
     spaces[7]->setActionText("Draw a card");
+    spaces[7]->setXcoordinate(270);
+    spaces[7]->setYcoordinate(640);
 
     //Space 8
     spaces[8]->setName("Euston Road");
@@ -176,6 +192,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[8]->setRent(6);
     spaces[8]->setTax(0);
     spaces[8]->setActionText("$100");
+    spaces[8]->setXcoordinate(200);
+    spaces[8]->setYcoordinate(640);
 
     //Space 9
     spaces[9]->setName("Pentonville Road");
@@ -188,6 +206,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[9]->setRent(8);
     spaces[9]->setTax(0);
     spaces[9]->setActionText("$120");
+    spaces[9]->setXcoordinate(140);
+    spaces[9]->setYcoordinate(640);
 
 
     //Space 10
@@ -201,6 +221,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[10]->setRent(0);
     spaces[10]->setTax(0);
     spaces[10]->setActionText("Just Visiting");
+    spaces[10]->setXcoordinate(30);
+    spaces[10]->setYcoordinate(650);
 
     //Space 11
     spaces[11]->setName("Pall Mall");
@@ -213,6 +235,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[11]->setRent(10);
     spaces[11]->setTax(0);
     spaces[11]->setActionText("$140");
+    spaces[11]->setXcoordinate(50);
+    spaces[11]->setYcoordinate(550);
 
     //Space 12
     spaces[12]->setName("Electic Company");
@@ -225,7 +249,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[12]->setRent(10);
     spaces[12]->setTax(0);
     spaces[12]->setActionText("$150");
-
+    spaces[12]->setXcoordinate(50);
+    spaces[12]->setYcoordinate(500);
 
     //Space 13
     spaces[13]->setName("Whitehall");
@@ -238,6 +263,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[13]->setRent(10);
     spaces[13]->setTax(0);
     spaces[13]->setActionText("$140");
+    spaces[13]->setXcoordinate(50);
+    spaces[13]->setYcoordinate(450);
 
     //Space 14
     spaces[14]->setName("Northumrl'd Avenue");
@@ -250,6 +277,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[14]->setRent(12);
     spaces[14]->setTax(0);
     spaces[14]->setActionText("$160");
+    spaces[14]->setXcoordinate(50);
+    spaces[14]->setYcoordinate(390);
 
     //Space 15
     spaces[15]->setName("Marylebone Station");
@@ -262,6 +291,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[15]->setRent(25);
     spaces[15]->setTax(0);
     spaces[15]->setActionText("$200");
+    spaces[15]->setXcoordinate(50);
+    spaces[15]->setYcoordinate(340);
 
     //Space 16
     spaces[16]->setName("Bow Street");
@@ -274,6 +305,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[16]->setRent(14);
     spaces[16]->setTax(0);
     spaces[16]->setActionText("$180");
+    spaces[16]->setXcoordinate(50);
+    spaces[16]->setYcoordinate(280);
 
     //Space 17
     spaces[17]->setName("Community Chest");
@@ -286,6 +319,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[17]->setRent(0);
     spaces[17]->setTax(0);
     spaces[17]->setActionText("Draw a Card");
+    spaces[17]->setXcoordinate(50);
+    spaces[17]->setYcoordinate(230);
 
     //Space 18
     spaces[18]->setName("Marlborough Street");
@@ -298,6 +333,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[18]->setRent(14);
     spaces[18]->setTax(0);
     spaces[18]->setActionText("$180");
+    spaces[18]->setXcoordinate(50);
+    spaces[18]->setYcoordinate(180);
 
     //Space 19
     spaces[19]->setName("Vine Street");
@@ -310,6 +347,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[19]->setRent(16);
     spaces[19]->setTax(0);
     spaces[19]->setActionText("$200");
+    spaces[19]->setXcoordinate(50);
+    spaces[19]->setYcoordinate(120);
 
     //Space 20
     spaces[20]->setName("FREE PARKING");
@@ -322,6 +361,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[20]->setRent(0);
     spaces[20]->setTax(0);
     spaces[20]->setActionText(" ");
+    spaces[20]->setXcoordinate(50);
+    spaces[20]->setYcoordinate(50);
 
     //Space 21
     spaces[21]->setName("Strand");
@@ -334,6 +375,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[21]->setRent(18);
     spaces[21]->setTax(0);
     spaces[21]->setActionText("$220");
+    spaces[21]->setXcoordinate(140);
+    spaces[21]->setYcoordinate(40);
 
     //Space 22
     spaces[22]->setName("Chance");
@@ -346,6 +389,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[22]->setRent(0);
     spaces[22]->setTax(0);
     spaces[22]->setActionText("Draw a Card");
+    spaces[22]->setXcoordinate(200);
+    spaces[22]->setYcoordinate(40);
 
     //Space 23
     spaces[23]->setName("Fleet Street");
@@ -358,6 +403,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[23]->setRent(18);
     spaces[23]->setTax(0);
     spaces[23]->setActionText("$220");
+    spaces[23]->setXcoordinate(270);
+    spaces[23]->setYcoordinate(40);
 
     //Space 24
     spaces[24]->setName("Trafalgar Square");
@@ -370,6 +417,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[24]->setRent(20);
     spaces[24]->setTax(0);
     spaces[24]->setActionText("$240");
+    spaces[24]->setXcoordinate(330);
+    spaces[24]->setYcoordinate(40);
 
     //Space 25
     spaces[25]->setName("Fenchurch St-> Station");
@@ -382,6 +431,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[25]->setRent(25);
     spaces[25]->setTax(0);
     spaces[25]->setActionText("$200");
+    spaces[25]->setXcoordinate(390);
+    spaces[25]->setYcoordinate(40);
 
     //Space 26
     spaces[26]->setName("Leicester Square");
@@ -394,6 +445,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[26]->setRent(22);
     spaces[26]->setTax(0);
     spaces[26]->setActionText("$260");
+    spaces[26]->setXcoordinate(450);
+    spaces[26]->setYcoordinate(40);
 
     //Space 27
     spaces[27]->setName("Covenry Street");
@@ -406,6 +459,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[27]->setRent(22);
     spaces[27]->setTax(0);
     spaces[27]->setActionText("$260");
+    spaces[27]->setXcoordinate(510);
+    spaces[27]->setYcoordinate(40);
 
     //Space 28
     spaces[28]->setName("Water Works");
@@ -418,6 +473,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[28]->setRent(10);
     spaces[28]->setTax(0);
     spaces[28]->setActionText("$150");
+    spaces[28]->setXcoordinate(580);
+    spaces[28]->setYcoordinate(40);
 
     //Space 29
     spaces[29]->setName("Piccadilly");
@@ -430,6 +487,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[29]->setRent(22);
     spaces[29]->setTax(0);
     spaces[29]->setActionText("280");
+    spaces[29]->setXcoordinate(640);
+    spaces[29]->setYcoordinate(40);
 
     //Space 30
     spaces[30]->setName("Go to Jail!");
@@ -442,6 +501,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[30]->setRent(0);
     spaces[30]->setTax(0);
     spaces[30]->setActionText(" ");
+    spaces[30]->setXcoordinate(730);
+    spaces[30]->setYcoordinate(40);
 
     //Space 31
     spaces[31]->setName("Regent Street");
@@ -454,6 +515,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[31]->setRent(26);
     spaces[31]->setTax(0);
     spaces[31]->setActionText("$300");
+    spaces[31]->setXcoordinate(730);
+    spaces[31]->setYcoordinate(120);
 
     //Space 32
     spaces[32]->setName("Oxford Street");
@@ -466,6 +529,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[32]->setRent(26);
     spaces[32]->setTax(0);
     spaces[32]->setActionText("$300");
+    spaces[32]->setXcoordinate(730);
+    spaces[32]->setYcoordinate(180);
 
     //Space 33
     spaces[33]->setName("Community Chest");
@@ -478,6 +543,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[33]->setRent(0);
     spaces[33]->setTax(0);
     spaces[33]->setActionText("Draw a card");
+    spaces[33]->setXcoordinate(730);
+    spaces[33]->setYcoordinate(230);
 
     //Space 34
     spaces[34]->setName("Bond Street");
@@ -490,6 +557,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[34]->setRent(28);
     spaces[34]->setTax(0);
     spaces[34]->setActionText("$320");
+    spaces[34]->setXcoordinate(730);
+    spaces[34]->setYcoordinate(280);
 
     //Space 35
     spaces[35]->setName("Liverpool St-> Station");
@@ -502,6 +571,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[35]->setRent(25);
     spaces[35]->setTax(0);
     spaces[35]->setActionText("$200");
+    spaces[35]->setXcoordinate(730);
+    spaces[35]->setYcoordinate(340);
 
     //Space 36
     spaces[36]->setName("Chance");
@@ -514,6 +585,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[36]->setRent(0);
     spaces[36]->setTax(0);
     spaces[36]->setActionText("Draw a Card");
+    spaces[36]->setXcoordinate(730);
+    spaces[36]->setYcoordinate(390);
 
     //Space 37
     spaces[37]->setName("Park Lane");
@@ -526,6 +599,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[37]->setRent(35);
     spaces[37]->setTax(0);
     spaces[37]->setActionText("$350");
+    spaces[37]->setXcoordinate(730);
+    spaces[37]->setYcoordinate(450);
 
     //Space 38
     spaces[38]->setName("Super Tax");
@@ -538,6 +613,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[38]->setRent(0);
     spaces[38]->setTax(75);
     spaces[38]->setActionText("Pay $100");
+    spaces[38]->setXcoordinate(730);
+    spaces[38]->setYcoordinate(500);
 
     //Space 39
     spaces[39]->setName("Mayfair");
@@ -550,6 +627,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[39]->setRent(50);
     spaces[39]->setTax(0);
     spaces[39]->setActionText("$400");
+    spaces[39]->setXcoordinate(730);
+    spaces[39]->setYcoordinate(560);
 
     for(int i = 0; i < 40; i++){
         spaces[i]->setHouses(0);
