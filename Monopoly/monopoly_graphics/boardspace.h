@@ -9,7 +9,6 @@ private:
     string name;
     string actionText;
     string spaceType;
-    int Ownership;
     int price;
     int freeParking;
     bool occupied;
@@ -23,18 +22,15 @@ private:
 public:
     boardSpace(){} // everything default to zero, set parameters outside of class with method calls
 
-    int getRent(){
-        return rent;
+    friend int getRent(boardSpace& a){
+        return a.rent;
     }
     string getSpaceType(){
         return spaceType;
     }
-    int getOwnership(){
-        return Ownership;
-    }
 
-    int getPrice(){
-        return price;
+    friend int getPrice(boardSpace a){
+        return a.price;
     }
 
     friend void setOwner(boardSpace& a, int id){
