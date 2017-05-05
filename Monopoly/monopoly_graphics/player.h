@@ -12,25 +12,55 @@ private:
     int userid; //The ID of the User
     int bank; //Amount of Money Owned
     int jailFree; //How Many Get Out of Free Cards DO you have
+    bool inJail; //whether or not the player is in jail
     int position; //Position on the board where the player is
 
 public:
-    Player(string name, int userid, int bank, int jailFree, int position) : name(name), userid(userid), bank(bank), jailFree(jailFree), position(position){}
+    Player(){}
 
-    friend int getPosition(Player a){
-        return a.position;
+    void setName(string initName){
+        name = initName;
+    }
+    void setUserID(int initUserID){
+        userid = initUserID;
     }
 
-    friend int getUserID(Player a){
-        return a.userid;
+    void setBank(int initName){
+        bank = initName;
+    }
+    void setJailFree(int initJailFree){
+        jailFree = initJailFree;
+    }
+    void addJailFree(){
+        jailFree += 1;
     }
 
-    friend int getBank(Player a){
-        return a.bank;
+    void setPosition(int initPosition){
+        position = initPosition;
     }
 
-    friend int getJailFree(Player a){
-        return a.jailFree;
+    void setJail(bool initJail){
+        inJail = initJail;
+    }
+
+    int getPosition(){
+        return position;
+    }
+
+    int getUserID(){
+        return userid;
+    }
+
+    int getBank(){
+        return bank;
+    }
+
+    int getJailFree(){
+        return jailFree;
+    }
+
+    int getJailStatus(){
+        return inJail;
     }
 
     friend void payRent(Player& a, Player& b, int& Rent){  //Player A pays Player B rent if on their property
@@ -38,11 +68,8 @@ public:
         b.bank = b.bank + Rent;
     }
 
-    friend void movePlayer(Player& a, int distance){
-        a.position = a.position + distance;
-        if(a.position > 39){
-            a.position = a.position - 40;
-        }
+    void movePlayer(int distance){
+        position = position + distance;
 
     }
 
@@ -59,17 +86,14 @@ public:
     friend void playerPayMortgageProperty(Player& a, int amount){
         a.bank = a.bank - amount;
     }
+/*
 
-    /*
-    Player& operator =(Player a){
-        a.name = name;
-        a.userid = userid;
-        a.bank = bank;
-        a.jailFree = jailFree;
-        a.position = position;
-    }
-    */
+    Player operator =(Player a){
+        Player temp(a.name, a.userid, a.bank, a.jailFree, a.position);
+        return temp;
+        }
 
+*/
 
 };
 

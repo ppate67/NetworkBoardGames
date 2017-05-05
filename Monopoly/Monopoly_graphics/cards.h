@@ -24,11 +24,12 @@ public:
         amount = initAmount;
     }
 
+    string getText(){
+        return text;
+    }
 
-    //The card read would be Chance[randomCard()] or CommunityChance[randomCard] --- A random card would be read out of that set based on the position the player is in
-    friend void readCard(Card a, string& words, int& payment){
-        words = a.text;
-        payment = a.amount;
+    int getAmount(){
+        return amount;
     }
 
 

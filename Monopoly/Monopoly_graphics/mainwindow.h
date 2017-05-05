@@ -3,6 +3,7 @@
 
 #include "boardspace.h"
 #include "player.h"
+#include "cards.h"
 #include <QMainWindow>
 #include <QtGui>
 #include <iostream>
@@ -18,6 +19,12 @@ class MainWindow : public QMainWindow
 private:
     Ui::MainWindow *ui;
     boardSpace** spaces;
+    Player** players;
+    Card** CommunityChest;
+    Card** Chance;
+    int turnNumber;
+    int numberOfTurns;
+
 
 
 public:
@@ -27,6 +34,7 @@ public:
 
 private slots:
     void on_pushButton_2_clicked();
+    //void on_Test_Button_clicked();
 };
 
 #endif // MAINWINDOW_H

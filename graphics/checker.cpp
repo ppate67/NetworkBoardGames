@@ -8,7 +8,6 @@ checker::checker(QWidget *parent) :
     ui->setupUi(this);
 
     connect(ui->pushButton_2, SIGNAL (clicked()), this, SLOT (on_pushButton_2_clicked()));
-
 }
 
 checker::~checker()

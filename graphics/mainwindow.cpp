@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pushButton_5, SIGNAL (clicked()), this, SLOT (on_pushButton_5_clicked()));
     //click quiting game
     connect(ui->pushButton_6, SIGNAL (clicked()), this, SLOT (on_pushButton_6_clicked()));
+    connect(this,SIGNAL(goToWidget(int)),this,SLOT(runningWidget(int)));
 }
 
 MainWindow::~MainWindow()
@@ -76,6 +77,7 @@ void MainWindow::runningWidget(int widgetNum)
         this->hide();
         checkerWidget->hide();
         chessWidget->show();
+        chessWidget->mainwindow = this;
         goWidget->hide();
         monopolyWidget->hide();
         break;
@@ -84,6 +86,7 @@ void MainWindow::runningWidget(int widgetNum)
         checkerWidget->hide();
         chessWidget->hide();
         goWidget->show();
+        goWidget-> mainwindow = this;
         monopolyWidget->hide();
         break;
     case 3:
@@ -92,6 +95,7 @@ void MainWindow::runningWidget(int widgetNum)
         chessWidget->hide();
         goWidget->hide();
         monopolyWidget->show();
+        monopolyWidget ->mainwindow = this;
         break;
     }
 }

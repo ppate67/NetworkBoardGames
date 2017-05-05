@@ -36,5 +36,6 @@ click back to main menu
 */
 void go::on_pushButton_2_clicked()
 {
-
+    this->hide();
+    mainwindow->show();
 }

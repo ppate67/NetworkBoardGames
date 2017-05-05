@@ -36,5 +36,6 @@ click back to main menu
 */
 void monopoly::on_pushButton_2_clicked()
 {
-
+    this->hide();
+    mainwindow->show();
 }

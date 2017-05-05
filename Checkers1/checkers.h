@@ -39,6 +39,7 @@ public:
     bool multiCapture();
     void captureAuxiloryFunc(int usercolor, int enemycolor);
     bool checkForWin(int lastMoveColor);
+    bool openMoves(int lastMoveColor);
     //networking functionalities
     static int checkersturn;
     static int playercolor;
