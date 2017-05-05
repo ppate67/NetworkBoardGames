@@ -12,6 +12,7 @@ private:
     int userid; //The ID of the User
     int bank; //Amount of Money Owned
     int jailFree; //How Many Get Out of Free Cards DO you have
+    bool inJail; //whether or not the player is in jail
     int position; //Position on the board where the player is
 
 public:
@@ -30,9 +31,16 @@ public:
     void setJailFree(int initJailFree){
         jailFree = initJailFree;
     }
+    void addJailFree(){
+        jailFree += 1;
+    }
 
     void setPosition(int initPosition){
         position = initPosition;
+    }
+
+    void setJail(bool initJail){
+        inJail = initJail;
     }
 
     int getPosition(){
@@ -49,6 +57,10 @@ public:
 
     int getJailFree(){
         return jailFree;
+    }
+
+    int getJailStatus(){
+        return inJail;
     }
 
     friend void payRent(Player& a, Player& b, int& Rent){  //Player A pays Player B rent if on their property
