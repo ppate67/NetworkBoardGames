@@ -74,7 +74,7 @@ public:
     }
 
     void setOwnership(int initOwnership){
-        owned = initOwnership;
+        Ownership = initOwnership;
     }
 
     void setMortgaged(bool initMortgage){
