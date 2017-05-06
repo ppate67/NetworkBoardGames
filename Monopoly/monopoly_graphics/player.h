@@ -14,6 +14,7 @@ private:
     int jailFree; //How Many Get Out of Free Cards DO you have
     bool inJail; //whether or not the player is in jail
     int position; //Position on the board where the player is
+    int ownedproperty[40]={0};
 
 public:
     Player(){}
@@ -46,6 +47,10 @@ public:
         inJail = initJail;
     }
 
+    void setOwned(int newOwned){
+        ownedproperty[newOwned] = 1;
+    }
+
     int getPosition(){
         return position;
     }
@@ -73,6 +78,10 @@ public:
 
     void movePlayer(int distance){
         position = position + distance;
+        if(position > 39){
+            position -= 40;
+            bank += 200;
+        }
 
     }
 

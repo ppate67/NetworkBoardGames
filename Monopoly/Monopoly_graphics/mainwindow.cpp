@@ -74,7 +74,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[0]->setType("START");
     spaces[0]->setPropertyCost(0);
     spaces[0]->setFreeParking(0);
-    spaces[0]->setOccupied(true);
+   // spaces[0]->setOccupied(true);
     spaces[0]->setOwnership(100);
     spaces[0]->setMortgaged(false);
     spaces[0]->setRent(0);
@@ -88,7 +88,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[1]->setType("Property");
     spaces[1]->setPropertyCost(60);
     spaces[1]->setFreeParking(0);
-    spaces[1]->setOccupied(false);
+    //spaces[1]->setOccupied(false);
     spaces[1]->setOwnership(100);
     spaces[1]->setMortgaged(false);
     spaces[1]->setRent(20);
@@ -102,7 +102,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[2]->setType("Community Chest");
     spaces[2]->setPropertyCost(0);
     spaces[2]->setFreeParking(0);
-    spaces[2]->setOccupied(false);
+    //spaces[2]->setOccupied(false);
     spaces[2]->setOwnership(100);
     spaces[2]->setMortgaged(false);
     spaces[2]->setRent(0);
@@ -116,7 +116,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[3]->setType("Property");
     spaces[3]->setPropertyCost(60);
     spaces[3]->setFreeParking(0);
-    spaces[3]->setOccupied(false);
+    //spaces[3]->setOccupied(false);
     spaces[3]->setOwnership(100);
     spaces[3]->setMortgaged(false);
     spaces[3]->setRent(40);
@@ -131,7 +131,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[4]->setType("Tax");
     spaces[4]->setPropertyCost(0);
     spaces[4]->setFreeParking(0);
-    spaces[4]->setOccupied(false);
+    //spaces[4]->setOccupied(false);
     spaces[4]->setOwnership(100);
     spaces[4]->setMortgaged(false);
     spaces[4]->setRent(200);
@@ -145,7 +145,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[5]->setType("RailRoad");
     spaces[5]->setPropertyCost(200);
     spaces[5]->setFreeParking(0);
-    spaces[5]->setOccupied(false);
+    //spaces[5]->setOccupied(false);
     spaces[5]->setOwnership(100);
     spaces[5]->setMortgaged(false);
     spaces[5]->setRent(100);
@@ -159,7 +159,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[6]->setType("Property");
     spaces[6]->setPropertyCost(100);
     spaces[6]->setFreeParking(0);
-    spaces[6]->setOccupied(false);
+    //spaces[6]->setOccupied(false);
     spaces[6]->setOwnership(100);
     spaces[6]->setMortgaged(false);
     spaces[6]->setRent(60);
@@ -173,7 +173,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[7]->setType("Chance");
     spaces[7]->setPropertyCost(0);
     spaces[7]->setFreeParking(0);
-    spaces[7]->setOccupied(false);
+    //spaces[7]->setOccupied(false);
     spaces[7]->setOwnership(100);
     spaces[7]->setMortgaged(false);
     spaces[7]->setRent(0);
@@ -187,7 +187,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[8]->setType("Property");
     spaces[8]->setPropertyCost(100);
     spaces[8]->setFreeParking(0);
-    spaces[8]->setOccupied(false);
+    //spaces[8]->setOccupied(false);
     spaces[8]->setOwnership(100);
     spaces[8]->setMortgaged(false);
     spaces[8]->setRent(60);
@@ -201,7 +201,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[9]->setType("Property");
     spaces[9]->setPropertyCost(120);
     spaces[9]->setFreeParking(0);
-    spaces[9]->setOccupied(false);
+    //spaces[9]->setOccupied(false);
     spaces[9]->setOwnership(100);
     spaces[9]->setMortgaged(false);
     spaces[9]->setRent(80);
@@ -216,7 +216,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[10]->setType("Jail");
     spaces[10]->setPropertyCost(0);
     spaces[10]->setFreeParking(0);
-    spaces[10]->setOccupied(false);
+    //spaces[10]->setOccupied(false);
     spaces[10]->setOwnership(100);
     spaces[10]->setMortgaged(false);
     spaces[10]->setRent(0);
@@ -230,7 +230,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[11]->setType("Property");
     spaces[11]->setPropertyCost(140);
     spaces[11]->setFreeParking(0);
-    spaces[11]->setOccupied(false);
+    //spaces[11]->setOccupied(false);
     spaces[11]->setOwnership(100);
     spaces[11]->setMortgaged(false);
     spaces[11]->setRent(100);
@@ -244,7 +244,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[12]->setType("Utility");
     spaces[12]->setPropertyCost(150);
     spaces[12]->setFreeParking(0);
-    spaces[12]->setOccupied(false);
+    //spaces[12]->setOccupied(false);
     spaces[12]->setOwnership(100);
     spaces[12]->setMortgaged(false);
     spaces[12]->setRent(100);
@@ -258,7 +258,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[13]->setType("Property");
     spaces[13]->setPropertyCost(140);
     spaces[13]->setFreeParking(0);
-    spaces[13]->setOccupied(false);
+    //spaces[13]->setOccupied(false);
     spaces[13]->setOwnership(100);
     spaces[13]->setMortgaged(false);
     spaces[13]->setRent(100);
@@ -272,7 +272,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[14]->setType("Property");
     spaces[14]->setPropertyCost(160);
     spaces[14]->setFreeParking(0);
-    spaces[14]->setOccupied(false);
+    //spaces[14]->setOccupied(false);
     spaces[14]->setOwnership(100);
     spaces[14]->setMortgaged(false);
     spaces[14]->setRent(120);
@@ -286,7 +286,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[15]->setType("RailRoad");
     spaces[15]->setPropertyCost(200);
     spaces[15]->setFreeParking(0);
-    spaces[15]->setOccupied(false);
+    //spaces[15]->setOccupied(false);
     spaces[15]->setOwnership(100);
     spaces[15]->setMortgaged(false);
     spaces[15]->setRent(100);
@@ -300,7 +300,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[16]->setType("Property");
     spaces[16]->setPropertyCost(180);
     spaces[16]->setFreeParking(0);
-    spaces[16]->setOccupied(false);
+    //spaces[16]->setOccupied(false);
     spaces[16]->setOwnership(100);
     spaces[16]->setMortgaged(false);
     spaces[16]->setRent(140);
@@ -314,7 +314,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[17]->setType("Community Chest");
     spaces[17]->setPropertyCost(0);
     spaces[17]->setFreeParking(0);
-    spaces[17]->setOccupied(false);
+    //spaces[17]->setOccupied(false);
     spaces[17]->setOwnership(100);
     spaces[17]->setMortgaged(false);
     spaces[17]->setRent(0);
@@ -328,7 +328,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[18]->setType("Property");
     spaces[18]->setPropertyCost(180);
     spaces[18]->setFreeParking(0);
-    spaces[18]->setOccupied(false);
+    //spaces[18]->setOccupied(false);
     spaces[18]->setOwnership(100);
     spaces[18]->setMortgaged(false);
     spaces[18]->setRent(140);
@@ -342,7 +342,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[19]->setType("Property");
     spaces[19]->setPropertyCost(200);
     spaces[19]->setFreeParking(0);
-    spaces[19]->setOccupied(false);
+    //spaces[19]->setOccupied(false);
     spaces[19]->setOwnership(100);
     spaces[19]->setMortgaged(false);
     spaces[19]->setRent(160);
@@ -356,7 +356,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[20]->setType("FreeParking");
     spaces[20]->setPropertyCost(0);
     spaces[20]->setFreeParking(0);
-    spaces[20]->setOccupied(false);
+    //spaces[20]->setOccupied(false);
     spaces[20]->setOwnership(100);
     spaces[20]->setMortgaged(false);
     spaces[20]->setRent(0);
@@ -370,7 +370,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[21]->setType("Property");
     spaces[21]->setPropertyCost(220);
     spaces[21]->setFreeParking(0);
-    spaces[21]->setOccupied(false);
+    //spaces[21]->setOccupied(false);
     spaces[21]->setOwnership(100);
     spaces[21]->setMortgaged(false);
     spaces[21]->setRent(180);
@@ -384,7 +384,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[22]->setType("Chance");
     spaces[22]->setPropertyCost(0);
     spaces[22]->setFreeParking(0);
-    spaces[22]->setOccupied(false);
+    //spaces[22]->setOccupied(false);
     spaces[22]->setOwnership(100);
     spaces[22]->setMortgaged(false);
     spaces[22]->setRent(0);
@@ -398,7 +398,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[23]->setType("Property");
     spaces[23]->setPropertyCost(220);
     spaces[23]->setFreeParking(0);
-    spaces[23]->setOccupied(false);
+    //spaces[23]->setOccupied(false);
     spaces[23]->setOwnership(100);
     spaces[23]->setMortgaged(false);
     spaces[23]->setRent(180);
@@ -412,7 +412,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[24]->setType("Property");
     spaces[24]->setPropertyCost(240);
     spaces[24]->setFreeParking(0);
-    spaces[24]->setOccupied(false);
+    //spaces[24]->setOccupied(false);
     spaces[24]->setOwnership(100);
     spaces[24]->setMortgaged(false);
     spaces[24]->setRent(200);
@@ -426,7 +426,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[25]->setType("RailRoad");
     spaces[25]->setPropertyCost(200);
     spaces[25]->setFreeParking(0);
-    spaces[25]->setOccupied(false);
+    //spaces[25]->setOccupied(false);
     spaces[25]->setOwnership(100);
     spaces[25]->setMortgaged(false);
     spaces[25]->setRent(250);
@@ -440,7 +440,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[26]->setType("Property");
     spaces[26]->setPropertyCost(260);
     spaces[26]->setFreeParking(0);
-    spaces[26]->setOccupied(false);
+    //spaces[26]->setOccupied(false);
     spaces[26]->setOwnership(100);
     spaces[26]->setMortgaged(false);
     spaces[26]->setRent(220);
@@ -454,7 +454,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[27]->setType("Property");
     spaces[27]->setPropertyCost(260);
     spaces[27]->setFreeParking(0);
-    spaces[27]->setOccupied(false);
+    //spaces[27]->setOccupied(false);
     spaces[27]->setOwnership(100);
     spaces[27]->setMortgaged(false);
     spaces[27]->setRent(220);
@@ -468,7 +468,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[28]->setType("Utility");
     spaces[28]->setPropertyCost(150);
     spaces[28]->setFreeParking(0);
-    spaces[28]->setOccupied(false);
+    //spaces[28]->setOccupied(false);
     spaces[28]->setOwnership(100);
     spaces[28]->setMortgaged(false);
     spaces[28]->setRent(100);
@@ -482,7 +482,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[29]->setType("Property");
     spaces[29]->setPropertyCost(280);
     spaces[29]->setFreeParking(0);
-    spaces[29]->setOccupied(false);
+    //spaces[29]->setOccupied(false);
     spaces[29]->setOwnership(100);
     spaces[29]->setMortgaged(false);
     spaces[29]->setRent(220);
@@ -496,7 +496,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[30]->setType("GoJail");
     spaces[30]->setPropertyCost(0);
     spaces[30]->setFreeParking(0);
-    spaces[30]->setOccupied(false);
+    //spaces[30]->setOccupied(false);
     spaces[30]->setOwnership(100);
     spaces[30]->setMortgaged(false);
     spaces[30]->setRent(0);
@@ -510,7 +510,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[31]->setType("Property");
     spaces[31]->setPropertyCost(300);
     spaces[31]->setFreeParking(0);
-    spaces[31]->setOccupied(false);
+    //spaces[31]->setOccupied(false);
     spaces[31]->setOwnership(100);
     spaces[31]->setMortgaged(false);
     spaces[31]->setRent(260);
@@ -524,7 +524,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[32]->setType("Property");
     spaces[32]->setPropertyCost(300);
     spaces[32]->setFreeParking(0);
-    spaces[32]->setOccupied(false);
+    //spaces[32]->setOccupied(false);
     spaces[32]->setOwnership(100);
     spaces[32]->setMortgaged(false);
     spaces[32]->setRent(260);
@@ -538,7 +538,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[33]->setType("Community Chest");
     spaces[33]->setPropertyCost(0);
     spaces[33]->setFreeParking(0);
-    spaces[33]->setOccupied(false);
+    //spaces[33]->setOccupied(false);
     spaces[33]->setOwnership(100);
     spaces[33]->setMortgaged(false);
     spaces[33]->setRent(0);
@@ -552,7 +552,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[34]->setType("Property");
     spaces[34]->setPropertyCost(320);
     spaces[34]->setFreeParking(0);
-    spaces[34]->setOccupied(false);
+    //spaces[34]->setOccupied(false);
     spaces[34]->setOwnership(100);
     spaces[34]->setMortgaged(false);
     spaces[34]->setRent(280);
@@ -566,7 +566,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[35]->setType("RailRoad");
     spaces[35]->setPropertyCost(200);
     spaces[35]->setFreeParking(0);
-    spaces[35]->setOccupied(false);
+    //spaces[35]->setOccupied(false);
     spaces[35]->setOwnership(100);
     spaces[35]->setMortgaged(false);
     spaces[35]->setRent(250);
@@ -580,7 +580,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[36]->setType("Chance");
     spaces[36]->setPropertyCost(0);
     spaces[36]->setFreeParking(0);
-    spaces[36]->setOccupied(false);
+    //spaces[36]->setOccupied(false);
     spaces[36]->setOwnership(100);
     spaces[36]->setMortgaged(false);
     spaces[36]->setRent(0);
@@ -594,7 +594,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[37]->setType("Property");
     spaces[37]->setPropertyCost(350);
     spaces[37]->setFreeParking(0);
-    spaces[37]->setOccupied(false);
+    //spaces[37]->setOccupied(false);
     spaces[37]->setOwnership(100);
     spaces[37]->setMortgaged(false);
     spaces[37]->setRent(350);
@@ -608,7 +608,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[38]->setType("Tax");
     spaces[38]->setPropertyCost(0);
     spaces[38]->setFreeParking(0);
-    spaces[38]->setOccupied(false);
+    //spaces[38]->setOccupied(false);
     spaces[38]->setOwnership(100);
     spaces[38]->setMortgaged(false);
     spaces[38]->setRent(100);
@@ -622,7 +622,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[39]->setType("Property");
     spaces[39]->setPropertyCost(400);
     spaces[39]->setFreeParking(0);
-    spaces[39]->setOccupied(false);
+    //spaces[39]->setOccupied(false);
     spaces[39]->setOwnership(100);
     spaces[39]->setMortgaged(false);
     spaces[39]->setRent(400);
@@ -849,22 +849,12 @@ void MainWindow::on_pushButton_2_clicked()
     ui->DiceRoll->setText("Your Roll: " + QString::number(totalRoll));
 
 
-
-
     //move players piece on board
     if (turnNumber == 0) //Adjust Player one's position
         ui->label_3->move(spaces[players[0]->getPosition()]->getX() , spaces[players[0]->getPosition()]->getY());
 
     if (turnNumber == 1) //Adjust Player Two's position
         ui->label_4->move(spaces[players[1]->getPosition()]->getX(), spaces[players[1]->getPosition()]->getY());
-
-
-    //Loops Player Back Around the Board and Pays them $200 as they pass go
-    if(players[turnNumber]->getPosition()>40){
-        players[turnNumber]->setPosition(players[turnNumber]->getPosition()-40);
-        players[turnNumber]->setBank(players[turnNumber]->getBank()+200);
-    }
-
 
     string typeOfSpace = spaces[players[turnNumber]->getPosition()]->getSpaceType();
     int Ownership = spaces[players[turnNumber]->getPosition()]->getOwnership();
@@ -874,6 +864,7 @@ void MainWindow::on_pushButton_2_clicked()
     int PlayerOwner = players[turnNumber]->getUserID();
 
     ui->label_2->setText(QString::fromStdString(typeOfSpace));
+
 
     //Checks to See if the Spot is a Chance Location
     if(typeOfSpace == "Chance"){
@@ -904,7 +895,6 @@ void MainWindow::on_pushButton_2_clicked()
         //Displays Message Box With What Card You Drew
         QMessageBox::information(this, "Draw A Chance Card", "You Drew the Card: " + QString::fromStdString(Chance[randFourteen]->getText()));
     }
-
 
     //Checks to See if the Spot is a Community Chest Location
     if(typeOfSpace == "Community Chest"){
@@ -939,13 +929,14 @@ void MainWindow::on_pushButton_2_clicked()
     if (typeOfSpace == "Property"  ||typeOfSpace ==  "Utility" || typeOfSpace == "RailRoad"){
         if (spaces[players[turnNumber]->getPosition()]->getOwnership() == 100) {
             QMessageBox::StandardButton reply;
-            reply = QMessageBox::question(this, "Buying Property", "Would you like to purchase "+QString::fromStdString(spaces[players[turnNumber]->getPosition()]->getName()), QMessageBox::Yes|QMessageBox::No);
+            reply = QMessageBox::question(this, "Buying Property", "Would you like to purchase "+QString::fromStdString(spaces[players[turnNumber]->getPosition()]->getName())+"?", QMessageBox::Yes|QMessageBox::No);
             if (reply == QMessageBox::Yes) {
                 qDebug() << "You have purchased "+QString::fromStdString(spaces[players[turnNumber]->getPosition()]->getName());
                 int tempBank = players[turnNumber]->getBank(); //Gets the Value of the Players Bank so they can get paid or pay their dues>
                 //This pays to deducts money from player
                 players[turnNumber]->setBank(tempBank - PropertyCost);
                 spaces[players[turnNumber]->getPosition()]->setOwnership(PlayerOwner);
+                players[turnNumber]->setOwned(players[turnNumber]->getPosition());
                 //QApplication::quit();
             }
             else {
@@ -968,8 +959,106 @@ void MainWindow::on_pushButton_2_clicked()
                    players[0]->setBank(tempBankReceiver + Rent);
                    ui->Player1_Bank_Amount->setText("$" + QString::number(players[0]->getBank()));
             }
+        }
+    }
 
-
+    //Checks for monopolies and adjusts rent
+    if ((spaces[1]->getOwnership() !=100) &&  (spaces[3]->getOwnership() != 100)) {
+        if (spaces[1]->getOwnership() ==  spaces[3]->getOwnership()) {
+            int temprent1 = spaces[1]->getRent();
+            int temprent2 = spaces[3]->getRent();
+            spaces[1]->setRent(temprent1*2);
+            spaces[3]->setRent(temprent2*2);
+            spaces[1]->setOwnership(4);
+            spaces[3]->setOwnership(5);
+        }
+    }
+    if ((spaces[6]->getOwnership() !=100) &&  (spaces[8]->getOwnership() != 100) && (spaces[9]->getOwnership() !=100)) {
+        if (spaces[6]->getOwnership() ==  spaces[8]->getOwnership() == spaces[9]->getOwnership()) {
+            int temprent1 = spaces[6]->getRent();
+            int temprent2 = spaces[8]->getRent();
+            int temprent3 = spaces[9]->getRent();
+            spaces[6]->setRent(temprent1*3);
+            spaces[8]->setRent(temprent2*3);
+            spaces[9]->setRent(temprent3*3);
+            spaces[6]->setOwnership(4);
+            spaces[8]->setOwnership(5);
+            spaces[9]->setOwnership(6);
+        }
+    }
+    if ((spaces[11]->getOwnership() !=100) &&  (spaces[13]->getOwnership() != 100) && (spaces[14]->getOwnership() !=100)) {
+        if (spaces[11]->getOwnership() ==  spaces[13]->getOwnership() == spaces[14]->getOwnership()) {
+            int temprent1 = spaces[11]->getRent();
+            int temprent2 = spaces[13]->getRent();
+            int temprent3 = spaces[14]->getRent();
+            spaces[11]->setRent(temprent1*3);
+            spaces[13]->setRent(temprent2*3);
+            spaces[14]->setRent(temprent3*3);
+            spaces[11]->setOwnership(4);
+            spaces[13]->setOwnership(5);
+            spaces[14]->setOwnership(6);
+        }
+    }
+    if ((spaces[16]->getOwnership() !=100) &&  (spaces[18]->getOwnership() != 100) && (spaces[19]->getOwnership() !=100)) {
+        if (spaces[16]->getOwnership() ==  spaces[18]->getOwnership() == spaces[19]->getOwnership()) {
+            int temprent1 = spaces[16]->getRent();
+            int temprent2 = spaces[18]->getRent();
+            int temprent3 = spaces[19]->getRent();
+            spaces[16]->setRent(temprent1*3);
+            spaces[18]->setRent(temprent2*3);
+            spaces[19]->setRent(temprent3*3);
+            spaces[16]->setOwnership(4);
+            spaces[18]->setOwnership(5);
+            spaces[19]->setOwnership(6);
+        }
+    }
+    if ((spaces[21]->getOwnership() !=100) &&  (spaces[23]->getOwnership() != 100) && (spaces[24]->getOwnership() !=100)) {
+        if (spaces[21]->getOwnership() ==  spaces[23]->getOwnership() == spaces[24]->getOwnership()) {
+            int temprent1 = spaces[21]->getRent();
+            int temprent2 = spaces[23]->getRent();
+            int temprent3 = spaces[24]->getRent();
+            spaces[21]->setRent(temprent1*3);
+            spaces[23]->setRent(temprent2*3);
+            spaces[24]->setRent(temprent3*3);
+            spaces[21]->setOwnership(4);
+            spaces[23]->setOwnership(5);
+            spaces[24]->setOwnership(6);
+        }
+    }
+    if ((spaces[26]->getOwnership() !=100) &&  (spaces[27]->getOwnership() != 100) && (spaces[29]->getOwnership() !=100)) {
+        if (spaces[26]->getOwnership() ==  spaces[27]->getOwnership() == spaces[29]->getOwnership()) {
+            int temprent1 = spaces[26]->getRent();
+            int temprent2 = spaces[27]->getRent();
+            int temprent3 = spaces[29]->getRent();
+            spaces[26]->setRent(temprent1*3);
+            spaces[27]->setRent(temprent2*3);
+            spaces[29]->setRent(temprent3*3);
+            spaces[26]->setOwnership(4);
+            spaces[27]->setOwnership(5);
+            spaces[29]->setOwnership(6);
+        }
+    }
+    if ((spaces[31]->getOwnership() !=100) &&  (spaces[32]->getOwnership() != 100) && (spaces[34]->getOwnership() !=100)) {
+        if (spaces[31]->getOwnership() ==  spaces[32]->getOwnership() == spaces[34]->getOwnership()) {
+            int temprent1 = spaces[31]->getRent();
+            int temprent2 = spaces[32]->getRent();
+            int temprent3 = spaces[34]->getRent();
+            spaces[31]->setRent(temprent1*3);
+            spaces[32]->setRent(temprent2*3);
+            spaces[34]->setRent(temprent3*3);
+            spaces[31]->setOwnership(4);
+            spaces[32]->setOwnership(5);
+            spaces[34]->setOwnership(6);
+        }
+    }
+    if ((spaces[37]->getOwnership() !=100) &&  (spaces[39]->getOwnership() != 100)) {
+        if (spaces[37]->getOwnership() ==  spaces[39]->getOwnership()) {
+            int temprent1 = spaces[37]->getRent();
+            int temprent2 = spaces[39]->getRent();
+            spaces[37]->setRent(temprent1*2);
+            spaces[39]->setRent(temprent2*2);
+            spaces[37]->setOwnership(4);
+            spaces[39]->setOwnership(5);
         }
     }
 
@@ -1002,6 +1091,8 @@ void MainWindow::on_pushButton_2_clicked()
         else{
             ui->Player1_inJail->setText("No");
         }
+
+        //Do we have a winner?
         if(players[0]->getBank() < 0){
             QMessageBox::information(this, "Player 2 WINS", "Player 1's Bank account has been overdrawn. Player 2 Wins the game!!!!!!");
             QApplication::quit();
@@ -1029,6 +1120,8 @@ void MainWindow::on_pushButton_2_clicked()
         else{
             ui->Player2_inJail->setText("No");
         }
+
+        //Do we have a winner?
         if(players[0]->getBank() < 0){
             QMessageBox::information(this, "Player 2 WINS", "Player 1's Bank account has been overdrawn. Player 1 Wins the game!!!!!!");
             QApplication::quit();
@@ -1044,8 +1137,6 @@ void MainWindow::on_pushButton_2_clicked()
         numberOfTurns = numberOfTurns +1;
         ui->TotalTurns->setText("Total Number of Turns: " + QString::number(numberOfTurns));
     }
-
-
 }
 /*
 void MainWindow::on_pushButton_3_clicked(){
