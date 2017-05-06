@@ -51,6 +51,10 @@ public:
         ownedproperty[newOwned] = 1;
     }
 
+    int getOwned(int newcheck){
+        return ownedproperty[newcheck];
+    }
+
     int getPosition(){
         return position;
     }
