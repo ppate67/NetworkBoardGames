@@ -982,6 +982,8 @@ void MainWindow::on_pushButton_2_clicked()
             int temprent2 = spaces[3]->getRent();
             spaces[1]->setRent(temprent1*2);
             spaces[3]->setRent(temprent2*2);
+            spaces[1]->setOwnership(4);
+            spaces[3]->setOwnership(5);
         }
     }
     if ((spaces[6]->getOwnership() !=100) &&  (spaces[8]->getOwnership() != 100) && (spaces[9]->getOwnership() !=100)) {
@@ -992,6 +994,9 @@ void MainWindow::on_pushButton_2_clicked()
             spaces[6]->setRent(temprent1*3);
             spaces[8]->setRent(temprent2*3);
             spaces[9]->setRent(temprent3*3);
+            spaces[6]->setOwnership(4);
+            spaces[8]->setOwnership(5);
+            spaces[9]->setOwnership(6);
         }
     }
     if ((spaces[11]->getOwnership() !=100) &&  (spaces[13]->getOwnership() != 100) && (spaces[14]->getOwnership() !=100)) {
@@ -1002,6 +1007,9 @@ void MainWindow::on_pushButton_2_clicked()
             spaces[11]->setRent(temprent1*3);
             spaces[13]->setRent(temprent2*3);
             spaces[14]->setRent(temprent3*3);
+            spaces[11]->setOwnership(4);
+            spaces[13]->setOwnership(5);
+            spaces[14]->setOwnership(6);
         }
     }
     if ((spaces[16]->getOwnership() !=100) &&  (spaces[18]->getOwnership() != 100) && (spaces[19]->getOwnership() !=100)) {
@@ -1012,6 +1020,9 @@ void MainWindow::on_pushButton_2_clicked()
             spaces[16]->setRent(temprent1*3);
             spaces[18]->setRent(temprent2*3);
             spaces[19]->setRent(temprent3*3);
+            spaces[16]->setOwnership(4);
+            spaces[18]->setOwnership(5);
+            spaces[19]->setOwnership(6);
         }
     }
     if ((spaces[21]->getOwnership() !=100) &&  (spaces[23]->getOwnership() != 100) && (spaces[24]->getOwnership() !=100)) {
@@ -1022,6 +1033,9 @@ void MainWindow::on_pushButton_2_clicked()
             spaces[21]->setRent(temprent1*3);
             spaces[23]->setRent(temprent2*3);
             spaces[24]->setRent(temprent3*3);
+            spaces[21]->setOwnership(4);
+            spaces[23]->setOwnership(5);
+            spaces[24]->setOwnership(6);
         }
     }
     if ((spaces[26]->getOwnership() !=100) &&  (spaces[27]->getOwnership() != 100) && (spaces[29]->getOwnership() !=100)) {
@@ -1032,6 +1046,9 @@ void MainWindow::on_pushButton_2_clicked()
             spaces[26]->setRent(temprent1*3);
             spaces[27]->setRent(temprent2*3);
             spaces[29]->setRent(temprent3*3);
+            spaces[26]->setOwnership(4);
+            spaces[27]->setOwnership(5);
+            spaces[29]->setOwnership(6);
         }
     }
     if ((spaces[31]->getOwnership() !=100) &&  (spaces[32]->getOwnership() != 100) && (spaces[34]->getOwnership() !=100)) {
@@ -1042,6 +1059,9 @@ void MainWindow::on_pushButton_2_clicked()
             spaces[31]->setRent(temprent1*3);
             spaces[32]->setRent(temprent2*3);
             spaces[34]->setRent(temprent3*3);
+            spaces[31]->setOwnership(4);
+            spaces[32]->setOwnership(5);
+            spaces[34]->setOwnership(6);
         }
     }
     if ((spaces[37]->getOwnership() !=100) &&  (spaces[39]->getOwnership() != 100)) {
@@ -1050,6 +1070,8 @@ void MainWindow::on_pushButton_2_clicked()
             int temprent2 = spaces[39]->getRent();
             spaces[37]->setRent(temprent1*2);
             spaces[39]->setRent(temprent2*2);
+            spaces[37]->setOwnership(4);
+            spaces[39]->setOwnership(5);
         }
     }
 
