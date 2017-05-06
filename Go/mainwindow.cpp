@@ -12,7 +12,7 @@
 #include "QGroupBox"
 #include "QInputDialog"
 #include "QScrollArea"
-
+#include "Monopoly/Monopoly_graphics/monopolyboard.h"
 int gameidtojoin=-1;
 int MainWindow::offline=0;
 bool MainWindow::victory=false;
@@ -355,10 +355,12 @@ void MainWindow::on_pushButton_5_clicked()
     connect(myWidget, SIGNAL(destroyed()), this, SLOT(leaveCheckers()));
     Checkers::offline=offline;
 }
-
+monopolyboard* m =nullptr;
 void MainWindow::on_pushButton_4_clicked()
 {
     //create monopoly game
+    m=new monopolyboard();
+    m->show();
 }
 
 void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
