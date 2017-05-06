@@ -772,14 +772,14 @@ MainWindow::MainWindow(QWidget *parent) :
     QPixmap board(":/board.jpg");
     ui->label->setPixmap(board.scaled(551,551,Qt::KeepAspectRatio));
 
-    /*//Display Piece 1
-    QPixmap piece1(":/player1piece.png");
+    //Display Piece 1
+    QPixmap piece1(":/piece1.png");
     ui->label_3->setPixmap(piece1.scaled(100,100, Qt::KeepAspectRatio));
 
     //Display Piece 2
-    QPixmap piece2(":/player2piece.png");
-    ui->label_4->setPixmap(piece1.scaled(100,100, Qt::KeepAspectRatio));
-    */
+    QPixmap piece2(":/piece2.png");
+    ui->label_4->setPixmap(piece2.scaled(100,100, Qt::KeepAspectRatio));
+
 
     //Display ScoreBoard
     ui->Player1_Space->setText(QString::number(players[0]->getPosition()) + "- " + QString::fromStdString(spaces[players[0]->getPosition()]->getName()));
@@ -823,8 +823,10 @@ void MainWindow::on_pushButton_2_clicked()
             QMessageBox::information(this, tr("Monopoly"),tr("You have declined to use your 'Get out of Jail Free' card."));
         }
     }
+
     //Rolls Dice and Moves The Player
     dieRoll(roll1, roll2, totalRoll);
+
     //Checks if player is in jail and needs doubles on the roll
     if (players[turnNumber]->getJailStatus() == true){
         if (roll1 == roll2){
@@ -847,14 +849,14 @@ void MainWindow::on_pushButton_2_clicked()
 
 
 
-  /*  //move players piece on board
+    //move players piece on board
     if (turnNumber == 0) //Adjust Player one's position
         ui->label_3->move(spaces[players[0]->getPosition()]->getX() , spaces[players[0]->getPosition()]->getY());
 
     if (turnNumber == 1) //Adjust Player Two's position
         ui->label_4->move(spaces[players[1]->getPosition()]->getX(), spaces[players[1]->getPosition()]->getY());
 
-*/
+
     //Loops Player Back Around the Board and Pays them $200 as they pass go
     if(players[turnNumber]->getPosition()>40){
         players[turnNumber]->setPosition(players[turnNumber]->getPosition()-40);

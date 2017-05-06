@@ -114,7 +114,13 @@ public:
         }
     }
 
+    int getX(){
+        return xCoordinate;
+    }
 
+    int getY(){
+        return yCoordinate;
+    }
 
     string getBoardname(boardSpace a){
         return a.name;
