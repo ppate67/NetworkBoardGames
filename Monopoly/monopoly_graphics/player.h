@@ -73,6 +73,10 @@ public:
 
     void movePlayer(int distance){
         position = position + distance;
+        if(position > 39){
+            position -= 40;
+            bank += 200;
+        }
 
     }
 

@@ -12,7 +12,7 @@ private:
     int Ownership;
     int price;
     int freeParking;
-    bool occupied;
+    //bool occupied;
     int owned;
     bool mortgaged;
     int houses;
@@ -69,9 +69,11 @@ public:
         freeParking = initMoney;
     }
 
+    /*
     void setOccupied(bool initOccupied){
         occupied = initOccupied;
     }
+    */
 
     void setOwnership(int initOwnership){
         Ownership = initOwnership;
@@ -122,7 +124,7 @@ public:
         return yCoordinate;
     }
 
-    string getBoardname(boardSpace a){
+    string getBoardname(const boardSpace& a){
         return a.name;
     }
 
