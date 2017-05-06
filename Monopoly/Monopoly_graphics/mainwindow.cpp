@@ -48,14 +48,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     players[0]->setName("Player 1");
     players[0]->setUserID(1);
-    players[0]->setBank(500);
+    players[0]->setBank(2000);
     players[0]->setJailFree(0);
     players[0]->setPosition(0);
     players[0]->setJail(false);
 
     players[1]->setName("Player 2");
     players[1]->setUserID(2);
-    players[1]->setBank(500);
+    players[1]->setBank(2000);
     players[1]->setJailFree(0);
     players[1]->setPosition(0);
     players[1]->setJail(false);
@@ -91,7 +91,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[1]->setOccupied(false);
     spaces[1]->setOwnership(100);
     spaces[1]->setMortgaged(false);
-    spaces[1]->setRent(2);
+    spaces[1]->setRent(20);
     spaces[1]->setTax(0);
     spaces[1]->setActionText("$60");
     spaces[1]->setXcoordinate(640);
@@ -119,7 +119,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[3]->setOccupied(false);
     spaces[3]->setOwnership(100);
     spaces[3]->setMortgaged(false);
-    spaces[3]->setRent(4);
+    spaces[3]->setRent(40);
     spaces[3]->setTax(0);
     spaces[3]->setActionText("$60");
     spaces[3]->setXcoordinate(510);
@@ -134,7 +134,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[4]->setOccupied(false);
     spaces[4]->setOwnership(100);
     spaces[4]->setMortgaged(false);
-    spaces[4]->setRent(4);
+    spaces[4]->setRent(200);
     spaces[4]->setTax(200);
     spaces[4]->setActionText("Pay $200");
     spaces[4]->setXcoordinate(450);
@@ -148,7 +148,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[5]->setOccupied(false);
     spaces[5]->setOwnership(100);
     spaces[5]->setMortgaged(false);
-    spaces[5]->setRent(25);
+    spaces[5]->setRent(100);
     spaces[5]->setTax(0);
     spaces[5]->setActionText("$200");
     spaces[5]->setXcoordinate(390);
@@ -162,7 +162,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[6]->setOccupied(false);
     spaces[6]->setOwnership(100);
     spaces[6]->setMortgaged(false);
-    spaces[6]->setRent(6);
+    spaces[6]->setRent(60);
     spaces[6]->setTax(0);
     spaces[6]->setActionText("$100");
     spaces[6]->setXcoordinate(330);
@@ -190,7 +190,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[8]->setOccupied(false);
     spaces[8]->setOwnership(100);
     spaces[8]->setMortgaged(false);
-    spaces[8]->setRent(6);
+    spaces[8]->setRent(60);
     spaces[8]->setTax(0);
     spaces[8]->setActionText("$100");
     spaces[8]->setXcoordinate(200);
@@ -204,7 +204,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[9]->setOccupied(false);
     spaces[9]->setOwnership(100);
     spaces[9]->setMortgaged(false);
-    spaces[9]->setRent(8);
+    spaces[9]->setRent(80);
     spaces[9]->setTax(0);
     spaces[9]->setActionText("$120");
     spaces[9]->setXcoordinate(140);
@@ -233,7 +233,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[11]->setOccupied(false);
     spaces[11]->setOwnership(100);
     spaces[11]->setMortgaged(false);
-    spaces[11]->setRent(10);
+    spaces[11]->setRent(100);
     spaces[11]->setTax(0);
     spaces[11]->setActionText("$140");
     spaces[11]->setXcoordinate(50);
@@ -247,7 +247,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[12]->setOccupied(false);
     spaces[12]->setOwnership(100);
     spaces[12]->setMortgaged(false);
-    spaces[12]->setRent(10);
+    spaces[12]->setRent(100);
     spaces[12]->setTax(0);
     spaces[12]->setActionText("$150");
     spaces[12]->setXcoordinate(50);
@@ -261,7 +261,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[13]->setOccupied(false);
     spaces[13]->setOwnership(100);
     spaces[13]->setMortgaged(false);
-    spaces[13]->setRent(10);
+    spaces[13]->setRent(100);
     spaces[13]->setTax(0);
     spaces[13]->setActionText("$140");
     spaces[13]->setXcoordinate(50);
@@ -275,7 +275,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[14]->setOccupied(false);
     spaces[14]->setOwnership(100);
     spaces[14]->setMortgaged(false);
-    spaces[14]->setRent(12);
+    spaces[14]->setRent(120);
     spaces[14]->setTax(0);
     spaces[14]->setActionText("$160");
     spaces[14]->setXcoordinate(50);
@@ -289,7 +289,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[15]->setOccupied(false);
     spaces[15]->setOwnership(100);
     spaces[15]->setMortgaged(false);
-    spaces[15]->setRent(25);
+    spaces[15]->setRent(100);
     spaces[15]->setTax(0);
     spaces[15]->setActionText("$200");
     spaces[15]->setXcoordinate(50);
@@ -303,7 +303,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[16]->setOccupied(false);
     spaces[16]->setOwnership(100);
     spaces[16]->setMortgaged(false);
-    spaces[16]->setRent(14);
+    spaces[16]->setRent(140);
     spaces[16]->setTax(0);
     spaces[16]->setActionText("$180");
     spaces[16]->setXcoordinate(50);
@@ -331,7 +331,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[18]->setOccupied(false);
     spaces[18]->setOwnership(100);
     spaces[18]->setMortgaged(false);
-    spaces[18]->setRent(14);
+    spaces[18]->setRent(140);
     spaces[18]->setTax(0);
     spaces[18]->setActionText("$180");
     spaces[18]->setXcoordinate(50);
@@ -345,7 +345,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[19]->setOccupied(false);
     spaces[19]->setOwnership(100);
     spaces[19]->setMortgaged(false);
-    spaces[19]->setRent(16);
+    spaces[19]->setRent(160);
     spaces[19]->setTax(0);
     spaces[19]->setActionText("$200");
     spaces[19]->setXcoordinate(50);
@@ -373,7 +373,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[21]->setOccupied(false);
     spaces[21]->setOwnership(100);
     spaces[21]->setMortgaged(false);
-    spaces[21]->setRent(18);
+    spaces[21]->setRent(180);
     spaces[21]->setTax(0);
     spaces[21]->setActionText("$220");
     spaces[21]->setXcoordinate(140);
@@ -401,7 +401,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[23]->setOccupied(false);
     spaces[23]->setOwnership(100);
     spaces[23]->setMortgaged(false);
-    spaces[23]->setRent(18);
+    spaces[23]->setRent(180);
     spaces[23]->setTax(0);
     spaces[23]->setActionText("$220");
     spaces[23]->setXcoordinate(270);
@@ -415,7 +415,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[24]->setOccupied(false);
     spaces[24]->setOwnership(100);
     spaces[24]->setMortgaged(false);
-    spaces[24]->setRent(20);
+    spaces[24]->setRent(200);
     spaces[24]->setTax(0);
     spaces[24]->setActionText("$240");
     spaces[24]->setXcoordinate(330);
@@ -429,7 +429,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[25]->setOccupied(false);
     spaces[25]->setOwnership(100);
     spaces[25]->setMortgaged(false);
-    spaces[25]->setRent(25);
+    spaces[25]->setRent(250);
     spaces[25]->setTax(0);
     spaces[25]->setActionText("$200");
     spaces[25]->setXcoordinate(390);
@@ -443,7 +443,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[26]->setOccupied(false);
     spaces[26]->setOwnership(100);
     spaces[26]->setMortgaged(false);
-    spaces[26]->setRent(22);
+    spaces[26]->setRent(220);
     spaces[26]->setTax(0);
     spaces[26]->setActionText("$260");
     spaces[26]->setXcoordinate(450);
@@ -457,7 +457,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[27]->setOccupied(false);
     spaces[27]->setOwnership(100);
     spaces[27]->setMortgaged(false);
-    spaces[27]->setRent(22);
+    spaces[27]->setRent(220);
     spaces[27]->setTax(0);
     spaces[27]->setActionText("$260");
     spaces[27]->setXcoordinate(510);
@@ -471,7 +471,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[28]->setOccupied(false);
     spaces[28]->setOwnership(100);
     spaces[28]->setMortgaged(false);
-    spaces[28]->setRent(10);
+    spaces[28]->setRent(100);
     spaces[28]->setTax(0);
     spaces[28]->setActionText("$150");
     spaces[28]->setXcoordinate(580);
@@ -485,7 +485,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[29]->setOccupied(false);
     spaces[29]->setOwnership(100);
     spaces[29]->setMortgaged(false);
-    spaces[29]->setRent(22);
+    spaces[29]->setRent(220);
     spaces[29]->setTax(0);
     spaces[29]->setActionText("280");
     spaces[29]->setXcoordinate(640);
@@ -513,7 +513,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[31]->setOccupied(false);
     spaces[31]->setOwnership(100);
     spaces[31]->setMortgaged(false);
-    spaces[31]->setRent(26);
+    spaces[31]->setRent(260);
     spaces[31]->setTax(0);
     spaces[31]->setActionText("$300");
     spaces[31]->setXcoordinate(730);
@@ -527,7 +527,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[32]->setOccupied(false);
     spaces[32]->setOwnership(100);
     spaces[32]->setMortgaged(false);
-    spaces[32]->setRent(26);
+    spaces[32]->setRent(260);
     spaces[32]->setTax(0);
     spaces[32]->setActionText("$300");
     spaces[32]->setXcoordinate(730);
@@ -555,7 +555,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[34]->setOccupied(false);
     spaces[34]->setOwnership(100);
     spaces[34]->setMortgaged(false);
-    spaces[34]->setRent(28);
+    spaces[34]->setRent(280);
     spaces[34]->setTax(0);
     spaces[34]->setActionText("$320");
     spaces[34]->setXcoordinate(730);
@@ -569,7 +569,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[35]->setOccupied(false);
     spaces[35]->setOwnership(100);
     spaces[35]->setMortgaged(false);
-    spaces[35]->setRent(25);
+    spaces[35]->setRent(250);
     spaces[35]->setTax(0);
     spaces[35]->setActionText("$200");
     spaces[35]->setXcoordinate(730);
@@ -597,7 +597,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[37]->setOccupied(false);
     spaces[37]->setOwnership(100);
     spaces[37]->setMortgaged(false);
-    spaces[37]->setRent(35);
+    spaces[37]->setRent(350);
     spaces[37]->setTax(0);
     spaces[37]->setActionText("$350");
     spaces[37]->setXcoordinate(730);
@@ -611,8 +611,8 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[38]->setOccupied(false);
     spaces[38]->setOwnership(100);
     spaces[38]->setMortgaged(false);
-    spaces[38]->setRent(0);
-    spaces[38]->setTax(75);
+    spaces[38]->setRent(100);
+    spaces[38]->setTax(100);
     spaces[38]->setActionText("Pay $100");
     spaces[38]->setXcoordinate(730);
     spaces[38]->setYcoordinate(500);
@@ -625,7 +625,7 @@ MainWindow::MainWindow(QWidget *parent) :
     spaces[39]->setOccupied(false);
     spaces[39]->setOwnership(100);
     spaces[39]->setMortgaged(false);
-    spaces[39]->setRent(50);
+    spaces[39]->setRent(400);
     spaces[39]->setTax(0);
     spaces[39]->setActionText("$400");
     spaces[39]->setXcoordinate(730);
@@ -824,6 +824,8 @@ void MainWindow::on_pushButton_2_clicked()
         }
     }
 
+
+
     //Rolls Dice and Moves The Player
     dieRoll(roll1, roll2, totalRoll);
 
@@ -871,7 +873,7 @@ void MainWindow::on_pushButton_2_clicked()
     int Rent = spaces[players[turnNumber]->getPosition()]->getRent();
     int PlayerOwner = players[turnNumber]->getUserID();
 
-    ui->label_2->setText(QString::number(Ownership));
+    ui->label_2->setText(QString::fromStdString(typeOfSpace));
 
     //Checks to See if the Spot is a Chance Location
     if(typeOfSpace == "Chance"){
@@ -895,6 +897,8 @@ void MainWindow::on_pushButton_2_clicked()
         else if(randFourteen == 5){
              players[turnNumber]->setJail(true);
              players[turnNumber]->setPosition(10);
+             ui->label_3->move(spaces[players[0]->getPosition()]->getX() , spaces[players[0]->getPosition()]->getY());
+             ui->label_4->move(spaces[players[1]->getPosition()]->getX(), spaces[players[1]->getPosition()]->getY());
         }
 
         //Displays Message Box With What Card You Drew
@@ -918,10 +922,13 @@ void MainWindow::on_pushButton_2_clicked()
         }*/
         if(randFourteen == 4){
             players[turnNumber]->addJailFree();
+
         }
         else if(randFourteen == 5){
              players[turnNumber]->setJail(true);
              players[turnNumber]->setPosition(10);
+             ui->label_3->move(spaces[players[0]->getPosition()]->getX() , spaces[players[0]->getPosition()]->getY());
+             ui->label_4->move(spaces[players[1]->getPosition()]->getX(), spaces[players[1]->getPosition()]->getY());
         }
 
         //Displays Message Box With What Card You Drew
@@ -929,7 +936,7 @@ void MainWindow::on_pushButton_2_clicked()
     }
 
     //Buying Property, paying rent, etc.
-    if (typeOfSpace == "Property"  ||typeOfSpace ==  "Utility" || typeOfSpace == "Railroad"){
+    if (typeOfSpace == "Property"  ||typeOfSpace ==  "Utility" || typeOfSpace == "RailRoad"){
         if (spaces[players[turnNumber]->getPosition()]->getOwnership() == 100) {
             QMessageBox::StandardButton reply;
             reply = QMessageBox::question(this, "Buying Property", "Would you like to purchase "+QString::fromStdString(spaces[players[turnNumber]->getPosition()]->getName()), QMessageBox::Yes|QMessageBox::No);
@@ -947,16 +954,38 @@ void MainWindow::on_pushButton_2_clicked()
             }
         }
         else if (Ownership != 100 || Ownership != turnNumber+1) {
-            QMessageBox::information(this, "Pay Rent", "You landed on owned property.");
-            int tempBank = players[turnNumber]->getBank();
-            players[turnNumber]->setBank(tempBank - Rent);
+            QMessageBox::information(this, "Pay Rent", "You landed on owned property. Pay $" + QString::number(Rent) + " to the Owner");
+            int tempBankPayer = players[turnNumber]->getBank();
+            players[turnNumber]->setBank(tempBankPayer - Rent);
+
+            if(turnNumber  == 0){
+                   int tempBankReceiver = players[1]->getBank();
+                   players[1]->setBank(tempBankReceiver + Rent);
+                   ui->Player2_Bank_Amount->setText("$" + QString::number(players[1]->getBank()));
+            }
+            if(turnNumber  == 1){
+                   int tempBankReceiver = players[0]->getBank();
+                   players[0]->setBank(tempBankReceiver + Rent);
+                   ui->Player1_Bank_Amount->setText("$" + QString::number(players[0]->getBank()));
+            }
+
+
         }
     }
 
     //Checks to See if the player is on the go directly to jail space
     if(typeOfSpace == "GoJail"){
+            QMessageBox::information(this, "Go to Jail", "Go directly to Jail. Do not Pass Go or Collect $200");
             players[turnNumber]->setJail(true);
             players[turnNumber]->setPosition(10);
+            ui->label_3->move(spaces[players[0]->getPosition()]->getX() , spaces[players[0]->getPosition()]->getY());
+            ui->label_4->move(spaces[players[1]->getPosition()]->getX(), spaces[players[1]->getPosition()]->getY());
+    }
+
+    if(typeOfSpace == "Tax"){
+        QMessageBox::information(this, "Pay Tax", "You landed on a Tax Space. Pay $" + QString::number(Rent) + " In Tax");
+        int tempBank = players[turnNumber]->getBank();
+        players[turnNumber]->setBank(tempBank - Rent);
     }
 
     int currentUserID = players[turnNumber]->getUserID();
@@ -973,6 +1002,15 @@ void MainWindow::on_pushButton_2_clicked()
         else{
             ui->Player1_inJail->setText("No");
         }
+        if(players[0]->getBank() < 0){
+            QMessageBox::information(this, "Player 2 WINS", "Player 1's Bank account has been overdrawn. Player 2 Wins the game!!!!!!");
+            QApplication::quit();
+        }
+        if(players[1]->getBank() < 0){
+            QMessageBox::information(this, "Player 1 WINS", "Player 2's Bank account has been overdrawn. Player 1 Wins the game!!!!!!");
+            QApplication::quit();
+        }
+
         //ui->Player1_inJail->setText(QString::number(players[0]->getJailStatus()));
         turnNumber = 1;
         ui->TurnLabel->setText("Player 2's Turn");
@@ -991,6 +1029,15 @@ void MainWindow::on_pushButton_2_clicked()
         else{
             ui->Player2_inJail->setText("No");
         }
+        if(players[0]->getBank() < 0){
+            QMessageBox::information(this, "Player 2 WINS", "Player 1's Bank account has been overdrawn. Player 1 Wins the game!!!!!!");
+            QApplication::quit();
+        }
+        if(players[1]->getBank() < 0){
+            QMessageBox::information(this, "Player 1 WINS", "Player 2's Bank account has been overdrawn. Player 1 Wins the game!!!!!!");
+            QApplication::quit();
+        }
+
         //ui->Player2_inJail->setText(QString::number(players[1]->getJailStatus()));
         turnNumber = 0;
         ui->TurnLabel->setText("Player 1's Turn");
@@ -1000,6 +1047,7 @@ void MainWindow::on_pushButton_2_clicked()
 
 
 }
+/*
 void MainWindow::on_pushButton_3_clicked(){
     players[turnNumber]->setJail(true);
 
@@ -1007,3 +1055,4 @@ void MainWindow::on_pushButton_3_clicked(){
 void MainWindow::on_pushButton_4_clicked(){
     players[turnNumber]->addJailFree();
     }
+*/
