@@ -875,6 +875,7 @@ void MainWindow::on_pushButton_2_clicked()
 
     ui->label_2->setText(QString::fromStdString(typeOfSpace));
 
+
     //Checks to See if the Spot is a Chance Location
     if(typeOfSpace == "Chance"){
         int tempBank = players[turnNumber]->getBank(); //Gets the Value of the Players Bank so they can get paid or pay their dues
@@ -946,6 +947,7 @@ void MainWindow::on_pushButton_2_clicked()
                 //This pays to deducts money from player
                 players[turnNumber]->setBank(tempBank - PropertyCost);
                 spaces[players[turnNumber]->getPosition()]->setOwnership(PlayerOwner);
+                players[turnNumber]->setOwned(players[turnNumber]->getPosition());
                 //QApplication::quit();
             }
             else {
@@ -970,6 +972,84 @@ void MainWindow::on_pushButton_2_clicked()
             }
 
 
+        }
+    }
+
+    //Checks for monopolies and adjusts rent
+    if ((spaces[1]->getOwnership() !=100) &&  (spaces[3]->getOwnership() != 100)) {
+        if (spaces[1]->getOwnership() ==  spaces[3]->getOwnership()) {
+            int temprent1 = spaces[1]->getRent();
+            int temprent2 = spaces[3]->getRent();
+            spaces[1]->setRent(temprent1*2);
+            spaces[3]->setRent(temprent2*2);
+        }
+    }
+    if ((spaces[6]->getOwnership() !=100) &&  (spaces[8]->getOwnership() != 100) && (spaces[9]->getOwnership() !=100)) {
+        if (spaces[6]->getOwnership() ==  spaces[8]->getOwnership() == spaces[9]->getOwnership()) {
+            int temprent1 = spaces[6]->getRent();
+            int temprent2 = spaces[8]->getRent();
+            int temprent3 = spaces[9]->getRent();
+            spaces[6]->setRent(temprent1*3);
+            spaces[8]->setRent(temprent2*3);
+            spaces[9]->setRent(temprent3*3);
+        }
+    }
+    if ((spaces[11]->getOwnership() !=100) &&  (spaces[13]->getOwnership() != 100) && (spaces[14]->getOwnership() !=100)) {
+        if (spaces[11]->getOwnership() ==  spaces[13]->getOwnership() == spaces[14]->getOwnership()) {
+            int temprent1 = spaces[11]->getRent();
+            int temprent2 = spaces[13]->getRent();
+            int temprent3 = spaces[14]->getRent();
+            spaces[11]->setRent(temprent1*3);
+            spaces[13]->setRent(temprent2*3);
+            spaces[14]->setRent(temprent3*3);
+        }
+    }
+    if ((spaces[16]->getOwnership() !=100) &&  (spaces[18]->getOwnership() != 100) && (spaces[19]->getOwnership() !=100)) {
+        if (spaces[16]->getOwnership() ==  spaces[18]->getOwnership() == spaces[19]->getOwnership()) {
+            int temprent1 = spaces[16]->getRent();
+            int temprent2 = spaces[18]->getRent();
+            int temprent3 = spaces[19]->getRent();
+            spaces[16]->setRent(temprent1*3);
+            spaces[18]->setRent(temprent2*3);
+            spaces[19]->setRent(temprent3*3);
+        }
+    }
+    if ((spaces[21]->getOwnership() !=100) &&  (spaces[23]->getOwnership() != 100) && (spaces[24]->getOwnership() !=100)) {
+        if (spaces[21]->getOwnership() ==  spaces[23]->getOwnership() == spaces[24]->getOwnership()) {
+            int temprent1 = spaces[21]->getRent();
+            int temprent2 = spaces[23]->getRent();
+            int temprent3 = spaces[24]->getRent();
+            spaces[21]->setRent(temprent1*3);
+            spaces[23]->setRent(temprent2*3);
+            spaces[24]->setRent(temprent3*3);
+        }
+    }
+    if ((spaces[26]->getOwnership() !=100) &&  (spaces[27]->getOwnership() != 100) && (spaces[29]->getOwnership() !=100)) {
+        if (spaces[26]->getOwnership() ==  spaces[27]->getOwnership() == spaces[29]->getOwnership()) {
+            int temprent1 = spaces[26]->getRent();
+            int temprent2 = spaces[27]->getRent();
+            int temprent3 = spaces[29]->getRent();
+            spaces[26]->setRent(temprent1*3);
+            spaces[27]->setRent(temprent2*3);
+            spaces[29]->setRent(temprent3*3);
+        }
+    }
+    if ((spaces[31]->getOwnership() !=100) &&  (spaces[32]->getOwnership() != 100) && (spaces[34]->getOwnership() !=100)) {
+        if (spaces[31]->getOwnership() ==  spaces[32]->getOwnership() == spaces[34]->getOwnership()) {
+            int temprent1 = spaces[31]->getRent();
+            int temprent2 = spaces[32]->getRent();
+            int temprent3 = spaces[34]->getRent();
+            spaces[31]->setRent(temprent1*3);
+            spaces[32]->setRent(temprent2*3);
+            spaces[34]->setRent(temprent3*3);
+        }
+    }
+    if ((spaces[37]->getOwnership() !=100) &&  (spaces[39]->getOwnership() != 100)) {
+        if (spaces[37]->getOwnership() ==  spaces[39]->getOwnership()) {
+            int temprent1 = spaces[37]->getRent();
+            int temprent2 = spaces[39]->getRent();
+            spaces[37]->setRent(temprent1*2);
+            spaces[39]->setRent(temprent2*2);
         }
     }
 
