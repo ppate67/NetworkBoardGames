@@ -9,7 +9,7 @@ using namespace std;
 //http://doc.qt.io/qt-5/qsqldatabase.html for more database commands from QSQLDatabase
 //http://blog.davidecoppola.com/2016/11/howto-embed-database-in-application-with-sqlite-and-qt/
 
-int main() {
+int main1() {
 //Connect to a Database
     const QString DRIVER("QSQLITE");
 
@@ -30,19 +30,20 @@ int main() {
     }
 
 //Insert Data
-    if(!query.exec("INSERT INTO player(name) VALUES('Tom Cruz')"))
+    if(!query.exec("INSERT INTO player(name) VALUES('Tom Cruz')"));
       //  qWarning() << "ERROR: " << query.lastError().text();
 
 //Query Table
+        /*
     query.prepare("SELECT name FROM people WHERE id = ?");
     query.addBindValue(mInputText->test().toInt());
     if(!query.exec())
        // qWarning << "ERROR: " << query.lastError().text();
-    if(query.first()) {     //Retreive result of executed query
+    if(query.first())      //Retreive result of executed query
         mOutputText->setText(query.value(0).toString());
     else
-       mOutputText->setText("Player not found");
-    }
+       mOutputText->setText("Player not found");*/
+
 }
 
 //--------OLD CODE-------------------

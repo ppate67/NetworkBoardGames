@@ -5,6 +5,7 @@
 #include "cards.h"
 #include <QMainWindow>
 #include <QtGui>
+#include "Networking/Client/client.h"
 #include <iostream>
 using namespace std;
 
@@ -23,14 +24,15 @@ private:
     Card** Chance;
     int turnNumber;
     int numberOfTurns;
-
+    static monopolyboard* head;
 
 
 public:
     explicit monopolyboard(QWidget *parent = 0);
     ~monopolyboard();
-
-
+    static int turn;
+    void sendGameMsg();
+    static void receiveUpdates(char vals[], int size);
 private slots:
     void on_pushButton_2_clicked();
     //void on_Test_Button_clicked();

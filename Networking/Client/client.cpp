@@ -4,6 +4,7 @@
 #include "Checkers1/checkers.h"
 #include "fstream"
 #include "QMessageBox"
+#include "Monopoly/Monopoly_graphics/monopolyboard.h"
 #include "Go/mainwindow.h"
 using namespace std;
 QTcpSocket* Client::s=NULL;
@@ -99,6 +100,14 @@ void Client :: readyRead(){
             Checkers::receiveUpdates(datamessage[i-2],i-2);
 
         }
+
+    }
+    if(type==3){//monopoly message
+        char datamessage[168];
+        for(int i=2; i<170;i++){
+            datamessage[i-2] = char(message[i]);
+        }
+        monopolyboard::receiveUpdates(datamessage,message.length());
 
     }
     if(type==8){//Informational messages needed by client to know what games are on the server and to get other background info
@@ -198,10 +207,13 @@ void Client::handleReply2(vector<char> data, int size){
     }
     else if(int(data[0])==9){
         string message ="";
-        message+=GameManager::playerList[int(data[1])];
-        for(int i=2; i<size;i++)
-            message+=char(data[i]);
-        ChatWindow::receiveChatMessage(message);
+        if(GameManager::playerList.size()>int(data[1])){
+            message+=GameManager::playerList[int(data[1])];
+            for(int i=2; i<size;i++)
+                message+=char(data[i]);
+
+            ChatWindow::receiveChatMessage(message);
+        }
     }
 }
 void Client::handleReply(vector<int> data,int size){

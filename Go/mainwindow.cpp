@@ -16,6 +16,8 @@
 int gameidtojoin=-1;
 int MainWindow::offline=0;
 bool MainWindow::victory=false;
+monopolyboard* m =nullptr;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -28,10 +30,12 @@ MainWindow::MainWindow(QWidget *parent) :
     populateList(5);
     connect(ui->action,SIGNAL(triggered()),this,SLOT(changeServer()));
     connect(ui->actionChat,SIGNAL(triggered()),this,SLOT(initiateChat()));
+
 }
 
 MainWindow::~MainWindow()
 {
+    Client::s->close();
     delete ui;
 }
 Go *tile[13][13]={{NULL}};
@@ -175,6 +179,11 @@ void MainWindow::on_pushButton_clicked()
             Checkers::playercolor=1;
             Checkers::checkersturn=0;
 
+        }
+        else if(gametype==3){
+            m = new monopolyboard;
+            m->show();
+            monopolyboard::turn=0;
         }
 }
 
@@ -355,7 +364,7 @@ void MainWindow::on_pushButton_5_clicked()
     connect(myWidget, SIGNAL(destroyed()), this, SLOT(leaveCheckers()));
     Checkers::offline=offline;
 }
-monopolyboard* m =nullptr;
+
 void MainWindow::on_pushButton_4_clicked()
 {
     //create monopoly game
@@ -533,16 +542,17 @@ void ChatWindow::setSlots(QWidget *baseWidget){
 }
 
 void ChatWindow::refreshPlayerList(){
-
-    groupBox->clear();
-    for(int i=0;i<GameManager::playerList.size();i++){
-        string name = GameManager::playerList[i];
-        QRadioButton *radio1 = new QRadioButton(QString::fromStdString(name));
-        vbox->addWidget(radio1);
+    if(w!=nullptr){
+        groupBox->clear();
+        for(int i=0;i<GameManager::playerList.size();i++){
+            string name = GameManager::playerList[i];
+            QRadioButton *radio1 = new QRadioButton(QString::fromStdString(name));
+            vbox->addWidget(radio1);
+        }
+        vbox->addStretch(1);
+        groupBox->setLayout(vbox);
+        groupBox->show();
     }
-    vbox->addStretch(1);
-    groupBox->setLayout(vbox);
-    groupBox->show();
 }
 void ChatWindow::sendChat(){
     //sends text info inside the textinput over the socket interface

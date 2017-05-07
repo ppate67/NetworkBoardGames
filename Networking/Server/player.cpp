@@ -45,6 +45,7 @@ cout << " Client connected at " << id <<endl;
 }*/
 void player :: connected(){}
 void player :: disconnected(){
+    cout << "Removing Player from Server Register"<< endl;
     for(int i=0; i<MAXNUMPLAYER; i++){
         if(slist[i]==socket){
             slist[i]=NULL;
@@ -65,7 +66,7 @@ void player :: readyRead(){
     int length = playerinput.length();
     int gameid=int(playerinput[0]);
     int type = int(playerinput[1]);
-    char  data2[length-2];
+    char data2[length-2];
     string data="";
     int handledata[5];
     string outputdata="";
@@ -333,6 +334,7 @@ void player::handleRequest2(int requestID[5],int playerID){
 
       }
     }
+
 
 
 }
