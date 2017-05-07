@@ -269,6 +269,19 @@ background-image:url(:/go icon.png)</string>
      <number>1</number>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>540</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Chat</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QMenuBar" name="menuBar">
@@ -277,7 +290,7 @@ background-image:url(:/go icon.png)</string>
      <x>0</x>
      <y>0</y>
      <width>1294</width>
-     <height>23</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -374,8 +387,8 @@ background-image:url(:/go icon.png)</string>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>301</x>
-     <y>51</y>
+     <x>-1</x>
+     <y>-1</y>
     </hint>
     <hint type="destinationlabel">
      <x>809</x>
@@ -406,8 +419,8 @@ background-image:url(:/go icon.png)</string>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>301</x>
-     <y>117</y>
+     <x>-1</x>
+     <y>-1</y>
     </hint>
     <hint type="destinationlabel">
      <x>809</x>
@@ -422,8 +435,8 @@ background-image:url(:/go icon.png)</string>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>301</x>
-     <y>95</y>
+     <x>-1</x>
+     <y>-1</y>
     </hint>
     <hint type="destinationlabel">
      <x>809</x>
@@ -438,8 +451,8 @@ background-image:url(:/go icon.png)</string>
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>301</x>
-     <y>73</y>
+     <x>-1</x>
+     <y>-1</y>
     </hint>
     <hint type="destinationlabel">
      <x>809</x>
