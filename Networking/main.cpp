@@ -9,8 +9,8 @@
  int main(int argc, char *argv[])
  {
      QApplication a(argc, argv);
-     Client client;
-     client.Connect();
+     Client::client->makeClient();
+     Client::client->Connect();
          MainWindow w;
          w.show();
  //       QWidget *myWidget = new QWidget();

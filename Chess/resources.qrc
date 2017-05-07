@@ -12,5 +12,7 @@
         <file>lightpawn.png</file>
         <file>lightqueen.png</file>
         <file>lightrook.png</file>
+        <file>Player1Logo.png</file>
+        <file>Player2Logo.png</file>
     </qresource>
 </RCC>

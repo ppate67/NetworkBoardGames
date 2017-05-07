@@ -1,8 +1,15 @@
 #include "pieces.h"
 
+int Piece::bkr = 0;
+int Piece::bkc = 4;
+int Piece::wkr = 7;
+int Piece::wkc = 4;
+
 bool Piece::checkPawn(int startRow, int startCol, int endRow, int endCol, bool occupied){
     switch(color){
+
         case 0:{ //black pieces increasing numbers in rows
+
             if (occupied == false){ // can't move forward into opposing piece
                 if (endRow == startRow + 1 && endCol == startCol)
                     return true;
@@ -13,8 +20,21 @@ bool Piece::checkPawn(int startRow, int startCol, int endRow, int endCol, bool o
             }
             else { // can only capture diagonally
                 if (endRow == startRow + 1){
-                    if (endCol == startCol - 1 || endCol == startCol + 1)
-                        return true;
+                    if (endCol == startCol - 1 || endCol == startCol + 1){
+                        bool midoccupied=true;
+                        Chess* temp = chesshead;
+                        int counter=0;
+                        while(temp!=nullptr){
+                            if(temp->getRow()>startRow)
+                                counter++;
+                            if(counter==8){
+                                midoccupied=temp->getPiece();
+                                break;
+                            }
+                            temp=temp->nexttile;
+                        }
+                        return midoccupied;
+                    }
                 }
             }
             break;
@@ -25,7 +45,20 @@ bool Piece::checkPawn(int startRow, int startCol, int endRow, int endCol, bool o
                     return true;
                 if (startRow == 6){
                     if (endRow == startRow - 2 && endCol == startCol)
-                        return true;
+                    {
+                        bool midoccupied=true;
+                        Chess* temp = chesshead;
+                        int counter=0;
+                        while(temp!=nullptr){
+                            if(temp->getRow()>endRow)
+                                counter++;
+                            if(counter==8){
+                                midoccupied=temp->getPiece();
+                                break;
+                            }
+                            temp=temp->nexttile;
+                        }
+                        return midoccupied;}
                 }
             }
             else {
@@ -119,6 +152,8 @@ bool Piece::checkValid(int endRow, int endCol, int endPieceColor, bool occupied)
         }
     }
     bool allow = false;
+    if(endRow>7 || endRow<0 || endCol>7 || endCol<0);
+    else
     switch(name){
         case 'P': allow = checkPawn(row, col, endRow, endCol, occupied);
             break;

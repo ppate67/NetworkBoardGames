@@ -44,24 +44,36 @@ cout << " Client connected at " << id <<endl;
 
 }*/
 void player :: connected(){}
-void player :: disconnected(){}
+void player :: disconnected(){
+    cout << "Removing Player from Server Register"<< endl;
+    for(int i=0; i<MAXNUMPLAYER; i++){
+        if(slist[i]==socket){
+            slist[i]=NULL;
+            MyServer::plist[i].filled=0;
+        }
+        socket->close();
+
+    }
+}
 void player :: readyRead(){
 	//this method is called by the slot signal mechanism whenever a new TCP
 	//message arrives to the server
 	//The server then handles the TCP byte array by decomposing it into its header components
 	// and its data payload components. Code branches off from there based on the header's type field.
-	
+
     QByteArray playerinput = socket->readAll();
 
     int length = playerinput.length();
     int gameid=int(playerinput[0]);
     int type = int(playerinput[1]);
+    char data2[length-2];
     string data="";
     int handledata[5];
     string outputdata="";
     for(int i=2;i<length;i++){
+        data2[i-2]=char(playerinput[i]);
         data += char(int(playerinput[i]));
-        outputdata+=int(playerinput[i]);
+        outputdata+=int(playerinput[i]+48);
         if(length==7){
             handledata[i-2]=int(playerinput[i]);
         }
@@ -93,17 +105,81 @@ void player :: readyRead(){
         if(&MyServer::plist[i]==this)
             ids=i;//finding the socket id of the client 
     if(type==8){
-        handleRequest2(handledata,ids);//if the type is 8 then the server is dealing with a client request
 
+        if(int(data2[0])==7){//adding or modifying list of playernames used for chat
+            string name = "";
+            for(int i =1; i<length; i++){
+                name+=data[i];
+            }
+            setUserName(name);
+        }
+        else if(int(data2[0])==8){
+            int id = gameid;//data2[1];
+            QByteArray output;
+            output.append(char(id));
+            output.append(char(8));//arbitrary set to 0
+            output.append(char(9));
+            //output.append(char(9));//this is an actual chat message
+            output.append(char(id));
+            for(int i=0;i<length-2;i++) {
+                output.append(char(data2[i]));
+                cout << "Sending " << data2[i];
+            }
+            cout << endl;
+            //int numnameSize=MyServer::plist.size();
+            for (int i=0; i<32; i++){
+                if(MyServer::plist[i].filled==0) {}
+                else{
+                    MyServer::plist[i].socket->write(output);
+                    MyServer::plist[i].socket->flush();
+
+                    MyServer::plist[i].socket->waitForBytesWritten(3000);
+
+                }
+            }
+        }
+
+        else
+            handleRequest2(handledata,ids);//if the type is 8 then the server is dealing with a client request
+        if(int(handledata[0])==1)
+        {  int ids=0;//id sender
+            QByteArray output;
+            for(int i=0; i<MAXNUMPLAYER; i++)
+                if(&MyServer::plist[i]==this)
+                    ids=i;
+            output.append(char(0));
+            output.append(char(8));
+            output.append(char(1));
+            output.append(char(handledata[1]));
+            int id = int(handledata[1]);//id of game
+
+            int playsize=GameManager::games[id].size();
+            for(int i =0; i<playsize; i++){
+
+                int pid=GameManager::games[id][i][2];
+                if(MyServer::plist[pid].filled==0) {}
+                else{
+                    cout << "Sending Victory Message" <<endl;
+                    MyServer::plist[pid].socket->write(output);
+                    MyServer::plist[pid].socket->flush();
+
+                    MyServer::plist[pid].socket->waitForBytesWritten(3000);
+                }
+            }
         //broadcastGames();
-
+        }
     }
+
     else
+    {
         task(&msg);
+    }
+
+
 }
 void player::handleRequest2(int requestID[5],int playerID){
 
-    if(requestID[0]==1){
+    if(requestID[0]==1){//deletes player from gamelist...informs all users
         cout << "Deleting Player: " << char(playerID+48)<<endl;
         int gameid=requestID[1];
         int playindex=requestID[2];
@@ -227,8 +303,39 @@ void player::handleRequest2(int requestID[5],int playerID){
     }
     else if(requestID[0]==6){ //ID 6 for playername
       //response to player request for a list of player usernames
-	  
+        //this sends a message of all player usernames
+      QByteArray output;
+      int ids=0;//id sender
+      output.append(char(0));
+      output.append(char(8));
+      output.append(char(6));
+      int numnameSize=MyServer::playerList.size();
+      for (int i=0; i<numnameSize; i++){
+            int nameSize = MyServer::playerList[i].size();
+
+            for(int ii=0; ii<nameSize;ii++){
+                output.append(MyServer::playerList[i][ii]);
+            }
+            output.append('/');
+
+
+      }
+      for(int i=0; i<MAXNUMPLAYER; i++){
+          int broadmsg[5]={3,1,1,1,1};
+          if(MyServer::plist[i].filled!=0){
+              //sends playername update to everyone on server so that everyone has the same almanac of users they can chat with.
+              MyServer::plist[i].socket->write(output);
+              MyServer::plist[i].socket->flush();
+
+              MyServer::plist[i].socket->waitForBytesWritten(3000);
+
+          }
+
+
+      }
     }
+
+
 
 }
 void player::handleRequest(int requestID[5],int playerID){//fires if type of gamemsg was 8
@@ -238,7 +345,7 @@ void player::handleRequest(int requestID[5],int playerID){//fires if type of gam
     }
 
 
-void player::task(GameMsg* msg){
+void player::task(GameMsg* msg){//we call this when we want to send a message to all players for a given game
     string data=msg->data;
     int ids=0;//id sender
     QByteArray output;
@@ -276,4 +383,28 @@ void player::broadcastGames(){
         if(MyServer::plist[i].filled!=0)
             handleRequest2(broadmsg,i);
     }
+}
+void player::setUserName(const string& name){
+        //Adds name to server under the user id associated with with player object's socket
+        //name[1]------->name[size] = name
+        //name[0]------->userid
+        //we store both userid and the actual name in our string so that we can easily/dynamically add names
+    bool inList=false;
+    int inListIndex=0;
+    int userID = int(name[0]);
+
+    for(int i=0;i<MyServer::playerList.size();i++){
+        if(userID==int(MyServer::playerList[i][0])){
+            inList=true;
+            inListIndex=i;
+        }
+    }
+    if(inList==false)
+        MyServer::playerList.push_back(name);
+    else
+        MyServer::playerList[inListIndex]=name;
+
+
+    int broadmsg[5]={6,1,1,1,1};//broadcasting new name to all clients. The one's don't matter->they are just message filler
+    handleRequest2(broadmsg,userID);
 }

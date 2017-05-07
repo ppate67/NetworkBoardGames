@@ -13,5 +13,7 @@
         <file>topright.png</file>
         <file>topside.png</file>
         <file>whitestone.png</file>
+        <file>defeat.gif</file>
+        <file>victory.gif</file>
     </qresource>
 </RCC>

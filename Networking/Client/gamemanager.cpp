@@ -1,8 +1,10 @@
 #include "gamemanager.h"
+#include "string"
 GameManager* GameManager::head=nullptr;
 int GameManager::clientID=0;
 bool GameManager::hasPlayerID=false;
 std::vector<std::vector<std::vector<int>>> GameManager:: games;
+std::vector<std::string> GameManager::playerList;
 GameManager::GameManager()
 {
 

@@ -9,7 +9,11 @@ QT += widgets
 CONFIG += app_bundle
 
 TEMPLATE = app
-
+QMAKE_CXXFLAGS_RELEASE -= -O2
+QMAKE_CXXFLAGS_RELEASE += -O3
+# add the desired -O3 if not present
+QMAKE_CXXFLAGS_RELEASE *= -O3
+QMAKE_LFLAGS_RELEASE -= -O1
 SOURCES += Networking/main.cpp \
     Chess/chess.cpp \
     Chess/chessboard.cpp \
@@ -22,7 +26,8 @@ SOURCES += Networking/main.cpp \
     Networking/Client/gamemsg.cpp \
     Checkers1/checkers.cpp \
     Checkers1/checkersboard.cpp \
-    Checkers1/pieces2.cpp
+    Checkers1/pieces2.cpp \
+    Monopoly/Monopoly_graphics/monopolyboard.cpp
 
 
 # The following define makes your compiler emit warnings if you use
@@ -40,17 +45,20 @@ SUBDIRS += \
     Checkers/board1.pro \
     Chess/Test3.pro \
     Networking/Client/TestHost.pro \
-    Checkers1/board1.pro
+    Checkers1/board1.pro \
+    Monopoly/Monopoly_graphics/monopoly.pro
 
 RESOURCES += \
     Chess/resources.qrc \
     Go/resources2.qrc \
     Checkers1/checkers_pieces.qrc \
     Checkers1/images.qrc \
-    Checkers1/kings.qrc
+    Checkers1/kings.qrc \
+    Monopoly/Monopoly_graphics/resources.qrc
 
 FORMS += \
-    Networking/mainwindow.ui
+    Networking/mainwindow.ui \
+    Monopoly/Monopoly_graphics/monopolyboard.ui
 
 DISTFILES += \
     Checkers/IMG_0114.JPG \
@@ -91,7 +99,10 @@ DISTFILES += \
     Checkers1/Black-Circle.png \
     Checkers1/darkking.png \
     Checkers1/lightking.png \
-    Checkers1/Red-circle.png
+    Checkers1/Red-circle.png \
+    Monopoly/Monopoly_graphics/board.jpg \
+    Monopoly/Monopoly_graphics/piece1.png \
+    Monopoly/Monopoly_graphics/piece2.png
 
 HEADERS += Chess/chess.h \
     Chess/chessboard.h \
@@ -104,4 +115,8 @@ HEADERS += Chess/chess.h \
     Networking/Client/gamemsg.h \
     Checkers1/checkers.h \
     Checkers1/checkersboard.h \
-    Checkers1/pieces2.h
+    Checkers1/pieces2.h \
+    Monopoly/Monopoly_graphics/boardspace.h \
+    Monopoly/Monopoly_graphics/cards.h \
+    Monopoly/Monopoly_graphics/player.h \
+    Monopoly/Monopoly_graphics/monopolyboard.h

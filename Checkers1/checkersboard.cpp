@@ -7,6 +7,9 @@ Checkers* checkersboard::tile[8][8] = {NULL};
 
 void checkersboard::setup(QWidget *baseWidget)
 {
+    //this sets up the graphics for the checkersboard. Also sets up the 64 tiles of checkers board
+    //Each chess object inherits from QLabel so it inherently has graphical qualities such as
+    //a background image/color/geometry. This setup function initializes all these graphics features of the Checkers QLabel
     QLabel *outLabel = new QLabel(baseWidget);  // This block of code the window to be the size of the screen
     QScreen *screen = QGuiApplication::primaryScreen();
     QRect  screenGeometry = screen->geometry();
@@ -91,5 +94,11 @@ void checkersboard::setup(QWidget *baseWidget)
     }
     }
     Checkers::checkershead=tile[0][0];
+}
+
+bool checkersboard::isOccupied(int row, int col){
+    if(tile[row][col]->getPiece())
+        return true;
+    return false;
 }
 

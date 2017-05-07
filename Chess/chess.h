@@ -2,7 +2,8 @@
 #define CHESS_H
 #include <QLabel>
 #include "Networking/Client/client.h"
-
+#include "QDialog"
+#include "QThread"
 class Chess:public QLabel
 {
 private:
@@ -14,7 +15,14 @@ private:
 
 
 public:
-    Chess(QWidget* pParent=0, Qt::WindowFlags f=0) : QLabel(pParent, f) {}
+    static int offline;
+    Chess(QWidget* pParent=0, Qt::WindowFlags f=0) : QLabel(pParent, f) {
+//        Chess::chesshead=NULL;
+//        Chess::chessturn=1;
+//        Chess::playercolor=0;
+//        Chess::selected=0;
+
+    }
 
     void mousePressEvent(QMouseEvent *event);
     void displayElement(char elem);
@@ -33,8 +41,8 @@ public:
     int getTileNum(){return tileNum;}
     bool getPiece(){return piece;}
     char getPieceName(){return pieceName;}
-
-
+    void passToAI();
+    void pawnPromotion(Chess* pawn);
 
     //networking methods. This is essentially the same stuff used by the go class
     //but a bit different since chess is a different game with different requirements
@@ -47,6 +55,27 @@ public:
     Chess* findHead(Chess* pnt);
     void sendGameMsg();
     static void receiveUpdates(char piece1, int iteration);
-};
 
+    //AI code
+    void resetBoardState(const string& state);
+    string describeBoardState();
+    Chess* findPiece(int row, int col);
+    int findScore(int destination);
+    vector<int> evaluateMoves(const string& originalBoardState,vector<vector<int>> moves,vector<vector<int>> playermoves, vector<Chess*> pieces, vector<Chess*> playerpieces, int treelength, int ecolor, int alpha, int beta, int score);
+    vector<int>findPossMoves();
+
+public slots:
+    void queenpromotion();
+};
+class ChessOptions:public QLabel
+{
+    public:
+    ChessOptions(QWidget* pParent=0, Qt::WindowFlags f=0) : QLabel(pParent, f) {}
+    int piecetype;
+    Chess *pawn;
+    QDialog * window;
+    void mousePressEvent(QMouseEvent *event);
+
+
+};
 #endif // CHESS_H

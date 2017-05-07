@@ -31,6 +31,7 @@ public slots:
     void handleRequest(int requestID[4], int playerID);
     void handleRequest2(int requestID[5], int playerID);
     void broadcastGames();
+    void setUserName(const string& name);
     /*
     requestID[0]->gamemanager function
     requestID[1]->options1

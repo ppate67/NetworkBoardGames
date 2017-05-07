@@ -1,12 +1,17 @@
 #include "goboard.h"
+#include "random"
+#include "QMessageBox"
 //Go *temp;
 Go* Go::head=NULL;
+
 int Go::turn=1;
 int Go::color=0;
 int Go::opponentScore=0;
 int Go::playerScore=0;
 int Go::wterr=0;
 int Go::blterr=0;
+int Go::offline=0;
+
 void Go::mousePressEvent(QMouseEvent *event)
 {
     if(turn==0 || !checkPositionValidity(this->getColumn(),this->getRow(),this->getPieceColor()))
@@ -24,7 +29,10 @@ void Go::mousePressEvent(QMouseEvent *event)
         this->setPiece(true);
         updateEntireBoard();
         this->displayElement(' ');
-        sendGameMsg();
+        if(offline==0)
+            sendGameMsg();
+        else
+            passToAI();
         this->displayBoard(this->type);
     }
 }
@@ -278,8 +286,11 @@ bool Go::isConnected(Go* curposition,Go* prevpos, Go* otherposition){
 }
 //bool suicide(GoBoard board){}
 bool Go::checkPositionValidity(int corx, int cory, int color){
-    //needs to be done
-    return true;
+    //checks if choosen tile already has a piece on it
+    if(this->piece==true)
+        return false;
+    else
+        return true;
 
 }
 bool Go::placeStone(int corx, int cory){return true;}
@@ -352,18 +363,31 @@ void Go::receiveUpdates(int color, int iteration){
 
     temp->displayElement(' ');
     temp->displayBoard(temp->type);
-    Go::turn=1;
+
+    int vecsize=GameManager::games.size();
+    for(int i =0; i<vecsize; i++){
+        int playsize=GameManager::games[i].size();
+        for(int ii=0; ii<playsize;ii++){
+            if(GameManager::games[i][ii][2]==GameManager::clientID && GameManager::games[i][ii][1]==1)
+                Go::turn=1;
+        }
+    }
+
 }
 
 int Go::calculateTerritory(Go* position, Go* prevposition, vector<Go*>* positions, int tercolor){
+    //recursively calculates the territory for a given color.
+    //works similarly to how liberties are checked
+
     int anticolor =0; if (tercolor==0)anticolor++;
     for(int i=0; i<positions->size(); i++)
         if(positions->at(i)==position)
-            return -1;
+            return -1;//makes sure to only visit/count a valid territory once
+
     if(position->getPieceColor()==2)
         positions->push_back(position);
     if(position->getPieceColor()==anticolor)
-        return 0;
+        return 0;//means that it is not a valid territory
     //if(position==originalpos && position !=prevposition)
       //  return 0;
     int terrs=1;
@@ -400,7 +424,7 @@ int Go::calculateTerritory(Go* position, Go* prevposition, vector<Go*>* position
                     terrs+=calculateTerritory(below,position,positions,tercolor);
                 }
                 else
-                    return 0;
+                    return 0;//any zeros are propagated throughout the recursive chain
 
         }
         if(below->getPieceColor()==tercolor)
@@ -417,7 +441,7 @@ int Go::calculateTerritory(Go* position, Go* prevposition, vector<Go*>* position
                 terrs+=calculateTerritory(above,position,positions,tercolor);
             }
             else
-                return 0;
+                return 0;//any zeros are propagated throughout the recursive chain
 
 
             }
@@ -435,7 +459,7 @@ int Go::calculateTerritory(Go* position, Go* prevposition, vector<Go*>* position
                 terrs+=calculateTerritory(right,position,positions,tercolor);
             }
             else
-                return 0;
+                return 0;//any zeros are propagated throughout the recursive chain
 
             }
         if(right->getPieceColor()==tercolor)
@@ -452,7 +476,7 @@ int Go::calculateTerritory(Go* position, Go* prevposition, vector<Go*>* position
                 terrs+=calculateTerritory(left,position,positions,tercolor);
             }
             else
-                return 0;
+                return 0;//any zeros are propagated throughout the recursive chain
 
 
         }
@@ -464,4 +488,140 @@ int Go::calculateTerritory(Go* position, Go* prevposition, vector<Go*>* position
     return terrs;
 
 
+}
+void Go::passToAI(){
+    Go* temp = head;
+    Go* bestconsid=nullptr;
+    int AIcolor=0; if(color==0)AIcolor=1;
+    int highestval=0;
+    while(temp!=nullptr){
+        int tempval=checkValAI(temp);
+        if(highestval<=tempval)
+        {
+            bestconsid=temp;
+            highestval=tempval;
+        }
+        temp=temp->nexttile;
+    }
+    if(bestconsid!=nullptr){
+        bestconsid->setPieceColor(AIcolor);
+        bestconsid->setPiece(true);
+        updateEntireBoard();
+        bestconsid->displayElement(' ');
+    }
+    else{
+
+
+        int counter=0;
+        //std::default_random_engine generator;
+        //std::uniform_int_distribution<int> distribution(0,168);
+        while(counter<1000){//try 1000 times to randomly find a availible spot
+            //do random turn. No good moves are availible at all.
+
+            int index = rand()%169;
+            Go* choice=head;
+            for(int i=0; i<index; i++){
+                choice=choice->nexttile;
+
+            }
+            if(choice->getPieceColor()!=1 || choice->getPieceColor()!=0 || choice->piece==false)
+            {
+
+                choice->setPieceColor(AIcolor);
+                choice->setPiece(true);
+                updateEntireBoard();
+                choice->displayElement(' ');
+                break;
+            }
+            counter++;
+
+        }
+    }
+}
+int Go::checkValAI(Go* consideration){
+    //This is the evaluation function for the AI. Since Go is complicated we only consider
+    //the present state of the game and not future states. The evaulation is a weight base
+    //system which awards taking territory away from the opponent, gaining territory, and capturing.
+    //AI performs well enough to know that its moves are not random and have a purpose but
+    //a real Go player might not any significant strategic merit to the moves it makes
+
+    int tempwterr =wterr;
+    int tempbterr = blterr;
+    int AIcolor=0; if(color==0)AIcolor=1;
+    int territoryWeight=1;
+    int enemyterritoryWeight=4;
+    int enemyLibertiesWeight=2;
+    int deltaEnemyLiberties=0;
+    int captureWeight=3;
+    int capturePoints=0;
+    int result = 1;// value of 1 means that it is atleast playable
+    if(consideration->getPieceColor()==1 || consideration->getPieceColor()==0){
+        result=-1;//can't even play the piece so it has a score lower than default
+        return result;
+    }
+
+    //finds total number of enemy liberties
+    Go* temp=Go::head;
+    int initialEnemyLiberties=0;
+    while(temp!=nullptr){
+        vector<Go*> positions;
+        int tempafter =checkLiberties(temp,temp,&positions);
+        if(tempafter>=0)
+            initialEnemyLiberties+=tempafter;
+        temp=temp->nexttile;
+    }
+
+
+    //Does calculations based on if piece was placed here at consideration
+    consideration->setPieceColor(AIcolor);
+    consideration->setPiece(true);
+    int afterEnemyLiberties=0;
+    temp=Go::head;
+    vector<Go*> tempcontainer;
+    tempwterr=0;tempbterr=0;
+    while(temp!=nullptr){
+
+        vector<Go*> positions;
+        int tempafter =checkLiberties(temp,temp,&positions);
+        if(tempafter>=0 && temp->getPieceColor()==color)
+            afterEnemyLiberties+=tempafter;
+        if(temp==consideration && tempafter<1)
+            return -1;//don't want this because it is suicide
+        positions.clear();
+        if(temp->checkLiberties(temp,temp,&positions)<=0){
+            tempcontainer.push_back(temp);
+        }
+
+        positions.clear();
+        if(temp->getPieceColor()==2){
+
+              if(temp->calculateTerritory(temp,temp,&positions,1)>0)
+                      tempbterr++;
+
+        }
+        positions.clear();
+        if(temp->getPieceColor()==2){
+               if(temp->calculateTerritory(temp,temp,&positions,0)>0)
+                    tempwterr++;
+
+        }
+        positions.clear();
+        temp=temp->nexttile;
+    }
+    int deltaBterr = tempbterr-blterr;
+    int deltaWterr = tempwterr-wterr;
+    deltaEnemyLiberties=initialEnemyLiberties-afterEnemyLiberties;
+    for(int i=0; i<tempcontainer.size(); i++){
+        if(tempcontainer[i]->getPieceColor()==color)
+            capturePoints++;
+    }
+
+    consideration->setPieceColor(2);
+    consideration->setPiece(false);
+    if(AIcolor==0)
+        result = (deltaEnemyLiberties)*enemyLibertiesWeight + deltaWterr*territoryWeight - deltaBterr*enemyterritoryWeight + (capturePoints)*captureWeight;
+    else//this will fire every time
+        result = (deltaEnemyLiberties)*enemyLibertiesWeight + deltaBterr*territoryWeight - deltaWterr*enemyterritoryWeight + (capturePoints)*captureWeight;
+
+    return result;
 }

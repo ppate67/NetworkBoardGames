@@ -67,14 +67,14 @@ void GoBoard::display(QWidget *baseWidget,Go *tile[13][13])
             tile[i][j]->displayBoard(type);
             tile[i][j]->setGeometry(x,y,40,40);
             tile[i][j]->type=type;
+            tile[i][j]->setPieceColor(2);
+            tile[i][j]->setPiece(false);
+            tile[i][j]->displayElement(' ');
             x+=40;
 
         }
         y+=40;
     }
-                tile[1][1]->setPiece(true);
-                tile[1][1]->setPieceColor(0);
-                tile[1][1]->displayElement(' ');
                 tile[0][0]->prevtile=nullptr;
                 for(int ii=0;ii<13;ii++){
                 for(int i=0;i<12;i++){

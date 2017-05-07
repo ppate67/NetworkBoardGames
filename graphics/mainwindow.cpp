@@ -7,6 +7,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+
+    connect(ui->pushButton_2, SIGNAL (clicked()), this, SLOT (on_pushButton_2_clicked()));
+    connect(ui->pushButton_3, SIGNAL (clicked()), this, SLOT (on_pushButton_3_clicked()));
+    connect(ui->pushButton_4, SIGNAL (clicked()), this, SLOT (on_pushButton_4_clicked()));
+    connect(ui->pushButton_5, SIGNAL (clicked()), this, SLOT (on_pushButton_5_clicked()));
+    //click quiting game
+    connect(ui->pushButton_6, SIGNAL (clicked()), this, SLOT (on_pushButton_6_clicked()));
+    connect(this,SIGNAL(goToWidget(int)),this,SLOT(runningWidget(int)));
 }
 
 MainWindow::~MainWindow()
@@ -19,7 +28,7 @@ click playing checker
 */
 void MainWindow::on_pushButton_2_clicked()
 {
-    connect(this, SIGNAL (clicked()), this, SLOT (checker::slot1()));
+    emit goToWidget(0);
 }
 
 /*
@@ -27,7 +36,7 @@ click playing chess
 */
 void MainWindow::on_pushButton_3_clicked()
 {
-    connect(this, SIGNAL (clicked()), this, SLOT (chess::slot1()));
+    emit goToWidget(1);
 }
 
 /*
@@ -35,7 +44,7 @@ click playing go
 */
 void MainWindow::on_pushButton_4_clicked()
 {
-    connect(this, SIGNAL (clicked()), this, SLOT (go::slot1()));
+    emit goToWidget(2);
 }
 
 /*
@@ -43,21 +52,54 @@ click playing monopoly
 */
 void MainWindow::on_pushButton_5_clicked()
 {
-    connect(this, SIGNAL (clicked()), this, SLOT (monopoly::slot1()));
+    emit goToWidget(3);
 }
 
-/*
-click quiting game
-*/
 void MainWindow::on_pushButton_6_clicked()
 {
-    connect(this, SIGNAL (clicked()), this, SLOT (quit()));
+    QApplication* app;
+    app->exit(0);
 }
-
-void MainWindow::on_pushButton_2_pressed()
+//show widget
+void MainWindow::runningWidget(int widgetNum)
 {
-
+    switch(widgetNum)
+    {
+    case 0:
+        this->hide();
+        checkerWidget->show();
+        checkerWidget->mainwindow = this;
+        chessWidget->hide();
+        goWidget->hide();
+        monopolyWidget->hide();
+        break;
+    case 1:
+        this->hide();
+        checkerWidget->hide();
+        chessWidget->show();
+        chessWidget->mainwindow = this;
+        goWidget->hide();
+        monopolyWidget->hide();
+        break;
+    case 2:
+        this->hide();
+        checkerWidget->hide();
+        chessWidget->hide();
+        goWidget->show();
+        goWidget-> mainwindow = this;
+        monopolyWidget->hide();
+        break;
+    case 3:
+        this->hide();
+        checkerWidget->hide();
+        chessWidget->hide();
+        goWidget->hide();
+        monopolyWidget->show();
+        monopolyWidget ->mainwindow = this;
+        break;
+    }
 }
+<<<<<<< HEAD
 //Chat Window Button, starts client side chat UI and connects to server
 void MainWindow::on_pushButton_clicked()
 {
@@ -107,3 +149,6 @@ void MainWindow::on_pushButton_clicked()
   */
 
 }
+=======
+
+>>>>>>> f2ebf02714879c6badac0e8a909c21dad292a697

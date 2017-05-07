@@ -10,6 +10,7 @@ private:
     int row, col, tileNum;
     bool piece;
 public:
+    static int offline;
     Go* nexttile;
     static Go* head;
     static int opponentScore;
@@ -24,6 +25,17 @@ public:
         nexttile=NULL;
         prevtile=NULL;
 
+    }
+    ~Go(){
+        head=nullptr;
+
+        turn=1;
+        color=0;
+        opponentScore=0;
+        playerScore=0;
+        wterr=0;
+        blterr=0;
+        offline=0;
     }
     static void updateEntireBoard();
     void mousePressEvent(QMouseEvent *event);
@@ -52,6 +64,8 @@ public:
     void sendGameMsg();
     static void receiveUpdates(int color, int iteration);
     int calculateTerritory(Go* position, Go* prevposition, vector<Go*>* positions, int tercolor);
+    void passToAI();
+    int checkValAI(Go* consideration);
 };
 
 
