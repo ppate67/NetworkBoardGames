@@ -281,7 +281,37 @@ void MainWindow::leaveCheckers(){
 
     //delete cc;
 }
+void MainWindow::leaveMonopoly(){
+    //informs the server that the player is leaving the Checkers game
+    //calls endingScreen which in turn displays the victory or defeat window.
+    int gameid=0;
+    int playindex=0;
+    bool screenType = victory;
+    victory=false;
+    for(int i=0; i<GameManager::games.size(); i++){
+        int playsize= GameManager::games[i].size();
+        for(int ii=0; ii<playsize; ii++)
+            if(GameManager::games[i][ii][2]==GameManager::clientID && GameManager::games[i][ii][0]==3){
+                gameid=i;
+                playindex=ii;
+            }
+    }
+    int requestID[5]={1,gameid,playindex,0,0};//msg type (delete), gameID, 0, 0,0
+    int playerid=GameManager::clientID;
+    Client::makeRequest(requestID,playerid);
 
+    int vecsize=GameManager::games.size();
+    for(int i =0; i<vecsize; i++){
+        int playsize=GameManager::games[i].size();
+        for(int ii=0; ii<playsize;ii++){
+            if(GameManager::games[i][ii][2]==GameManager::clientID && GameManager::games[i][ii][1]==1)
+                endingScreen(screenType);
+        }
+    }
+
+
+    //delete cc;
+}
 void MainWindow::on_pushButton_3_clicked()
 {
 
@@ -376,6 +406,8 @@ void MainWindow::on_pushButton_4_clicked()
     //create monopoly game
     m=new monopolyboard();
     m->show();
+    m->setAttribute( Qt::WA_DeleteOnClose );
+    connect(m, SIGNAL(destroyed()), this, SLOT(leaveMonopoly()));
 }
 
 void MainWindow::on_listWidget_itemClicked(QListWidgetItem *item)
