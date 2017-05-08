@@ -5,9 +5,7 @@
 #include <stdlib.h> // used in checkPath function
 
 class chessboard:public Chess
-{
-private:
-    static Chess *tile[8][8];
+{   
 public:
     chessboard(){
 
@@ -19,6 +17,8 @@ public:
     static void drawpath(Chess *t);
     static void erasepath();
     static bool checkMate();
+
+    static Chess *tile[8][8];
 };
 
 #endif // CHESSBOARD_H

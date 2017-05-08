@@ -152,21 +152,103 @@ bool Piece::checkValid(int endRow, int endCol, int endPieceColor, bool occupied)
         }
     }
     bool allow = false;
-    if(endRow>7 || endRow<0 || endCol>7 || endCol<0);
+    if(endRow>7 || endRow<0 || endCol>7 || endCol<0); // make sure it is being moved to a tile on the board
     else
-    switch(name){
+    switch(name){ // decide which piece is selected and trying to move
         case 'P': allow = checkPawn(row, col, endRow, endCol, occupied);
             break;
-        case 'R': allow = checkRook(row, col, endRow, endCol);
+        case 'R': {
+            allow = checkRook(row, col, endRow, endCol);
+            if (allow == true){
+                if (color == 0 && (br0Moved == false || br7Moved == false)){
+                    if (col == 0)
+                        br0Moved = true;
+                    else
+                        br7Moved =true;
+                }
+                else if (color == 1 && (wr0Moved == false || wr7Moved == false)){
+                    if (col == 0)
+                        wr0Moved = true;
+                    else
+                        wr7Moved =true;
+                }
+            }
             break;
+        }
         case 'H': allow = checkKnight(row, col, endRow, endCol);
             break;
-        case 'K': allow = checkKing(row, col, endRow, endCol);
+        case 'K': {
+            allow = checkKing(row, col, endRow, endCol);
+            if (allow == true){
+                if (color == 0 && bkMoved == false)
+                    bkMoved = true;
+                else if(color == 1 && wkMoved == false)
+                    wkMoved = true;
+            }
             break;
+        }
         case 'Q': allow = checkQueen(row, col, endRow, endCol);
             break;
         case 'B': allow = checkBishop(row, col, endRow, endCol);
             break;
    }
    return allow;
+}
+
+bool Piece::canCastle(int color, int rookCol){
+    switch(color){
+        case 0:{
+            if(blackCastled==true || bkMoved==true){
+                return false;
+            }
+            switch(rookCol){
+                case 0:{
+                    if(br0Moved==true)
+                        return false;
+                    else if(chessboard::checkPath(0, 0, 0, 4, 'l') == false)
+                        return false;
+                    else
+                        return true;
+                    break;
+                }
+                case 7:{
+                    if(br7Moved==true)
+                        return false;
+                    else if(chessboard::checkPath(0, 7, 0, 4, 'l') == false)
+                        return false;
+                    else
+                        return true;
+                    break;
+                }
+            }
+            break;
+        }
+        case 1:{
+            if(whiteCastled==true || wkMoved==true){
+                return false;
+            }
+            switch(rookCol){
+                case 0:{
+                    if(wr0Moved==true)
+                        return false;
+                    else if(chessboard::checkPath(7, 0, 7, 4, 'l') == false)
+                        return false;
+                    else
+                        return true;
+                    break;
+                }
+                case 7:{
+                    if(wr7Moved==true)
+                        return false;
+                    else if(chessboard::checkPath(7, 7, 7, 4, 'l') == false)
+                        return false;
+                    else
+                        return true;
+                    break;
+                }
+            }
+            break;
+        }
+    }
+    return false;
 }
