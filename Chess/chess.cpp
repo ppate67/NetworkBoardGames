@@ -125,11 +125,13 @@ void Chess::mousePressEvent(QMouseEvent *event)
                 else
                     passToAI();
         }
+        // to castle, player can select a king and then rook, or vice versa, of the same color
         else if ((temp->getPieceColor() == this->getPieceColor()) && ((this->getPieceName() == 'K' && temp->getPieceName() == 'R') || (this->getPieceName()=='R' && temp->getPieceName()=='K'))){
             //trying to castle
             Chess* rook;
             Chess* king;
             int rookCol;
+            //determine which piece is the king and which is the rook
             if (this->getPieceName()=='R'){
                 rook = this;
                 king = temp;
@@ -144,6 +146,7 @@ void Chess::mousePressEvent(QMouseEvent *event)
                 chessboard::erasepath();
                 selected=0;
                 if (rookCol == 0){
+                    // allowed to castle so switch king with rook on left side of board
                     Chess* endRook = chessboard::tile[rook->getRow()][3];
                     Chess* endKing = chessboard::tile[king->getRow()][2];
                     rook->setPiece(false);
@@ -161,6 +164,7 @@ void Chess::mousePressEvent(QMouseEvent *event)
                     temp->displayBoard();
                 }
                 else{ // rookCol == 7
+                    // allowed to castle so switch king with rook on right side of board
                     Chess* endRook = chessboard::tile[rook->getRow()][5];
                     Chess* endKing = chessboard::tile[king->getRow()][6];
                     rook->setPiece(false);

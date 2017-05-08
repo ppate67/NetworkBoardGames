@@ -5,6 +5,7 @@ int Piece::bkc = 4;
 int Piece::wkr = 7;
 int Piece::wkc = 4;
 
+//determine legal move for pawn
 bool Piece::checkPawn(int startRow, int startCol, int endRow, int endCol, bool occupied){
     switch(color){
 
@@ -73,6 +74,7 @@ bool Piece::checkPawn(int startRow, int startCol, int endRow, int endCol, bool o
     return false;
 }
 
+//determine legal move for rook
 bool Piece::checkRook(int startRow, int startCol, int endRow, int endCol){ // can move in straight lines without jumping over pieces
     if (chessboard::checkPath(startRow, startCol, endRow, endCol, 'l') == true){
         return true;
@@ -82,6 +84,7 @@ bool Piece::checkRook(int startRow, int startCol, int endRow, int endCol){ // ca
     }
 }
 
+//determine legal move for knight
 bool Piece::checkKnight(int startRow, int startCol, int endRow, int endCol){ // allowed to jump over pieces
     if (endRow == startRow + 2){ // move two up and one to left or right
         if (endCol == startCol - 1 || endCol == startCol + 1)
@@ -102,6 +105,7 @@ bool Piece::checkKnight(int startRow, int startCol, int endRow, int endCol){ // 
     return false;
 }
 
+//determine legal move for king
 bool Piece::checkKing(int startRow, int startCol, int endRow, int endCol){
     if (endRow == startRow){
         if ((endCol == startCol - 1) || (endCol == startCol + 1)){
@@ -126,6 +130,7 @@ bool Piece::checkKing(int startRow, int startCol, int endRow, int endCol){
     return false;
 }
 
+//determine legal move for queen
 bool Piece::checkQueen(int startRow, int startCol, int endRow, int endCol){ // can move in straight or diagonal lines without jumping over pieces
     if (chessboard::checkPath(startRow, startCol, endRow, endCol, 'l') == true){
         return true;
@@ -136,6 +141,7 @@ bool Piece::checkQueen(int startRow, int startCol, int endRow, int endCol){ // c
     return false;
 }
 
+//determine legal move for bishop
 bool Piece::checkBishop(int startRow, int startCol, int endRow, int endCol){ // can move in diagonal lines without jumping over pieces
     if (chessboard::checkPath(startRow, startCol, endRow, endCol, 'd') == true){
         return true;
@@ -157,7 +163,7 @@ bool Piece::checkValid(int endRow, int endCol, int endPieceColor, bool occupied)
     switch(name){ // decide which piece is selected and trying to move
         case 'P': allow = checkPawn(row, col, endRow, endCol, occupied);
             break;
-        case 'R': {
+        case 'R': { // if rook is moved, that rook can no longer castle
             allow = checkRook(row, col, endRow, endCol);
             if (allow == true){
                 if (color == 0 && (br0Moved == false || br7Moved == false)){
@@ -177,7 +183,7 @@ bool Piece::checkValid(int endRow, int endCol, int endPieceColor, bool occupied)
         }
         case 'H': allow = checkKnight(row, col, endRow, endCol);
             break;
-        case 'K': {
+        case 'K': { // if king is moved, that king can no longer castle
             allow = checkKing(row, col, endRow, endCol);
             if (allow == true){
                 if (color == 0 && bkMoved == false)
@@ -195,6 +201,7 @@ bool Piece::checkValid(int endRow, int endCol, int endPieceColor, bool occupied)
    return allow;
 }
 
+// king and rook can only caslte if they have not moved from their original spots, or if anything is in between them
 bool Piece::canCastle(int color, int rookCol){
     switch(color){
         case 0:{
