@@ -50,16 +50,16 @@ void Chess::mousePressEvent(QMouseEvent *event)
                     Piece::wkc = this->getColumn();
                 }
                 chessboard::erasepath();
-                //this->setTileColor(temp->getTileColor());
-                this->setPieceColor(temp->getPieceColor());
-                this->setPiece(true);
-                this->setpieceName(temp->getPieceName());
-                temp->displayBoard();
-                this->displayElement(this->getPieceName());
-                temp->setPiece(false);
-                temp->displayElement(' ');
-                temp->setpieceName(' ');
-                temp->displayBoard();
+//                //this->setTileColor(temp->getTileColor());
+//                this->setPieceColor(temp->getPieceColor());
+//                this->setPiece(true);
+//                this->setpieceName(temp->getPieceName());
+//                temp->displayBoard();
+//                this->displayElement(this->getPieceName());
+//                temp->setPiece(false);
+//                temp->displayElement(' ');
+//                temp->setpieceName(' ');
+//                temp->displayBoard();
                 if(offline==0)
                     sendGameMsg();
 
@@ -271,6 +271,7 @@ void Chess::receiveUpdates(char piece1, int iteration){
     for(int i=0;i<iteration;i++){
         temp=temp->nexttile;
     }
+
     if(int(piece1)==32){
         temp->setPiece(false);
         temp->clear();
@@ -279,12 +280,17 @@ void Chess::receiveUpdates(char piece1, int iteration){
         temp->setPiece(true);
         if(int(piece1)>90){
             piece1-=32;
+            if(temp->getPieceColor()!=1 && temp->getPieceName()=='K')
+                temp->parentWidget()->close();
             temp->setPieceColor(1);
         }
         else{
+            if(temp->getPieceColor()!=0 && temp->getPieceName()=='K')
+                temp->parentWidget()->close();
             temp->setPieceColor(0);
         }
     }
+
     temp->setpieceName(piece1);
 
 
