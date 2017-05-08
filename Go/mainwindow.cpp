@@ -77,7 +77,9 @@ void MainWindow::populateList2(int size){
         radbutton->setData(Qt::UserRole,i);
 
         ui->listWidget->setItemWidget(radbutton, new QRadioButton(tr((title1))));
-
+        int pid1=GameManager::clientID;
+        int request1[5]={3,1,0,0,0};
+        Client::makeRequest(request1,pid1);
     }
 }
 void MainWindow::populateList(int size){
@@ -194,6 +196,7 @@ void MainWindow::leaveGo(){
     //informs the server that the player is leaving the Go game
     //calls endingScreen which in turn displays the victory or defeat window.
     int gameid=0;
+    Go::turn=1;
     int playindex=0;
     bool screenType = victory;
     victory=false;
@@ -223,6 +226,7 @@ void MainWindow::leaveChess(){
     //informs the server that the player is leaving the Chess game
     //calls endingScreen which in turn displays the victory or defeat window.
     int gameid=0;
+    Chess::chessturn=1;
     int playindex=0;
     bool screenType = victory;
     victory=false;
@@ -254,6 +258,7 @@ void MainWindow::leaveCheckers(){
     //informs the server that the player is leaving the Checkers game
     //calls endingScreen which in turn displays the victory or defeat window.
     int gameid=0;
+    Checkers::checkersturn=1;
     int playindex=0;
     bool screenType = victory;
     victory=false;

@@ -21,7 +21,7 @@ MyServer::MyServer(QObject *parent) :
         cout << "Server started!";
         QHostInfo info;
         QNetworkInterface qinterface = QNetworkInterface::interfaceFromName(info.hostName());
-        cout << qinterface.allAddresses()[3].toString().toStdString();
+        cout << qinterface.allAddresses()[4].toString().toStdString();
         //displays one of the IP addresses of server for debugging purposes
     }
 }
