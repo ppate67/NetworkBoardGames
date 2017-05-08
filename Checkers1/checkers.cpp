@@ -89,15 +89,15 @@ void Checkers::mousePressEvent(QMouseEvent *event)
                 if(!multiCapture()){
                     multicap=false;
                     this->displayBoard();
+                    if(checkForWin(this->getPieceColor())){
+                        //End game, notify players of winner.
+                        //For now I'm testing with a console print.
+                        cout << "Game over." << endl;
+                    }
                     if(offline==0)
                         sendGameMsg();
                     else
                         passToAI();
-                }
-                if(checkForWin(this->getPieceColor())){
-                    //End game, notify players of winner.
-                    //For now I'm testing with a console print.
-                    cout << "Game over." << endl;
                 }
             }
             
