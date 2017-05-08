@@ -14,6 +14,7 @@ void chessboard::setup(QWidget *baseWidget)
 {
     QLabel *outLabel = new QLabel(baseWidget);
     QScreen *screen = QGuiApplication::primaryScreen();
+    //get the screen's height and width
     QRect  screenGeometry = screen->geometry();
     int height = screenGeometry.height();
     int width = screenGeometry.width();

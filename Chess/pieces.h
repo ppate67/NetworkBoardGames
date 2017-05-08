@@ -27,6 +27,12 @@ public:
     static int bkc;
     static int wkr;
     static int wkc;
+
+    static bool blackCastled, whiteCastled;
+    static bool bkMoved, wkMoved;
+    static bool br0Moved, br7Moved, wr0Moved, wr7Moved;
+
+    static bool canCastle(int color, int rookCol);
 };
 
 #endif
