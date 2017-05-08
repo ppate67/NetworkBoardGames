@@ -89,15 +89,16 @@ void Checkers::mousePressEvent(QMouseEvent *event)
                 if(!multiCapture()){
                     multicap=false;
                     this->displayBoard();
+                    if(checkForWin(this->getPieceColor())){
+                        //End game, notify players of winner.
+                        //For now I'm testing with a console print.
+                        cout << "Game over." << endl;
+                        this->parentWidget()->close();
+                    }
                     if(offline==0)
                         sendGameMsg();
                     else
                         passToAI();
-                }
-                if(checkForWin(this->getPieceColor())){
-                    //End game, notify players of winner.
-                    //For now I'm testing with a console print.
-                    cout << "Game over." << endl;
                 }
             }
             
@@ -176,22 +177,23 @@ bool Checkers::multiCapture(){
 
 bool Checkers::checkForWin(int lastMoveColor){
     //Go through each element on the board. If there are no opponent color pieces remaining, return true.
+    int currColor = (lastMoveColor == 0 ? 1 : 0);
     //Not efficient, but without keeping a static count of how many of each color are left, this is the easiest.
     for(int i = 0; i < 8; i++)
         for(int j = 0; j < 8; j++)
-            if(checkersboard::tile[i][j]->getPiece() == true && checkersboard::tile[i][j]->getPieceColor() != lastMoveColor)
+            if(checkersboard::tile[i][j]->getPiece() == true && checkersboard::tile[i][j]->getPieceColor() == currColor)
                 return false;
-    if(openMoves(lastMoveColor))
+    if(openMoves(currColor))
         return false;
     return true;
 }
 
-bool Checkers::openMoves(int lastMoveColor){
+bool Checkers::openMoves(int currColor){
     //Go through each element of the board. If there are no pieces with available moves remaining
     //(i.e. all opponent pieces are blocked) that player loses.
     for(int i = 0; i < 8; i++)
         for(int j = 0; j < 8; j++){
-            if(checkersboard::tile[i][j]->getPiece() == true && checkersboard::tile[i][j]->getPieceColor() != lastMoveColor){
+            if(checkersboard::tile[i][j]->getPiece() == true && checkersboard::tile[i][j]->getPieceColor() == currColor){
                 CheckerPiece p(checkersboard::tile[i][j]->getPieceColor(), checkersboard::tile[i][j]->getPieceName(), i, j);
                 if(p.checkMoves(checkersboard::tile))
                     return true;
@@ -555,8 +557,8 @@ void Checkers::passToAI(){
                         bool middleOccupied = checkersboard::tile[(targetDes->getRow()+temp->getRow())/2][(targetDes->getColumn()+temp->getColumn())/2]->getPiece();
 
                         Checkers* middlepiece = checkersboard::tile[(targetDes->getRow()+temp->getRow())/2][(targetDes->getColumn()+temp->getColumn())/2];
-                        if(p.checkCapture(targetDes->getRow(), targetDes->getColumn(), middleOccupied, targetDes->getPiece(), middlepiece->getPieceColor()))
-                            possibleMoves.push_back(i*8 + ii);
+                        //if(p.checkCapture(targetDes->getRow(), targetDes->getColumn(), middleOccupied, targetDes->getPiece(), middlepiece->getPieceColor()))
+                            //possibleMoves.push_back(i*8 + ii);
                     }
 
 
@@ -631,6 +633,14 @@ void Checkers::passToAI(){
 }
 vector<int> Checkers::evaluateMoves(const string& originalBoardState,vector<vector<int>> moves,vector<vector<int>> playermoves, vector<Checkers*> AIpieces,vector<Checkers*> playerpieces, int treelength, int ecolor, int alpha, int beta, int score){//
 //returns index of best move and the score of that move. treelength is how far in the future we are evaluating to
+    if(AIpieces.size() == 0){
+        //GAME IS OVER, AI LOSES
+        //We will have to stop the game, open the Victory GIF to the user.
+        //For now, there will just be a console print
+        cout << "Game over, Victory to the human!" << endl;
+    }
+    else{
+
     int AIcolor = 0;if(playercolor==0)AIcolor=1;
     int nextColor = 0; if(ecolor==0)nextColor=1;
     int bestPiece= 0;
@@ -715,8 +725,8 @@ vector<int> Checkers::evaluateMoves(const string& originalBoardState,vector<vect
                                     bool middleOccupied = checkersboard::tile[(targetDes->getRow()+temp->getRow())/2][(targetDes->getColumn()+temp->getColumn())/2]->getPiece();
 
                                     Checkers* middlepiece = checkersboard::tile[(targetDes->getRow()+temp->getRow())/2][(targetDes->getColumn()+temp->getColumn())/2];
-                                    if(p.checkCapture(targetDes->getRow(), targetDes->getColumn(), middleOccupied, targetDes->getPiece(), middlepiece->getPieceColor()))
-                                        possibleMoves.push_back(j*8 + jj);
+                                    //if(p.checkCapture(targetDes->getRow(), targetDes->getColumn(), middleOccupied, targetDes->getPiece(), middlepiece->getPieceColor()))
+                                        //possibleMoves.push_back(j*8 + jj);
                                 }
 
                             }
@@ -731,6 +741,7 @@ vector<int> Checkers::evaluateMoves(const string& originalBoardState,vector<vect
                     //temp=temp->nexttile;
                 }
             }
+
             //we want to simulate what the board state is like if we make each of these possible moves
             int nextIterationScore=setScore;
             int nextIterationIndex=0;
@@ -815,9 +826,7 @@ vector<int> Checkers::evaluateMoves(const string& originalBoardState,vector<vect
     vector<int> result;
     result.push_back(bestMoveIndex);result.push_back(highestPieceScore);result.push_back(bestPiece);result.push_back(alpha);result.push_back(beta);
     return result;
-
-
-
+    }
 }
 void Checkers::resetBoardState(const string& state){
     for(int i =0; i<64; i++)
@@ -882,8 +891,8 @@ int Checkers::findScore(int destination){
     CheckerPiece p(src->getPieceColor(),src->getPieceName(),src->getRow(),src->getColumn());
 
     Checkers* middlepiece = checkersboard::tile[(des->getRow()+src->getRow())/2][(des->getColumn()+src->getColumn())/2];
-    if(p.checkCapture(des->getRow(), des->getColumn(), middleOccupied, des->getPiece(), middlepiece->getPieceColor()))
-        score+=50;
+    //if(p.checkCapture(des->getRow(), des->getColumn(), middleOccupied, des->getPiece(), middlepiece->getPieceColor()))
+        //score+=50;
     if(des->row==7 || des->row==0)//about to become a king
         score+=200;
 

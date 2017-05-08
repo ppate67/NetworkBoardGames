@@ -20,7 +20,8 @@ bool Piece::br7Moved = false;
 bool Piece::wr0Moved = false;
 bool Piece::wr7Moved = false;
 
-
+//whenever mouse is clicked it checks if it was pressed for moving the piece or selecting a piece
+//and responds accordingly
 void Chess::mousePressEvent(QMouseEvent *event)
 {
     if(selected==0)
@@ -60,16 +61,16 @@ void Chess::mousePressEvent(QMouseEvent *event)
                     Piece::wkc = this->getColumn();
                 }
                 chessboard::erasepath();
-                //this->setTileColor(temp->getTileColor());
-                this->setPieceColor(temp->getPieceColor());
-                this->setPiece(true);
-                this->setpieceName(temp->getPieceName());
-                temp->displayBoard();
-                this->displayElement(this->getPieceName());
-                temp->setPiece(false);
-                temp->displayElement(' ');
-                temp->setpieceName(' ');
-                temp->displayBoard();
+//                //this->setTileColor(temp->getTileColor());
+//                this->setPieceColor(temp->getPieceColor());
+//                this->setPiece(true);
+//                this->setpieceName(temp->getPieceName());
+//                temp->displayBoard();
+//                this->displayElement(this->getPieceName());
+//                temp->setPiece(false);
+//                temp->displayElement(' ');
+//                temp->setpieceName(' ');
+//                temp->displayBoard();
                 if(offline==0)
                     sendGameMsg();
 
@@ -92,16 +93,20 @@ void Chess::mousePressEvent(QMouseEvent *event)
             temp->displayBoard();
             if (temp->getPieceColor() == 0){ // black piece was just moved, check if it put white king in check
                 if(p.checkValid(Piece::wkr, Piece::wkc, 1, true) == true){
-                    if(chessboard::checkMate()==true)
+                    if(chessboard::checkMate()==true){
                         cout << "Game Over" << endl; // possibly add gif later
+                        this->parentWidget()->close();
+                    }
                     else
                         cout << "White piece in check" << endl; // just testing now, should add pop up later
                 }
             }
             else{ // white piece was jsut moved, check if it put black king in check
                 if(p.checkValid(Piece::bkr, Piece::bkc, 1, true) == true){
-                    if(chessboard::checkMate()==true)
+                    if(chessboard::checkMate()==true){
                         cout << "Game Over" << endl; // possibly add gif later
+                        this->parentWidget()->close();
+                    }
                     else
                         cout << "Black piece in check" << endl; // just testing now, should add pop up later
                 }
@@ -182,6 +187,7 @@ void Chess::mousePressEvent(QMouseEvent *event)
     }
 }
 
+//display piece depending on the colour of the piece
 void Chess::displayElement(char elem)
 {
     this->pieceName=elem;
@@ -227,6 +233,7 @@ void Chess::displayElement(char elem)
         this->clear();
 }
 
+//display the chess board
 void Chess::displayBoard()
 {
     if(this->tileColor==1)
@@ -334,6 +341,7 @@ void Chess::receiveUpdates(char piece1, int iteration){
     for(int i=0;i<iteration;i++){
         temp=temp->nexttile;
     }
+
     if(int(piece1)==32){
         temp->setPiece(false);
         temp->clear();
@@ -342,12 +350,17 @@ void Chess::receiveUpdates(char piece1, int iteration){
         temp->setPiece(true);
         if(int(piece1)>90){
             piece1-=32;
+            if(temp->getPieceColor()!=1 && temp->getPieceName()=='K')
+                temp->parentWidget()->close();
             temp->setPieceColor(1);
         }
         else{
+            if(temp->getPieceColor()!=0 && temp->getPieceName()=='K')
+                temp->parentWidget()->close();
             temp->setPieceColor(0);
         }
     }
+
     temp->setpieceName(piece1);
 
 

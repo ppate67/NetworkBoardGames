@@ -79,7 +79,7 @@ bool CheckerPiece::checkMoves(Checkers* tile[8][8]){
                     if(col<7)
                         space1 = checkValid2(row+1, col+1, tile[row+1][col+1]->getPieceColor(), tile[row+1][col+1]->getPiece());
                     if(col>0)
-                        space2 = checkValid2(row+1, col+1, tile[row+1][col-1]->getPieceColor(), tile[row+1][col-1]->getPiece());
+                        space2 = checkValid2(row+1, col-1, tile[row+1][col-1]->getPieceColor(), tile[row+1][col-1]->getPiece());
 
                     if(space1 || space2)
                         return true;

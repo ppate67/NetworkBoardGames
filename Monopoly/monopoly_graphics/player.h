@@ -14,10 +14,13 @@ private:
     int jailFree; //How Many Get Out of Free Cards DO you have
     bool inJail; //whether or not the player is in jail
     int position; //Position on the board where the player is
-    int ownedproperty[40]={0};
+    int ownedproperty[40];
 
 public:
-    Player(){}
+    Player(){
+        for(int i=0; i<40; i++)
+            ownedproperty[i]=0;
+    }
 
     void setName(string initName){
         name = initName;

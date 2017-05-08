@@ -27,6 +27,7 @@ private slots:
     void leaveGo();
     void leaveChess();
     void leaveCheckers();
+    void leaveMonopoly();
     void populateList(int size);
     void populateList2(int size);
     void on_pushButton_3_clicked();
