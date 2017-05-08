@@ -82,16 +82,20 @@ void Chess::mousePressEvent(QMouseEvent *event)
             temp->displayBoard();
             if (temp->getPieceColor() == 0){ // black piece was just moved, check if it put white king in check
                 if(p.checkValid(Piece::wkr, Piece::wkc, 1, true) == true){
-                    if(chessboard::checkMate()==true)
+                    if(chessboard::checkMate()==true){
                         cout << "Game Over" << endl; // possibly add gif later
+                        this->parentWidget()->close();
+                    }
                     else
                         cout << "White piece in check" << endl; // just testing now, should add pop up later
                 }
             }
             else{ // white piece was jsut moved, check if it put black king in check
                 if(p.checkValid(Piece::bkr, Piece::bkc, 1, true) == true){
-                    if(chessboard::checkMate()==true)
+                    if(chessboard::checkMate()==true){
                         cout << "Game Over" << endl; // possibly add gif later
+                        this->parentWidget()->close();
+                    }
                     else
                         cout << "Black piece in check" << endl; // just testing now, should add pop up later
                 }

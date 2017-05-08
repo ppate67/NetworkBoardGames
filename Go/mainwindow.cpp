@@ -367,6 +367,12 @@ void MainWindow::on_pushButton_5_clicked()
 
 void MainWindow::on_pushButton_4_clicked()
 {
+    //request server to add monopoly game to register
+    int counter=GameManager::games.size();
+    int gametype=3;
+    int requestID[5]={2,counter,1,0,gametype};
+    int playerid=GameManager::clientID;
+    Client::makeRequest(requestID,playerid);
     //create monopoly game
     m=new monopolyboard();
     m->show();

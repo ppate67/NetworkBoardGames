@@ -93,6 +93,7 @@ void Checkers::mousePressEvent(QMouseEvent *event)
                         //End game, notify players of winner.
                         //For now I'm testing with a console print.
                         cout << "Game over." << endl;
+                        this->parentWidget()->close();
                     }
                     if(offline==0)
                         sendGameMsg();
