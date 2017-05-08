@@ -10,7 +10,8 @@ int Chess::playercolor=0;
 int Chess::selected=0;
 int Chess::offline=0;
 
-
+//whenever mouse is clicked it checks if it was pressed for moving the piece or selecting a piece
+//and responds accordingly
 void Chess::mousePressEvent(QMouseEvent *event)
 {
     if(selected==0)
@@ -119,6 +120,7 @@ void Chess::mousePressEvent(QMouseEvent *event)
     }
 }
 
+//display piece depending on the colour of the piece
 void Chess::displayElement(char elem)
 {
     this->pieceName=elem;
@@ -164,6 +166,7 @@ void Chess::displayElement(char elem)
         this->clear();
 }
 
+//display the chess board
 void Chess::displayBoard()
 {
     if(this->tileColor==1)
