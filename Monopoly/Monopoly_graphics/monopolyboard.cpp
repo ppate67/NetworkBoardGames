@@ -1137,17 +1137,22 @@ void monopolyboard::receiveUpdates(char vals[], int size){
         head->spaces[i]->setRent(int(vals[88+i*2+1]));
     }
 
-
+    head->updateBoard();
 }
 void monopolyboard::updateBoard(){
+    //update info for player 1
     ui->Player1_Space->setText(QString::number(players[0]->getPosition()) + "- " + QString::fromStdString(spaces[players[0]->getPosition()]->getName()));
     ui->Player1_Bank_Amount->setText("$" + QString::number(players[0]->getBank()));
     ui->Player1_Jailfree_amount->setText(QString::number(players[0]->getJailFree()));
+    ui->Player1_Space->setText(QString::number(players[0]->getPosition()) + "- " + QString::fromStdString(spaces[players[0]->getPosition()]->getName()));
 
+    //update info for player 2
     ui->Player2_Space->setText(QString::number(players[1]->getPosition()) + "- " +QString::fromStdString(spaces[players[1]->getPosition()]->getName()));
     ui->Player2_Bank_Amount->setText("$" + QString::number(players[1]->getBank()));
     ui->Player2_Jailfree_amount->setText(QString::number(players[1]->getJailFree()));
+    ui->Player2_Space->setText(QString::number(players[1]->getPosition()) + "- " +QString::fromStdString(spaces[players[1]->getPosition()]->getName()));
 
+    //updates jail labels
     if (players[0]->getJailStatus() == true)
         ui->Player1_inJail->setText("Yes");
     else{
