@@ -54,6 +54,10 @@ RESOURCES += \
     Checkers1/checkers_pieces.qrc \
     Checkers1/images.qrc \
     Checkers1/kings.qrc \
+    Monopoly/Monopoly_graphics/resourcesmonopoly.qrc \
+    Monopoly/Monopoly_graphics/resourcesmonopoly.qrc \
+    Monopoly/Monopoly_graphics/resourcesmonopoly.qrc \
+    Monopoly/Monopoly_graphics/resourcesmonopoly.qrc \
     Monopoly/Monopoly_graphics/resourcesmonopoly.qrc
 
 FORMS += \

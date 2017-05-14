@@ -32,7 +32,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="resources.qrc">:/board.jpg</pixmap>
+     <pixmap resource="resourcesmonopoly.qrc">:/board.jpg</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -599,7 +599,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="resources.qrc">:/piece1.png</pixmap>
+     <pixmap resource="resourcesmonopoly.qrc">:/piece1.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -618,7 +618,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="resources.qrc">:/piece2.png</pixmap>
+     <pixmap resource="resourcesmonopoly.qrc">:/piece2.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -659,7 +659,7 @@
      <x>0</x>
      <y>0</y>
      <width>1288</width>
-     <height>21</height>
+     <height>34</height>
     </rect>
    </property>
   </widget>
@@ -675,7 +675,7 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="resourcesmonopoly.qrc"/>
  </resources>
  <connections/>
 </ui>

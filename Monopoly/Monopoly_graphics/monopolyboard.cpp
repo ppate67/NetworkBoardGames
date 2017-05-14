@@ -876,7 +876,7 @@ void monopolyboard::on_pushButton_2_clicked()
     int Rent = spaces[players[turnNumber]->getPosition()]->getRent();
     int PlayerOwner = players[turnNumber]->getUserID();
 
-    ui->label_2->setText(QString::fromStdString(typeOfSpace));
+    ui->label_2->setText(QString::fromStdString(typeOfSpace));//ignore or delete
 
     //Checks to See if the Spot is a Chance Location
     if(typeOfSpace == "Chance"){
@@ -994,6 +994,44 @@ void monopolyboard::on_pushButton_2_clicked()
     int currentUserID = players[turnNumber]->getUserID();
 
     //Switch Turns
+
+    //Updates ScoreBoard
+        //Updated to do player 1 and 2 for each turn.
+    ui->Player1_Space->setText(QString::number(players[0]->getPosition()) + "- " + QString::fromStdString(spaces[players[0]->getPosition()]->getName()));
+    ui->Player1_Bank_Amount->setText("$" + QString::number(players[0]->getBank()));
+    ui->Player1_Jailfree_amount->setText(QString::number(players[0]->getJailFree()));
+    ui->Player2_Space->setText(QString::number(players[1]->getPosition()) + "- " +QString::fromStdString(spaces[players[1]->getPosition()]->getName()));
+    ui->Player2_Bank_Amount->setText("$" + QString::number(players[1]->getBank()));
+    ui->Player2_Jailfree_amount->setText(QString::number(players[1]->getJailFree()));
+    if (players[0]->getJailStatus() == true)
+        ui->Player1_inJail->setText("Yes");
+    else{
+        ui->Player1_inJail->setText("No");
+    }
+    if (players[1]->getJailStatus() == true)
+        ui->Player2_inJail->setText("Yes");
+    else{
+        ui->Player2_inJail->setText("No");
+    }
+    if(players[0]->getBank() < 0){
+        QMessageBox::information(this, "Player 2 WINS", "Player 1's Bank account has been overdrawn. Player 2 Wins the game!!!!!!");
+        QApplication::quit();
+    }
+    if(players[1]->getBank() < 0){
+        QMessageBox::information(this, "Player 1 WINS", "Player 2's Bank account has been overdrawn. Player 1 Wins the game!!!!!!");
+        QApplication::quit();
+    }
+    if(currentUserID==1){
+        turnNumber = 1;
+        ui->TurnLabel->setText("Player 2's Turn");
+    }
+    else{
+        turnNumber = 0;
+        ui->TurnLabel->setText("Player 1's Turn");
+        numberOfTurns = numberOfTurns +1;
+        ui->TotalTurns->setText("Total Number of Turns: " + QString::number(numberOfTurns));
+    }
+    /*
     if(currentUserID == 1){
 
         //Updates ScoreBoard
@@ -1047,7 +1085,8 @@ void monopolyboard::on_pushButton_2_clicked()
         numberOfTurns = numberOfTurns +1;
         ui->TotalTurns->setText("Total Number of Turns: " + QString::number(numberOfTurns));
     }
-
+    */
+    updateBoard();
     sendGameMsg();
 }
 void monopolyboard::sendGameMsg(){
@@ -1100,6 +1139,27 @@ void monopolyboard::receiveUpdates(char vals[], int size){
 
 
 }
+void monopolyboard::updateBoard(){
+    ui->Player1_Space->setText(QString::number(players[0]->getPosition()) + "- " + QString::fromStdString(spaces[players[0]->getPosition()]->getName()));
+    ui->Player1_Bank_Amount->setText("$" + QString::number(players[0]->getBank()));
+    ui->Player1_Jailfree_amount->setText(QString::number(players[0]->getJailFree()));
+
+    ui->Player2_Space->setText(QString::number(players[1]->getPosition()) + "- " +QString::fromStdString(spaces[players[1]->getPosition()]->getName()));
+    ui->Player2_Bank_Amount->setText("$" + QString::number(players[1]->getBank()));
+    ui->Player2_Jailfree_amount->setText(QString::number(players[1]->getJailFree()));
+
+    if (players[0]->getJailStatus() == true)
+        ui->Player1_inJail->setText("Yes");
+    else{
+        ui->Player1_inJail->setText("No");
+    }
+    if (players[1]->getJailStatus() == true)
+        ui->Player2_inJail->setText("Yes");
+    else{
+        ui->Player2_inJail->setText("No");
+    }
+}
+
 /*
 void MainWindow::on_pushButton_3_clicked(){
     players[turnNumber]->setJail(true);

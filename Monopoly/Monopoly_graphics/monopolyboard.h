@@ -32,6 +32,7 @@ public:
     ~monopolyboard();
     static int turn;
     void sendGameMsg();
+    void updateBoard();
     static void receiveUpdates(char vals[], int size);
 private slots:
     void on_pushButton_2_clicked();
