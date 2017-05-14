@@ -66,7 +66,7 @@ void player :: readyRead(){
     int length = playerinput.length();
     int gameid=int(playerinput[0]);
     int type = int(playerinput[1]);
-    char data2[length-2];
+    char* data2=new char[length-2];
     string data="";
     int handledata[5];
     string outputdata="";
@@ -174,7 +174,7 @@ void player :: readyRead(){
     {
         task(&msg);
     }
-
+    delete [] data2;
 
 }
 void player::handleRequest2(int requestID[5],int playerID){

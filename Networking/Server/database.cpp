@@ -43,7 +43,7 @@ int main1() {
         mOutputText->setText(query.value(0).toString());
     else
        mOutputText->setText("Player not found");*/
-
+return 0;
 }
 
 //--------OLD CODE-------------------
